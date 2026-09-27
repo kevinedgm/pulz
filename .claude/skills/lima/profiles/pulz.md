@@ -88,7 +88,29 @@ coco:
   # NO lo llenas tú: arranca en 'none-yet' y coco lo va escribiendo SOLO cada vez
   # que diseñas una pantalla (registra ahí la entidad que descubre). Crece solo.
   # Puedes revisarlo/ajustarlo cuando quieras; ver examples/data_contract.example.md.
-  data_contract: none-yet
+  data_contract: >
+    (registrado por coco, ronda acceso/r01, 2026-09-27; fuente: esquema real 0002/0012/0022/0023 y Edge Functions)
+    PortalBranding = organization_id, slug, name, logo_path?, brand_color?, welcome_message?(<=140),
+      read_only, redirect_to?  — RPC pública portal_branding(p_slug); sin fila = 404 idéntico.
+    MiMembresia = organization_id, slug, name, brand_color?, logo_path?, role(admin|productor|operador),
+      status(invitado|activo|suspendido), username?, must_change_password, read_only, cancelled
+      — vista mis_membresias (solo las de auth.uid()).
+    MiembroEquipo = organization_id, user_id, full_name, username?, role, status, must_change_password,
+      locked_until?, invitation_expires_at?, invitation_used?  — función equipo_miembros(p_org),
+      solo admin activo de esa empresa.
+    Acceso: signInWithPassword({email}) DIRECTO; email = valor si trae "@", si no
+      `${usuario}@${organization_id}.usuarios.pulz.mx`.
+    Edge manage-member = accion(alta|rol|estado|desbloquear|reenviar), organization_id, username?,
+      nombre?, rol?, modo?(dictada|enlace), contrasena?, user_id?, estado? → {user_id, username, enlace?}
+    Edge set-password = contrasena, token? → {ok, slug?}
+    Reglas de presentación: TODO rechazo de login muestra "Usuario o contraseña incorrectos";
+      enlace inválido/usado/vencido muestra "El enlace no es válido o ya se usó";
+      "bloqueado" se deriva de locked_until > ahora; "enlace vigente" se deriva de
+      invitation_used = false y invitation_expires_at > ahora; username nulo = titular;
+      brand_color solo como acento sobre fondo neutro, nunca detrás de texto.
+    NO reales (no diseñar como reales): nombre/usuario en la pantalla de bienvenida antes de
+      canjear el token; correo real del titular en la lista de equipo; "último acceso";
+      foto de perfil; contador de intentos; borrar persona (nada se borra, §0.3).
   # Scripts de auditoría del proyecto. Si no los tienes, deja VACÍO (coco audita a
   # mano y lo marca) o pon AUTO para autodetectar.
   governance_scripts:

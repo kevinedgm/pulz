@@ -320,6 +320,32 @@ por scripts de terceros (minificados, con `vendor/`). No es código nuestro:
 se ignoran en `eslint.config.js` y `.prettierignore`, igual que
 `apps/web/functions/e/` (copia literal de la referencia, como `tokens.css`).
 
+## 2026-09-27 · coco, ronda acceso/r01: `equipo_miembros` es una función, no una vista
+
+El dueño aprobó "la vista `equipo_miembros`". Se implementó como **función que
+devuelve filas** (`equipo_miembros(p_org)`, security definer, `0023`) por dos
+razones: una vista `security_invoker` no puede leer `login_throttle` ni
+`member_invitations` (no tienen política para `authenticated`, y no deben
+tenerla: ahí vive el hash del token), y una vista `security definer` las
+expondría sin filtro por rol. La función verifica adentro que quien llama sea
+**admin activo de esa empresa** — igual que las RPC de §8.2 — y devuelve
+solo lo derivado (`locked_until` vigente, vencimiento y uso de la última
+invitación), nunca el hash. pgTAP 12/12.
+
+Detalle: se comprueba la membresía admin directamente y **no** con
+`has_role()`, porque `has_role` rechaza cuando la suscripción está vencida y
+el admin sí debe poder *ver* a su equipo en solo lectura (§7.4).
+
+## 2026-09-27 · coco: iconos que el sprite no tiene van con texto
+
+`pulz-iconos.svg` trae 12 símbolos del proceso (maguey, horno, tina, lote,
+medir, más, campana, reloj…) y **no** trae ojo (mostrar contraseña), "⋯",
+copiar ni compartir. Por la regla de un solo set (sin emojis, sin otro set),
+esos controles se construyen con **texto**: "Mostrar" / "Ocultar",
+"Acciones", "Copiar enlace", "Compartir…". Si el dueño quiere iconos ahí,
+hay que agregarlos al sprite (Configuración → marca, otra ronda), no
+mezclar sets.
+
 ## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
 
 El test de "dos transferencias simultáneas del último litro" está escrito
