@@ -1,0 +1,2 @@
+-- Solo local: dos empresas + la simulación de Cuatro Vientos.
+-- Se llena en la Fase 1, cuando el esquema exista como migraciones.
