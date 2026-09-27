@@ -8,7 +8,10 @@
 > saldos de §15.1. Todo contra el proyecto alojado, con el mismo ciclo que la
 > Fase 1 (`db reset --linked` → `db query --linked -f test`).
 >
-> **Estado: plan escrito, esperando aprobación del dueño antes de implementar.**
+> **Estado (2026-09-27): aprobado e implementado.** 17 RPC + helpers en
+> `0014`–`0021`, semilla por RPC, pgTAP 26/26 + aislamiento 18/18 + saldos
+> §15.1 exactos. Único punto no comprobado: la concurrencia con dos sesiones
+> reales (SKIP; `docs/DUDAS.md` #5). Detalle de resultados al final.
 
 ## Qué ya existe y qué no
 
@@ -125,11 +128,12 @@ pgTAP, por RPC (tarea 11) + concurrencia (tarea 12). Nada de Vitest.
 
 ## Cómo se comprueban los criterios de aceptación de §16 (Fase 2)
 
-| Criterio | Cómo |
-|---|---|
-| pgTAP por RPC: feliz, idempotencia, duras, blandas | `supabase db query --linked -f supabase/tests/<archivo>` para cada archivo, todo `ok` |
-| Concurrencia: dos transferencias del último litro → una pasa, otra `SALDO_INSUFICIENTE` | test con `dblink` (tarea 12) |
-| La simulación por RPC da §15.1 | tras `db reset --linked` con la semilla nueva, la misma consulta de saldos de la Fase 1 |
+| Criterio | Cómo | Resultado real (2026-09-27) |
+|---|---|---|
+| pgTAP por RPC: feliz, idempotencia, duras, blandas | `supabase db query --linked -f supabase/tests/rpc.test.sql` | **26/26 ok** |
+| Concurrencia: dos transferencias del último litro → una pasa, otra `SALDO_INSUFICIENTE` | test con `dblink` (tarea 12) | **SKIP**: en Supabase alojado `dblink_connect` exige contraseña; no se declara en verde. Cómo probarlo a mano: `docs/DUDAS.md` #5 |
+| La simulación por RPC da §15.1 | tras `db reset --linked` con la semilla nueva, la misma consulta de saldos de la Fase 1 | **Exactos** (y 38 operaciones, 13 lotes, 16 aristas, mismos niveles de historia y avisos que la referencia) |
+| Aislamiento sigue en verde | `…/aislamiento.test.sql` | **18/18 ok** |
 
 ## Dudas que esta fase va a tener que cerrar (se anotan en `docs/DUDAS.md` al aparecer)
 

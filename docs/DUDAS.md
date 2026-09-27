@@ -39,6 +39,45 @@
    `20260927000009_etapas.sql` y quitar el recorte de la semilla. Pendiente
    de confirmación, no bloquea.
 
+5. **Prueba de concurrencia (§16 Fase 2) — pendiente de dos sesiones
+   reales.** `supabase/tests/rpc_concurrencia.test.sql` la hace con `dblink`,
+   pero Supabase alojado exige contraseña para abrir la segunda sesión y esa
+   contraseña nunca se ha pedido. Queda en **SKIP** (no en verde). Para
+   probarla de verdad, el dueño puede hacerlo él mismo con dos terminales de
+   `psql` contra la cadena de conexión del proyecto (Project Settings →
+   Database), pegando en cada una, casi al mismo tiempo:
+
+       select set_config('request.jwt.claims',
+         '{"sub":"a88771d6-e323-5b36-991d-c42e5880e507","role":"authenticated"}', false);
+       select transferir('b66cf468-47f7-51ee-a8f2-994d907440b9', gen_random_uuid(), now(),
+         (select id from resources where code = 'Tanque 1'), (select id from resources where code = 'Tanque 2'),
+         (select id from lots where folio = 'G-COMPRA-01'), 250, null, 'conservar');
+
+   Una debe regresar el id del lote y la otra fallar con
+   `SALDO_INSUFICIENTE:`. Después, `supabase db reset --linked` deja todo
+   como estaba. Alternativa: dar la contraseña de Postgres del proyecto para
+   que el test con `dblink` la use (es un secreto de cuenta; mejor la opción
+   de las dos terminales).
+
+## De negocio interpretadas en la Fase 2 (implementado el supuesto; fácil de cambiar)
+
+6. **Folios automáticos**: prefijo por material o etapa + consecutivo por
+   empresa (`MAG-001`, `AC-001`, `F-001`, `FER-001`, `HOR-001`, `DES-001`,
+   `MEZ/ORD/COL/PUN-001`, `G-001`). El usuario puede dar folio propio y el
+   contador lo salta. La simulación usa folios "a mano" en varios lados
+   (`FER-T1-001`, `G-2609-01`, `G-INI-01`); no se intentó adivinar esos
+   formatos. ¿Quiere el dueño un formato por defecto distinto (p. ej. con
+   tina o con fecha)?
+7. **Tina "que ya fermentaba"** entra con `registrar_entrada('fermentado', tina, litros)`
+   y abre un ciclo sin formulación (`formulation_id` nulo), como en la
+   simulación. Confirmar que no hace falta pedir más datos ahí.
+8. **`corregir_operacion`** corrige solo metadatos (nota, contraparte,
+   documento, fecha en que ocurrió); los volúmenes no se tocan nunca, se
+   ajustan con `registrar_movimiento_granel` (Ajuste de inventario ±). Si el
+   dueño quería poder "corregir litros" de una operación, hay que decidir si
+   eso es un movimiento de ajuste ligado a la original (propuesta) o algo
+   más.
+
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
 Las 9 preguntas de §18 (escala de actividad/dulzor/acidez, precio del plan,

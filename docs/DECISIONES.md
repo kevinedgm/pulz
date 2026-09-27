@@ -191,6 +191,74 @@ contraseña de Postgres del proyecto y nunca hizo falta pedirla: `link`,
 - **`propagate_template(uuid)`** busca el id en las tres tablas de plantillas
   (un uuid solo existe en una) y devuelve cuántas filas agregó.
 
+## 2026-09-27 · Fase 2 aplicada: 17 RPC, semilla por RPC, 26 pgTAP en verde
+
+Las 8 migraciones de RPC (`0014`–`0021`) aplicaron sin errores. La semilla
+reescrita para **construir la simulación llamando a las RPC** reproduce
+exactamente la simulación de referencia: 38 operaciones, 13 lotes, 16
+aristas de linaje, los mismos niveles de historia lote por lote, los dos
+avisos blandos (`mezcla_clases_2a`, `diferencia_volumen`) y los saldos de
+§15.1. Es la prueba de que las RPC hacen lo que la simulación hacía a mano.
+
+## 2026-09-27 · Contrato §12.1 en helpers, no repetido en cada RPC
+
+`rpc_guard`, `rpc_existing` (idempotencia), `rpc_open_operation`,
+`rpc_set_result`, `rpc_warn` (aviso blando que exige nota o falla con
+`REQUIERE_NOTA:<codigo>`), `lock_lots`/`lock_resources` (`for update` en
+orden de id), `lot_balance`/`lot_total_balance`/`resource_balance`/`live_lot`
+(siempre del ledger), `check_capacity` (estricta bloquea, flexible avisa),
+`refresh_lot_status` (agotado/activo derivado del saldo) y
+`recompute_history` (§6). Todos revocados a `authenticated`; solo los llaman
+las RPC (security definer). `folio_counters` + `next_folio` dan folios por
+empresa y prefijo con bloqueo de fila, **saltando los folios que el usuario
+dio a mano** (la simulación trae `MEZ-001`, `DES-001`… explícitos).
+
+## 2026-09-27 · Interpretaciones de negocio hechas en la Fase 2 (docs/DUDAS.md las lista)
+
+- **Linaje de un corte**: se reparte entre las cargas de la corrida en
+  proporción al volumen cargado, redondeado a 3 decimales. Es la única regla
+  que reproduce los 20.042/5.958 y 12.333/3.667 L de la simulación.
+- **Regla de acumulación (§4.5)** implementada tal cual: el corte se suma al
+  lote vivo del colector salvo que ese lote esté entre las cargas de la misma
+  corrida; entonces nace lote nuevo. Probado en los tres casos (colector
+  vacío, lote vivo no cargado, lote vivo cargado).
+- **`transferir` a un tanque vacío con `renombrar`** (o con destilado que
+  entra a granel) crea el lote nuevo con `consumo` + `entrada` + linaje, como
+  hace la simulación con `G-2609-01`. Con `conservar` y destino vacío es una
+  pata `transferencia` simple.
+- **Unión con decisión `conservar`**: el folio que se conserva es el del lote
+  que ya está en el tanque destino; la sugerencia "el del lote mayor" (§5.1)
+  es de la interfaz, la RPC aplica lo que llega.
+- **Conciliación (§5.1)**: la nota del aviso `diferencia_volumen` se genera
+  sola ("Declarado X L; ledger Y L.") porque §2.1 la marca como automática;
+  no se le exige nota al usuario.
+- **`abrir_horneado` en la semilla lo hace Aurelia (productor)**, no Tomás
+  como en la simulación: §11.1 no permite al operador abrir horneadas y el
+  documento gana sobre la semilla (§0.2). Lo mismo aplicaría a cualquier
+  otra diferencia entre quién registró algo en la simulación y §11.1.
+- **`registrar_medicion`** recibe `p_dia`, `p_actividad` y `p_numeros` como
+  `integer` (se guardan como smallint): con `smallint` en la firma un literal
+  o un número JSON no resuelve la función. Se corrigió editando `0017` (regla
+  "desde cero"), no con una migración encima.
+- **`operation_kind`** gana `anular_medicion` y `cerrar_ciclo` (editado en
+  `0001`): la referencia no tenía tipo para esas dos acciones.
+- **`corregir_operacion`** solo corrige metadatos (nota, contraparte,
+  documento, fecha en que ocurrió) y deja una operación `correccion` que
+  apunta a la original. Los volúmenes se corrigen con movimientos de ajuste.
+
+## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
+
+El test de "dos transferencias simultáneas del último litro" está escrito
+(`supabase/tests/rpc_concurrencia.test.sql`) con dos sesiones vía `dblink`,
+pero en Supabase alojado `dblink_connect('dbname=postgres')` responde
+`password or GSSAPI delegated credentials required`: no hay forma de abrir
+una segunda sesión sin la contraseña de Postgres del proyecto, que nunca se
+ha pedido. El test se marca **SKIP** (no se finge que pasó, §0.1.3). Cómo
+probarlo de verdad queda en `docs/DUDAS.md` #5. Lo que sí está probado por
+código y por pgTAP: cada RPC bloquea con `for update` los lotes y recursos
+que toca **en orden de id** antes de leer saldos, que es la mecánica que
+hace que la segunda sesión vea el saldo ya consumido.
+
 ## 2026-09-26 · Flujo de interfaz obligatorio: kiwi primero, siempre
 
 `PULZ_MAESTRO.md` §13.4 ya establecía que "ninguna pantalla se construye sin

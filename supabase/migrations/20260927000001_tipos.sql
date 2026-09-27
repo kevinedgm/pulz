@@ -34,9 +34,9 @@ create type catalog_kind as enum (
 -- Qué hace cada operación (la mecánica, no la etiqueta que ve el usuario)
 create type operation_kind as enum (
   'recepcion_maguey', 'entrada_directa', 'abrir_horneado', 'cerrar_horneado',
-  'formulacion', 'medicion', 'tina_lista', 'abrir_corrida', 'corte',
-  'cerrar_corrida', 'transferencia', 'movimiento_granel', 'completar_historia',
-  'correccion');
+  'formulacion', 'medicion', 'anular_medicion', 'tina_lista', 'cerrar_ciclo',
+  'abrir_corrida', 'corte', 'cerrar_corrida', 'transferencia',
+  'movimiento_granel', 'completar_historia', 'correccion');
 
 -- Tipos de pata en el ledger
 create type movement_type as enum (
