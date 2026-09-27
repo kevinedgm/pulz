@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Acceso (portal, sesión, cambio obligatorio, bienvenida, equipo) · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+/* Solo grises del kit. Reglas locales de esta ronda (estructura, no apariencia). */
+/* El kit declara `.wf button{color:inherit}` (0,1,1) y gana sobre `.wf-btn--primary` (0,1,0):
+   la primaria salía negra sobre negro. Se corrige aquí con más especificidad (hallazgo → kit de kiwi). */
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn--primary:disabled,.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+.wf-shell--solo{grid-template-columns:1fr}
+.wf-shell--solo>.wf-side{display:none}
+.acc-wrap{max-width:440px;margin:0 auto}
+.acc-brand{display:flex;gap:var(--wf-s3);align-items:center;margin-bottom:var(--wf-s5)}
+.acc-logo{width:56px;height:56px;flex:none;border-radius:12px;background:repeating-linear-gradient(45deg,var(--wf-g2) 0 6px,var(--wf-g1) 6px 12px);border:1px solid var(--wf-g3);display:grid;place-items:center;font-size:11px;color:var(--wf-g6)}
+.acc-brand h1{font-size:22px;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.acc-brand p{margin:2px 0 0;font-size:14px}
+.acc-form{display:grid;gap:var(--wf-s4)}
+.acc-field .wf-input{font-size:18px;min-height:52px}
+.acc-help{font-size:13px;color:var(--wf-g6);margin-top:4px}
+.acc-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-weight:600}
+.acc-foot{margin-top:var(--wf-s6);font-size:13px;color:var(--wf-g6);text-align:center}
+.acc-row-actions{display:flex;gap:var(--wf-s2);flex-wrap:wrap}
+.acc-menu{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s2);display:grid;gap:var(--wf-s1);max-width:280px;margin-top:var(--wf-s2)}
+.acc-menu .wf-btn{justify-content:flex-start;min-height:44px}
+.acc-drawer{position:absolute;top:0;bottom:0;right:0;width:min(420px,92%);background:var(--wf-g0);border-left:1px solid var(--wf-g3);z-index:21;padding:var(--wf-s5);overflow:auto}
+.acc-seg{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s2)}
+.acc-seg .wf-btn[aria-pressed="true"]{background:var(--wf-g2);border-width:2px}
+.acc-link{border:1px dashed var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s3);font:13px var(--wf-mono);word-break:break-all;background:var(--wf-g1)}
+.acc-404{text-align:center;padding:var(--wf-s7) var(--wf-s4)}
+.wf-table td .wf-status{white-space:nowrap}
+/* medium (600–1023): con menú lateral de 200 la tabla de 5 columnas no cabe →
+   la lista se apila como en compact (una tarjeta por persona); el drawer sigue siendo drawer. */
+@container wf (max-width: 1023px){
+  .acc-lista thead{display:none}
+  .acc-lista tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .acc-lista td{display:block;border:0;padding:2px var(--wf-s3)}
+  .acc-lista td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+@container wf (max-width: 599px){
+  .acc-drawer{top:auto;left:0;right:0;width:100%;max-height:92%;border-left:0;border-top:1px solid var(--wf-g3);border-radius:12px 12px 0 0}
+  .acc-wrap{max-width:none}
+  .acc-brand h1{font-size:20px}
+}
+</style>
+</head>
+<body class="wf">
+
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>ACCESO · r01 · F2</strong>
+  <fieldset><legend>Pantalla</legend>
+    <button data-s="portal" aria-pressed="true">1 Portal e inicio de sesión</button>
+    <button data-s="cambio" aria-pressed="false">2 Cambio obligatorio</button>
+    <button data-s="bienvenida" aria-pressed="false">3 Bienvenida por enlace</button>
+    <button data-s="equipo" aria-pressed="false">4 Equipo (admin)</button>
+  </fieldset>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Default</option>
+      <option value="loading">Carga</option>
+      <option value="empty">Vacío</option>
+      <option value="error">Error (rechazo / red)</option>
+      <option value="denied">Sin permiso</option>
+      <option value="offline">Sin conexión</option>
+      <option value="long">Contenido largo</option>
+      <option value="readonly">Solo lectura (vencida)</option>
+      <option value="notfound">404 genérico (inexistente / cancelada)</option>
+      <option value="alta">Equipo · agregar persona</option>
+      <option value="creado-enlace">Equipo · acceso creado (enlace)</option>
+      <option value="creado-dictada">Equipo · acceso creado (dictada)</option>
+      <option value="menu">Equipo · acciones de una fila</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="wf-shell" id="wf-shell">
+      <nav class="wf-side" aria-label="Navegación principal" id="wf-side">
+        <strong>Mezcal Cuatro Vientos</strong>
+        <ul class="wf-list" style="border:0;margin-top:12px">
+          <li><a href="#">Inicio</a></li><li><a href="#">Maguey</a></li><li><a href="#">Horneado</a></li>
+          <li><a href="#">Fermentación</a></li><li><a href="#">Destilación</a></li><li><a href="#">Granel</a></li>
+          <li><a href="#">Trazabilidad</a></li><li><a href="#" aria-current="page">Configuración · Equipo</a></li>
+        </ul>
+        <span class="wf-note">Menú de §13.1: sigue al proceso. Equipo vive en Configuración. En compact el menú es navegación inferior (otra ronda).</span>
+      </nav>
+      <div>
+        <header class="wf-top" id="wf-top"></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main" id="wf-view" tabindex="-1"></main>
+        <div class="wf-bottom" id="wf-bottom"></div>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+
+<script>
+// ---------- contenido realista (rotulado como ejemplo donde aplica) ----------
+const EMPRESA = { nombre: 'Mezcal Cuatro Vientos', mensaje: 'Registro de producción del palenque', color: '#7A3E1D' };
+const LARGA = { nombre: 'Destilería Artesanal de los Cuatro Vientos del Valle de Tlacolula y Anexas, S. de R.L. de C.V.',
+  mensaje: 'Bienvenidos al registro del palenque. Aquí capturamos maguey, horneadas, tinas, corridas y granel — con la mano que tengas libre.' };
+const MIEMBROS = [
+  { n: 'Benito Cruz',        u: null,           rol: 'admin',     est: 'activo',   nota: 'titular · entra con su correo' },
+  { n: 'Aurelia Santiago',   u: 'aurelia',      rol: 'productor', est: 'activo',   nota: '' },
+  { n: 'Tomás Hernández',    u: 'tomas.h',      rol: 'operador',  est: 'activo',   nota: 'debe cambiar la contraseña dictada' },
+  { n: 'Prueba Enlace',      u: 'prueba.enlace',rol: 'operador',  est: 'invitado', nota: 'enlace pendiente' },
+];
+const est = (e) => ({ activo: '<span class="wf-status wf-status--on">activo</span>',
+  invitado: '<span class="wf-status wf-status--draft">invitado</span>',
+  suspendido: '<span class="wf-status wf-status--off">suspendido</span>' })[e];
+
+// ---------- piezas comunes ----------
+const marca = (emp = EMPRESA, skel = false) => `
+  <div class="acc-brand">
+    <div class="acc-logo" aria-hidden="true">${skel ? '' : 'logo'}</div>
+    <div style="min-width:0">
+      ${skel ? '<div class="wf-line" style="height:16px;width:70%"></div><div class="wf-line" style="width:50%"></div>'
+             : `<h1>${emp.nombre}</h1><p class="wf-muted">${emp.mensaje}</p>`}
+    </div>
+  </div>
+  <span class="wf-note">Lo único que se ve sin sesión: portal_branding (nombre, logo, color ${emp.color || ''}, mensaje ≤140). El color de marca lo aplica coco; aquí solo se anota.</span>`;
+
+const campoUsuario = (valor = '', ayuda = true) => `
+  <div class="wf-field acc-field">
+    <label for="u">Usuario o correo</label>
+    <input class="wf-input" id="u" value="${valor}" inputmode="email" autocapitalize="none" autocomplete="username" placeholder="ana.lopez">
+    ${ayuda ? '<p class="acc-help">Si tu encargado te dio un usuario, escríbelo tal cual. Si eres el titular, tu correo.</p>' : ''}
+  </div>`;
+const campoContrasena = (id = 'p', label = 'Contraseña', ayuda = '') => `
+  <div class="wf-field acc-field">
+    <label for="${id}">${label}</label>
+    <div style="display:flex;gap:8px"><input class="wf-input" id="${id}" type="password" autocomplete="current-password" style="flex:1"><button class="wf-btn" type="button" aria-pressed="false" aria-label="Mostrar contraseña" style="min-width:44px">👁</button></div>
+    ${ayuda ? `<p class="acc-help">${ayuda}</p>` : ''}
+  </div>`;
+
+// ---------- 1 · Portal e inicio de sesión ----------
+const portal = {
+  default: () => `<div class="acc-wrap">${marca()}
+    <form class="acc-form">
+      ${campoUsuario('tomas.h')}
+      ${campoContrasena()}
+      <span class="wf-note">Un solo campo: si trae "@" es titular (correo real); si no, el navegador arma usuario@&lt;organization_id&gt;.usuarios.pulz.mx y llama directo a signInWithPassword (§7.5). La persona nunca ve el correo sintético.</span>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Entrar</button></div>
+      <p class="acc-foot"><a href="#" class="wf-btn wf-btn--quiet">¿No puedes entrar?</a></p>
+      <span class="wf-note">"¿No puedes entrar?": si el campo trae "@" ofrece "Te mandamos un correo para recuperarla" (flujo estándar de Auth); si no, muestra "Pídele a tu encargado que te la restablezca" (§7.2: el colaborador no recibe correos). Sin pantalla nueva.</span>
+    </form>
+    <p class="acc-foot">¿Aún no tienes PULZ? <a href="#">Conoce PULZ</a> <span class="wf-tag">fuera del portal · Won't esta ronda</span></p>
+    <span class="wf-note">Sugerencia (Should): recordar el último usuario escrito en este teléfono (local); el usuario simple no es secreto.</span>
+  </div>`,
+  loading: () => `<div class="acc-wrap">${marca(EMPRESA, true)}
+    <form class="acc-form">${campoUsuario()}${campoContrasena()}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Entrar</button></div></form>
+    <span class="wf-note">Conexión lenta: la marca llega después, el formulario ya es usable. Skeleton con la misma huella (logo cuadrado + dos líneas). Al pulsar Entrar: botón ocupado, campos bloqueados, sin doble envío.</span></div>`,
+  empty: () => portal.default(),
+  error: () => `<div class="acc-wrap">${marca()}
+    <form class="acc-form">
+      ${campoUsuario('tomas.h', false)}
+      ${campoContrasena()}
+      <div class="acc-alert" role="alert">Usuario o contraseña incorrectos</div>
+      <span class="wf-note">Los cuatro rechazos (empresa inexistente, usuario inexistente, contraseña mala, cuenta suspendida) muestran exactamente este texto (§7.5). El usuario se conserva; el foco vuelve a Contraseña.</span>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Entrar</button></div>
+      <p class="acc-foot"><a href="#" class="wf-btn wf-btn--quiet">¿No puedes entrar?</a></p>
+    </form>
+    <h2>Error de red (variante)</h2>
+    <div class="wf-state" role="alert"><h3>No pudimos conectar</h3><p class="wf-muted">Revisa tu señal. Lo que escribiste se conserva.</p><button class="wf-btn">Reintentar</button></div>
+  </div>`,
+  denied: () => portal.default(),
+  offline: () => `<div class="acc-wrap">${marca()}
+    <form class="acc-form">${campoUsuario('tomas.h', false)}${campoContrasena()}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit" disabled aria-disabled="true">Entrar</button></div>
+      <span class="wf-note">Entrar requiere señal (§8.3): banner persistente, botón primario deshabilitado con motivo, nada se pierde.</span></form></div>`,
+  long: () => `<div class="acc-wrap">${marca(LARGA)}
+    <form class="acc-form">${campoUsuario('maria.guadalupe.hernandez')}${campoContrasena()}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Entrar</button></div></form>
+    <span class="wf-note">Nombre largo: dos líneas y elipsis en compact (el título completo va en el atributo title y en el manifiesto). Mensaje de 140: completo. Usuario largo (30): el campo hace scroll horizontal, no se corta.</span></div>`,
+  readonly: () => `<div class="acc-wrap">${marca()}
+    <form class="acc-form">${campoUsuario('tomas.h')}${campoContrasena()}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Entrar</button></div></form>
+    <span class="wf-note">Suscripción vencida (read_only de portal_branding): se entra igual. El banner explica que se puede consultar y exportar pero no registrar (§7.4). Después de entrar, la app esconde las acciones de escritura y la base las rechaza (has_role).</span></div>`,
+  notfound: () => `<div class="acc-404">
+    <h1>No encontramos esta página</h1>
+    <p class="wf-muted">Revisa el enlace que te compartieron.</p>
+    <a class="wf-btn" href="#">Ir a pulz.mx</a>
+    <span class="wf-note">404 idéntico para empresa inexistente y para cancelada (§7.4): sin marca, sin pista de cuál de las dos es. Lo sirve la Pages Function con status 404 y la app genérica; la guardia del router muestra lo mismo si la sesión no pertenece al slug.</span>
+  </div>`,
+};
+
+// ---------- 2 · Cambio obligatorio ----------
+const cambio = {
+  default: () => `<div class="acc-wrap">${marca()}
+    <h2 style="margin-top:0">Elige tu contraseña</h2>
+    <p class="wf-muted">Tu encargado te dio una contraseña temporal. Antes de seguir, pon una tuya.</p>
+    <form class="acc-form">
+      ${campoContrasena('n1', 'Nueva contraseña', 'Mínimo 8 caracteres.')}
+      ${campoContrasena('n2', 'Repítela')}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Guardar contraseña</button></div>
+      <p class="acc-foot"><a href="#" class="wf-btn wf-btn--quiet">Cerrar sesión</a></p>
+    </form>
+    <span class="wf-note">Obligatorio: no hay "Cancelar" ni "Volver" (mis_membresias.must_change_password = true bloquea el resto de la app). "Cerrar sesión" es salir, no cancelar. La bandera la baja el servidor (set-password con sesión), nunca el navegador.</span>
+  </div>`,
+  loading: () => cambio.default(),
+  empty: () => cambio.default(),
+  error: () => `<div class="acc-wrap">${marca()}
+    <h2 style="margin-top:0">Elige tu contraseña</h2>
+    <form class="acc-form">
+      ${campoContrasena('n1', 'Nueva contraseña', 'Mínimo 8 caracteres.')}
+      <div class="wf-field acc-field"><label for="n2">Repítela</label><input class="wf-input" id="n2" type="password" aria-invalid="true" aria-describedby="e2"><p class="acc-help" id="e2"><b>No coinciden.</b> Escríbela igual dos veces.</p></div>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Guardar contraseña</button></div>
+    </form>
+    <span class="wf-note">Validación bajo el campo, antes de enviar. Error de red: mismo patrón que el portal (conserva lo escrito + Reintentar).</span></div>`,
+  denied: () => cambio.default(),
+  offline: () => `<div class="acc-wrap">${marca()}<h2 style="margin-top:0">Elige tu contraseña</h2>
+    <form class="acc-form">${campoContrasena('n1', 'Nueva contraseña')}${campoContrasena('n2', 'Repítela')}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit" disabled aria-disabled="true">Guardar contraseña</button></div></form>
+    <span class="wf-note">Requiere señal: banner + primario deshabilitado; lo escrito se conserva.</span></div>`,
+  long: () => cambio.default().replace('Mezcal Cuatro Vientos', LARGA.nombre),
+  readonly: () => cambio.default(),
+  notfound: () => portal.notfound(),
+};
+
+// ---------- 3 · Bienvenida por enlace ----------
+const bienvenida = {
+  default: () => `<div class="acc-wrap">${marca()}
+    <h2 style="margin-top:0">Te dieron acceso a ${EMPRESA.nombre}</h2>
+    <p class="wf-muted">Elige tu contraseña. Con ella vas a entrar de ahora en adelante.</p>
+    <form class="acc-form">
+      ${campoContrasena('b1', 'Tu contraseña', 'Mínimo 8 caracteres.')}
+      ${campoContrasena('b2', 'Repítela')}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit">Crear contraseña y entrar</button></div>
+    </form>
+    <span class="wf-note">Sin sesión: pulz.mx/e/&lt;slug&gt;/bienvenida#&lt;token&gt;. El token va en el fragmento (#) y nunca se manda al servidor del portal; set-password lo canjea (72 h, un solo uso, solo el hash en la base). No se muestra nombre ni usuario: el token no se puede consultar sin canjearlo (incógnita 2 del brief).</span>
+  </div>`,
+  loading: () => bienvenida.default(),
+  empty: () => bienvenida.default(),
+  error: () => `<div class="acc-wrap">${marca()}
+    <div class="wf-state" role="alert">
+      <h2 style="margin-top:0">El enlace no es válido o ya se usó</h2>
+      <p class="wf-muted">Pídele a tu encargado que te mande uno nuevo.</p>
+      <a class="wf-btn" href="#">Ir al inicio de sesión</a>
+    </div>
+    <span class="wf-note">Un solo mensaje para inválido, usado y vencido (set-password no distingue la causa a propósito). Sin botón de reintento: no hay nada que reintentar.</span>
+  </div>`,
+  denied: () => bienvenida.error(),
+  offline: () => `<div class="acc-wrap">${marca()}<h2 style="margin-top:0">Te dieron acceso a ${EMPRESA.nombre}</h2>
+    <form class="acc-form">${campoContrasena('b1', 'Tu contraseña')}${campoContrasena('b2', 'Repítela')}
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit" disabled aria-disabled="true">Crear contraseña y entrar</button></div></form>
+    <span class="wf-note">Requiere señal.</span></div>`,
+  long: () => bienvenida.default().replaceAll(EMPRESA.nombre, LARGA.nombre),
+  readonly: () => bienvenida.default(),
+  notfound: () => portal.notfound(),
+};
+
+// ---------- 4 · Equipo (solo admin) ----------
+const fila = (m, i, conMenu = false) => `
+  <tr>
+    <td data-l="Nombre"><b>${m.n}</b>${m.nota ? `<br><span class="wf-small wf-muted">${m.nota}</span>` : ''}</td>
+    <td data-l="Usuario">${m.u ? `<code>${m.u}</code>` : '<span class="wf-muted">titular · correo</span>'}</td>
+    <td data-l="Rol">${m.rol}</td>
+    <td data-l="Estado">${est(m.est)}${m.est === 'invitado' ? ' <span class="wf-tag">vence en 2 días · supuesto</span>' : ''}${i === 2 ? ' <span class="wf-tag">bloqueado por intentos · supuesto</span>' : ''}</td>
+    <td data-l="Acciones"><button class="wf-btn" aria-haspopup="menu" aria-expanded="${conMenu}" aria-label="Acciones para ${m.n}">⋯ Acciones</button>
+      ${conMenu ? `<div class="acc-menu" role="menu">
+        <button class="wf-btn" role="menuitem">Cambiar rol…</button>
+        ${m.est === 'invitado' ? '<button class="wf-btn" role="menuitem">Reenviar enlace</button>' : ''}
+        ${i === 2 ? '<button class="wf-btn" role="menuitem">Desbloquear</button>' : ''}
+        ${m.est === 'suspendido' ? '<button class="wf-btn" role="menuitem">Reactivar</button>' : '<button class="wf-btn wf-btn--danger" role="menuitem">Suspender…</button>'}
+      </div>
+      <span class="wf-note">Menú por fila, no una columna de botones: 4 acciones máximo, la destructiva (Suspender) separada y con forma distinta; pide confirmación corta con consecuencia ("Ya no podrá entrar. Puedes reactivar cuando quieras."). "Desbloquear" solo aparece si hay bloqueo; "Reenviar" solo en invitado. No existe borrar (§0.3).</span>` : ''}
+    </td>
+  </tr>`;
+const tabla = (ms, menuIdx = -1) => `
+  <table class="wf-table wf-table--stack acc-lista">
+    <thead><tr><th>Nombre</th><th>Usuario</th><th>Rol</th><th>Estado</th><th><span class="wf-sr">Acciones</span></th></tr></thead>
+    <tbody>${ms.map((m, i) => fila(m, i, i === menuIdx)).join('')}</tbody>
+  </table>`;
+const cabeceraEquipo = () => `
+  <h1>Equipo</h1>
+  <p class="wf-muted">Quién puede entrar a ${EMPRESA.nombre} y qué puede hacer.</p>
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist>Agregar persona</button><input class="wf-input" placeholder="Buscar por nombre o usuario" aria-label="Buscar" style="max-width:280px"></div>
+  <span class="wf-note">Una sola primaria: Agregar persona (en compact baja a la barra inferior). Buscar es Should para listas grandes; con 4 personas no estorba.</span>`;
+const equipo = {
+  default: () => `${cabeceraEquipo()}${tabla(MIEMBROS)}
+    <span class="wf-note">Roles = admin · productor · operador (§11.1). Estado = invitado · activo · suspendido. "vence en 2 días" y "bloqueado por intentos" están rotulados como supuesto: hoy el admin no puede leer member_invitations ni login_throttle (incógnita 1 del brief) y el hook de intentos no está en el plan (docs/DUDAS.md #9).</span>`,
+  loading: () => `<h1>Equipo</h1><div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:20px"></div><div class="wf-line" style="width:60%"></div>'.repeat(4)}</div><span class="wf-note">Misma huella que la lista.</span>`,
+  empty: () => `${cabeceraEquipo().replace('<button class="wf-btn wf-btn--primary" data-wf-persist>', '<button class="wf-btn" data-wf-persist>')}<div class="wf-state"><h2>Solo estás tú</h2><p class="wf-muted">Agrega a quien produce y a quien mide. Puedes dictarle una contraseña o mandarle un enlace por WhatsApp.</p><button class="wf-btn wf-btn--primary" data-wf-persist>Agregar persona</button></div>
+    <span class="wf-note">Vacío inicial: explica qué falta y ofrece la siguiente acción útil. La primaria vive en el vacío; la de la cabecera baja a secundaria para no tener dos.</span>`,
+  error: () => `<h1>Equipo</h1><div class="wf-state" role="alert"><h2>No pudimos cargar al equipo</h2><p class="wf-muted">Revisa tu señal.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div>
+    <h2>Error al crear (variante)</h2><div class="acc-alert" role="alert">Ese usuario ya existe en la empresa</div><span class="wf-note">409 de manage-member: se muestra bajo el campo Usuario del formulario, que se conserva.</span>`,
+  denied: () => `<h1>Equipo</h1><div class="wf-state"><h2>Solo el administrador puede ver el equipo</h2><p class="wf-muted">Pídele a ${MIEMBROS[0].n} que te dé de alta o cambie tu rol.</p></div>
+    <span class="wf-note">Productor/operador (§11.1): no se oculta sin motivo; explica quién puede. Sin botón "Solicitar acceso": no existe ese flujo.</span>`,
+  offline: () => `${cabeceraEquipo().replace('<button class="wf-btn wf-btn--primary" data-wf-persist>', '<button class="wf-btn wf-btn--primary" data-wf-persist disabled aria-disabled="true">')}${tabla(MIEMBROS)}
+    <span class="wf-note">Sin conexión: se ve la última lista cargada (rotulada como guardada) y ninguna acción está disponible; todas requieren señal.</span>`,
+  long: () => `${cabeceraEquipo()}${tabla([...MIEMBROS, ...Array.from({ length: 8 }, (_, k) => ({ n: ['Guadalupe Martínez Reyes', 'Juan Carlos Pérez', 'Rosalinda García', 'Efraín Cruz Sánchez', 'Micaela López', 'Abel Ramírez', 'Cirila Hernández Gómez', 'Nicolás Antonio'][k], u: ['guadalupe.m', 'jc.perez', 'rosalinda', 'efrain.cs', 'micaela', 'abel.r', 'cirila.hg', 'nicolas.a'][k], rol: k % 3 ? 'operador' : 'productor', est: k === 5 ? 'suspendido' : 'activo', nota: '' }))])}
+    <p class="wf-muted">Mostrando 12 de 200 · <button class="wf-btn wf-btn--quiet">Cargar más</button></p>
+    <span class="wf-note">Lista grande: paginación por 50 + buscar. En compact la tabla se apila (una tarjeta por persona).</span>`,
+  readonly: () => `${cabeceraEquipo().replace('<button class="wf-btn wf-btn--primary" data-wf-persist>', '<button class="wf-btn wf-btn--primary" data-wf-persist disabled aria-disabled="true">')}${tabla(MIEMBROS)}
+    <span class="wf-note">Vencida: se puede ver el equipo pero no crear ni cambiar (has_role rechaza escrituras). El banner lo explica.</span>`,
+  notfound: () => portal.notfound(),
+  alta: () => `${cabeceraEquipo().replace('<button class="wf-btn wf-btn--primary" data-wf-persist>', '<button class="wf-btn" data-wf-persist>')}${tabla(MIEMBROS)}`,
+  'creado-enlace': () => `${cabeceraEquipo().replace('<button class="wf-btn wf-btn--primary" data-wf-persist>', '<button class="wf-btn" data-wf-persist>')}${tabla([...MIEMBROS, { n: 'Rosalinda García', u: 'rosalinda', rol: 'operador', est: 'invitado', nota: 'recién creada' }])}`,
+  'creado-dictada': () => `${cabeceraEquipo().replace('<button class="wf-btn wf-btn--primary" data-wf-persist>', '<button class="wf-btn" data-wf-persist>')}${tabla([...MIEMBROS, { n: 'Rosalinda García', u: 'rosalinda', rol: 'productor', est: 'activo', nota: 'debe cambiar la contraseña dictada' }])}`,
+  menu: () => `${cabeceraEquipo()}${tabla(MIEMBROS, 2)}`,
+};
+
+// Overlays de Equipo (drawer en medium/expanded, hoja inferior en compact: mismo formulario, misma instancia)
+const OV = {
+  alta: () => `<div class="wf-scrim"></div><aside class="acc-drawer" role="dialog" aria-modal="true" aria-labelledby="alta-t">
+    <h2 id="alta-t" style="margin-top:0">Agregar persona</h2>
+    <form class="acc-form">
+      <div class="wf-field acc-field"><label for="an">Nombre</label><input class="wf-input" id="an" value="Rosalinda García" autocomplete="off"></div>
+      <div class="wf-field acc-field"><label for="au">Usuario para entrar</label><input class="wf-input" id="au" value="rosalinda" autocapitalize="none"><p class="acc-help">Minúsculas, números, punto o guion (3 a 30). Solo se usa para entrar; no es un correo.</p></div>
+      <div class="wf-field"><label>Rol</label>
+        <div class="acc-seg" style="grid-template-columns:1fr 1fr 1fr"><button type="button" class="wf-btn" aria-pressed="false">Admin</button><button type="button" class="wf-btn" aria-pressed="false">Productor</button><button type="button" class="wf-btn" aria-pressed="true">Operador</button></div>
+        <p class="acc-help">Operador: mediciones, corridas y cortes. Productor: además todo el proceso. Admin: todo.</p></div>
+      <div class="wf-field"><label>¿Cómo le entregas el acceso?</label>
+        <div class="acc-seg"><button type="button" class="wf-btn" aria-pressed="true">Enlace por WhatsApp</button><button type="button" class="wf-btn" aria-pressed="false">Contraseña dictada</button></div>
+        <p class="acc-help">Enlace: dura 72 h y sirve una vez; la persona elige su contraseña. Dictada: se la dices en persona y la cambia al entrar.</p></div>
+      <span class="wf-note">Con "Contraseña dictada" aparece un campo Contraseña temporal (mín. 8) debajo; con "Enlace" no hay campo. Misma instancia del formulario en drawer y en hoja: no se duplica estado.</span>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit">Crear acceso</button><button class="wf-btn" type="button">Cancelar</button></div>
+    </form>
+    <span class="wf-note">Cancelar descarta; con cambios pregunta antes. Atrás/Esc cierra la capa y devuelve el foco a "Agregar persona".</span>
+  </aside>`,
+  'creado-enlace': () => `<div class="wf-scrim"></div><aside class="acc-drawer" role="dialog" aria-modal="true" aria-labelledby="ok-t">
+    <h2 id="ok-t" style="margin-top:0">Listo: acceso para Rosalinda</h2>
+    <p class="wf-muted">Mándale este enlace por WhatsApp. Sirve una vez y vence en 72 horas.</p>
+    <div class="acc-link">https://pulz.mx/e/cuatro-vientos/bienvenida#iW--L34aMWzpfkNY8FydVO2I840jd…</div>
+    <div class="wf-actions" style="margin-top:12px"><button class="wf-btn wf-btn--primary">Copiar enlace</button><button class="wf-btn">Compartir…</button></div>
+    <p class="wf-small wf-muted" role="status">Copiado ✓ (feedback visible ≥ 3 s)</p>
+    <span class="wf-note">"Compartir…" usa la hoja nativa del teléfono si existe (supuesto: Web Share API); si no, solo Copiar. El enlace queda visible para seleccionarlo si el portapapeles falla. Si se pierde: "Reenviar enlace" en la fila genera otro.</span>
+    <div class="wf-actions" style="margin-top:16px"><button class="wf-btn">Cerrar</button></div>
+  </aside>`,
+  'creado-dictada': () => `<div class="wf-scrim"></div><aside class="acc-drawer" role="dialog" aria-modal="true" aria-labelledby="ok2-t">
+    <h2 id="ok2-t" style="margin-top:0">Listo: Rosalinda ya puede entrar</h2>
+    <p class="wf-muted">Dile su usuario <code>rosalinda</code> y la contraseña que escribiste. La primera vez que entre tendrá que cambiarla.</p>
+    <div class="wf-actions" style="margin-top:16px"><button class="wf-btn wf-btn--primary">Entendido</button></div>
+    <span class="wf-note">No se vuelve a mostrar la contraseña dictada: si se pierde, el admin crea un enlace ("Reenviar enlace" no aplica a dictada; se usa "Cambiar entrega → enlace", propuesta para lima).</span>
+  </aside>`,
+};
+
+// ---------- render ----------
+const SUP = { portal, cambio, bienvenida, equipo };
+const PRIMARIA = { portal: 'Entrar', cambio: 'Guardar contraseña', bienvenida: 'Crear contraseña y entrar', equipo: 'Agregar persona' };
+let S = { s: 'portal', w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame');
+  f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label');
+  lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  const sup = SUP[S.s];
+  const soloEstadosEquipo = ['alta', 'creado-enlace', 'creado-dictada', 'menu'];
+  let st = S.state;
+  if (S.s !== 'equipo' && soloEstadosEquipo.includes(st)) st = 'default';
+  document.getElementById('wf-shell').classList.toggle('wf-shell--solo', S.s !== 'equipo');
+  document.getElementById('wf-top').innerHTML = S.s === 'equipo'
+    ? `<nav class="wf-small" aria-label="Ruta">Configuración / <b>Equipo</b></nav><span class="wf-note" style="margin:0 0 0 auto">Cabecera con ruta: dónde estoy y cómo regreso (Configuración).</span>`
+    : `<span class="wf-small wf-muted">pulz.mx/e/cuatro-vientos${S.s === 'bienvenida' ? '/bienvenida#…' : ''}</span>`;
+  const view = (sup[st] || sup.default)();
+  document.getElementById('wf-view').innerHTML = view;
+  const ov = S.s === 'equipo' && OV[st] ? OV[st]() : '';
+  document.getElementById('wf-overlay').innerHTML = ov;
+  const banners = {
+    offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> Para entrar o hacer cambios necesitas señal.</p>',
+    readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar y exportar, no registrar.</p>',
+  };
+  document.getElementById('wf-banner').innerHTML = st === 'notfound' ? '' : (banners[st] || '');
+  const dis = ['offline', 'readonly'].includes(st) || st === 'notfound';
+  const oculto = st === 'notfound' || (S.s === 'equipo' && ['denied', 'error', 'loading', 'empty'].includes(st)) || ov;
+  document.getElementById('wf-bottom').innerHTML = oculto ? '' : `<button class="wf-btn wf-btn--primary" style="flex:1" ${dis ? 'disabled aria-disabled="true"' : ''}>${PRIMARIA[S.s]}</button>`;
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+  document.querySelectorAll('[data-s]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.s === S.s)));
+}
+document.addEventListener('click', e => {
+  const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); return; }
+  const s = e.target.closest('[data-s]'); if (s) { S.s = s.dataset.s; render(); }
+});
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>

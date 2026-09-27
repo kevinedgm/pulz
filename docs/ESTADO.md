@@ -59,10 +59,16 @@ comprobable en este plan**; **pantallas: pendientes de la ronda de kiwi**.
 
 ## Qué falta
 
-1. **Ronda de `kiwi`** para: portal + inicio de sesión, cambio obligatorio de
-   contraseña, bienvenida por enlace, equipo (solo admin). → aprobación del
-   dueño → `lima` → `coco` (implementación en `apps/web/src/modules/acceso/`
-   y guardias en `apps/web/src/app/router.ts`) → `mora-docs`.
+1. **Ronda de `kiwi` r01 escrita, esperando aprobación del dueño**:
+   `design-hub/lab/acceso/r01/` (`brief.md` con 3 user flows, `index.html`
+   wireframe F2 de las 4 pantallas × 3 espacios × 13 estados, `hallazgos.md`,
+   `declaracion.md`). Verificado: `check_artifact.py` 0/0, 156 combinaciones
+   sin desborde y con una sola primaria, 0 errores JS. Dos hallazgos altos
+   para decidir en la aprobación: el admin no puede leer hoy "bloqueado" ni
+   "enlace vigente" (falta una vista solo-admin), y el hook de intentos no
+   está en el plan. → aprobación → `lima` → `coco` (implementación en
+   `apps/web/src/modules/acceso/` y guardias en `apps/web/src/app/router.ts`)
+   → `mora-docs`. Cambios pedidos → `r02`, nunca se sobrescribe r01.
 2. Vitest de integración del cliente de acceso (mensaje único en los cuatro
    rechazos, guardias) cuando exista la pantalla.
 3. Que el dueño decida sobre `docs/DUDAS.md` #9 (subir de plan para el hook)
