@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · SUPERFICIE · r01</title>
+<link rel="stylesheet" href="vendor/wireframe-kit.css">
+</head>
+<body class="wf">
+<!-- kiwi · base F1/F2. Copia como index.html de la ronda y el kit a vendor/.
+     Reemplaza SUPERFICIE, las regiones y los estados. No añadas color. -->
+
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>SUPERFICIE · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="834" aria-pressed="false">medium 834</button>
+    <button data-w="393" aria-pressed="false">compact 393</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Default</option>
+      <option value="loading">Carga</option>
+      <option value="empty">Vacío</option>
+      <option value="error">Error</option>
+      <option value="denied">Sin permiso</option>
+      <option value="offline">Sin conexión</option>
+      <option value="long">Contenido largo</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="wf-shell">
+      <nav class="wf-side" aria-label="Navegación principal">
+        <strong>Producto</strong>
+        <ul class="wf-list" style="border:0;margin-top:12px"><li><a href="#" aria-current="page">Destino frecuente</a></li><li><a href="#">Destino 2</a></li></ul>
+      </nav>
+      <div>
+        <header class="wf-top"><nav class="wf-small" aria-label="Ruta">Inicio / <b>Superficie</b></nav></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main" id="wf-view" tabindex="-1"></main>
+        <div class="wf-bottom"><button class="wf-btn wf-btn--primary" style="flex:1">Verbo + objeto</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const V = {
+  default: () => `
+    <h1>Título de la vista</h1>
+    <p class="wf-muted">Qué necesita saber el usuario aquí, en una frase.</p>
+    <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist>Verbo + objeto</button><button class="wf-btn">Secundaria</button></div>
+    <span class="wf-note">Una sola acción primaria. En compact pasa a la barra inferior persistente.</span>
+    <h2>Dato dominante</h2>
+    <div class="wf-grid">${'<div class="wf-card"><div class="wf-img"></div><div class="wf-line"></div><div class="wf-line" style="width:60%"></div></div>'.repeat(3)}</div>`,
+  loading: () => `<div class="wf-skel" aria-busy="true"><div class="wf-line" style="height:28px;width:40%"></div><div class="wf-grid">${'<div class="wf-card"><div class="wf-img"></div><div class="wf-line"></div></div>'.repeat(3)}</div></div><span class="wf-note">Misma huella que el default.</span>`,
+  empty: () => `<div class="wf-state"><h2>Aún no hay X</h2><p class="wf-muted">Explica qué falta y por qué.</p><button class="wf-btn wf-btn--primary">Siguiente acción útil</button></div>`,
+  error: () => `<div class="wf-state" role="alert"><h2>No pudimos cargar X</h2><p class="wf-muted">Causa + qué hacer. Lo capturado se conserva.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div>`,
+  denied: () => `<div class="wf-state"><h2>No tienes acceso a X</h2><p class="wf-muted">Quién puede darlo y cómo pedirlo.</p><button class="wf-btn">Solicitar acceso</button></div>`,
+  offline: () => V.default(),
+  long: () => V.default().replace('Título de la vista','Título de la vista con un nombre extraordinariamente largo que obliga a revisar el ajuste en dos o tres líneas'),
+};
+let S = {w: innerWidth < 700 ? 393 : innerWidth < 1200 ? 834 : 1440, state: 'default'};
+function render(){
+  const f = document.getElementById('wf-frame');
+  f.style.setProperty('--wf-w', S.w + 'px');
+  document.getElementById('wf-label').style.setProperty('--wf-w', S.w + 'px');
+  document.getElementById('wf-label').textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} (referencia declarada)`;
+  document.getElementById('wf-view').innerHTML = V[S.state]();
+  document.getElementById('wf-banner').innerHTML = S.state === 'offline' ? '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puede que veas datos guardados.</p>' : '';
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) { S.w = +b.dataset.w; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>

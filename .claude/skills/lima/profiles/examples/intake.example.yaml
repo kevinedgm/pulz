@@ -1,0 +1,47 @@
+# === lima · project intake (EXAMPLE, filled) ===
+# Copy this, fill your values, and pass it to the bootstrap:
+#   bash <skill>/scripts/init-project.sh --intake my-intake.yaml --qa playwright
+# Keys must match reference/intake.md exactly. AUTO = let the skill inspect the repo.
+
+project_name: "Acme Health"
+design_system_name: "PULZ"
+
+color_law: |
+  surface #FFFFFF     # page background
+  ink     #14161A     # default text
+  action  #2F6BFF     # ONLY the primary action / active state
+  accent  #7C5CFF     # focus, selection, secondary emphasis
+  danger  #C0392B     # ONLY errors / destructive
+  success #12805C     # positive state
+  rule: if an element is neither action nor status, it is ink on surface.
+  rule: shadow means elevation, never decoration.
+
+type_law: |
+  body:    "Inter"
+  display: "Inter Tight"
+  scale:   1.20 modular scale from 14px base
+
+tokens_source:
+  - src/styles/tokens.css
+canonical_reference: docs/mockup.html
+
+framework: react-ts
+styling: tailwind
+icon_library: lucide
+router: react-router
+component_dir: src/components/
+naming_convention: PascalCase folder + index.tsx
+
+hub_root: design-hub
+hub_language: en
+
+a11y_target: "WCAG 2.2 AA"
+breakpoints: [1440, 1024, 768, 390]
+touch_min_px: 44
+
+qa_runner: playwright
+serve_command: "python3 -m http.server 4321 --directory ."
+
+anti_references:
+  - "Material Design default blue"
+  - "Roboto"
