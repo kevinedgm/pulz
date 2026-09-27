@@ -76,6 +76,22 @@
     Es un ajuste de Auth en el panel del proyecto; puede depender del plan.
     Pendiente de que el dueño lo active si su plan lo permite; no bloquea.
 
+11. **Bienvenida por enlace: la persona no queda dentro tras elegir su
+    contraseña.** La Edge Function `set-password` con token fija la
+    contraseña y devuelve `{ok, slug}`, pero no abre sesión (el token del
+    enlace no es una sesión de Supabase Auth, y el navegador no conoce el
+    usuario sintético `<username>@<org>.usuarios.pulz.mx`, y el token no
+    se puede consultar sin canjearlo). Hoy la pantalla de bienvenida, al
+    terminar, muestra "Listo, ya tienes contraseña. Entra con tu usuario y
+    la contraseña que acabas de elegir" y un botón "Ir a entrar" que lleva
+    al portal `/e/<slug>`. Es un paso extra respecto a §7.3 ("elige su
+    contraseña y entra") y el botón de la ronda de kiwi dice "Crear
+    contraseña y entrar" aunque no entra. Opción barata: que `set-password`
+    devuelva también el correo de acceso (`login_email`) para que el
+    cliente haga `signInWithPassword` de inmediato con la contraseña recién
+    elegida y llegue a `/inicio` sin tocar nada más. Pendiente de decidir;
+    no bloquea la Fase 3.
+
 ## De negocio interpretadas en la Fase 2 (implementado el supuesto; fácil de cambiar)
 
 6. **Folios automáticos**: prefijo por material o etapa + consecutivo por
