@@ -11,14 +11,17 @@
 
 ## Fase actual
 
-**Fase 3 · Portal, acceso y equipo — servidor terminado y verificado;
-interfaz detenida en la compuerta de `kiwi`.** Las tres Edge Functions
-(`signup-company`, `manage-member`, `set-password`) están desplegadas y
-probadas de punta a punta; la Pages Function del portal pasa sus pruebas
-reales; el login con usuario simple y con correo funciona contra GoTrue.
-**Siguiente paso**: ronda de `kiwi` (brief, flujo, wireframes F0–F2) para
-las pantallas de acceso y equipo → **el dueño la aprueba** → lima → coco →
-mora-docs. Nada de interfaz se construye antes (`CLAUDE.md` §3).
+**Fase 3 · Portal, acceso y equipo — servidor e interfaz construidos y
+verificados; falta cerrar el ciclo del squad (lima → mora).** Las tres Edge
+Functions están desplegadas y probadas; la Pages Function pasa sus pruebas
+reales; las cuatro pantallas (portal + inicio de sesión, cambio obligatorio,
+bienvenida, equipo) y el sistema `shared/ui` están implementados con la
+estructura aprobada de kiwi r01, con Vitest 33/33 (integración real contra
+el proyecto alojado incluida) y evidencia Playwright en 4 anchos × 2 temas.
+**Siguiente paso**: el dueño revisa la evidencia y las pantallas
+(`preview` del dev server) y decide `docs/DUDAS.md` #11; luego `lima`
+evalúa la compuerta Candidate con `design-hub/lab/acceso/r01/coco-declaracion.md`
+y `mora-docs` documenta. Después, Fase 4.
 
 ## Qué pasó
 
@@ -47,6 +50,21 @@ mora-docs. Nada de interfaz se construye antes (`CLAUDE.md` §3).
     auth.uid())` en `profiles`. 0 errores.
   - Lint/format del repo en verde (se ignoran `.claude/`, `.agents/`,
     `design-hub/` — tooling de terceros).
+- 2026-09-27: Fase 3, mitad de interfaz (squad):
+  - `kiwi` r01 (`design-hub/lab/acceso/r01/`) **aprobada por el dueño**,
+    junto con `equipo_miembros` (función security definer, `0023`, pgTAP
+    12/12).
+  - `lima`: 14 piezas `draft` en `design-hub/system/registry.json` con
+    contrato; orden de construcción `orden-coco.md`.
+  - `coco` (R3 + F3): `apps/web/src/shared/ui/` (10 piezas con tokens
+    reales, demos en `design-hub/Components/demo` construidas desde el
+    código), `modules/acceso/` (portal, cambio obligatorio, bienvenida,
+    404, store y guardias), `modules/equipo/` (lista, menú por fila, alta
+    por enlace o dictada). Verificado en navegador real, Vitest 33/33
+    (integración real: 4 rechazos → mismo texto) y Playwright 8/8 corridas
+    con 104 capturas. Siete defectos encontrados y corregidos en la
+    verificación (ver `docs/DECISIONES.md`). Declaración:
+    `design-hub/lab/acceso/r01/coco-declaracion.md`.
 
 ## Criterios de aceptación de la Fase 3 (§16) — estado
 
@@ -55,34 +73,22 @@ login por usuario y por correo **OK**; rechazos idénticos **OK** en GoTrue
 (el texto único lo pone la pantalla); slug 301 **OK**; vencida/cancelada
 **OK** (pgTAP); función del portal **5/5**; título "Mezcal Cuatro Vientos ·
 PULZ" **OK**; altas/canje/cambio obligatorio **OK**; **5 fallos bloquean: no
-comprobable en este plan**; **pantallas: pendientes de la ronda de kiwi**.
+comprobable en este plan**; **pantallas: construidas y verificadas** (texto
+único en los cuatro rechazos probado contra el proyecto alojado; guardias y
+adaptación probadas con Playwright); falta la compuerta de lima y mora.
 
 ## Qué falta
 
-1. **Ronda de `kiwi` r01 APROBADA por el dueño (2026-09-27), junto con la
-   vista solo-admin `equipo_miembros`. Estructura congelada.**
-   **`lima` hecho (2026-09-27)**: 14 entradas `draft` en
-   `design-hub/system/registry.json` (6 componentes: button, text-field,
-   password-field, segmented-choice, status-chip, row-menu · 4 patrones:
-   banner, state-block, task-layer, list-stack · 4 pantallas
-   product-application), todas con contrato (estados, variantes, adaptativo,
-   a11y) atado a `tokens.css`; dependencias verificadas sin huérfanos. Orden
-   de construcción para coco en `design-hub/lab/acceso/r01/orden-coco.md`
-   (base primero: migración `equipo_miembros` + pgTAP; luego shared/ui con
-   demos F3 en el Hub; luego pantallas y guardias; luego pruebas y
-   auditoría). **Siguiente: `coco`**, cuando el dueño lo indique.
-   Detalle de la ronda:
-   `design-hub/lab/acceso/r01/` (`brief.md` con 3 user flows, `index.html`
-   wireframe F2 de las 4 pantallas × 3 espacios × 13 estados, `hallazgos.md`,
-   `declaracion.md`). Verificado: `check_artifact.py` 0/0, 156 combinaciones
-   sin desborde y con una sola primaria, 0 errores JS. Dos hallazgos altos
-   para decidir en la aprobación: el admin no puede leer hoy "bloqueado" ni
-   "enlace vigente" (falta una vista solo-admin), y el hook de intentos no
-   está en el plan. → aprobación → `lima` → `coco` (implementación en
-   `apps/web/src/modules/acceso/` y guardias en `apps/web/src/app/router.ts`)
-   → `mora-docs`. Cambios pedidos → `r02`, nunca se sobrescribe r01.
-2. Vitest de integración del cliente de acceso (mensaje único en los cuatro
-   rechazos, guardias) cuando exista la pantalla.
+1. **Cerrar el ciclo del squad para acceso/r01**: el dueño revisa
+   `design-hub/qa/evidence/acceso-r01/` y las pantallas en el dev server
+   (`.claude/launch.json` → `web`, usuarios de `supabase/seed.sql`); si hay
+   cambios de estructura → `kiwi` r02 (nunca se sobrescribe r01); si hay
+   cambios visuales o de código → `coco`. Si conforme → `lima` evalúa la
+   compuerta Candidate con `coco-declaracion.md` y actualiza el registry →
+   `mora-docs` documenta las piezas en el Hub.
+2. Decidir `docs/DUDAS.md` #11 (que `set-password` devuelva el correo de
+   acceso para que la bienvenida deje a la persona dentro). Es un cambio
+   pequeño en la Edge Function + `BienvenidaPage.vue`.
 3. Que el dueño decida sobre `docs/DUDAS.md` #9 (subir de plan para el hook)
    y #10 (protección de contraseñas filtradas). No bloquean.
 4. Sigue abierto de fases anteriores: concurrencia a mano (#5), escala 1–6
@@ -99,6 +105,8 @@ comprobable en este plan**; **pantallas: pendientes de la ronda de kiwi**.
 | Proyecto Supabase | 22 migraciones + semilla por RPC; 3 Edge Functions desplegadas; hook de intentos no disponible (plan); **cada `db reset --linked` lo reconstruye** |
 | Cloudflare | `apps/web/wrangler.toml` (Pages, `dist/`); la Pages Function se prueba con `pnpm --filter @pulz/web test:portal` (requiere `pnpm build` antes) |
 | Docker / Colima / Podman | desinstalados a propósito, regla permanente |
+| Dev server / Hub | `.claude/launch.json`: `web` (Vite 5173) y `hub` (`python3 -m http.server 4321` → `/design-hub/Components/demo/`); el Hub se reconstruye con `pnpm --filter @pulz/web build:hub` |
+| Playwright | `@playwright/test` 1.63 en la raíz, instalado **sin** descargar navegadores (usa el Chromium 1243 ya en `~/Library/Caches/ms-playwright`). Evidencia: `node design-hub/qa/evidencia-acceso.mjs` con `web` y `hub` corriendo |
 | Fruti Squad | `.claude/skills/{kiwi,lima,coco,mora-docs}`, perfil `.claude/skills/lima/profiles/pulz.md` |
 
 ## Regla de seguridad que hay que recordar
@@ -114,10 +122,13 @@ hacia adelante).
 
 ## Pendiente de decidir (ver `docs/DUDAS.md`)
 
-- #9 hook de intentos (plan) · #10 contraseñas filtradas · #5 concurrencia
-  a mano · #4 escala 1–6 · #6–#8 supuestos de negocio de la Fase 2.
+- #11 bienvenida sin sesión automática · #9 hook de intentos (plan) · #10
+  contraseñas filtradas · #5 concurrencia a mano · #4 escala 1–6 · #6–#8
+  supuestos de negocio de la Fase 2.
 
 ## Próxima fase
 
-No hay siguiente fase hasta cerrar la Fase 3: falta la interfaz, que empieza
-por `kiwi` y la aprobación del dueño.
+Fase 4 (`docs/PULZ_MAESTRO.md` §16) cuando el dueño dé por cerrada la Fase 3:
+falta que lima registre el estado de las piezas y que mora las documente. El
+plan de la Fase 4 se escribe en `docs/plan/FASE-4.md` y se aprueba antes de
+tocar código (§0.1).

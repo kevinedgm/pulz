@@ -346,6 +346,46 @@ esos controles se construyen con **texto**: "Mostrar" / "Ocultar",
 hay que agregarlos al sprite (Configuración → marca, otra ronda), no
 mezclar sets.
 
+## 2026-09-27 · coco (R3): lo que el navegador real encontró y las pruebas de unidad no
+
+La verificación se hizo en tres capas y cada una encontró algo distinto:
+
+- **En el navegador (dev server contra el proyecto alojado):** `Boton`
+  renderiza un fragmento (control + texto del motivo), así que Vue no
+  heredaba los atributos sueltos: `form="form-acceso"` no llegaba al
+  `<button>` y **"Entrar" no enviaba nada**. También un `href` indefinido
+  pasado a `RouterLink` pisaba el que este calcula y dejaba el enlace
+  "Equipo" como `<a>` sin destino. Ninguna de las dos se ve con `vue-tsc`
+  ni con el build. Ahora `inheritAttrs: false` + atributos a mano y solo el
+  atributo de destino que aplica; hay prueba de regresión para ambos.
+- **En Playwright (evidencia por ancho y tema):** el bloque de error de
+  Bienvenida se estiraba a toda la pantalla en compact (tarjeta `grid` con
+  `min-height: 100vh` → `align-content: start`), y la celda de acciones en
+  la lista apilada decía "Acciones · Acciones".
+- **En Vitest:** `aria-describedby` apuntaba a la ayuda aunque el error la
+  ocultara (referencia colgante); `CapaTarea` no metía el foco si nacía
+  abierta (`immediate: true`).
+
+Además, el símbolo `i-mas` del sprite estaba dibujado como **menú** (tres
+líneas) y se usaba en "Agregar persona": se redibujó como "+". Es el único
+cambio al sprite; no se agregó ningún icono nuevo.
+
+**"Solo admin" en Equipo no es un guardia del router.** La orden de lima lo
+listaba como guardia, pero la ronda de kiwi tiene el estado "Sin permiso"
+("Solo el administrador puede ver el equipo. Pídele a…") y un guardia que
+redirige lo dejaría inalcanzable. Se quitó el `meta.soloAdmin` muerto: la
+página muestra ese estado y `equipo_miembros` rechaza en la base. Inicio
+solo enseña el enlace "Equipo" al admin.
+
+**Evidencia con Playwright sin descargar nada.** `design-hub/qa` traía el
+arnés de lima pero no el paquete; `@playwright/test` 1.63 pide exactamente
+la revisión 1243 de Chromium, que ya estaba en la caché de la máquina, así
+que se instaló con `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`. El script
+`design-hub/qa/evidencia-acceso.mjs` recorre las pantallas reales
+(inicios de sesión de la semilla incluidos) en 1440/1024/768/390 × claro/
+oscuro, comprueba sin desborde horizontal, rechazo único, guardias y cierre
+con confirmación, y deja 104 capturas en `design-hub/qa/evidence/acceso-r01/`.
+
 ## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
 
 El test de "dos transferencias simultáneas del último litro" está escrito
