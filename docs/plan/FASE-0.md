@@ -7,16 +7,24 @@
 
 ## Objetivo
 
-Que `pnpm install && pnpm build && pnpm test` corra en verde, que
-`supabase start` responda, que exista CI mínimo corriendo en un PR, y que el
-perfil de identidad de PULZ (§13.4) esté cargado en Fruti Squad con el
-Design Hub inicial creado.
+Que `pnpm install && pnpm build && pnpm test` corra en verde, que exista CI
+mínimo corriendo en un PR, y que el perfil de identidad de PULZ (§13.4) esté
+cargado en Fruti Squad con el Design Hub inicial creado.
 
-## Bloqueo detectado antes de empezar
+> **Actualización 2026-09-26**: `supabase start` deja de ser criterio de
+> aceptación de esta fase. El dueño decidió, de forma explícita y permanente,
+> descartar Docker/Colima/Podman y trabajar siempre contra un proyecto
+> Supabase alojado (gestionado desde su panel web). Se probó Colima y sí
+> llegó a funcionar, pero se desinstaló a propósito — no es una limitación
+> técnica temporal, es la arquitectura de trabajo elegida. Detalle completo en
+> `docs/DECISIONES.md`. La sección "Pregunta abierta" de más abajo queda
+> resuelta y se conserva solo como registro histórico.
 
-El entorno **no tiene Docker, Colima ni Podman** instalados, y `supabase
+## Bloqueo detectado antes de empezar (histórico, ya resuelto)
+
+El entorno **no tenía Docker, Colima ni Podman** instalados, y `supabase
 start` los necesita para levantar Postgres local. Antes de instalar nada
-pesado (Docker Desktop u otra alternativa) se pregunta al dueño cuál prefiere
+pesado (Docker Desktop u otra alternativa) se preguntó al dueño cuál prefería
 — ver pregunta al final de este documento. El resto de la Fase 0 no depende
 de esto y puede completarse mientras se decide.
 
@@ -99,7 +107,7 @@ de esto y puede completarse mientras se decide.
 | Criterio | Comando / verificación |
 |---|---|
 | `pnpm install && pnpm build && pnpm test` en verde | correrlos en la raíz del monorepo, código de salida 0 |
-| `supabase start` responde | `supabase start` desde la raíz; si Docker no está disponible, se documenta el bloqueo en `docs/DUDAS.md` y se avisa en vez de fingir que pasó |
+| ~~`supabase start` responde~~ | **retirado**: el dueño descartó Docker/Colima permanentemente; el CLI se usa solo para migraciones contra el proyecto alojado (ver `docs/DECISIONES.md`) |
 | CI corre en un PR | abrir un PR de prueba (o revisar un run de Actions) y confirmar que `ci.yml` se dispara y termina en verde |
 | Existe el perfil PULZ de lima con los valores de §13.4 y el Design Hub inicial | revisar el archivo de perfil que genera Fruti Squad (dentro de `.claude/` o `design-hub/`, según lo que instale) y comparar campo por campo contra la tabla de §13.4 |
 
@@ -107,15 +115,19 @@ Si algún criterio no se puede comprobar con un comando real (p. ej. `supabase
 start` sin Docker), se dice explícitamente en `docs/ESTADO.md` — no se declara
 la fase cerrada por optimismo (regla §0.1.3).
 
-## Pregunta abierta antes de implementar
+## Pregunta abierta antes de implementar (histórico — ya resuelta)
 
-No hay Docker, Colima ni Podman en esta máquina. `supabase start` los
-necesita para levantar Postgres, Auth, Storage, etc. localmente. Opciones:
+No había Docker, Colima ni Podman en esta máquina. `supabase start` los
+necesita para levantar Postgres, Auth, Storage, etc. localmente. Opciones que
+se plantearon:
 
 1. Instalar **Docker Desktop** (más pesado, interfaz gráfica, requiere
    aceptar su licencia).
 2. Instalar **Colima** vía Homebrew (`brew install colima docker`) — más
    ligero, solo línea de comandos, sin licencia de Docker Desktop.
 
-¿Cuál prefieres, o ya tienes uno de los dos en camino? Mientras se decide,
-el resto de la Fase 0 (tareas 1–8, 10–13) no depende de esto.
+**Resuelto**: se instaló Colima, funcionó (con más CPU/memoria de la que
+trae por defecto), pero el dueño pidió explícitamente desinstalarlo y no
+volver a usar Supabase local — todo el trabajo va contra el proyecto alojado.
+Ver `docs/DECISIONES.md` para el detalle y `docs/DUDAS.md` para lo que esto
+deja pendiente de cara a la Fase 1 (cómo probar sin un Postgres reseteable).
