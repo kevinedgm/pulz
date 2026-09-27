@@ -5,50 +5,76 @@
 
 ## Fase actual
 
-**Fase 0 · Arranque** — en planeación. Aún no se ha implementado nada de código.
+**Fase 0 · Arranque** — en curso. Monorepo, tooling, CI y estructura base
+implementados y verificados con comandos reales. Falta: decidir Docker/Colima
+y correr Fruti Squad (pendiente de confirmación) antes de poder cerrarla.
 
 ## Qué pasó
 
 - 2026-09-26: se leyó completo `PULZ_MAESTRO.md` y los archivos de
   `referencia/` (`pulz_esquema.sql`, `pulz_simulacion_semilla.sql`,
-  `pulz_portal_function.ts`, `pulz-tokens.css`). Se inspeccionó el entorno
-  local (ver "Entorno" abajo).
-- Se escribió `docs/plan/FASE-0.md` con las tareas de arranque y se espera
-  aprobación del dueño antes de tocar código.
+  `pulz_portal_function.ts`, `pulz-tokens.css`). Se escribió el plan de la
+  Fase 0 y se mostró para aprobación.
+- 2026-09-26: se implementó la mayor parte de la Fase 0 (ver detalle abajo).
+  `git init`, monorepo pnpm, `apps/web` (Vue 3 + Vite + TS + Pinia + Router +
+  Supabase client), `packages/shared`, ESLint/Prettier, Vitest con prueba de
+  humo, Supabase CLI inicializado, CI mínimo. Seis commits, uno por tarea
+  coherente (§0.1.5). Verificado con comandos reales:
+  - `pnpm install` — verde
+  - `pnpm lint` — verde
+  - `pnpm format` — verde
+  - `pnpm build` — verde (`apps/web` compila y genera `dist/`)
+  - `pnpm test` — verde (1 prueba de humo en `apps/web`)
+  - `supabase start` — **falla**: no hay Docker/Colima/Podman en esta
+    máquina. Documentado en `docs/DUDAS.md`, no se declaró listo por
+    optimismo (§0.1.3).
+  - CI en un PR real — **no verificado todavía** (no se ha abierto PR).
 
-## Qué falta
+## Qué falta para cerrar la Fase 0
 
-- Aprobación del plan de Fase 0.
-- Todo lo demás: el repositorio no tiene una sola línea de código todavía.
+1. Decidir Docker Desktop vs. Colima (pregunta abierta al dueño) e instalar
+   uno para que `supabase start` responda.
+2. Confirmar con el dueño antes de correr
+   `npx github:kevinedgm/fruti-squad setup --target claude` (descarga y
+   ejecuta un script de un repo de GitHub de un tercero) — instalar Fruti
+   Squad, hacer el intake de §13.4 y verificar que quede el perfil PULZ y el
+   Design Hub inicial.
+3. Abrir un PR real y confirmar que `ci.yml` corre en verde ahí.
 
-## Entorno detectado (2026-09-26)
+## Entorno (actualizado 2026-09-26, después de implementar)
 
 | Herramienta | Estado |
 |---|---|
-| Node | v20.20.2 — suficiente |
-| npm | 10.8.2 |
-| pnpm | no instalado; `corepack` sí está disponible (v0.34.6) para activarlo |
-| git | 2.50.1 — el directorio **no es un repo git todavía** (`git init` pendiente) |
-| Supabase CLI | no instalado |
-| Docker / Colima / Podman | **ninguno instalado** — `supabase start` los necesita |
+| Node | 22.23.3 instalado vía `nvm`, fijado en `.nvmrc` y en `engines` del `package.json` raíz (el Node 20 de Homebrew se quedó instalado pero no se usa para este repo) |
+| pnpm | 9.15.9, activado vía Corepack |
+| git | 2.50.1 — repo inicializado, rama `main`, 6 commits |
+| Supabase CLI | 2.118.0, instalado vía Homebrew; `supabase init` ya corrido |
+| Docker / Colima / Podman | **ninguno instalado** — `supabase start` falla con `docker: command not found (podman also not found)` |
 | Homebrew | disponible (6.0.15) |
 
 ## Decisiones y por qué
 
-- Aún no hay decisiones de negocio tomadas fuera del documento maestro: todas
-  las de §2, §7, §10.2 y §18 de `PULZ_MAESTRO.md` se toman como finales según
-  su orden de autoridad (§0.2).
-- El repo se inicializará con `git init` en Fase 0 (no existía como
-  repositorio git al empezar).
+Ver `docs/DECISIONES.md` para el detalle de cada una. Resumen:
+
+- `PULZ_MAESTRO.md` y `referencia/` se movieron a `docs/` (lo pide §19).
+- pnpm vía Corepack, versión fijada (`pnpm@9.15.9`).
+- Node 22, no 20: `@supabase/supabase-js` exige Node ≥ 22 en su `engines`.
+- Mientras no haya Docker/Colima/Podman, el desarrollo apunta al proyecto
+  Supabase alojado que dio el dueño (`https://ypgeiyorgktshgbzhgfh.supabase.co`,
+  credenciales en `apps/web/.env.local`, no versionado) en vez de a
+  `supabase start` local. **No es el proyecto heredado de Istmeño** (regla
+  dura de §0.3). Esto es temporal: la Fase 1 necesita poder resetear la base
+  libremente con `supabase db reset`, algo que no se debe hacer contra un
+  proyecto alojado compartido — para esa fase sí hace falta Docker o Colima.
 
 ## Pendiente de decidir (ver `docs/DUDAS.md`)
 
-- Cómo correr Supabase local sin Docker Desktop instalado (alternativas:
-  Docker Desktop vs. Colima vía Homebrew). Bloquea el criterio de aceptación
-  "`supabase start` responde" de la Fase 0; se preguntará al dueño antes de
-  instalar nada pesado en su máquina.
+- Docker Desktop vs. Colima — pregunta abierta al dueño, bloquea el criterio
+  de aceptación "`supabase start` responde" de la Fase 0.
+- Confirmación para correr el instalador de Fruti Squad (script de GitHub de
+  un tercero, no paquete de npm) antes de ejecutarlo.
 
 ## Próxima fase
 
 Fase 1 · Base de datos (partir `pulz_esquema.sql` en migraciones, aplicar
-§10.2, pgTAP de aislamiento) — no empieza hasta cerrar Fase 0.
+§10.2, pgTAP de aislamiento) — no empieza hasta cerrar la Fase 0.
