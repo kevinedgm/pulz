@@ -172,7 +172,7 @@ pueden escribir y revisar en el repo sin estar enlazado todavía.
 |---|---|
 | `supabase db reset` sin errores | `supabase db reset --linked` sin errores (tarea 7) |
 | Saldos de §15.1 exactos consultando `resource_lot_balances` | `supabase db query --linked` (tarea 9), comparado campo por campo |
-| pgTAP de aislamiento en verde | `supabase test db --linked` (tarea 8) |
+| pgTAP de aislamiento en verde | ~~`supabase test db --linked`~~ → **necesita Docker aunque apunte al proyecto alojado** (levanta `pg_prove` en un contenedor). Se corre en su lugar `supabase db query --linked -f supabase/tests/aislamiento.test.sql`, que ejecuta el test como función pgTAP y devuelve todas las líneas TAP. Resultado real: **18/18 ok** (ver `docs/DECISIONES.md`) |
 | Ninguna política `for all` | `supabase db query --linked "select * from pg_policies where cmd = 'ALL'"` → cero filas |
 | Sin columnas `json`/`jsonb` en `public` | `supabase db query --linked "select table_name, column_name from information_schema.columns where table_schema = 'public' and data_type in ('json','jsonb')"` → cero filas |
 

@@ -5,94 +5,97 @@
 >
 > **Antes de leer el resto, lee `CLAUDE.md` en la raíz del repo.** Trae las
 > reglas que se decidieron después de `PULZ_MAESTRO.md` y que valen para
-> todas las fases, no solo para la Fase 0: nunca Docker/Supabase local,
-> migraciones "desde cero" mientras no haya lanzamiento, y que toda interfaz
-> empieza por la skill `kiwi`.
+> todas las fases: nunca Docker/Supabase local, migraciones "desde cero"
+> mientras no haya lanzamiento, y que toda interfaz empieza por la skill
+> `kiwi`.
 
 ## Fase actual
 
-**Fase 1 · Base de datos** — plan escrito en `docs/plan/FASE-1.md`,
-**esperando aprobación del dueño antes de implementar** (regla §0.1.2). Fase
-0 quedó cerrada en la práctica (ver abajo).
+**Fase 1 · Base de datos — cerrada** (2026-09-27). Todos los criterios de
+aceptación de `PULZ_MAESTRO.md` §16 comprobados con comandos reales contra el
+proyecto alojado (abajo). **Fase 2 · Comandos (RPC)** es la siguiente: falta
+escribir `docs/plan/FASE-2.md` y mostrarlo para aprobación antes de tocar
+código (§0.1.2).
 
 ## Qué pasó
 
-- 2026-09-26: se leyó completo `PULZ_MAESTRO.md` y los archivos de
-  `referencia/`. Se escribió y aprobó el plan de la Fase 0.
-- 2026-09-26: se implementó casi toda la Fase 0 — monorepo pnpm, `apps/web`
-  (Vue 3 + Vite + TS + Pinia + Router + cliente Supabase), `packages/shared`,
-  ESLint/Prettier, Vitest, Supabase CLI inicializado, CI mínimo, Fruti Squad
-  con el perfil PULZ completo (§13.4) y los agent-skills de Supabase.
-  Verificado con comandos reales: `pnpm install/lint/format/build/test` en
-  verde; `supabase start` **sí llegó a funcionar** con Colima (dándole más
-  CPU/memoria); la skill `lima` respondió correctamente a una prueba directa
-  leyendo su perfil.
-- 2026-09-26 (mismo día, sesión continuada): el dueño creó
-  `github.com/kevinedgm/pulz` y se subieron los commits. Después pidió
-  reestructurar el plan sobre tres puntos permanentes, ya escritos en
-  `CLAUDE.md` (raíz del repo) y en `docs/DECISIONES.md` con el detalle
-  completo:
-  1. **Nunca Docker/Colima/Podman**, ni siquiera temporalmente — se
-     desinstaló Colima. Todo el trabajo de base de datos va directo contra
-     el proyecto Supabase alojado (`apps/web/.env.local`).
-  2. **Migraciones "desde cero" mientras no haya lanzamiento**: el esquema se
-     trata como una sola implementación limpia y correcta, no como una pila
-     de parches históricos. Se edita/reescribe la migración que haga falta en
-     vez de apilar una de "fix" arriba de otra. Esto cambia el día que el
-     producto tenga usuarios reales (ahí sí, migraciones aditivas e
-     inmutables).
-  3. **Cualquier trabajo de interfaz empieza por la skill `kiwi`** (ya lo
-     decía `PULZ_MAESTRO.md` §13.4; ahora es una regla explícita en
-     `CLAUDE.md` para que no se salte por accidente): kiwi (estructura) →
-     lima (gobernanza) → coco (construcción + auditoría) → mora-docs
-     (documentación).
+- 2026-09-26: Fase 0 completa (monorepo, tooling, CI, Fruti Squad,
+  agent-skills de Supabase, repo en `github.com/kevinedgm/pulz`). Detalle en
+  `docs/plan/FASE-0.md`.
+- 2026-09-26: el dueño fijó tres reglas permanentes (`CLAUDE.md`): nunca
+  Docker, migraciones "desde cero" pre-lanzamiento, kiwi primero en interfaz.
+- 2026-09-27: el dueño aprobó `docs/plan/FASE-1.md`, corrió `supabase login`
+  y confirmó usar `supabase db push`/`--linked` directo contra el proyecto
+  alojado `ypgeiyorgktshgbzhgfh` (instancia de desarrollo). Se enlazó y se
+  implementó la Fase 1 completa:
+  - 13 migraciones en `supabase/migrations/` (tipos → plataforma → cobro →
+    catálogos con §10.2 → predios/proveedores/insumos → infraestructura →
+    operaciones → lotes y ledger → etapas → auditoría → vistas → portal →
+    RLS). Nombres con timestamp secuencial `20260927000001…13`, que es el
+    patrón que exige el CLI.
+  - `supabase/seed.sql`: la simulación de Cuatro Vientos adaptada a §10.2
+    (plantillas + `seed_organization_catalogs`) y una segunda empresa mínima
+    ("Palenque Prueba B") para probar aislamiento.
+  - `supabase/tests/aislamiento.test.sql`: pgTAP de aislamiento (§11.3) y de
+    los criterios de aceptación, como función que corre por la Management
+    API (Docker no se usa en ningún paso).
 
-- 2026-09-27: el dueño confirmó usar `supabase db push`/`--linked` directo
-  contra el proyecto alojado (es una instancia de desarrollo, no hace falta
-  un segundo proyecto). Se probó cada subcomando del CLI real (`db reset
-  --linked`, `test db --linked`, `db query --linked`, `db push`) y **todos
-  existen y apuntan al proyecto alojado sin Docker** — confirmado con
-  `--help`, no supuesto. Se escribió `docs/plan/FASE-1.md` con el esquema
-  completo partido en migraciones (§10.2 aplicado), la simulación adaptada +
-  segunda empresa, y pgTAP de aislamiento. **Bloqueo real encontrado**:
-  `supabase link` pide `supabase login` o `SUPABASE_ACCESS_TOKEN`, y esta
-  sesión no puede completar un login interactivo — se le pidió al dueño
-  correr `supabase login` en su propia terminal.
+## Criterios de aceptación de la Fase 1 (§16) — comprobados
+
+| Criterio | Comando real | Resultado |
+|---|---|---|
+| `supabase db reset` sin errores | `supabase db reset --linked --yes` | **13/13 migraciones + semilla aplicadas sin un solo error** de Postgres (la referencia anticipaba errores; no hubo) |
+| Saldos de §15.1 exactos en `resource_lot_balances` | `supabase db query --linked "select … from resource_lot_balances …"` | **Exactos**: COL-002 16 · G-COMPRA-01 250 · G-INI-01 341.8 · FER-T1-001 870 · FER-T2-001 1400 · FER-T3-INI 1300 |
+| pgTAP de aislamiento en verde | `supabase db query --linked -f supabase/tests/aislamiento.test.sql` | **18/18 ok** (dos empresas reales, usuario sin membresía, operador vs. admin, FK compuesta, RLS) |
+| Ninguna política `for all` | `select count(*) from pg_policies where cmd='ALL'` | **0** |
+| Sin columnas `json`/`jsonb` en `public` | `information_schema.columns` | **0** (45 tablas, todas con RLS activada) |
+| Semilla por empresa (§10.2) | conteos | 29 plantillas → 29 copias en B; 30 en A (29 + 1 propia), 2 ocultas con `active=false` |
+
+Lo que NO se pudo comprobar tal como lo pedía el plan: `supabase test db
+--linked` — necesita Docker aunque apunte al proyecto alojado. Se sustituyó
+por el runner de la Management API con el mismo test; no es una omisión, es
+una vía equivalente (ver `docs/DECISIONES.md`).
 
 ## Qué falta
 
-- Aprobación del dueño para `docs/plan/FASE-1.md` antes de tocar el esquema.
-- Que el dueño corra `supabase login` (o dé un access token) para poder
-  enlazar el proyecto y ejecutar las tareas 6–9 del plan de Fase 1 (link,
-  reset, pgTAP, verificación de saldos). Las migraciones (tareas 1–5) se
-  pueden escribir sin esto.
-- Abrir un PR real y confirmar que `ci.yml` corre en verde ahí (no bloquea
-  la Fase 1).
+- Escribir y aprobar `docs/plan/FASE-2.md` (cuerpos de las RPC de §12 con
+  el contrato de §12.1; reescribir la simulación para que se construya
+  llamando a las RPC; pgTAP por RPC y prueba de concurrencia).
+- Confirmar con el dueño la escala 1–6 de actividad/dulzor/acidez (§18 #1,
+  `docs/DUDAS.md` #4). No bloquea.
+- Abrir un PR real y confirmar que `ci.yml` corre en verde (no bloquea).
+- Cuando el front lo necesite (Fase 4/5): `supabase gen types typescript
+  --linked` hacia `packages/shared`.
 
-## Entorno (actualizado 2026-09-26)
+## Entorno (actualizado 2026-09-27)
 
 | Herramienta | Estado |
 |---|---|
-| Node | 22.23.3 vía `nvm`, fijado en `.nvmrc` y `engines` del `package.json` raíz |
-| pnpm | 9.15.9, activado vía Corepack |
-| git | repo en `github.com/kevinedgm/pulz`, rama `main`, sincronizado |
-| Supabase CLI | 2.118.0 (Homebrew); se usa solo contra el proyecto alojado, nunca `supabase start` |
-| Docker / Colima / Podman | **desinstalados a propósito, regla permanente** (ver `CLAUDE.md`) |
-| Fruti Squad | `.claude/skills/{kiwi,lima,coco,mora-docs}`; perfil en `.claude/skills/lima/profiles/pulz.md`; Design Hub en `design-hub/`; probado con una invocación real de `lima` |
-| Agent-skills de Supabase | `.agents/skills/{supabase,supabase-postgres-best-practices}`, symlink en `.claude/skills/` |
+| Node | 22.23.3 vía `nvm` (`.nvmrc`, `engines`) |
+| pnpm | 9.15.9 vía Corepack |
+| git | `github.com/kevinedgm/pulz`, rama `main` |
+| Supabase CLI | 2.118.0, **enlazado** a `ypgeiyorgktshgbzhgfh` ("pulz", instancia de desarrollo). Nunca `supabase start`, nunca `supabase test db` (ambos piden Docker) |
+| Proyecto Supabase | esquema completo de la Fase 1 aplicado; **cada `db reset --linked` lo borra y reconstruye** — no guardar ahí nada que no esté en `seed.sql` |
+| Docker / Colima / Podman | desinstalados a propósito, regla permanente |
+| Fruti Squad | `.claude/skills/{kiwi,lima,coco,mora-docs}`, perfil `.claude/skills/lima/profiles/pulz.md`, Design Hub en `design-hub/` |
+| Agent-skills de Supabase | `.agents/skills/{supabase,supabase-postgres-best-practices}` |
+
+## Regla de seguridad que hay que recordar
+
+`supabase projects list` muestra también el proyecto **TRAKER-PALENQUE**
+(`thpoahtohyofjndauvix`): es el sistema heredado de Istmeño. **Nunca se
+enlaza ni se toca** (`PULZ_MAESTRO.md` §0.3). Solo `ypgeiyorgktshgbzhgfh`.
 
 ## Decisiones y por qué
 
-Ver `docs/DECISIONES.md` para el historial completo (no se borra nada, se
-agregan entradas nuevas cuando una decisión reemplaza a otra). Las que rigen
-hacia adelante están resumidas en `CLAUDE.md`.
+Ver `docs/DECISIONES.md` (historial completo, no se borra nada) y `CLAUDE.md`
+(las que rigen hacia adelante).
 
 ## Pendiente de decidir (ver `docs/DUDAS.md`)
 
-- Nada de negocio pendiente para esta fase. Solo el bloqueo operativo de
-  `supabase login` de arriba.
+- Escala 1–6 vs. 1–10 para actividad/dulzor/acidez (#4). Implementado 1–6.
 
 ## Próxima fase
 
-Ninguna todavía — hay que cerrar la Fase 1 primero. Ver `docs/plan/FASE-1.md`
-para el detalle completo de tareas y criterios de aceptación.
+Fase 2 · Comandos (RPC). Toca escribir `docs/plan/FASE-2.md` y mostrarlo
+para aprobación.

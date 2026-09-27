@@ -129,6 +129,68 @@ del lanzamiento), ese proyecto no debe usarse para nada que no esté en
 `seed.sql` — ninguna prueba manual ni dato de demo sobrevive al siguiente
 reset.
 
+## 2026-09-27 · Fase 1 aplicada: cero errores de Postgres en el esquema de referencia
+
+`PULZ_MAESTRO.md` §0.2 anticipaba que `pulz_esquema.sql` "no está probado
+en Postgres real" y tendría errores de sintaxis u orden. Al partirlo en 13
+migraciones y aplicarlo con `supabase db reset --linked` **no apareció
+ninguno**: las 13 migraciones y la semilla corrieron limpias a la primera.
+Lo que sí cambió respecto a la referencia fue por diseño (§10.2), no por
+error — se lista abajo.
+
+## 2026-09-27 · pgTAP se corre por la Management API, no con `supabase test db`
+
+`supabase test db --linked` sí conecta al proyecto alojado, pero levanta
+`pg_prove` en un contenedor Docker local para ejecutarlo — y Docker está
+descartado (CLAUDE.md §1). Falla con `DockerRunError`. Solución sin Docker y
+sin contraseña de base de datos: el test es una **función pgTAP** en el
+esquema temporal, y se ejecuta con
+
+    supabase db query --linked -f supabase/tests/aislamiento.test.sql
+
+El runner de la Management API solo devuelve el resultado del último
+statement, y ese es `runtests(...)`, que emite todas las líneas TAP. Todo va
+en una transacción que termina en `rollback`, así que no deja rastro en el
+proyecto. Detalle: `pg_temp` no sirve como nombre de esquema para
+`runtests()`; se resuelve con `pg_my_temp_schema()`.
+
+Con `psql` (viene con Postgres.app) también se podría, pero necesita la
+contraseña de Postgres del proyecto y nunca hizo falta pedirla: `link`,
+`reset` y `query` funcionan solo con `supabase login`.
+
+## 2026-09-27 · Cambios deliberados respecto a `pulz_esquema.sql` (además de §10.2)
+
+- **Escala de actividad 1–6** (§18 #1): el CHECK de
+  `fermentation_measurements.activity` pasa de 1–10 a 1–6, y `dulzor`/`acidez`
+  en `measurement_readings` quedan acotados a 1–6 por CHECK. La simulación
+  traía actividades 7 y 8 (escala vieja); en `seed.sql` se recortaron a 6.
+  Solo afecta la semilla; ningún saldo de §15.1 depende de eso.
+- **"Anular medición"** (§4.4, §12.2 `anular_medicion`): `fermentation_measurements`
+  gana `voided_at`, `voided_by`, `void_reason` (con CHECK de consistencia) para
+  que la RPC de Fase 2 tenga dónde anular sin borrar.
+- **Rangos de aviso configurables** (§18 #5 y #6): `organization_settings`
+  gana `abv_warn_min/max` (35–55) y `brix_warn_min/max` (12–14) en vez de
+  dejarlos en código.
+- **`has_role()` rechaza escrituras con suscripción vencida o cancelada**
+  (§11.2): se implementa dentro de la propia función, así todas las políticas
+  y RPC lo heredan sin repetirlo.
+- **`updated_at` con trigger** en catálogos, recursos, predios, proveedores,
+  insumos, ajustes y suscripciones (§10.1 lo pedía; la referencia solo lo
+  tenía en dos tablas).
+- **Índices** adicionales por `(organization_id, …)` en las tablas de consulta
+  frecuente y el de `organization_members (user_id, organization_id)` que pide
+  §11.2.
+- **Grants explícitos** (§10.1): se revoca todo a `anon`/`authenticated` en
+  `public` y se otorga tabla por tabla. Los *default privileges* que el
+  propio Supabase define al crear el proyecto se dejan como están (no son
+  nuestros y no se tocan con `alter default privileges`); los grants
+  explícitos de `0013` mandan sobre ellos.
+- **`attachments.kind_item_id`** y las demás referencias tipadas verifican el
+  tipo de catálogo con un trigger (`assert_catalog_item`) además de la FK
+  compuesta, como pide §10.2.5.
+- **`propagate_template(uuid)`** busca el id en las tres tablas de plantillas
+  (un uuid solo existe en una) y devuelve cuántas filas agregó.
+
 ## 2026-09-26 · Flujo de interfaz obligatorio: kiwi primero, siempre
 
 `PULZ_MAESTRO.md` §13.4 ya establecía que "ninguna pantalla se construye sin

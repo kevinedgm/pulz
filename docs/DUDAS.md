@@ -23,14 +23,21 @@
    hacían sus equivalentes locales, apuntando al proyecto alojado. No se
    necesita Docker en ningún paso del ciclo de la Fase 1.
 
-2. **Autenticación del CLI para `supabase link`.** `supabase link
-   --project-ref ypgeiyorgktshgbzhgfh` pide `supabase login` (interactivo, no
-   se puede completar en una sesión no interactiva) o
-   `SUPABASE_ACCESS_TOKEN`. Pendiente de que el dueño corra `supabase login`
-   en su propia terminal (recomendado) o dé un personal access token para
-   exportarlo en la sesión. Bloquea las tareas 6–9 de `docs/plan/FASE-1.md`,
-   no las tareas 1–5 (escribir las migraciones sí se puede hacer sin estar
-   enlazado).
+2. **Autenticación del CLI para `supabase link`.** **Resuelto**: el dueño
+   corrió `supabase login` en su terminal; con eso `link`, `db reset
+   --linked`, `db query --linked` y `db push` funcionan desde esta sesión.
+   Nunca hizo falta la contraseña de Postgres del proyecto ni un access token
+   en el chat.
+
+3. **`supabase test db --linked` necesita Docker aunque apunte al proyecto
+   alojado.** **Resuelto sin Docker**: el pgTAP se corre como función a
+   través de `supabase db query --linked -f …` (ver `docs/DECISIONES.md`).
+   Queda como nota para no volver a intentar `supabase test db`.
+
+4. **Escala de actividad/dulzor/acidez** (§18 #1): se implementó 1–6 por
+   CHECK. Si el dueño prefiere 1–10, es cambiar dos CHECK en
+   `20260927000009_etapas.sql` y quitar el recorte de la semilla. Pendiente
+   de confirmación, no bloquea.
 
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
