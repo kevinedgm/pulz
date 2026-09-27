@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PULZ · Contrapropuesta de diseño v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#173F87;--ink-700:#275AA5;--ink-100:#DDE7F5;
+  --clay-300:#F2CFC2;--clay-100:#FAEAE4;
+  --canvas:#F8F6F2;--surface:#FFFFFF;--text:#18243A;--muted:#687184;--border:#DDE1E7;
+  --ok:#287A55;--ok-bg:#E4F2EA;--pend:#C17A18;--pend-bg:#FBEEDB;--late:#B93A2E;--late-bg:#FBE4E1;--info:#2B6CB0;--info-bg:#E1ECF8;
+  --brand-ink:#173F87;--brand-clay:#F2CFC2;
+  --font:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-md:10px;--r-lg:12px;--r-xl:14px;--r-2xl:16px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink-900:#7FA3E0;--ink-700:#A4BEEB;--ink-100:#1E2B44;--clay-300:#E0A98F;--clay-100:#3A2A25;
+  --canvas:#0F1521;--surface:#171F2E;--text:#EEF1F7;--muted:#9AA5BB;--border:#2A3549;
+  --ok:#6FC79A;--ok-bg:#163526;--pend:#E9B356;--pend-bg:#3A2A10;--late:#F0837A;--late-bg:#3B1B18;--info:#7FB2F0;--info-bg:#18304B;}}
+:root[data-theme="dark"]{
+  --ink-900:#7FA3E0;--ink-700:#A4BEEB;--ink-100:#1E2B44;--clay-300:#E0A98F;--clay-100:#3A2A25;
+  --canvas:#0F1521;--surface:#171F2E;--text:#EEF1F7;--muted:#9AA5BB;--border:#2A3549;
+  --ok:#6FC79A;--ok-bg:#163526;--pend:#E9B356;--pend-bg:#3A2A10;--late:#F0837A;--late-bg:#3B1B18;--info:#7FB2F0;--info-bg:#18304B;}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--canvas);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.55}
+h1,h2,h3{line-height:1.2;margin:0}
+p{margin:0 0 12px}
+a{color:var(--ink-700)}
+code{font-family:inherit;font-weight:600;background:var(--ink-100);padding:1px 6px;border-radius:6px;font-size:.92em}
+
+/* Cabecera de marca: siempre tinta fija */
+.masthead{background:var(--brand-ink);color:#fff}
+.masthead .in{max-width:1080px;margin:0 auto;padding:40px 20px 0}
+.lockup{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.lockup svg{width:40px;height:40px;color:var(--brand-clay)}
+.wordmark{font-weight:800;letter-spacing:-.05em;font-size:26px}
+.wordmark i{display:inline-block;font-style:normal;transform:skewX(-8deg)}
+.lockup small{display:block;font-size:12px;opacity:.75;font-weight:500;letter-spacing:0}
+.masthead h1{font-size:clamp(32px,6vw,48px);font-weight:800;letter-spacing:-.03em;max-width:17ch}
+.masthead .lede{font-size:18px;max-width:62ch;opacity:.9;margin:16px 0 32px}
+
+/* La franja de etapas: la pieza memorable */
+.strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin:0 -4px;position:relative}
+.stage{position:relative;padding:0 4px 28px;text-align:center}
+.stage .bub{width:64px;height:64px;margin:0 auto;border-radius:50%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;position:relative;z-index:1}
+.stage .bub svg{width:36px;height:36px;color:#fff}
+.stage::before{content:"";position:absolute;top:32px;left:0;right:0;height:2px;background:rgba(255,255,255,.3)}
+.stage:first-child::before{left:50%}.stage:last-child::before{right:50%}
+.stage b{display:block;font-size:14px;margin-top:10px;font-weight:700}
+.door{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:700;color:var(--brand-ink);background:var(--brand-clay);border-radius:999px;padding:2px 10px}
+.door.dim{background:transparent;color:rgba(255,255,255,.55);border:1px dashed rgba(255,255,255,.4)}
+.strip-note{font-size:14px;opacity:.8;padding:0 0 28px;max-width:70ch}
+@media (max-width:640px){
+  .strip{grid-template-columns:1fr;margin:0}
+  .stage{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:12px;text-align:left;padding:6px 0}
+  .stage .bub{width:48px;height:48px;margin:0}.stage .bub svg{width:28px;height:28px}
+  .stage::before{top:0;bottom:0;left:24px;right:auto;width:2px;height:auto}
+  .stage:first-child::before{top:50%;left:24px}.stage:last-child::before{bottom:50%;right:auto}
+  .stage b{margin:0}.door{margin:0}
+}
+
+/* Navegación de secciones */
+.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.toc .in{max-width:1080px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
+.toc a{flex:none;text-decoration:none;color:var(--ink-900);font-weight:600;font-size:14px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--border);min-height:40px;display:inline-flex;align-items:center}
+.toc a:hover,.toc a:focus-visible{background:var(--ink-100);border-color:var(--ink-700);outline:none}
+
+main{max-width:1080px;margin:0 auto;padding:8px 20px 80px}
+section{padding:48px 0 8px;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;margin-bottom:20px}
+.sec-head .n{font-weight:800;font-size:32px;color:var(--clay-300);letter-spacing:-.02em;grid-row:span 2}
+.sec-head h2{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink-900)}
+.sec-head p{color:var(--muted);margin:0;max-width:68ch}
+h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.prose{max-width:72ch}
+
+/* Principios */
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.pr{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-2xl);padding:20px}
+.pr .k{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--clay-100);color:var(--ink-900);font-weight:800;margin-bottom:10px}
+.pr h3{margin:0 0 6px;font-size:18px}
+.pr p{margin:0;color:var(--muted)}
+.pr.key{border:2px solid var(--ink-900)}
+
+/* Diagramas: lámina clara en ambos temas para que Mermaid se lea */
+.fig{background:#fff;border:1px solid var(--border);border-radius:var(--r-2xl);padding:16px;margin:12px 0 8px;overflow-x:auto}
+.fig pre.mermaid{margin:0;min-width:320px;display:flex;justify-content:center;background:transparent;color:#18243A}
+.cap{font-size:14px;color:var(--muted);margin:0 0 20px;max-width:72ch}
+
+/* Tablas */
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r-xl);background:var(--surface);margin:12px 0 20px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:560px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-weight:700;color:var(--ink-900);background:var(--ink-100);font-size:14px}
+tr:last-child td{border-bottom:0}
+td b{font-weight:700}
+
+/* Tarjetas de etapa */
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-2xl);padding:18px}
+.sc header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.sc header .ib{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--ink-100);color:var(--ink-900);flex:none}
+.sc header .ib svg{width:28px;height:28px}
+.sc h3{margin:0;font-size:18px}
+.sc dl{margin:0;display:grid;gap:8px}
+.sc dt{font-size:12px;font-weight:700;color:var(--muted)}
+.sc dd{margin:0;font-size:15px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;border-radius:999px;padding:3px 10px}
+.t-ok{background:var(--ok-bg);color:var(--ok)}.t-pend{background:var(--pend-bg);color:var(--pend)}
+.t-late{background:var(--late-bg);color:var(--late)}.t-info{background:var(--info-bg);color:var(--info)}
+.t-clay{background:var(--clay-100);color:var(--ink-900)}
+
+/* Avisos */
+.note{border-radius:var(--r-lg);padding:14px 16px;background:var(--clay-100);border-left:4px solid var(--clay-300);margin:12px 0 20px;max-width:80ch}
+.note b{color:var(--ink-900)}
+
+/* Leyenda de historia */
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0 20px}
+.lg{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:14px}
+.lg p{margin:8px 0 0;font-size:14px;color:var(--muted)}
+
+/* Árbol de carpetas */
+.tree{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-2xl);padding:18px 20px;overflow-x:auto;font-size:14px;line-height:1.7;white-space:pre;margin:12px 0 20px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.tree .c{color:var(--muted)}
+.tree .d{color:var(--ink-900);font-weight:700}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;gap:10px;max-width:80ch}
+.qs li{counter-increment:q;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:14px 16px 14px 56px;position:relative}
+.qs li::before{content:counter(q);position:absolute;left:14px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--ink-900);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+footer{max-width:1080px;margin:0 auto;padding:0 20px 48px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<style>
+.phones{display:flex;gap:18px;flex-wrap:wrap;margin:14px 0 22px}
+.phone{width:230px;border:8px solid #18243A;border-radius:30px;background:#F7F5F2;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);flex:none}
+.phone .bar{height:18px;background:#18243A}
+.phone .url{font:12px/1 ui-monospace,monospace;color:#687184;background:#EDEAE4;margin:8px;padding:7px 9px;border-radius:9px;white-space:nowrap;overflow:hidden}
+.phone .body{padding:16px 16px 22px;color:#18243A}
+.pl-logo{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:22px;margin:6px auto 10px}
+.pl-name{text-align:center;font-weight:800;font-size:17px;line-height:1.2}
+.pl-msg{text-align:center;color:#687184;font-size:12.5px;margin:4px 0 14px}
+.pl-f{border:1px solid #D8D4CC;background:#fff;border-radius:10px;padding:9px 10px;font-size:13px;color:#687184;margin-bottom:8px}
+.pl-btn{border-radius:10px;padding:10px;text-align:center;color:#fff;font-weight:700;font-size:14px;margin-top:4px}
+.pl-foot{text-align:center;font-size:11px;color:#9AA0AA;margin-top:14px}
+.home{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 8px;padding:16px 10px}
+.home .ap{text-align:center;font-size:10.5px;color:#fff}
+.home .ic{width:46px;height:46px;border-radius:12px;margin:0 auto 5px;display:grid;place-items:center;font-weight:800;color:#fff;font-size:17px}
+.phone.dark{background:linear-gradient(160deg,#2B3A55,#5A4A6B)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-maguey" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 44V24"/><path d="M24 26c0-9 3-16 8-20"/><path d="M24 26c0-9-3-16-8-20"/><path d="M24 30c2-8 8-14 16-15"/><path d="M24 30c-2-8-8-14-16-15"/><path d="M24 36c3-6 9-9 17-8"/><path d="M24 36c-3-6-9-9-17-8"/><path d="M14 44h20"/></symbol>
+<symbol id="i-horno" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 40h36"/><path d="M10 40c0-12 8-22 14-28 6 6 14 16 14 28"/><path d="M18 40c0-8 3-13 6-16 3 3 6 8 6 16"/><path d="M24 12V6"/><path d="M20 8l4-2 4 2"/></symbol>
+<symbol id="i-molienda" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="26" r="16"/><circle cx="24" cy="26" r="6"/><path d="M24 10v10M24 32v10M8 26h10M30 26h10M13 15l7 7M28 30l7 7M35 15l-7 7M20 30l-7 7"/></symbol>
+<symbol id="i-tina" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8h24l-2 34H14z"/><path d="M11 18h26M12 30h24"/><path d="M20 24c1-2 3-2 4 0s3 2 4 0"/><circle cx="18" cy="14" r="1"/><circle cx="29" cy="13" r="1"/></symbol>
+<symbol id="i-destila" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40h20"/><path d="M12 40V30a8 8 0 0116 0v10"/><path d="M20 22v-8"/><path d="M20 14h8c6 0 8 4 8 10v8"/><path d="M34 32v8"/><path d="M36 42a2 2 0 11-4 0c0-2 2-4 2-4s2 2 2 4z"/></symbol>
+<symbol id="i-lote" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="12" width="28" height="30" rx="3"/><path d="M14 12V8h20v4"/><path d="M18 22h12M18 28h12M18 34h6"/></symbol>
+<symbol id="pulz-mark" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="48" r="42" stroke-width="5"/><path d="M18 56h14l6-16 8 32 8-40 6 24h18" stroke-width="6"/><path d="M48 20c-3 6-4 12-2 18" stroke-width="4"/><path d="M48 20c3 6 4 12 2 18" stroke-width="4"/></symbol>
+</svg>
+
+<header class="masthead">
+  <div class="in">
+    <div class="lockup">
+      <svg aria-hidden="true"><use href="#pulz-mark"/></svg>
+      <div><span class="wordmark">PUL<i>Z</i></span><small>Producción y trazabilidad de mezcal</small></div>
+    </div>
+    <h1>Contrapropuesta de diseño v3</h1>
+    <p class="lede">Mismo proceso del palenque, más flexible. Cualquier lote puede entrar al sistema en la etapa en que esté, con toda su historia, con parte o con ninguna, y completarla después. Incluye arquitectura, esquema de base de datos y estructura del proyecto.</p>
+
+    <div class="strip" role="list" aria-label="Etapas y puntos de entrada">
+      <div class="stage" role="listitem"><div class="bub"><svg><use href="#i-maguey"/></svg></div><b>Maguey</b><span class="door">+ entrada</span></div>
+      <div class="stage" role="listitem"><div class="bub"><svg><use href="#i-horno"/></svg></div><b>Horneado</b><span class="door">+ entrada</span></div>
+      <div class="stage" role="listitem"><div class="bub"><svg><use href="#i-molienda"/></svg></div><b>Molienda</b><span class="door dim">sin entrada</span></div>
+      <div class="stage" role="listitem"><div class="bub"><svg><use href="#i-tina"/></svg></div><b>Fermentación</b><span class="door">+ entrada</span></div>
+      <div class="stage" role="listitem"><div class="bub"><svg><use href="#i-destila"/></svg></div><b>Destilación</b><span class="door">+ entrada</span></div>
+      <div class="stage" role="listitem"><div class="bub"><svg><use href="#i-lote"/></svg></div><b>Granel</b><span class="door">+ entrada</span></div>
+    </div>
+    <p class="strip-note">Cada etiqueta “+ entrada” es una puerta: un lote comprado o que ya existía antes de usar PULZ entra ahí directamente. Molienda no la necesita porque nadie compra agave a medio moler.</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Secciones"><div class="in">
+  <a href="#cambio">Qué cambió</a><a href="#principios">Principios</a><a href="#flujo">Flujo</a><a href="#etapas">Etapas</a><a href="#granel">Granel</a><a href="#traza">Trazabilidad</a><a href="#arq">Arquitectura</a><a href="#bd">Base de datos</a><a href="#carpetas">Carpetas</a><a href="#fases">Fases</a><a href="#portal">Portal</a><a href="#preguntas">Respuestas</a>
+</div></nav>
+
+<main>
+
+<section id="cambio">
+  <div class="sec-head"><span class="n">1</span><h2>Qué cambió respecto al documento original</h2><p>El proceso productivo se conserva tal cual lo explicó el palenque de referencia. Cambian el enfoque del producto y cómo entra la información.</p></div>
+  <div class="tw"><table>
+    <thead><tr><th>Tema</th><th>Documento original</th><th>Contrapropuesta</th></tr></thead>
+    <tbody>
+      <tr><td><b>Para quién</b></td><td>SaaS con planes Operativo, Profesional y Premium, piloto con 2–3 perfiles.</td><td>Producto de autoservicio: cualquiera se registra, crea su empresa, invita a su gente y paga con Stripe si quiere más. Crece por boca a boca.</td></tr>
+      <tr><td><b>Qué es</b></td><td>Bitácora de producción con trazabilidad.</td><td>La herramienta privada del dueño. No es una herramienta de cumplimiento; el dueño decide qué enseña y a quién.</td></tr>
+      <tr><td><b>Por dónde entra un lote</b></td><td>Siempre desde la recepción de maguey, en orden.</td><td>Por cualquier etapa (salvo molienda). La historia hacia atrás es opcional y se completa cuando se quiera.</td></tr>
+      <tr><td><b>Granel</b></td><td>Sólo nace de un colector de mezcal.</td><td>Además acepta compras con certificado opcional y carga inicial, y maneja un catálogo editable de movimientos de entrada y salida (agua, puntas, unión con otro lote, laboratorio, autoconsumo, merma, venta…).</td></tr>
+      <tr><td><b>Validaciones</b></td><td>Muchas reglas bloquean.</td><td>Sólo bloquea lo físicamente imposible. Lo demás avisa, pide nota y deja seguir.</td></tr>
+      <tr><td><b>Medición diaria</b></td><td>17 lecturas por tina al día, obligatorias.</td><td>Modo mínimo por defecto; modo completo como opción por empresa (el palenque de referencia lo usa).</td></tr>
+      <tr><td><b>Base de datos</b></td><td>Tablas base listadas; planes como entitlements.</td><td>Esquema relacional completo, sin JSON ni JSONB, con linaje de lotes, llaves compuestas por empresa y catálogos con semilla que cada empresa amplía.</td></tr>
+      <tr><td><b>Arquitectura</b></td><td>Supabase + Workers + Queues, sincronización offline propia.</td><td>Supabase + un Worker delgado. La lógica de dominio vive en funciones de Postgres; sin Queues en el MVP; offline sólo para lo que se captura en campo.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="principios">
+  <div class="sec-head"><span class="n">2</span><h2>Seis principios de diseño</h2><p>Si una pantalla o regla contradice alguno de estos, el principio gana.</p></div>
+  <div class="principles">
+    <div class="pr key"><span class="k">1</span><h3>Entra por donde estés</h3><p>Un lote se registra en la etapa en que se encuentra: maguey recién llegado, una tina que ya fermentaba, ordinario acumulado o granel comprado.</p></div>
+    <div class="pr key"><span class="k">2</span><h3>La historia hacia atrás es opcional</h3><p>Se puede dejar vacía, poner sólo una nota o un certificado, o vincularla después a lotes reales. Completarla nunca obliga a rehacer nada.</p></div>
+    <div class="pr"><span class="k">3</span><h3>Nada bloquea salvo lo imposible</h3><p>Bloquea: saldo negativo, capacidad estricta excedida, datos de otra empresa. Todo lo demás avisa, pide nota y registra.</p></div>
+    <div class="pr"><span class="k">4</span><h3>El dueño decide qué se ve</h3><p>La información es privada de la empresa. Las exportaciones las arma el dueño; el sistema nunca decide por él qué es presentable.</p></div>
+    <div class="pr"><span class="k">5</span><h3>Captura mínima, detalle opcional</h3><p>Cada formulario pide lo indispensable. Lo demás aparece en “más datos” para quien lo quiera llevar.</p></div>
+    <div class="pr"><span class="k">6</span><h3>Todo es lote, recurso y movimiento</h3><p>Las etapas son vistas sobre un mismo modelo: lotes que se mueven entre recursos. Por eso la trazabilidad funciona igual en todas.</p></div>
+  </div>
+</section>
+
+<section id="flujo">
+  <div class="sec-head"><span class="n">3</span><h2>El flujo entre etapas, pulido</h2><p>Las flechas continuas son el flujo normal del palenque. Las punteadas son las puertas de entrada directa.</p></div>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'15px'}}}%%
+flowchart TD
+  EM(["+ Maguey comprado o cosechado"]) -.-> M
+  EH(["+ Agave ya cocido"]) -.-> H
+  ET(["+ Tina que ya fermentaba"]) -.-> T
+  EC(["+ Colector con ordinario o colas"]) -.-> C
+  EG(["+ Granel comprado o existente"]) -.-> G
+  M["Maguey&lt;br/&gt;predio, especie, piñas, kg"] --> H["Horneado&lt;br/&gt;kg cargados y cocidos"]
+  H --> F["Molienda y formulación&lt;br/&gt;agua e insumos"]
+  F -->|"reparte a una o varias tinas"| T["Fermentación&lt;br/&gt;ciclo por tina"]
+  T -->|"una tina alimenta varias corridas"| D["Destilación&lt;br/&gt;1ª o 2ª pasada"]
+  D -->|"cortes con L y % Alc."| C["Colectores&lt;br/&gt;una clase por colector"]
+  C -->|"ordinario / colas"| D
+  C -->|"mezcal"| G["Granel&lt;br/&gt;tanques y lotes"]
+  G --> S["Salida&lt;br/&gt;venta, envasado, muestra"]
+  classDef entry fill:#FAEAE4,stroke:#E0A98F,color:#173F87
+  classDef exit fill:#E4F2EA,stroke:#287A55,color:#18243A
+  class EM,EH,ET,EC,EG entry
+  class S exit
+</pre></div>
+  <p class="cap">Salida es nueva: sin ella el inventario de granel nunca baja y el saldo de tanques se vuelve ficción.</p>
+
+  <h3>Entregas entre etapas</h3>
+  <div class="tw"><table>
+    <thead><tr><th>De</th><th>A</th><th>Qué pasa</th><th>Condición</th></tr></thead>
+    <tbody>
+      <tr><td>Maguey</td><td>Horneado</td><td>Uno o varios lotes de maguey se cargan al horno</td><td>Saldo en kg disponible</td></tr>
+      <tr><td>Horneado</td><td>Formulación</td><td>Nace un lote de agave cocido con linaje a los lotes de maguey</td><td>Corrida cerrada con kg cocidos</td></tr>
+      <tr><td>Formulación</td><td>Fermentación</td><td>El volumen se reparte a tinas; cada tina abre ciclo con su lote fermentado</td><td>Tina disponible; suma repartida ≤ volumen</td></tr>
+      <tr><td>Fermentación</td><td>Destilación</td><td>Carga al alambique desde una o varias tinas con volumen o porcentaje</td><td>El productor declara la tina lista (el día 6–7 sólo avisa)</td></tr>
+      <tr><td>Destilación</td><td>Colectores</td><td>Cada corte suma al lote vivo del colector de su clase</td><td>Clase del corte = clase del colector</td></tr>
+      <tr><td>Colectores</td><td>Destilación</td><td>Ordinario o colas cargan una 2ª pasada</td><td>Lo que haya, lleno o no; ordinario + colas juntos avisa y pide nota</td></tr>
+      <tr><td>Colector de mezcal</td><td>Granel</td><td>Transferencia a tanque; si el tanque tiene otro lote, nace una mezcla</td><td>Capacidad del tanque según su política</td></tr>
+      <tr><td>Granel</td><td>Salida</td><td>Venta a granel, envasado, muestra o merma</td><td>Saldo suficiente</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="etapas">
+  <div class="sec-head"><span class="n">4</span><h2>Cada etapa: qué se queda, qué cambia</h2><p>Lo que no aparece aquí se queda exactamente como en el Anexo A.</p></div>
+  <div class="stages">
+    <article class="sc"><header><span class="ib"><svg><use href="#i-maguey"/></svg></span><h3>Maguey</h3></header><dl>
+      <dt>Cambia</dt><dd>Se agrega número de piñas (opcional) junto al peso. Predio desde catálogo o escrito a mano. Proveedor opcional.</dd>
+      <dt>Entrada directa</dt><dd>Es la entrada natural. Su lote queda con historia “completa” en cuanto se registra.</dd>
+    </dl></article>
+    <article class="sc"><header><span class="ib"><svg><use href="#i-horno"/></svg></span><h3>Horneado</h3></header><dl>
+      <dt>Cambia</dt><dd>Al cerrar, el agave cocido se vuelve un lote propio con folio, así puede alimentar varias formulaciones y saldarse en kg.</dd>
+      <dt>Entrada directa</dt><dd>Agave ya cocido comprado a otro palenque. Poco común, pero cuesta nada soportarlo.</dd>
+    </dl></article>
+    <article class="sc"><header><span class="ib"><svg><use href="#i-molienda"/></svg></span><h3>Molienda y formulación</h3></header><dl>
+      <dt>Se queda</dt><dd>Todo el Anexo A.8: agua, insumos, volumen resultante y reparto a una o varias tinas.</dd>
+      <dt>Entrada directa</dt><dd>No se ofrece. Si alguien tiene mosto sin historia, lo registra como tina que ya fermentaba.</dd>
+    </dl></article>
+    <article class="sc"><header><span class="ib"><svg><use href="#i-tina"/></svg></span><h3>Fermentación</h3></header><dl>
+      <dt>Cambia</dt><dd>Medición todos los días, sin duración fija: según formulación y clima tarda 4, 6, 7 o más días, y el productor la declara lista. Dos modos por empresa. <b>Mínimo:</b> una temperatura, un Brix y actividad. <b>Completo:</b> las 3 + 3 lecturas en superficie y fondo, dulzor y acidez.</dd>
+      <dt>Entrada directa</dt><dd>La tina que ya fermentaba el día que empiezan a usar PULZ. Clave para arrancar sin esperar la próxima cosecha.</dd>
+    </dl></article>
+    <article class="sc"><header><span class="ib"><svg><use href="#i-destila"/></svg></span><h3>Destilación</h3></header><dl>
+      <dt>Cambia</dt><dd>El “ya mezcal” de la 1ª pasada es normal y va directo a granel. La corrida se abre cuando hay olla libre, con lo que tenga el colector, lleno o no. Mezclar ordinario y colas en la misma 2ª pasada casi no pasa, pero se permite: avisa y pide nota. Las puntas son opcionales de capturar (suelen ser menos de 300 mL).</dd>
+      <dt>Entrada directa</dt><dd>Colectores que ya tenían ordinario, colas o puntas acumulados.</dd>
+    </dl></article>
+    <article class="sc"><header><span class="ib"><svg><use href="#i-lote"/></svg></span><h3>Granel</h3></header><dl>
+      <dt>Cambia</dt><dd>Se vuelve una etapa completa con un catálogo de movimientos de entrada y salida que cada empresa amplía. El grado no lo calcula el sistema: lo declara quien hace el movimiento.</dd>
+      <dt>Entrada directa</dt><dd>La más usada: granel comprado para completar un pedido, y el inventario que ya estaba en tanques.</dd>
+    </dl></article>
+  </div>
+
+  <h3>Destilación, cortes y colectores</h3>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'15px'}}}%%
+flowchart TD
+  T1["Tina 3"] -->|"30 %"| R1
+  T2["Tina 4"] -->|"70 %"| R1["Corrida · 1ª pasada"]
+  R1 -->|mezcal| CM["Colector de mezcal"]
+  R1 -->|ordinario| CO["Colector de ordinario"]
+  R1 -->|colas| CC["Colector de colas"]
+  R1 -->|puntas| PQ{"¿Captura de puntas activa?&lt;br/&gt;(opcional, suele ser muy poco)"}
+  PQ -->|sí| CP["Colector de puntas"]
+  PQ -->|no| X["Descarte sin captura"]
+  CO -->|"cuando hay olla libre,&lt;br/&gt;lleno o no"| R2["Corrida · 2ª pasada"]
+  CC -.->|"junto con ordinario:&lt;br/&gt;avisa y pide nota"| R2
+  CC --> R2
+  CP -.->|"subir grado"| G
+  R2 -->|mezcal| CM
+  R2 -->|ordinario| CO
+  R2 -->|colas| CC
+  CM -->|"“ya mezcal”: directo"| G["Granel"]
+  EC(["+ Carga inicial de colector"]) -.-> CO
+  classDef entry fill:#FAEAE4,stroke:#E0A98F,color:#173F87
+  classDef warn fill:#FBEEDB,stroke:#C17A18,color:#18243A
+  class EC entry
+  class X warn
+</pre></div>
+  <p class="cap">Un colector sólo acumula en su lote vivo si ese lote no se cargó a la misma corrida; si no, el corte abre un lote nuevo. Así las colas que salen de destilar colas no se vuelven su propio padre.</p>
+</section>
+
+<section id="granel">
+  <div class="sec-head"><span class="n">5</span><h2>Granel: donde está el dinero</h2><p>Es la etapa que más cambia porque ahí se juntan lotes propios y comprados para completar pedidos.</p></div>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'15px'}}}%%
+flowchart TD
+  CM["Colector de mezcal"] -->|transferir| Q
+  TT["Otro tanque"] -->|"tanque a tanque"| Q
+  Q{"¿El tanque destino&lt;br/&gt;ya tiene un lote?"}
+  Q -->|no| TK["Lote en tanque"]
+  Q -->|sí| FD{"El usuario decide"}
+  FD -->|"conservar un folio&lt;br/&gt;(sugiere el mayor)"| TK
+  FD -->|renombrar| TK
+  EN(["+ Entradas del catálogo&lt;br/&gt;agua · puntas · unión con otro lote&lt;br/&gt;compra · carga inicial · ajuste"]) -.-> TK
+  TK --> DEC["Declara volumen y % Alc.&lt;br/&gt;resultantes · quién y cuándo"]
+  DEC --> TK
+  TK --> OUT["Salidas del catálogo&lt;br/&gt;venta · laboratorio · autoconsumo&lt;br/&gt;merma · muestra · las que agregue"]
+  classDef entry fill:#FAEAE4,stroke:#E0A98F,color:#173F87
+  classDef exit fill:#E4F2EA,stroke:#287A55,color:#18243A
+  class EN entry
+  class OUT exit
+</pre></div>
+
+  <div class="two">
+    <div class="prose">
+      <h3>Compra de granel</h3>
+      <p>Pide sólo volumen. Todo lo demás es opcional: proveedor (de catálogo o escrito), % Alc., folio del certificado del organismo, foto del certificado o del análisis, y una nota de origen declarado como “espadín de un predio en Sola de Vega”.</p>
+      <p>Si trae certificado, el lote queda con historia “declarada”. Si no trae nada, queda “sin historia”, se usa igual y nadie le pide cuentas.</p>
+    </div>
+    <div class="prose">
+      <h3>Juntar lotes</h3>
+      <p>Al juntar dos lotes el usuario decide: conservar un folio (el sistema sugiere el del lote mayor) o renombrar. En los dos casos se guarda el aporte de cada uno, por ejemplo 600 L del propio y 43.8 L del otro, así la trazabilidad hacia atrás muestra proporciones reales.</p>
+      <p>Los colectores acumulan: cada corte se suma al lote vivo del colector registrando su aporte, para no generar un lote por corrida.</p>
+    </div>
+  </div>
+  <div class="note"><b>El grado lo declara el usuario.</b> Después de una entrada (agua, puntas, unión, compra) quien la hace captura el volumen y el % Alc. que quedaron; el sistema no calcula grado. Si el volumen declarado no cuadra con la suma del ledger (por ejemplo, la contracción al agregar agua), se registra solo un movimiento de conciliación con aviso. Las salidas no piden resultado. Cada movimiento queda con quién lo hizo, cuándo pasó y cuándo se sincronizó.</div>
+</section>
+
+<section id="traza">
+  <div class="sec-head"><span class="n">6</span><h2>Trazabilidad y nivel de historia</h2><p>Lo que se vende en un video de quince segundos: abres un lote y ves de dónde vino todo.</p></div>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'15px'}}}%%
+flowchart TD
+  G["G-032 · Mezcla en Tanque 2&lt;br/&gt;1,000 L · 47 % Alc."] -->|"600 L · 60 %"| G31["G-031 · granel propio"]
+  G -->|"400 L · 40 %"| EX["G-EXT-07 · compra&lt;br/&gt;proveedor y certificado capturados"]
+  G31 --> CM["Colector de mezcal&lt;br/&gt;corridas 12, 13 y 14"]
+  CM --> R12["Corrida 12"]
+  R12 --> T3["Tina 3 · ciclo 41"]
+  T3 --> F9["Formulación 9"]
+  F9 --> H4["Horneado 4"]
+  H4 --> M7["Maguey M-007&lt;br/&gt;Predio El Tule · 180 piñas · 6.2 t"]
+  EX -.-> D["Origen declarado&lt;br/&gt;“espadín de Sola de Vega”"]
+  classDef reg fill:#E4F2EA,stroke:#287A55,color:#18243A
+  classDef dec fill:#FBEEDB,stroke:#C17A18,color:#18243A
+  class M7 reg
+  class EX,D dec
+</pre></div>
+  <p class="cap">El lote G-032 queda con historia <b>parcial</b>: el 60 % llega hasta un predio registrado y el 40 % termina en un certificado declarado.</p>
+
+  <div class="legend">
+    <div class="lg"><span class="tag t-ok">✓ Completa</span><p>Todas las ramas llegan hasta un lote de maguey registrado.</p></div>
+    <div class="lg"><span class="tag t-info">→ Parcial</span><p>Algunas ramas llegan al maguey y otras terminan antes.</p></div>
+    <div class="lg"><span class="tag t-pend">◔ Declarada</span><p>Las ramas terminan en datos declarados: nota, proveedor o certificado.</p></div>
+    <div class="lg"><span class="tag t-clay">○ Sin historia</span><p>El lote entró sin datos de origen. Se usa normal.</p></div>
+  </div>
+  <p class="prose">El nivel es informativo para el dueño, no un semáforo de cumplimiento. Se recalcula cuando se agrega o completa linaje. En el detalle de cada lote hay un botón <b>Completar historia</b> que permite vincularlo a lotes existentes o capturar el origen declarado; esas aristas quedan marcadas como retroactivas.</p>
+</section>
+
+<section id="arq">
+  <div class="sec-head"><span class="n">7</span><h2>Arquitectura: Supabase + Cloudflare</h2><p>Tu elección de stack está bien. El ajuste es dónde vive cada cosa, para que un proyecto de una persona sea mantenible.</p></div>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'15px'}}}%%
+flowchart TD
+  subgraph CFP["Cloudflare Pages"]
+    PWA["PWA · Vue 3 + TS + Vite"]
+  end
+  PWA --> IDB[("IndexedDB&lt;br/&gt;cola de comandos&lt;br/&gt;y última copia leída")]
+  subgraph SB["Supabase"]
+    AUTH["Auth&lt;br/&gt;correo o teléfono"]
+    PG[("Postgres&lt;br/&gt;tablas + RLS&lt;br/&gt;funciones RPC")]
+    ST["Storage&lt;br/&gt;fotos y certificados"]
+  end
+  PWA -->|"login"| AUTH
+  PWA -->|"lecturas y comandos RPC&lt;br/&gt;con el JWT del usuario"| PG
+  PWA -->|"subir evidencias"| ST
+  subgraph W["Cloudflare Worker"]
+    CK["/checkout y /portal"]
+    WH["/stripe/webhook"]
+    AD["/admin · tu consola"]
+    CR["Cron · avisos de medición"]
+  end
+  PWA -->|"mejorar plan"| CK
+  CK --> STR["Stripe"]
+  STR -->|"eventos"| WH
+  WH -->|"service_role"| PG
+  AD -->|"service_role"| PG
+  CR --> PG
+</pre></div>
+
+  <h3>Qué vive dónde</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Pieza</th><th>Servicio</th><th>Responsabilidad</th></tr></thead>
+    <tbody>
+      <tr><td><b>PWA</b></td><td>Cloudflare Pages</td><td>Pantallas, captura en campo, cola offline, caché de lecturas. Nunca tiene la llave <code>service_role</code>.</td></tr>
+      <tr><td><b>Reglas de dominio</b></td><td>Postgres (funciones RPC)</td><td>Transferir, cortar, registrar entradas y salidas de granel. Cada comando valida saldo y capacidad, escribe el ledger y el linaje en una sola transacción, y es idempotente.</td></tr>
+      <tr><td><b>Aislamiento entre empresas</b></td><td>Postgres (RLS + llaves compuestas)</td><td>Lectura sólo para miembros activos; escrituras de producción sólo vía RPC.</td></tr>
+      <tr><td><b>Archivos</b></td><td>Supabase Storage</td><td>Bucket <code>evidencias/{empresa}/{lote}/</code> con políticas por membresía.</td></tr>
+      <tr><td><b>Cobros</b></td><td>Worker + Stripe</td><td>Checkout y portal de cliente; el webhook actualiza <code>subscriptions</code>. Es lo único que requiere secretos.</td></tr>
+      <tr><td><b>Tu consola</b></td><td>Worker</td><td>Empresas, planes, suspensiones y soporte, protegida por <code>platform_admins</code>.</td></tr>
+      <tr><td><b>Tareas programadas</b></td><td>Worker (Cron Triggers)</td><td>Avisos de medición pendiente y de tinas en día de alerta.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note"><b>Ajustes al documento original.</b> Sale Cloudflare Queues del MVP: con funciones transaccionales en Postgres no hace falta procesar en segundo plano. Realtime queda opcional; con recargar al volver a la pantalla basta al inicio. Y la lógica de volúmenes no se duplica en el Worker: una sola fuente de verdad en la base.</div>
+
+  <div class="two">
+    <div>
+      <h3>Cobro con Stripe</h3>
+      <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'14px','actorBkg':'#DDE7F5','actorBorder':'#173F87'}}}%%
+sequenceDiagram
+  participant A as PWA
+  participant W as Worker
+  participant S as Stripe
+  participant DB as Postgres
+  A->>W: POST /checkout (JWT)
+  W->>S: crear Checkout Session
+  S-->>A: página de pago
+  S->>W: checkout.session.completed
+  W->>DB: guarda evento en stripe_events
+  W->>DB: actualiza subscriptions
+  DB-->>A: plan activo al recargar
+</pre></div>
+    </div>
+    <div>
+      <h3>Captura sin señal</h3>
+      <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'14px'}}}%%
+flowchart TD
+  C["Captura en campo"] --> Q[("Cola local&lt;br/&gt;comando + idempotency_key")]
+  Q --> N{"¿Hay señal?"}
+  N -->|no| Q
+  N -->|sí| R["Llama la función RPC"]
+  R --> L{"¿Ya está esa idempotency_key&lt;br/&gt;en operations?"}
+  L -->|sí| OK["Sincronizado&lt;br/&gt;devuelve el resultado previo"]
+  L -->|no| V{"¿Saldo y capacidad válidos?"}
+  V -->|sí| OK
+  V -->|no| X["Conflicto visible&lt;br/&gt;para corregir"]
+</pre></div>
+    </div>
+  </div>
+  <p class="prose">La cola offline es propia y pequeña: guarda comandos, no una réplica de la base. En el MVP sólo encolan mediciones, cortes y fotos, que es lo que se captura junto a la tina o el alambique. Transferencias y mezclas se hacen con señal porque dependen del saldo real. Si más adelante hace falta offline completo, PowerSync se conecta a este mismo Postgres sin rediseñar el esquema.</p>
+
+  <h3>Ambientes</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Ambiente</th><th>Base</th><th>Web y Worker</th><th>Stripe</th></tr></thead>
+    <tbody>
+      <tr><td>Local</td><td>Supabase CLI en Docker</td><td>Vite dev + <code>wrangler dev</code></td><td>Modo prueba + <code>stripe listen</code></td></tr>
+      <tr><td>Staging</td><td>Proyecto Supabase aparte</td><td>Rama <code>staging</code> en Pages y Worker</td><td>Modo prueba</td></tr>
+      <tr><td>Producción</td><td>Proyecto Supabase principal</td><td>Rama <code>main</code></td><td>Modo real</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="bd">
+  <div class="sec-head"><span class="n">8</span><h2>Esquema de base de datos</h2><p>Postgres relacional puro: sin JSON ni JSONB. El SQL completo va en el archivo <code>pulz_esquema.sql</code> que acompaña este documento.</p></div>
+
+  <h3>Reglas del esquema</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Regla</th><th>Por qué</th></tr></thead>
+    <tbody>
+      <tr><td><b>Todas las tablas de negocio llevan <code>organization_id</code></b>, también las hijas.</td><td>RLS simple e indexable: cada política es una línea.</td></tr>
+      <tr><td><b>Llaves foráneas compuestas</b> <code>(organization_id, id)</code>.</td><td>Aunque falle una política, la base impide ligar un lote de una empresa a un tanque de otra.</td></tr>
+      <tr><td><b>Nada de listas en columnas.</b> Límites de plan, lecturas de medición y cambios de auditoría son filas.</td><td>Lo que te dio dolor de cabeza con JSONB: consultas, validaciones y migraciones vuelven a ser SQL normal.</td></tr>
+      <tr><td><b>Sólo la mecánica es <code>ENUM</code></b> (roles, estados, tipo de pata del ledger). Todo lo que un palenque nombra a su manera es catálogo con semilla.</td><td>Tú mantienes la semilla (alambique de cobre, olla de barro…); cada empresa agrega lo suyo y oculta lo que no usa, sin borrar.</td></tr>
+      <tr><td><b>Toda acción es una fila de <code>operations</code></b>.</td><td>Quién y cuándo se guarda una sola vez; movimientos, lotes, linaje y etapas la citan.</td></tr>
+      <tr><td><b>Volúmenes sólo en el ledger.</b> Saldos por vista.</td><td>Nadie puede “editar” cuánto hay en un tanque; se corrige con otro movimiento.</td></tr>
+      <tr><td><b>Linaje en su propia tabla</b> <code>lot_lineage</code>.</td><td>Completar la historia después es insertar filas; la trazabilidad es una consulta recursiva.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Lotes, linaje y ledger</h3>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'14px'}}}%%
+erDiagram
+  lots ||--o{ lot_lineage : "es hijo en"
+  lots ||--o{ lot_lineage : "es padre en"
+  lots ||--o| lot_external_sources : "compra o carga inicial"
+  lots ||--o| maguey_receptions : "si es maguey"
+  lots ||--o{ liquid_movements : "se mueve en"
+  lots ||--o{ attachments : "evidencias"
+  resources ||--o{ liquid_movements : "origen o destino"
+  operations ||--o{ liquid_movements : "patas"
+  operations ||--o{ lot_lineage : "crea aristas"
+  operations }o--o| movement_concepts : "concepto de granel"
+  suppliers ||--o{ lot_external_sources : "vende"
+  predios ||--o{ maguey_receptions : "de dónde"
+  lots {
+    uuid id PK
+    text folio
+    material_kind material
+    liquid_class liquid_class
+    lot_origin origin
+    history_level history
+  }
+  lot_lineage {
+    uuid child_lot_id FK
+    uuid parent_lot_id FK
+    numeric quantity
+    numeric abv
+    boolean retroactive
+  }
+  liquid_movements {
+    movement_type movement_type
+    uuid lot_id FK
+    uuid source_resource_id FK
+    uuid dest_resource_id FK
+    numeric volume_l
+    numeric abv
+    uuid operation_id FK
+    uuid correction_of_id FK
+  }
+  operations {
+    operation_kind kind
+    uuid concept_id FK
+    timestamptz occurred_at
+    uuid recorded_by FK
+    numeric result_volume_l
+    numeric result_abv
+    folio_decision folio_decision
+  }
+</pre></div>
+
+  <h3>Operaciones por etapa</h3>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'14px'}}}%%
+erDiagram
+  roasting_runs ||--o{ roasting_run_inputs : "carga"
+  roasting_run_inputs }o--|| lots : "maguey"
+  roasting_runs |o--|| lots : "produce agave cocido"
+  formulations ||--o{ formulation_inputs : "usa"
+  formulation_inputs }o--|| lots : "agave cocido"
+  formulations ||--o{ formulation_supplies : "insumos"
+  formulations |o--|| lots : "produce formulación"
+  fermentation_cycles }o--|| resources : "tina"
+  fermentation_cycles ||--|| lots : "lote fermentado"
+  fermentation_cycles ||--o{ fermentation_measurements : "mediciones"
+  fermentation_measurements ||--o{ measurement_readings : "lecturas"
+  distillation_runs }o--|| resources : "alambique"
+  distillation_runs ||--o{ distillation_run_inputs : "orígenes"
+  distillation_runs ||--o{ distillation_cuts : "cortes"
+  distillation_run_inputs ||--|| liquid_movements : "carga_alambique"
+  distillation_cuts ||--|| liquid_movements : "corte"
+</pre></div>
+
+  <h3>Plataforma, empresas y cobro</h3>
+  <div class="fig"><pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#DDE7F5','primaryTextColor':'#18243A','primaryBorderColor':'#173F87','lineColor':'#275AA5','fontFamily':'Atkinson Hyperlegible Next, system-ui, sans-serif','fontSize':'14px'}}}%%
+erDiagram
+  organizations ||--o{ organization_members : "miembros"
+  profiles ||--o{ organization_members : "pertenece"
+  organizations ||--|| organization_settings : "ajustes"
+  organizations ||--|| subscriptions : "plan vigente"
+  plans ||--o{ subscriptions : ""
+  plans ||--o{ plan_limits : "límites"
+  plans ||--o{ plan_features : "funciones"
+  organizations ||--o{ resources : "infraestructura"
+  organizations ||--o{ lots : "lotes"
+</pre></div>
+
+  <h3>Tablas por grupo</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Grupo</th><th>Tablas</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td><b>Plataforma</b></td><td>organizations, profiles, platform_admins, organization_members, organization_settings</td><td>Roles: admin, productor, operador. Ajustes: modo de medición, puntas, mezcla en 2ª pasada.</td></tr>
+      <tr><td><b>Cobro</b></td><td>plans, plan_limits, plan_features, subscriptions, stripe_events</td><td>Los entitlements del original, ahora como filas.</td></tr>
+      <tr><td><b>Catálogos</b></td><td>catalog_items, catalog_item_hidden, movement_concepts, movement_concept_hidden, species, species_hidden, predios, suppliers, supplies</td><td>Semilla de plataforma + propios de cada empresa. Tipos de horno, molino, tina, alambique, colector y tanque; tipos de proveedor y adjunto; unidades; movimientos de granel.</td></tr>
+      <tr><td><b>Infraestructura</b></td><td>resources</td><td>El recurso es lo físico (“Alambique 1”, 300 L); su tipo sale del catálogo (“Alambique de cobre”).</td></tr>
+      <tr><td><b>Núcleo</b></td><td>operations, operation_warnings, lots, lot_lineage, lot_external_sources, maguey_receptions, liquid_movements, attachments</td><td>Lo que hace posible entrar por cualquier etapa.</td></tr>
+      <tr><td><b>Etapas</b></td><td>roasting_runs(+inputs), formulations(+inputs, +supplies), fermentation_cycles, fermentation_measurements, measurement_readings, distillation_runs(+inputs, +cuts)</td><td>Una tina sólo puede tener un ciclo abierto (índice único parcial).</td></tr>
+      
+      <tr><td><b>Control</b></td><td>audit_events, audit_changes</td><td>Auditoría columna por columna. La idempotencia offline vive en <code>operations</code>.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Funciones RPC (la API del producto)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Función</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><code>registrar_recepcion_maguey</code></td><td>Crea lote de maguey con predio, especie, piñas y kg.</td></tr>
+      <tr><td><code>registrar_entrada</code></td><td>La puerta de cualquier etapa: compra o carga inicial, con datos declarados opcionales.</td></tr>
+      <tr><td><code>abrir_horneado</code> · <code>cerrar_horneado</code></td><td>Carga lotes al horno; al cerrar nace el lote de agave cocido con su linaje.</td></tr>
+      <tr><td><code>registrar_formulacion</code></td><td>Molienda, insumos y reparto a tinas; abre los ciclos.</td></tr>
+      <tr><td><code>registrar_medicion</code> · <code>declarar_tina_lista</code></td><td>Lecturas en modo mínimo o completo; el productor declara la tina lista.</td></tr>
+      <tr><td><code>abrir_corrida</code> · <code>registrar_corte</code></td><td>Orígenes múltiples con porcentaje; cortes a colectores de su clase.</td></tr>
+      <tr><td><code>transferir</code></td><td>Mueve líquido; si el destino ya tiene lote, el usuario conserva un folio o renombra.</td></tr>
+      <tr><td><code>registrar_movimiento_granel</code></td><td>Cualquier concepto del catálogo, de entrada o de salida. Las entradas piden volumen y % Alc. resultantes; si no cuadran con el ledger, concilia con aviso.</td></tr>
+      <tr><td><code>cerrar_corrida</code></td><td>Cierra la corrida; quién y cuándo quedan en su operación.</td></tr>
+      <tr><td><code>completar_historia</code></td><td>Vincula un lote a sus padres después, o captura su origen declarado.</td></tr>
+      <tr><td><code>corregir_operacion</code></td><td>Corrección trazable; nunca borra.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="carpetas">
+  <div class="sec-head"><span class="n">9</span><h2>Estructura del proyecto</h2><p>Un solo repositorio con pnpm workspaces. Cada etapa del palenque es un módulo de la app con la misma forma.</p></div>
+<div class="tree"><span class="d">pulz/</span>
+├── <span class="d">apps/</span>
+│   ├── <span class="d">web/</span>                         <span class="c"># PWA · Vue 3 + TypeScript + Vite</span>
+│   │   ├── public/                  <span class="c"># manifest, iconos, favicon</span>
+│   │   ├── <span class="d">src/</span>
+│   │   │   ├── app/                 <span class="c"># main.ts, router, layout pz-app, guardas de rol</span>
+│   │   │   ├── <span class="d">modules/</span>             <span class="c"># un módulo por dominio, misma forma en todos</span>
+│   │   │   │   ├── auth/
+│   │   │   │   ├── empresa/         <span class="c"># miembros, invitaciones, ajustes</span>
+│   │   │   │   ├── infraestructura/
+│   │   │   │   ├── catalogos/
+│   │   │   │   ├── maguey/
+│   │   │   │   ├── horneado/
+│   │   │   │   ├── formulacion/
+│   │   │   │   ├── fermentacion/
+│   │   │   │   │   ├── pages/       <span class="c"># TinasPage.vue, CicloPage.vue, MedicionPage.vue</span>
+│   │   │   │   │   ├── components/  <span class="c"># TinaCard.vue, LecturasForm.vue</span>
+│   │   │   │   │   ├── api.ts       <span class="c"># llamadas RPC y consultas del módulo</span>
+│   │   │   │   │   └── routes.ts
+│   │   │   │   ├── destilacion/
+│   │   │   │   ├── granel/
+│   │   │   │   ├── trazabilidad/    <span class="c"># árbol hacia atrás y hacia adelante</span>
+│   │   │   │   └── plan/            <span class="c"># plan actual, mejorar, portal Stripe</span>
+│   │   │   ├── <span class="d">shared/</span>
+│   │   │   │   ├── ui/              <span class="c"># componentes del kit PULZ (btn, chip, state, field...)</span>
+│   │   │   │   ├── supabase.ts      <span class="c"># cliente único</span>
+│   │   │   │   ├── offline/         <span class="c"># db.ts (IndexedDB), queue.ts, sync.ts</span>
+│   │   │   │   └── composables/
+│   │   │   └── styles/              <span class="c"># pulz-kit.css + composición</span>
+│   │   └── vite.config.ts           <span class="c"># vite-plugin-pwa</span>
+│   └── <span class="d">worker/</span>                      <span class="c"># Cloudflare Worker (Hono)</span>
+│       ├── src/
+│       │   ├── index.ts             <span class="c"># rutas y cron</span>
+│       │   ├── routes/              <span class="c"># checkout.ts, portal.ts, stripe-webhook.ts, admin.ts</span>
+│       │   ├── cron/                <span class="c"># avisos-medicion.ts</span>
+│       │   └── lib/                 <span class="c"># supabase-admin.ts (service_role), stripe.ts</span>
+│       └── wrangler.toml
+├── <span class="d">supabase/</span>
+│   ├── config.toml
+│   ├── <span class="d">migrations/</span>                  <span class="c"># el SQL de pulz_esquema.sql partido en orden</span>
+│   │   ├── 0001_tipos.sql
+│   │   ├── 0002_plataforma.sql
+│   │   ├── 0003_catalogos.sql
+│   │   ├── 0004_infraestructura.sql
+│   │   ├── 0005_lotes_ledger.sql
+│   │   ├── 0006_etapas.sql
+│   │   ├── 0007_control.sql
+│   │   ├── 0008_vistas.sql
+│   │   ├── 0009_rls.sql
+│   │   └── 0010_rpc.sql
+│   ├── tests/                       <span class="c"># pgTAP: aislamiento entre empresas, saldos, idempotencia</span>
+│   └── seed.sql                     <span class="c"># planes, especies globales, empresa demo</span>
+├── <span class="d">packages/</span>
+│   └── shared/                      <span class="c"># tipos generados (supabase gen types), constantes de dominio</span>
+├── docs/                            <span class="c"># este documento y decisiones</span>
+├── .github/workflows/               <span class="c"># pruebas de base + despliegue a Pages y Worker</span>
+└── pnpm-workspace.yaml</div>
+  <p class="prose">Hono en el Worker es sugerencia: es ligero y hecho para Workers, pero un <code>fetch</code> con un <code>switch</code> de rutas también basta para cuatro endpoints. Las pruebas de aislamiento entre empresas son la única prueba que yo haría obligatoria antes de abrir registro público.</p>
+</section>
+
+<section id="fases">
+  <div class="sec-head"><span class="n">10</span><h2>Fases, recortadas para autoservicio</h2><p>Primero que funcione para el palenque de referencia; después que cualquiera pueda entrar solo.</p></div>
+  <div class="tw"><table>
+    <thead><tr><th>Fase</th><th>Contenido</th><th>Se da por terminada cuando</th></tr></thead>
+    <tbody>
+      <tr><td><b>1 · Núcleo</b></td><td>Empresas y RLS, infraestructura, las seis etapas, lotes, linaje y ledger, entradas directas, granel completo, trazabilidad, cola offline de mediciones y cortes.</td><td>El palenque de referencia sostiene un ciclo completo y encuentra el origen de un lote de granel en menos de diez segundos.</td></tr>
+      <tr><td><b>2 · Autoservicio</b></td><td>Registro público, primer uso guiado con “¿qué tienes hoy en tanques y tinas?”, plan gratis y plan de pago con Stripe, tu consola de administrador.</td><td>Un productor desconocido se registra, carga su inventario y usa el sistema sin que tú intervengas.</td></tr>
+      <tr><td><b>3 · Lo que pidan</b></td><td>Exportar a PDF o Excel, costo por litro, rendimiento kg de maguey a L de mezcal, inventario de insumos.</td><td>Lo decide el uso real, no este documento.</td></tr>
+      <tr><td><b>4 · Comercial</b></td><td>Envasado, lotes comerciales, QR.</td><td>Sólo si varios usuarios lo piden.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Planes sugeridos.</b> Para autoservicio, dos planes bastan: uno gratis con límite de lotes activos y usuarios, y uno de pago para el palenque (en su momento se habló de alrededor de $299 MXN al mes, precio por validar). Tres planes con módulos distintos se vuelven difíciles de explicar en un video de TikTok.</div>
+</section>
+
+<section id="portal">
+  <div class="sec-head"><span class="n">11</span><h2>Un portal para cada negocio</h2><p>Tu sitio sigue siendo uno, pero cada palenque entra por <code>pulz.mx/e/su-nombre</code> y ve su nombre, su logo y su color, desde el primer segundo y hasta el icono en el teléfono. Viene de tu rama <code>saas</code>, con seis mejoras.</p></div>
+
+  <div class="phones" aria-label="Maqueta del portal">
+    <div class="phone"><div class="bar"></div><div class="url">pulz.mx/e/istmeno</div><div class="body">
+      <div class="pl-logo" style="background:#7A3E1D">PI</div>
+      <div class="pl-name">Palenque Istmeño</div>
+      <div class="pl-msg">Registro de producción del palenque</div>
+      <div class="pl-f">Usuario · ana.lopez</div>
+      <div class="pl-f">Contraseña</div>
+      <div class="pl-btn" style="background:#7A3E1D">Entrar</div>
+      <div class="pl-foot">con PULZ</div>
+    </div></div>
+    <div class="phone dark"><div class="bar"></div><div class="home">
+      <div class="ap"><div class="ic" style="background:#7A3E1D">PI</div>P. Istmeño</div>
+      <div class="ap"><div class="ic" style="background:#2E6B4F">CV</div>Cuatro Vien…</div>
+      <div class="ap"><div class="ic" style="background:#3B7DD8">✉</div>Correo</div>
+      <div class="ap"><div class="ic" style="background:#E0A030">☼</div>Clima</div>
+      <div class="ap"><div class="ic" style="background:#25D366">✆</div>WhatsApp</div>
+      <div class="ap"><div class="ic" style="background:#8A8F99">⚙</div>Ajustes</div>
+    </div></div>
+  </div>
+  <p class="cap">Primera pantalla: lo que ve Ana al abrir el enlace. Segunda: dos palenques instalados en el mismo teléfono son dos apps, cada una con su nombre.</p>
+
+  <h3>Cómo funciona</h3>
+  <pre class="mermaid">
+flowchart TD
+  A(["pulz.mx/e/istmeno"]) --> F["Función de Cloudflare&lt;br/&gt;lee la marca del portal"]
+  F -->|"slug viejo"| R["301 al nombre nuevo"]
+  F -->|"no existe o cancelada"| N["404 genérico"]
+  F -->|"existe"| H["HTML ya con nombre, color,&lt;br/&gt;icono y manifiesto propios"]
+  H --> L["Usuario y contraseña"]
+  L --> AU["Supabase Auth&lt;br/&gt;ana.lopez@id-empresa.usuarios.pulz.mx"]
+  AU --> HK{"Hook de intentos"}
+  HK -->|"5 fallos"| B["Bloqueo 15 min&lt;br/&gt;el encargado desbloquea"]
+  HK -->|"ok"| APP["Dentro, con la empresa en el token"]
+  </pre>
+
+  <h3>Qué se tomó de tu rama y qué se mejoró</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tema</th><th>En la rama saas</th><th>En PULZ</th></tr></thead>
+    <tbody>
+      <tr><td><b>Nombre del portal</b></td><td>El slug no se puede cambiar nunca, porque va dentro del correo de cada trabajador.</td><td>El correo sintético usa el id de la empresa, así que el slug se puede cambiar. El viejo redirige para siempre y nadie más lo puede tomar.</td></tr>
+      <tr><td><b>Empresa suspendida</b></td><td>El portal da 404, aunque la regla dice que se conserva la lectura. En la práctica no pueden entrar a sacar sus datos.</td><td>Con pago vencido el portal abre en sólo lectura. Sólo una cuenta cancelada da 404.</td></tr>
+      <tr><td><b>Inicio de sesión</b></td><td>Pasa por una función intermedia que habla con Auth en nombre de todos.</td><td>Directo contra Auth: el correo sintético no es secreto. Cada intento cuenta contra la IP real de quien lo hace, y hay una pieza menos que mantener.</td></tr>
+      <tr><td><b>Intentos fallidos</b></td><td>Sin límite por cuenta.</td><td>Hook de Auth dentro de Postgres: 5 fallos bloquean 15 minutos (30 si reincide). El encargado puede desbloquear.</td></tr>
+      <tr><td><b>Alta del trabajador</b></td><td>Contraseña dictada en persona.</td><td>Se conserva, y se suma un enlace de bienvenida de un solo uso por WhatsApp para que el trabajador elija su contraseña.</td></tr>
+      <tr><td><b>Marca e instalación</b></td><td>El manifiesto se cambia en el navegador ya cargado; en iOS el icono se quedaba con el nombre de la plataforma.</td><td>Una función de Cloudflare entrega el HTML ya con la marca. También sale bien la vista previa del enlace en WhatsApp.</td></tr>
+      <tr><td><b>Marca antes de entrar</b></td><td>Devuelve JSON.</td><td>Devuelve columnas fijas: nombre, logo, color, mensaje, sólo lectura y redirección. Nada más, y sin función de listado.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note"><b>También se adoptó de tu rama:</b> una política RLS por operación (ninguna <code>for all</code>), mensaje idéntico para cualquier rechazo, contraseña temporal que el servidor obliga a cambiar, slugs reservados en tabla y el bucket público de logos separado del privado de documentos. Por revisar en su momento: la empresa en el token con el hook de claims, los permisos de tina por operador, los folios con bloqueo, las cuotas en trigger y la auditoría con un solo trigger.</div>
+</section>
+
+<section id="preguntas">
+  <div class="sec-head"><span class="n">12</span><h2>Respuestas del palenque de referencia</h2><p>Lo que contestó y cómo cambió el diseño. Queda pendiente si el folio del certificado de granel vale la pena; mientras, sigue siendo campo opcional.</p></div>
+  <div class="tw"><table>
+    <thead><tr><th>Tema</th><th>Respuesta</th><th>Cambio en v3</th></tr></thead>
+    <tbody>
+      <tr><td><b>Ordinario y colas en la misma 2ª pasada</b></td><td>En teoría no pasa, pero puede pasar.</td><td>Se permite; avisa y pide nota.</td></tr>
+      <tr><td><b>Puntas</b></td><td>Algunos las guardan; este palenque no las captura por ser muy poco. A veces se usan para subir el grado de un lote bajo.</td><td>Captura opcional; “Puntas para subir grado” como entrada de granel, con lote de origen opcional.</td></tr>
+      <tr><td><b>Fermentación y medición</b></td><td>Tarda 4, 6, 7 o más días según formulación y clima; se mide todos los días.</td><td>Sin duración fija; recordatorio diario; la tina se declara lista.</td></tr>
+      <tr><td><b>Ajuste de grado</b></td><td>Si sale alto se le agrega agua. En granel hacen falta entradas y salidas de todo tipo.</td><td>Catálogo editable de movimientos de entrada y salida, con semilla.</td></tr>
+      <tr><td><b>Juntar dos lotes</b></td><td>Puede conservar el folio del mayor o renombrarse.</td><td>El usuario decide en cada caso; el sistema sugiere el mayor.</td></tr>
+      <tr><td><b>Lo importante de cada movimiento</b></td><td>Quién lo hizo y cuándo.</td><td>Tabla <code>operations</code>: autor, fecha en campo y fecha de sincronización en cada acción.</td></tr>
+      <tr><td><b>Grado resultante</b></td><td>No lo calcula el sistema: el usuario captura volumen y grado que quedaron, en las entradas.</td><td>Se quitó el alcohol puro calculado; grado declarado y conciliación de volumen con aviso.</td></tr>
+      <tr><td><b>Destilar colas y ordinario</b></td><td>Se destila cuando hay olla libre, lleno o no el colector. El “ya mezcal” de la 1ª va directo a granel.</td><td>Sin umbral de llenado para abrir corrida.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Simulación.</b> El esquema v3 se probó con una empresa ficticia completa, del alta a la venta de granel, en <code>pulz_simulacion.html</code>. Encontró seis errores estructurales que ya están corregidos.</div>
+</section>
+</main>
+<footer>PULZ · contrapropuesta de diseño v3 · incorpora las respuestas del palenque de referencia · basada en el documento de viabilidad original y en la operación real del palenque de referencia.</footer>
+</body>
+</html>
