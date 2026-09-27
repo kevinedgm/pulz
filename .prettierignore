@@ -1,0 +1,12 @@
+dist
+node_modules
+pnpm-lock.yaml
+.wrangler
+
+# Documentación y archivos de referencia: se dejan tal como los entregó
+# el dueño, no se reformatean.
+docs/
+
+# Copia literal de docs/referencia/pulz-tokens.css: debe quedar idéntica
+# al original para que se note si diverge.
+apps/web/src/shared/ui/tokens.css

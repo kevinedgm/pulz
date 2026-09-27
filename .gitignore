@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.DS_Store
+
+# Variables de entorno: nunca se comitean valores reales
+.env
+.env.local
+.env.*.local
+
+# Supabase CLI
+supabase/.branches/
+supabase/.temp/
+
+# Cobertura y logs
+coverage/
+*.log
