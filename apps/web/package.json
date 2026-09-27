@@ -8,7 +8,8 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:portal": "vitest run --config functions/vitest.config.ts"
+    "test:portal": "vitest run --config functions/vitest.config.ts",
+    "build:hub": "vite build --config vite.hub.config.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2",

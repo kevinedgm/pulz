@@ -39,6 +39,9 @@ export default tseslint.config(
     },
     rules: {
       "vue/multi-word-component-names": "off",
+      // Con defineProps<>() tipado, un prop opcional (`x?: string`) ya es
+      // undefined por defecto; exigir `default: undefined` solo mete ruido.
+      "vue/require-default-prop": "off",
     },
   },
   eslintConfigPrettier,
