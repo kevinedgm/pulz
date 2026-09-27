@@ -36,3 +36,31 @@ claves esperadas). **No es el proyecto heredado de Istmeño** (regla dura de
 disponible se retoma `supabase start` para el ciclo de Fase 1 (migraciones +
 `db reset` + pgTAP), que necesita poder resetear la base libremente — algo
 que no se debe hacer contra un proyecto alojado compartido.
+
+**Superada por la decisión siguiente**: se probó Colima y sí llegó a levantar
+el stack completo, pero el dueño pidió explícitamente no usar Docker/Colima
+en esta máquina y trabajar contra el proyecto alojado desde su propio panel.
+
+## 2026-09-26 · Se descarta Docker/Colima; todo el trabajo va contra Supabase alojado
+
+Instrucción explícita del dueño ("desinstala colima directamente..., en
+supabase en la página se va a trabajar"). Se hizo `supabase stop`,
+`colima stop`, `colima delete -f` y `brew uninstall colima` (se limpió
+también `lima`, que quedó sin usuarios). El CLI de Supabase se queda
+instalado (sirve para generar/editar migraciones y, más adelante, enlazar
+con `supabase link` al proyecto alojado), pero **no se vuelve a intentar
+`supabase start` local** salvo que el dueño lo pida de nuevo.
+
+Consecuencia para fases futuras: la Fase 1 (`supabase db reset` + pgTAP) va
+a necesitar un mecanismo contra el proyecto alojado en vez de un reset local
+— por ejemplo, migraciones aplicadas con `supabase db push` y una base de
+pruebas separada del proyecto de desarrollo. Se decide el detalle cuando se
+llegue a esa fase; queda anotado en `docs/DUDAS.md`.
+
+## 2026-09-26 · Agent-skills de Supabase instalados
+
+`npx skills add supabase/agent-skills`, pedido explícitamente por el dueño.
+Instala dos skills (`Supabase`, `Postgres Best Practices`) en
+`.agents/skills/`, con symlink hacia `.claude/skills/` para Claude Code. El
+propio instalador mostró su evaluación de riesgo ("Safe risk", 0 alertas de
+Socket) antes de instalar.

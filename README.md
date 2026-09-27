@@ -8,9 +8,10 @@ estado actual y [`docs/plan/`](docs/plan/) para el plan de cada fase.
 
 - Node 22 (fijado en `.nvmrc`; con `nvm` basta `nvm use`).
 - pnpm, activado vía Corepack: `corepack enable`.
-- Supabase CLI (`brew install supabase/tap/supabase`) y Docker o Colima para
-  correr `supabase start` en local (ver `docs/DUDAS.md` si no los tienes
-  todavía).
+- Un proyecto Supabase (alojado, gestionado desde
+  [supabase.com](https://supabase.com)). El desarrollo **no** corre contra
+  `supabase start` local — ver `docs/DUDAS.md` y `docs/DECISIONES.md` para el
+  porqué. El Supabase CLI sigue instalado para migraciones.
 
 ## Arrancar
 

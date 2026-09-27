@@ -5,17 +5,22 @@
 
 ## De entorno (Fase 0)
 
-1. **`supabase start` sin Docker.** La máquina de desarrollo no tenía Docker,
-   Colima ni Podman instalados (confirmado con
-   `docker: command not found (podman also not found)` al correr
-   `supabase start`). Mientras se decide si se instala Docker Desktop o
-   Colima, el desarrollo apunta directo al proyecto Supabase alojado
-   `https://ypgeiyorgktshgbzhgfh.supabase.co` (variables en
-   `apps/web/.env.local`, no versionado). Esto es una desviación temporal de
-   §8.4 ("local: `supabase start`"); se retoma el flujo local en cuanto haya
-   un runtime de contenedores disponible, sobre todo para la Fase 1
-   (migraciones + pgTAP necesitan Postgres local para poder resetear la base
-   en cada corrida sin arriesgar el proyecto alojado).
+1. **`supabase start` sin Docker.** ~~La máquina de desarrollo no tenía
+   Docker, Colima ni Podman instalados~~ — se instaló Colima, se le dio más
+   memoria/CPU y `supabase start` sí llegó a levantar el stack completo
+   (Postgres, Auth, Storage, Studio, etc.) en local. Pero el dueño pidió
+   explícitamente desinstalar Colima y trabajar directo contra el proyecto
+   Supabase alojado (`https://ypgeiyorgktshgbzhgfh.supabase.co`, variables en
+   `apps/web/.env.local`, no versionado), gestionado desde su propio panel
+   web. Esto es una desviación deliberada, no temporal, de §8.4 ("local:
+   `supabase start`") — ver `docs/DECISIONES.md`.
+
+   **Sigue abierto**: cómo va a funcionar la Fase 1 (`supabase db reset` +
+   pgTAP) sin un Postgres local que se pueda resetear libremente. Opciones a
+   decidir cuando se llegue ahí: (a) un segundo proyecto Supabase alojado solo
+   para pruebas, separado del de desarrollo; (b) retomar Colima/Docker solo
+   para el ciclo de pruebas, sin usarlo para el día a día; (c) otra cosa que
+   se decida entonces. No se decide ahora porque no bloquea la Fase 0.
 
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
