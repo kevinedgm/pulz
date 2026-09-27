@@ -108,6 +108,27 @@ como si fueran commits separados de un historial de producción. Se escribe
 el número mínimo de migraciones que representen el esquema correcto de una
 vez, y se corrigen in situ cuando haga falta.
 
+## 2026-09-26 · Fase 1 va con `supabase db push`/`--linked` directo, sin segundo proyecto
+
+El dueño confirmó: "usa directo supabase db push contra el proyecto alojado,
+esa es una instancia de desarrollo". Se descarta la opción de un segundo
+proyecto Supabase separado para pruebas — el mismo proyecto
+(`ypgeiyorgktshgbzhgfh`) sirve para desarrollo y para el ciclo de
+reset/prueba de la Fase 1.
+
+Se confirmó contra el CLI real (2.118.0), no por documentación externa, que
+`supabase db reset --linked` y `supabase test db --linked` existen y hacen
+justo lo que hacían sus equivalentes locales pero contra el proyecto
+enlazado — o sea que **todo** el ciclo de Fase 1 (link, reset, seed, pgTAP,
+consultas de verificación) se puede hacer sin Docker. Detalle completo en
+`docs/plan/FASE-1.md`.
+
+Efecto colateral importante: `supabase db reset --linked` borra y reconstruye
+el proyecto alojado por completo cada vez. Mientras dure este régimen (antes
+del lanzamiento), ese proyecto no debe usarse para nada que no esté en
+`seed.sql` — ninguna prueba manual ni dato de demo sobrevive al siguiente
+reset.
+
 ## 2026-09-26 · Flujo de interfaz obligatorio: kiwi primero, siempre
 
 `PULZ_MAESTRO.md` §13.4 ya establecía que "ninguna pantalla se construye sin

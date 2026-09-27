@@ -11,11 +11,9 @@
 
 ## Fase actual
 
-**Fase 0 · Arranque** — cerrada en la práctica. Monorepo, tooling, CI,
-estructura base, Fruti Squad y los agent-skills de Supabase implementados y
-verificados con comandos reales; repo en GitHub y sincronizado. Solo falta
-confirmar `ci.yml` en un PR real cuando exista uno (no bloquea empezar la
-Fase 1).
+**Fase 1 · Base de datos** — plan escrito en `docs/plan/FASE-1.md`,
+**esperando aprobación del dueño antes de implementar** (regla §0.1.2). Fase
+0 quedó cerrada en la práctica (ver abajo).
 
 ## Qué pasó
 
@@ -49,14 +47,27 @@ Fase 1).
      lima (gobernanza) → coco (construcción + auditoría) → mora-docs
      (documentación).
 
+- 2026-09-27: el dueño confirmó usar `supabase db push`/`--linked` directo
+  contra el proyecto alojado (es una instancia de desarrollo, no hace falta
+  un segundo proyecto). Se probó cada subcomando del CLI real (`db reset
+  --linked`, `test db --linked`, `db query --linked`, `db push`) y **todos
+  existen y apuntan al proyecto alojado sin Docker** — confirmado con
+  `--help`, no supuesto. Se escribió `docs/plan/FASE-1.md` con el esquema
+  completo partido en migraciones (§10.2 aplicado), la simulación adaptada +
+  segunda empresa, y pgTAP de aislamiento. **Bloqueo real encontrado**:
+  `supabase link` pide `supabase login` o `SUPABASE_ACCESS_TOKEN`, y esta
+  sesión no puede completar un login interactivo — se le pidió al dueño
+  correr `supabase login` en su propia terminal.
+
 ## Qué falta
 
+- Aprobación del dueño para `docs/plan/FASE-1.md` antes de tocar el esquema.
+- Que el dueño corra `supabase login` (o dé un access token) para poder
+  enlazar el proyecto y ejecutar las tareas 6–9 del plan de Fase 1 (link,
+  reset, pgTAP, verificación de saldos). Las migraciones (tareas 1–5) se
+  pueden escribir sin esto.
 - Abrir un PR real y confirmar que `ci.yml` corre en verde ahí (no bloquea
-  empezar la Fase 1).
-- Fase 1 todavía no arranca: falta escribir y aprobar
-  `docs/plan/FASE-1.md` con las tres reglas nuevas ya incorporadas
-  (especialmente la estrategia de migraciones "desde cero" y cómo se aplica
-  el esquema contra el proyecto alojado sin `supabase db reset` local).
+  la Fase 1).
 
 ## Entorno (actualizado 2026-09-26)
 
@@ -78,14 +89,10 @@ hacia adelante están resumidas en `CLAUDE.md`.
 
 ## Pendiente de decidir (ver `docs/DUDAS.md`)
 
-- Mecánica exacta para aplicar el esquema de la Fase 1 contra el proyecto
-  alojado sin Postgres local (¿`supabase db push` directo?, ¿un segundo
-  proyecto Supabase para pruebas separado del de desarrollo?). Se decide al
-  escribir `docs/plan/FASE-1.md`.
+- Nada de negocio pendiente para esta fase. Solo el bloqueo operativo de
+  `supabase login` de arriba.
 
 ## Próxima fase
 
-Fase 1 · Base de datos (partir `pulz_esquema.sql` en migraciones, aplicar
-§10.2, migraciones "desde cero" per `CLAUDE.md`, pgTAP de aislamiento). Toca
-escribir `docs/plan/FASE-1.md` y mostrarlo para aprobación antes de tocar el
-esquema.
+Ninguna todavía — hay que cerrar la Fase 1 primero. Ver `docs/plan/FASE-1.md`
+para el detalle completo de tareas y criterios de aceptación.

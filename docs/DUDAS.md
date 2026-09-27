@@ -15,12 +15,22 @@
    web. Esto es una desviación deliberada, no temporal, de §8.4 ("local:
    `supabase start`") — ver `docs/DECISIONES.md`.
 
-   **Sigue abierto**: cómo va a funcionar la Fase 1 (`supabase db reset` +
-   pgTAP) sin un Postgres local que se pueda resetear libremente. Opciones a
-   decidir cuando se llegue ahí: (a) un segundo proyecto Supabase alojado solo
-   para pruebas, separado del de desarrollo; (b) retomar Colima/Docker solo
-   para el ciclo de pruebas, sin usarlo para el día a día; (c) otra cosa que
-   se decida entonces. No se decide ahora porque no bloquea la Fase 0.
+   **Resuelto** (ver `docs/plan/FASE-1.md`): el dueño decidió usar
+   directamente `supabase db push`/`--linked` contra el proyecto alojado —
+   es una instancia de desarrollo, no hace falta un segundo proyecto para
+   pruebas. Se confirmó con `--help` real del CLI que `supabase db reset
+   --linked` y `supabase test db --linked` existen y hacen exactamente lo que
+   hacían sus equivalentes locales, apuntando al proyecto alojado. No se
+   necesita Docker en ningún paso del ciclo de la Fase 1.
+
+2. **Autenticación del CLI para `supabase link`.** `supabase link
+   --project-ref ypgeiyorgktshgbzhgfh` pide `supabase login` (interactivo, no
+   se puede completar en una sesión no interactiva) o
+   `SUPABASE_ACCESS_TOKEN`. Pendiente de que el dueño corra `supabase login`
+   en su propia terminal (recomendado) o dé un personal access token para
+   exportarlo en la sesión. Bloquea las tareas 6–9 de `docs/plan/FASE-1.md`,
+   no las tareas 1–5 (escribir las migraciones sí se puede hacer sin estar
+   enlazado).
 
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
