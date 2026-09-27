@@ -9,7 +9,9 @@
 > de intentos, las guardias del router y la Pages Function del portal
 > funcionen — todo probado contra el proyecto alojado.
 >
-> **Estado: plan escrito, esperando aprobación del dueño antes de implementar.**
+> **Estado (2026-09-27): aprobado. Servidor (tareas 1–8) implementado y
+> verificado contra el proyecto alojado; interfaz detenida en la compuerta
+> de `kiwi` esperando al dueño.** Resultados reales al final del documento.
 > Es la **primera fase con interfaz**: las pantallas no se construyen hasta
 > que el dueño apruebe la ronda de `kiwi` (compuerta explícita abajo).
 
@@ -160,3 +162,19 @@ de suposiciones para que un layout se vea completo (§13.4).
 - **Pruebas que crean usuarios en Auth**: un `db reset --linked` los borra
   (auth.users se reinicia). Hay que correr las pruebas de alta en orden y
   resetear después.
+
+## Resultados reales (2026-09-27) — servidor, tareas 1–8
+
+| Criterio (§16) | Comando real | Resultado |
+|---|---|---|
+| Login por usuario y por correo | `curl …/auth/v1/token?grant_type=password` con los usuarios de la semilla | **OK**: Benito (correo real) y Tomás (`tomas.h@<org_id>.usuarios.pulz.mx`) reciben token |
+| Mensaje idéntico en los rechazos | mismo `curl` con contraseña mala y con usuario inexistente | GoTrue devuelve **el mismo** `invalid_credentials` (400) en ambos; empresa inexistente y cuenta suspendida se resuelven en el cliente con el mismo texto (pendiente de la pantalla) |
+| 5 fallos bloquean y el admin desbloquea | `supabase config push` del hook | **NO COMPROBABLE en este plan**: 402 `HOOK_PASSWORD_VERIFICATION_ATTEMPT` no disponible para la organización (`docs/DUDAS.md` #9). Queda el límite por IP de Supabase |
+| Slug renombrado redirige 301 | `test:portal` (wrangler pages dev + portal_branding real) | **OK**: `/e/mezcal-cuatro-vientos/fermentacion` → 301 a `/e/cuatro-vientos/fermentacion` |
+| Vencida en solo lectura; cancelada 404 idéntico | pgTAP `supabase/tests/portal.test.sql` | **11/11**: vencida → `read_only = true` y `has_role` rechaza escrituras; cancelada e inexistente → ninguna fila (el mismo 404) |
+| La función del portal pasa sus pruebas | `pnpm --filter @pulz/web test:portal` | **5/5** en Miniflare, sin Docker |
+| Título en `/e/cuatro-vientos` = "Mezcal Cuatro Vientos · PULZ" | la misma prueba | **OK** |
+| Alta de miembro (dictada y enlace), canje de bienvenida, cambio obligatorio | `curl` contra las Edge Functions desplegadas | **OK**: enlace de un solo uso (segundo canje → 400), `must_change_password` pasa de `true` a `false` por el servidor, duplicado → 409, operador → 403, sin sesión → 401 |
+| `signup-company` | `curl` | **OK**: crea titular + empresa (`prueba-c`), `portal_branding` la ve al instante; slug reservado → "Ese nombre de portal está reservado" |
+| Advisors de seguridad | `supabase db advisors --linked` | 0 errores; los avisos que quedan son las RPC de §12 por diseño (`docs/DECISIONES.md`) |
+| Pantallas con ronda de kiwi aprobada | — | **Pendiente: compuerta.** Sigue la ronda de `kiwi` |

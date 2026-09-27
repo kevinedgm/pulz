@@ -35,7 +35,7 @@ create trigger suppliers_updated_at before update on suppliers
   for each row execute function set_updated_at();
 
 create function suppliers_check_type() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = public as $$
 begin
   perform assert_catalog_item(new.organization_id, new.type_item_id, 'tipo_proveedor');
   return new;
@@ -58,7 +58,7 @@ create trigger supplies_updated_at before update on supplies
   for each row execute function set_updated_at();
 
 create function supplies_check_unit() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = public as $$
 begin
   perform assert_catalog_item(new.organization_id, new.unit_item_id, 'unidad_insumo');
   return new;

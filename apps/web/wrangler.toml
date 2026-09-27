@@ -1,0 +1,7 @@
+# Cloudflare Pages · PULZ (PULZ_MAESTRO.md §7.7, §8.1). Sirve la PWA y la
+# Pages Function del portal en functions/e/[slug]/[[path]].ts.
+# SUPABASE_URL y SUPABASE_ANON_KEY se configuran como variables del proyecto
+# en Cloudflare Pages (no aquí): la función solo usa la llave publishable.
+name = "pulz-web"
+compatibility_date = "2026-09-01"
+pages_build_output_dir = "dist"

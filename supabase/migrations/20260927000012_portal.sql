@@ -61,7 +61,7 @@ grant execute on function portal_branding(text) to anon, authenticated;
 -- navegador inicia sesión DIRECTO contra Supabase Auth, sin función intermedia.
 -- La función manage-member (Fase 3) lo usa al crear la cuenta.
 create function member_login_email(p_org uuid, p_username text) returns text
-language sql immutable as $$
+language sql immutable set search_path = public as $$
   select lower(p_username) || '@' || p_org::text || '.usuarios.pulz.mx';
 $$;
 

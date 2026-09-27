@@ -14,20 +14,29 @@
 begin;
 
 -- ---------------------------------------------------------------------
--- auth.users (mínimo). Tokens como '' y no NULL (§17).
+-- auth.users (mínimo). Tokens como '' y no NULL (§17). Contraseñas de
+-- desarrollo (bcrypt vía pgcrypto, el formato que verifica GoTrue) para
+-- poder probar el acceso de la Fase 3; este proyecto se resetea, no son
+-- secretos:  benito → 'benito-2026' · aurelia → 'aurelia-2026' ·
+-- tomas.h → 'tomas-2026' · dueña B → 'prueba-b-2026' · admin → 'pulz-2026'
 -- ---------------------------------------------------------------------
-insert into auth.users (instance_id, id, aud, role, email, email_confirmed_at,
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
                         raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
                         confirmation_token, recovery_token, email_change_token_new, email_change) values
-  ('00000000-0000-0000-0000-000000000000', 'f6d4a253-a9a1-508c-9319-d223fe92949e', 'authenticated', 'authenticated', 'tu@pulz.mx', now(),
+  ('00000000-0000-0000-0000-000000000000', 'f6d4a253-a9a1-508c-9319-d223fe92949e', 'authenticated', 'authenticated', 'tu@pulz.mx',
+   extensions.crypt('pulz-2026', extensions.gen_salt('bf')), now(),
    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', 'a88771d6-e323-5b36-991d-c42e5880e507', 'authenticated', 'authenticated', 'benito@cuatrovientos.mx', now(),
+  ('00000000-0000-0000-0000-000000000000', 'a88771d6-e323-5b36-991d-c42e5880e507', 'authenticated', 'authenticated', 'benito@cuatrovientos.mx',
+   extensions.crypt('benito-2026', extensions.gen_salt('bf')), now(),
    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', '417489a3-9fa1-5914-bbc9-92d5334e9734', 'authenticated', 'authenticated', 'aurelia@b66cf468-47f7-51ee-a8f2-994d907440b9.usuarios.pulz.mx', now(),
+  ('00000000-0000-0000-0000-000000000000', '417489a3-9fa1-5914-bbc9-92d5334e9734', 'authenticated', 'authenticated', 'aurelia@b66cf468-47f7-51ee-a8f2-994d907440b9.usuarios.pulz.mx',
+   extensions.crypt('aurelia-2026', extensions.gen_salt('bf')), now(),
    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', 'e8e03baf-44a8-5af4-8d68-e0f3e04315a9', 'authenticated', 'authenticated', 'tomas.h@b66cf468-47f7-51ee-a8f2-994d907440b9.usuarios.pulz.mx', now(),
+  ('00000000-0000-0000-0000-000000000000', 'e8e03baf-44a8-5af4-8d68-e0f3e04315a9', 'authenticated', 'authenticated', 'tomas.h@b66cf468-47f7-51ee-a8f2-994d907440b9.usuarios.pulz.mx',
+   extensions.crypt('tomas-2026', extensions.gen_salt('bf')), now(),
    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', ''),
-  ('00000000-0000-0000-0000-000000000000', 'c0ffee00-0000-4000-8000-0000000000b1', 'authenticated', 'authenticated', 'duena@pruebab.mx', now(),
+  ('00000000-0000-0000-0000-000000000000', 'c0ffee00-0000-4000-8000-0000000000b1', 'authenticated', 'authenticated', 'duena@pruebab.mx',
+   extensions.crypt('prueba-b-2026', extensions.gen_salt('bf')), now(),
    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '');
 
 insert into profiles (id, full_name) values

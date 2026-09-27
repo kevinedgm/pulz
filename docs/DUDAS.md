@@ -59,6 +59,23 @@
    que el test con `dblink` la use (es un secreto de cuenta; mejor la opción
    de las dos terminales).
 
+9. **Hook de intentos de contraseña (§7.5, §18 #9) — RESPONDIDO: no está en
+   el plan del proyecto.** `supabase config push` devolvió `402 "The
+   following auth hooks cannot be configured for this organization:
+   HOOK_PASSWORD_VERIFICATION_ATTEMPT"`. Queda apagado en `config.toml` (con
+   el `uri` comentado, listo para cuando suban de plan) y el freno es el
+   límite por IP de Supabase Auth. La función `auth_password_attempt`, la
+   tabla `login_throttle` y `desbloquear_miembro` se quedan: no estorban y
+   funcionan el día que el hook exista. **Consecuencia**: el criterio de
+   aceptación "5 fallos bloquean y el admin desbloquea" de §16 Fase 3 **no se
+   puede cumplir** en este plan; se marca como no comprobable, no como
+   pasado.
+
+10. **Protección contra contraseñas filtradas (HaveIBeenPwned).** Los
+    advisors de Supabase la recomiendan (`auth_leaked_password_protection`).
+    Es un ajuste de Auth en el panel del proyecto; puede depender del plan.
+    Pendiente de que el dueño lo active si su plan lo permite; no bloquea.
+
 ## De negocio interpretadas en la Fase 2 (implementado el supuesto; fácil de cambiar)
 
 6. **Folios automáticos**: prefijo por material o etapa + consecutivo por

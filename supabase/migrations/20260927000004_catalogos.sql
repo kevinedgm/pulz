@@ -116,7 +116,7 @@ create trigger species_updated_at before update on species
 -- (§10.2.5). La FK compuesta garantiza la empresa; esto garantiza el tipo.
 -- ---------------------------------------------------------------------
 create function assert_catalog_item(p_org uuid, p_item uuid, p_catalog catalog_kind) returns void
-language plpgsql stable as $$
+language plpgsql stable set search_path = public as $$
 begin
   if p_item is null then
     return;

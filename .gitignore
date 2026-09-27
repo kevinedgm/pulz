@@ -11,6 +11,9 @@ dist/
 supabase/.branches/
 supabase/.temp/
 
+# wrangler (Miniflare) estado local de `pages dev`
+.wrangler/
+
 # Cobertura y logs
 coverage/
 *.log

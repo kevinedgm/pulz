@@ -28,7 +28,7 @@ create trigger resources_updated_at before update on resources
 
 -- El catálogo del tipo debe corresponder al kind del recurso (§10.2.5)
 create function resource_catalog_for(p_kind resource_kind) returns catalog_kind
-language sql immutable as $$
+language sql immutable set search_path = public as $$
   select case p_kind
     when 'horno'     then 'tipo_horno'::catalog_kind
     when 'molino'    then 'tipo_molino'::catalog_kind
@@ -40,7 +40,7 @@ language sql immutable as $$
 $$;
 
 create function resources_check_type() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = public as $$
 begin
   perform assert_catalog_item(new.organization_id, new.type_item_id, resource_catalog_for(new.kind));
   return new;

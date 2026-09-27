@@ -6,7 +6,18 @@ import globals from "globals"
 
 export default tseslint.config(
   {
-    ignores: ["**/dist/**", "**/node_modules/**", "**/.wrangler/**", "docs/**"],
+    // .claude/, .agents/ y design-hub/ son tooling de terceros (Fruti Squad,
+    // agent-skills): no son código nuestro y traen scripts minificados.
+    ignores: [
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/.wrangler/**",
+      "docs/**",
+      ".claude/**",
+      ".agents/**",
+      "design-hub/**",
+      "supabase/.temp/**",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

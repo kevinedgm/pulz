@@ -10,3 +10,13 @@ docs/
 # Copia literal de docs/referencia/pulz-tokens.css: debe quedar idéntica
 # al original para que se note si diverge.
 apps/web/src/shared/ui/tokens.css
+# Copia literal de docs/referencia/pulz_portal_function.ts (misma razón).
+# Se ignora la carpeta: los corchetes del nombre son metacaracteres de glob.
+apps/web/functions/e/
+
+# Tooling de terceros (Fruti Squad, agent-skills) y estado del CLI: no es
+# código nuestro, no se reformatea.
+.claude/
+.agents/
+design-hub/
+supabase/.temp/

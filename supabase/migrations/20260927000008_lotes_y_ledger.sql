@@ -118,7 +118,7 @@ create table attachments (
 create index attachments_org_lot on attachments (organization_id, lot_id);
 
 create function attachments_check_kind() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = public as $$
 begin
   perform assert_catalog_item(new.organization_id, new.kind_item_id, 'tipo_adjunto');
   return new;

@@ -11,66 +11,65 @@
 
 ## Fase actual
 
-**Fase 2 · Comandos (RPC) — cerrada salvo un punto** (2026-09-27). Las 17
-RPC de §12 existen con el contrato de §12.1; la simulación se construye
-llamando a las RPC y da exactamente §15.1; pgTAP por RPC 26/26. **Lo único
-no comprobado**: la prueba de concurrencia con dos sesiones reales (queda en
-SKIP porque la Management API no puede abrir una segunda sesión sin la
-contraseña de Postgres — ver `docs/DUDAS.md` #5, con el comando para que el
-dueño la corra en dos terminales). **Fase 3 · Portal, acceso y equipo** es
-la siguiente: falta escribir `docs/plan/FASE-3.md` y mostrarlo para
-aprobación (§0.1.2).
+**Fase 3 · Portal, acceso y equipo — servidor terminado y verificado;
+interfaz detenida en la compuerta de `kiwi`.** Las tres Edge Functions
+(`signup-company`, `manage-member`, `set-password`) están desplegadas y
+probadas de punta a punta; la Pages Function del portal pasa sus pruebas
+reales; el login con usuario simple y con correo funciona contra GoTrue.
+**Siguiente paso**: ronda de `kiwi` (brief, flujo, wireframes F0–F2) para
+las pantallas de acceso y equipo → **el dueño la aprueba** → lima → coco →
+mora-docs. Nada de interfaz se construye antes (`CLAUDE.md` §3).
 
 ## Qué pasó
 
-- 2026-09-26: Fase 0 completa; reglas permanentes en `CLAUDE.md`; repo en
-  `github.com/kevinedgm/pulz`.
-- 2026-09-27: Fase 1 completa (13 migraciones, semilla, pgTAP de
-  aislamiento 18/18, saldos §15.1) contra el proyecto alojado, sin Docker.
-- 2026-09-27: el dueño aprobó `docs/plan/FASE-2.md`. Se implementó:
-  - `0014_rpc_base`: helpers del contrato §12.1 (guard, idempotencia,
-    bloqueo en orden de id, saldos del ledger, capacidad, avisos con nota,
-    estado agotado, nivel de historia, folios por empresa).
-  - `0015`–`0020`: las 17 RPC de negocio (`registrar_recepcion_maguey`,
-    `registrar_entrada`, `abrir/cerrar_horneado`, `registrar_formulacion`,
-    `registrar_medicion`, `anular_medicion`, `declarar_tina_lista`,
-    `cerrar_ciclo`, `abrir_corrida`, `registrar_corte`, `cerrar_corrida`,
-    `transferir`, `registrar_movimiento_granel`, `completar_historia`,
-    `corregir_operacion`) + `desbloquear_miembro` de la Fase 1.
-  - `0021`: `provision_organization` (solo `service_role`) y los grants:
-    17 RPC ejecutables por `authenticated`, ninguna función interna expuesta.
-  - `seed.sql` reescrito: la producción de Cuatro Vientos se construye con
-    38 llamadas a RPC en orden cronológico, con el usuario que registró cada
-    cosa (salvo `abrir_horneado`, que lo hace Aurelia porque §11.1 no se lo
-    permite al operador).
-  - `supabase/tests/rpc.test.sql` (26 aserciones) y
-    `rpc_concurrencia.test.sql` (dblink; SKIP en alojado).
-  - Dos correcciones "desde cero" (editadas en su migración, no encimadas):
-    `operation_kind` gana `anular_medicion`/`cerrar_ciclo` (`0001`) y
-    `registrar_medicion` recibe enteros, no smallint (`0017`).
+- 2026-09-26: Fase 0 (monorepo, tooling, Fruti Squad, repo en GitHub) y
+  reglas permanentes en `CLAUDE.md`.
+- 2026-09-27: Fase 1 (esquema en 13 migraciones, aislamiento 18/18, saldos
+  §15.1) y Fase 2 (17 RPC, semilla por RPC, pgTAP 26/26) contra el proyecto
+  alojado, sin Docker.
+- 2026-09-27: Fase 3, mitad de servidor:
+  - `0022_acceso.sql`: vista `mis_membresias` para las guardias del router.
+  - Contraseñas de desarrollo en la semilla (bcrypt vía `extensions.crypt`).
+  - Edge Functions con `@supabase/server` (`withSupabase`), desplegadas con
+    `--use-api`. Smoke real con `curl`: 13 casos, todos como se diseñaron
+    (alta por enlace y dictada, canje de un solo uso, cambio obligatorio,
+    duplicado 409, operador 403, sin sesión 401, alta de empresa, slug
+    reservado).
+  - Hook de intentos: **402, no está en el plan del proyecto** (§18 #9
+    respondido). Queda apagado y documentado; el criterio "5 fallos
+    bloquean" no es comprobable en este plan.
+  - `config push` acotado: `config.toml` deja sin declarar todo lo que no
+    queremos que mande (15 diferencias que el template habría empujado).
+  - Pages Function copiada a `apps/web/functions/e/[slug]/[[path]].ts`,
+    `wrangler.toml`, prueba e2e con `wrangler pages dev` (5/5) y pgTAP del
+    portal (11/11).
+  - Advisors: corregidos `search_path`, revokes a `anon`, `(select
+    auth.uid())` en `profiles`. 0 errores.
+  - Lint/format del repo en verde (se ignoran `.claude/`, `.agents/`,
+    `design-hub/` — tooling de terceros).
 
-## Criterios de aceptación de la Fase 2 (§16) — comprobados
+## Criterios de aceptación de la Fase 3 (§16) — estado
 
-| Criterio | Comando real | Resultado |
-|---|---|---|
-| pgTAP por RPC: feliz, idempotencia, duras, blandas | `supabase db query --linked -f supabase/tests/rpc.test.sql` | **26/26 ok**: idempotencia (misma llave → mismo lote, ledger intacto), `SALDO_INSUFICIENTE`, `CAPACIDAD_EXCEDIDA`, `NO_PERMITIDO` (otra empresa; operador en RPC de productor), `REQUIERE_NOTA` sin nota / aviso registrado con nota, regla de acumulación (3 casos), transferir con `conservar` + linaje, conciliación exacta, estado agotado, niveles de historia |
-| La simulación por RPC da §15.1 | `supabase db reset --linked` + saldos | **Exactos**; además 38 operaciones, 13 lotes, 16 aristas de linaje y los mismos niveles de historia que la simulación de referencia, y los dos avisos blandos |
-| Aislamiento sigue en verde con la semilla por RPC | `…/aislamiento.test.sql` | **18/18 ok** |
-| Concurrencia: dos transferencias del último litro | `…/rpc_concurrencia.test.sql` | **SKIP** — dblink pide contraseña en alojado. No se declara en verde. Instrucciones para probarlo a mano en `docs/DUDAS.md` #5 |
+Ver tabla completa en `docs/plan/FASE-3.md` ("Resultados reales"). Resumen:
+login por usuario y por correo **OK**; rechazos idénticos **OK** en GoTrue
+(el texto único lo pone la pantalla); slug 301 **OK**; vencida/cancelada
+**OK** (pgTAP); función del portal **5/5**; título "Mezcal Cuatro Vientos ·
+PULZ" **OK**; altas/canje/cambio obligatorio **OK**; **5 fallos bloquean: no
+comprobable en este plan**; **pantallas: pendientes de la ronda de kiwi**.
 
 ## Qué falta
 
-- (Opcional, no bloquea) Que el dueño corra la prueba de concurrencia en dos
-  terminales `psql` (`docs/DUDAS.md` #5) o dé la contraseña de Postgres del
-  proyecto para que el test con `dblink` la use.
-- Confirmar tres supuestos de negocio de la Fase 2 (`docs/DUDAS.md` #6–#8:
-  formato de folios, entrada de tina que ya fermentaba, alcance de
-  `corregir_operacion`) y la escala 1–6 (#4). No bloquean.
-- Escribir y aprobar `docs/plan/FASE-3.md` (portal, acceso y equipo:
-  `signup-company`, `manage-member`, hook de intentos, pantallas de acceso,
-  guardias del router, Pages Function del portal). **Ojo**: es la primera
-  fase con interfaz → empieza por `kiwi` (`CLAUDE.md` §3).
-- Abrir un PR real y confirmar que `ci.yml` corre en verde (no bloquea).
+1. **Ronda de `kiwi`** para: portal + inicio de sesión, cambio obligatorio de
+   contraseña, bienvenida por enlace, equipo (solo admin). → aprobación del
+   dueño → `lima` → `coco` (implementación en `apps/web/src/modules/acceso/`
+   y guardias en `apps/web/src/app/router.ts`) → `mora-docs`.
+2. Vitest de integración del cliente de acceso (mensaje único en los cuatro
+   rechazos, guardias) cuando exista la pantalla.
+3. Que el dueño decida sobre `docs/DUDAS.md` #9 (subir de plan para el hook)
+   y #10 (protección de contraseñas filtradas). No bloquean.
+4. Sigue abierto de fases anteriores: concurrencia a mano (#5), escala 1–6
+   (#4), folios/entrada de tina/corregir_operacion (#6–#8). No bloquean.
+5. Abrir un PR real y confirmar `ci.yml` (no bloquea).
 
 ## Entorno (actualizado 2026-09-27)
 
@@ -78,11 +77,11 @@ aprobación (§0.1.2).
 |---|---|
 | Node / pnpm | 22.23.3 vía `nvm` · pnpm 9.15.9 vía Corepack |
 | git | `github.com/kevinedgm/pulz`, rama `main` |
-| Supabase CLI | 2.118.0, enlazado a `ypgeiyorgktshgbzhgfh` ("pulz", desarrollo). Nunca `supabase start` ni `supabase test db` (piden Docker); pgTAP va por `supabase db query --linked -f` |
-| Proyecto Supabase | 21 migraciones + semilla por RPC aplicadas; **cada `db reset --linked` lo borra y reconstruye** |
+| Supabase CLI | 2.118.0, enlazado a `ypgeiyorgktshgbzhgfh`. Nunca `supabase start` ni `test db` (Docker); pgTAP por `db query --linked -f`; funciones con `deploy --use-api`; **`config diff` antes de cualquier `config push`** |
+| Proyecto Supabase | 22 migraciones + semilla por RPC; 3 Edge Functions desplegadas; hook de intentos no disponible (plan); **cada `db reset --linked` lo reconstruye** |
+| Cloudflare | `apps/web/wrangler.toml` (Pages, `dist/`); la Pages Function se prueba con `pnpm --filter @pulz/web test:portal` (requiere `pnpm build` antes) |
 | Docker / Colima / Podman | desinstalados a propósito, regla permanente |
 | Fruti Squad | `.claude/skills/{kiwi,lima,coco,mora-docs}`, perfil `.claude/skills/lima/profiles/pulz.md` |
-| Agent-skills de Supabase | `.agents/skills/{supabase,supabase-postgres-best-practices}` |
 
 ## Regla de seguridad que hay que recordar
 
@@ -97,11 +96,10 @@ hacia adelante).
 
 ## Pendiente de decidir (ver `docs/DUDAS.md`)
 
-- #4 escala 1–6 vs 1–10 · #5 cómo correr la concurrencia · #6 formato de
-  folios · #7 entrada de tina que ya fermentaba · #8 alcance de
-  `corregir_operacion`. Todo implementado con un supuesto razonable.
+- #9 hook de intentos (plan) · #10 contraseñas filtradas · #5 concurrencia
+  a mano · #4 escala 1–6 · #6–#8 supuestos de negocio de la Fase 2.
 
 ## Próxima fase
 
-Fase 3 · Portal, acceso y equipo. Toca escribir `docs/plan/FASE-3.md` y
-mostrarlo para aprobación. Las pantallas de acceso pasan primero por `kiwi`.
+No hay siguiente fase hasta cerrar la Fase 3: falta la interfaz, que empieza
+por `kiwi` y la aprobación del dueño.

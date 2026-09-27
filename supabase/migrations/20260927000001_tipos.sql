@@ -52,7 +52,7 @@ create type movement_type as enum (
 -- updated_at lo fija el servidor (§10.1). Se usa en catálogos, recursos,
 -- ajustes y suscripciones.
 create function set_updated_at() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = public as $$
 begin
   new.updated_at := now();
   return new;

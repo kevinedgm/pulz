@@ -9,8 +9,9 @@ create function provision_organization(
 language plpgsql security definer set search_path = public as $$
 declare v_org uuid; v_plan uuid;
 begin
-  if coalesce(auth.role(), current_setting('request.jwt.claim.role', true), '') <> 'service_role'
-     and session_user <> 'postgres' then
+  -- Solo el servidor: por PostgREST con llave secreta el rol activo es
+  -- service_role (con API keys nuevas no hay JWT, así que no se mira auth.role()).
+  if current_user not in ('service_role', 'postgres') then
     raise exception 'NO_PERMITIDO: el alta de empresas la hace el servidor' using errcode = 'P0001';
   end if;
   if p_admin is null or nullif(btrim(p_nombre), '') is null or nullif(btrim(p_slug), '') is null then

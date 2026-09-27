@@ -152,12 +152,12 @@ create policy subs_select on subscriptions for select to authenticated
 
 -- Nombres de compañeros de empresa visibles (para "quién lo hizo")
 create policy profile_select on profiles for select to authenticated
-  using (id = auth.uid() or exists (
+  using (id = (select auth.uid()) or exists (
     select 1 from organization_members a join organization_members b
       on a.organization_id = b.organization_id
-     where a.user_id = auth.uid() and a.status = 'activo' and b.user_id = profiles.id));
+     where a.user_id = (select auth.uid()) and a.status = 'activo' and b.user_id = profiles.id));
 create policy profile_update on profiles for update to authenticated
-  using (id = auth.uid()) with check (id = auth.uid());
+  using (id = (select auth.uid())) with check (id = (select auth.uid()));
 
 create policy plans_select    on plans         for select to authenticated using (is_public or (select is_platform_admin()));
 create policy limits_select   on plan_limits   for select to authenticated using (true);
@@ -172,3 +172,13 @@ create policy throttle_auth_select on login_throttle for select to supabase_auth
 create policy throttle_auth_insert on login_throttle for insert to supabase_auth_admin with check (true);
 create policy throttle_auth_update on login_throttle for update to supabase_auth_admin using (true);
 create policy throttle_auth_delete on login_throttle for delete to supabase_auth_admin using (true);
+
+-- ---------------------------------------------------------------------
+-- Funciones security definer que NO son API (advisors de Supabase):
+-- las de membresía las usan las políticas y las RPC; anon no las necesita.
+-- El trigger de slug y la propagación de plantillas no los llama nadie por
+-- PostgREST. portal_branding sí queda para anon a propósito (§7.5).
+-- ---------------------------------------------------------------------
+revoke execute on function is_member(uuid), has_role(uuid, member_role[]), is_platform_admin() from public, anon;
+revoke execute on function organizations_slug_guard() from public, anon, authenticated;
+revoke execute on function propagate_template(uuid) from authenticated;

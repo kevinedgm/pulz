@@ -246,6 +246,80 @@ dio a mano** (la simulación trae `MEZ-001`, `DES-001`… explícitos).
   documento, fecha en que ocurrió) y deja una operación `correccion` que
   apunta a la original. Los volúmenes se corrigen con movimientos de ajuste.
 
+## 2026-09-27 · Fase 3 (servidor): Edge Functions con `@supabase/server`, no con `Deno.serve` a mano
+
+La skill de Supabase instalada manda verificar contra la documentación viva
+y no contra memoria. La documentación y el README del paquete (unpkg) muestran
+que hoy las Edge Functions se escriben con `withSupabase({ auth }, handler)`
+de `npm:@supabase/server`, que da `ctx.supabase` (cliente con la RLS del que
+llama), `ctx.supabaseAdmin` (llave secreta) y `ctx.userClaims`. Así se
+escribieron `signup-company` (auth `publishable`), `manage-member` (auth
+`user`) y `set-password` (auth `['user','publishable']`). Se despliegan con
+`supabase functions deploy --use-api` (bundle en el servidor, sin Docker).
+Probadas de punta a punta contra el proyecto alojado con `curl`: alta por
+enlace (token de un solo uso, 72 h, solo hash en la base) y por contraseña
+dictada (`must_change_password` la baja el servidor), 401/403/409 correctos,
+alta de empresa con `provision_organization` y rechazo de slug reservado.
+
+## 2026-09-27 · `supabase config push` solo con lo declarado a propósito
+
+`config diff` mostró que el `config.toml` que genera `supabase init` habría
+**cambiado 15 cosas** del proyecto alojado (apagar confirmaciones de correo y
+MFA, cambiar OTP, pooler, Twilio, analytics…). Como "las propiedades que el
+archivo no declara se dejan igual", se comentaron todas esas claves con la
+marca `(no declarado a propósito)` y quedó declarado únicamente el hook.
+Regla hacia adelante: **antes de cada `config push`, `config diff`**, y solo
+se declara en `config.toml` lo que de verdad queremos que mande.
+
+## 2026-09-27 · El hook de intentos no está en el plan: se documenta, no se finge
+
+Ver `docs/DUDAS.md` #9 (402 de la API). `config.toml` deja el hook en
+`enabled = false` con el `uri` comentado. El criterio "5 fallos bloquean" de
+§16 Fase 3 queda como **no comprobable en este plan**.
+
+## 2026-09-27 · Advisors de Supabase: se corrigió lo que era nuestro, se documentó lo que es diseño
+
+`supabase db advisors --linked` tras la Fase 2: 8 funciones sin
+`search_path` fijo (se les puso `set search_path = public` en su migración
+original), `is_member`/`has_role`/`is_platform_admin`/`organizations_slug_guard`
+ejecutables por `anon` (revocadas; `portal_branding` se queda para `anon` a
+propósito, §7.5), políticas de `profiles` con `auth.uid()` sin `(select …)`
+(corregido). Lo que queda son 21 avisos "security definer ejecutable por
+authenticated": **son las RPC de negocio de §12, así es la arquitectura**
+(§8.2: toda escritura pasa por RPC que verifica el rol adentro). Y uno de
+protección de contraseñas filtradas (`docs/DUDAS.md` #10).
+
+## 2026-09-27 · Contraseñas en la semilla y prueba real de login
+
+La semilla fija `encrypted_password` con `extensions.crypt(…,
+extensions.gen_salt('bf'))` (pgcrypto vive en el esquema `extensions` en
+Supabase; sin el prefijo, `gen_salt` "no existe"). Con eso se probó contra
+GoTrue real: el titular entra con correo, el colaborador con su correo
+sintético `usuario@<organization_id>.usuarios.pulz.mx`, y contraseña mala y
+usuario inexistente devuelven **exactamente el mismo** `invalid_credentials`
+— la base del mensaje único "Usuario o contraseña incorrectos" (§7.5).
+
+## 2026-09-27 · Pages Function: probada con `wrangler pages dev` real, no con un pool de Vitest
+
+`@cloudflare/vitest-pool-workers` exige Vitest 4 y el repo usa 5 (y su
+export `./config` no resolvía). En su lugar la prueba levanta `wrangler pages
+dev dist` (Miniflare, sin Docker) con los bindings del proyecto alojado y
+pega por HTTP: es la función real, con `HTMLRewriter` real, contra
+`portal_branding` real. 5/5: título "Mezcal Cuatro Vientos · PULZ",
+manifiesto por empresa, 301 del slug viejo, 404 para inexistente, marca de la
+empresa B. Se corre aparte (`pnpm --filter @pulz/web test:portal`) porque
+necesita `dist/`; el `pnpm test` normal la excluye. El caso "cancelada da el
+mismo 404" se prueba en pgTAP (`supabase/tests/portal.test.sql`, 11/11):
+`portal_branding` no devuelve fila ni para cancelada ni para inexistente, y
+la función no distingue.
+
+## 2026-09-27 · ESLint/Prettier ignoran `.claude/`, `.agents/` y `design-hub/`
+
+Al instalar Fruti Squad y los agent-skills, el lint del repo quedó en rojo
+por scripts de terceros (minificados, con `vendor/`). No es código nuestro:
+se ignoran en `eslint.config.js` y `.prettierignore`, igual que
+`apps/web/functions/e/` (copia literal de la referencia, como `tokens.css`).
+
 ## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
 
 El test de "dos transferencias simultáneas del último litro" está escrito
