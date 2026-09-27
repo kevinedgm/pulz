@@ -39,9 +39,15 @@ withDefaults(defineProps<{ variante?: ChipVariante }>(), { variante: "on" })
   background: currentColor;
 }
 .chip--draft {
-  color: var(--pend);
+  /* --pend sobre --pend-bg da 3.03:1 en claro (compuerta de lima, docs/DUDAS.md #12):
+     el texto va en --text; el color de estado queda en borde y punto. */
+  color: var(--text);
   background: var(--pend-bg);
+  border-color: var(--pend);
   border-style: dashed;
+}
+.chip--draft::before {
+  border-color: var(--pend);
 }
 .chip--off {
   color: var(--muted);

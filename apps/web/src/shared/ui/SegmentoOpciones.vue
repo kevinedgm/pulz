@@ -62,14 +62,18 @@ function mover(delta: number) {
   color: var(--text);
 }
 .segmento__opciones {
-  display: grid;
-  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  /* n columnas iguales; si una etiqueta no cabe (texto al 200 % en compact),
+     la opción baja de fila en vez de recortarse (compuerta de lima) */
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--sp-2);
 }
 .segmento__opcion {
+  flex: 1 1 calc((100% - var(--sp-2) * (var(--n, 2) - 1)) / var(--n, 2));
+  min-width: max-content;
   min-height: var(--tap);
   padding: 0 var(--sp-3);
-  border: 1px solid var(--border);
+  border: 1px solid var(--muted); /* límite del control ≥ 3:1 (compuerta de lima) */
   border-radius: var(--r-md);
   background: var(--surface);
   color: var(--text);

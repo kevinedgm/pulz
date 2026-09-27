@@ -376,10 +376,14 @@ const miembros = [
 }
 .hub-barra label {
   display: flex;
+  flex: 1 1 200px;
+  min-width: 0;
   gap: var(--sp-2);
   align-items: center;
 }
 .hub-barra select {
+  flex: 1 1 0;
+  min-width: 0; /* con texto al 200 % no ensancha la barra */
   min-height: var(--tap);
   border: 1px solid var(--border);
   border-radius: var(--r-md);

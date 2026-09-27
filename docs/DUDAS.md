@@ -92,6 +92,17 @@
     elegida y llegue a `/inicio` sin tocar nada más. Pendiente de decidir;
     no bloquea la Fase 3.
 
+12. **Token `--pend` (ámbar) en modo claro no alcanza 4.5:1 como texto.**
+    Al evaluar la compuerta Candidate, lima midió el contraste real de los
+    pares de tokens que usan las piezas: todos pasan (claro y oscuro) salvo
+    `--pend #C17A18` sobre `--pend-bg #FBEEDB` = **3.03:1** (texto necesita
+    4.5). En oscuro da 7.27. Mitigación ya aplicada en las piezas: el texto
+    del chip "invitado" va en `--text` y el ámbar queda en borde y punto (el
+    aviso "Sin conexión" ya usaba `--text`). Decisión del dueño (es un valor
+    de §13.4): si quiere ámbar como texto, cambiar `--pend` en claro a
+    `#8F5A10` (5.05:1 sobre `--pend-bg`, 5.77 sobre blanco) en
+    `apps/web/src/shared/ui/tokens.css`. No bloquea.
+
 ## De negocio interpretadas en la Fase 2 (implementado el supuesto; fácil de cambiar)
 
 6. **Folios automáticos**: prefijo por material o etapa + consecutivo por

@@ -47,6 +47,7 @@ defineExpose({ enLinea })
   border-radius: var(--r-2xl);
   box-shadow: var(--shadow);
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* nunca más ancha que el viewport (texto al 200 %) */
   align-content: start; /* con min-height (compact) las filas no se estiran */
   gap: var(--sp-6);
 }

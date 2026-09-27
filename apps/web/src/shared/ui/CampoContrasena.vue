@@ -75,6 +75,7 @@ const describedby = computed(
 <style scoped>
 .campo {
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* la columna no crece al ancho intrínseco del input */
   gap: var(--sp-1);
 }
 .campo__etiqueta {
@@ -86,11 +87,12 @@ const describedby = computed(
   gap: var(--sp-2);
 }
 .campo__control {
-  flex: 1 1 auto;
+  flex: 1 1 0; /* base 0: el input no impone su ancho intrínseco a la fila */
   min-width: 0;
   min-height: var(--tap);
   padding: 0 var(--sp-3);
-  border: 1px solid var(--border);
+  /* --muted, no --border: el borde es el límite del control (3:1 no-texto, sol) */
+  border: 1px solid var(--muted);
   border-radius: var(--r-md);
   background: var(--surface);
   color: var(--text);
