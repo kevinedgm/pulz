@@ -64,3 +64,57 @@ Instala dos skills (`Supabase`, `Postgres Best Practices`) en
 `.agents/skills/`, con symlink hacia `.claude/skills/` para Claude Code. El
 propio instalador mostró su evaluación de riesgo ("Safe risk", 0 alertas de
 Socket) antes de instalar.
+
+## 2026-09-26 · GitHub: repo creado y sincronizado
+
+El dueño creó `github.com/kevinedgm/pulz` y pidió subir los cambios. El repo
+local ya tenía `origin` apuntando ahí (se sincronizó solo tras los commits
+anteriores de esta sesión); se confirmó con `git ls-remote` que coincide con
+`HEAD` y se empujó el resto de los commits sin pedir nada más — no hacía
+falta crear el remoto a mano.
+
+## 2026-09-26 · "Nunca Docker" pasa de ser una solución de Fase 0 a regla permanente del proyecto
+
+El dueño pidió explícitamente reestructurar **todo el plan**, no solo la
+Fase 0, para que Docker/Colima/Podman queden fuera para siempre: todo el
+trabajo de base de datos va contra el proyecto Supabase alojado. Se escribió
+como regla dura en `CLAUDE.md` (nuevo, raíz del repo) en vez de repetirla en
+cada `docs/plan/FASE-N.md`, para que cualquier sesión futura la lea sin tener
+que releer todo el historial de decisiones.
+
+## 2026-09-26 · Migraciones pre-lanzamiento: "desde cero", no capas históricas
+
+El dueño aclaró el criterio para cuando el esquema cambie durante el
+desarrollo (por ejemplo, al corregir los errores que `PULZ_MAESTRO.md` §10.2
+ya anticipa que va a tener `pulz_esquema.sql` al aplicarse a Postgres real):
+como el producto no está lanzado y no hay datos reales que proteger, **lo que
+importa es el estado final correcto del esquema, no el historial de cómo se
+llegó ahí**. En vez de apilar una migración nueva de "fix" arriba de otra con
+el error, se edita/reescribe la migración correspondiente para que el
+conjunto siga siendo, en todo momento, "la implementación desde cero"
+correcta — y se vuelve a aplicar contra el proyecto alojado (rehacer el
+esquema ahí no arriesga nada porque no hay usuarios todavía).
+
+Esto es lo opuesto de la práctica normal en producción (migraciones aditivas
+e inmutables) a propósito: es una decisión explícita para la etapa
+pre-lanzamiento. **Cuando el producto tenga usuarios reales, este régimen
+cambia** — a partir de ahí las migraciones sí se vuelven aditivas, como pide
+cualquier base de datos con datos que no se pueden perder. Regla completa en
+`CLAUDE.md`.
+
+Consecuencia práctica para la Fase 1: no tiene sentido escribir muchas
+migraciones numeradas 0001, 0002, 0003... que documenten cada corrección
+como si fueran commits separados de un historial de producción. Se escribe
+el número mínimo de migraciones que representen el esquema correcto de una
+vez, y se corrigen in situ cuando haga falta.
+
+## 2026-09-26 · Flujo de interfaz obligatorio: kiwi primero, siempre
+
+`PULZ_MAESTRO.md` §13.4 ya establecía que "ninguna pantalla se construye sin
+su ronda de kiwi aprobada", pero el dueño pidió dejarlo explícito y a prueba
+de que se salte por accidente: **cualquier trabajo de interfaz — diseñar,
+prototipar, crear o corregir una pantalla, componente, flujo o mockup —
+empieza invocando la skill `kiwi`**, que estructura (F0–F2) y entrega a
+`lima` (gobernanza) → `coco` (construcción + auditoría) → `mora-docs`
+(documentación). Nunca se empieza directo en `lima` o `coco` para algo nuevo.
+Regla completa, con el diagrama del flujo, en `CLAUDE.md`.
