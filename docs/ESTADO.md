@@ -139,7 +139,9 @@ hacia adelante).
 
 ## Próxima fase
 
-Fase 4 (`docs/PULZ_MAESTRO.md` §16) cuando el dueño dé por cerrada la Fase 3:
-falta que lima registre el estado de las piezas y que mora las documente. El
-plan de la Fase 4 se escribe en `docs/plan/FASE-4.md` y se aprueba antes de
-tocar código (§0.1).
+**Fase 4 · Interfaz base y configuración — plan escrito en
+`docs/plan/FASE-4.md` (2026-09-27), pendiente de aprobación del dueño.**
+Orden propuesto: servidor (bucket `branding` + políticas, pgTAP de
+configuración, PWA mínima) → ronda kiwi `shell/r01` → ronda
+`configuracion/r01` → ronda `arranque/r01` → prueba de punta a punta con una
+empresa nueva. Nada se implementa hasta la aprobación (§0.1).
