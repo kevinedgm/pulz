@@ -79,13 +79,15 @@ adaptación probadas con Playwright); falta la compuerta de lima y mora.
 
 ## Qué falta
 
-1. **Cerrar el ciclo del squad para acceso/r01**: el dueño revisa
-   `design-hub/qa/evidence/acceso-r01/` y las pantallas en el dev server
-   (`.claude/launch.json` → `web`, usuarios de `supabase/seed.sql`); si hay
-   cambios de estructura → `kiwi` r02 (nunca se sobrescribe r01); si hay
-   cambios visuales o de código → `coco`. Si conforme → `lima` evalúa la
-   compuerta Candidate con `coco-declaracion.md` y actualiza el registry →
-   `mora-docs` documenta las piezas en el Hub.
+1. **Cerrar el ciclo del squad para acceso/r01.** `lima` ya evaluó la
+   compuerta Candidate (2026-09-27, `design-hub/lab/acceso/r01/lima-compuerta.md`):
+   **las 14 piezas están en `candidate` 0.2.0** en el registry, con QA por
+   faceta (viewports, teclado, touch emulado, zoom 200 % aproximado,
+   contraste medido) y hallazgos devueltos a coco ya corregidos. **Falta
+   `mora-docs`** (documentar las piezas en el Hub según la tabla de entrega
+   de `lima-compuerta.md`). La compuerta Stable (harden + audit + zoom nativo
+   a mano + aprobación explícita) queda para cuando el dueño pida
+   estabilizar; no antes.
 2. Decidir `docs/DUDAS.md` #11 (que `set-password` devuelva el correo de
    acceso para que la bienvenida deje a la persona dentro). Es un cambio
    pequeño en la Edge Function + `BienvenidaPage.vue`.
@@ -106,7 +108,7 @@ adaptación probadas con Playwright); falta la compuerta de lima y mora.
 | Cloudflare | `apps/web/wrangler.toml` (Pages, `dist/`); la Pages Function se prueba con `pnpm --filter @pulz/web test:portal` (requiere `pnpm build` antes) |
 | Docker / Colima / Podman | desinstalados a propósito, regla permanente |
 | Dev server / Hub | `.claude/launch.json`: `web` (Vite 5173) y `hub` (`python3 -m http.server 4321` → `/design-hub/Components/demo/`); el Hub se reconstruye con `pnpm --filter @pulz/web build:hub` |
-| Playwright | `@playwright/test` 1.63 en la raíz, instalado **sin** descargar navegadores (usa el Chromium 1243 ya en `~/Library/Caches/ms-playwright`). Evidencia: `node design-hub/qa/evidencia-acceso.mjs` con `web` y `hub` corriendo |
+| Playwright | `@playwright/test` 1.63 en la raíz, instalado **sin** descargar navegadores (usa el Chromium 1243 ya en `~/Library/Caches/ms-playwright`). Evidencia: `node design-hub/qa/evidencia-acceso.mjs` y zoom 200 % aprox. `node design-hub/qa/zoom-acceso.mjs`, con `web` y `hub` corriendo |
 | Fruti Squad | `.claude/skills/{kiwi,lima,coco,mora-docs}`, perfil `.claude/skills/lima/profiles/pulz.md` |
 
 ## Regla de seguridad que hay que recordar

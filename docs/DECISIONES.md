@@ -386,6 +386,36 @@ que se instaló con `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`. El script
 oscuro, comprueba sin desborde horizontal, rechazo único, guardias y cierre
 con confirmación, y deja 104 capturas en `design-hub/qa/evidence/acceso-r01/`.
 
+## 2026-09-27 · lima, compuerta Candidate: medir en vez de confiar
+
+La compuerta no se evaluó solo con la declaración de coco: lima **midió**
+dos cosas que la declaración dejaba en "no comprobado" y ambas encontraron
+defectos reales:
+
+- **Contraste** sobre los pares de tokens que las piezas usan de verdad
+  (claro y oscuro): `--pend/--pend-bg` = 3.03:1 en claro (texto del chip
+  "invitado") y `--border/--surface` = 1.31:1 como límite de campo. Las
+  piezas se corrigieron (texto en `--text`, borde en `--muted`); el token
+  ámbar queda como decisión del dueño (`docs/DUDAS.md` #12), porque es un
+  valor de §13.4 y cambiarlo toca a todo el sistema.
+- **Texto al 200 %** (aproximado con `root font-size`, no zoom nativo): el
+  `<input>` imponía su ancho intrínseco (size=20 × fuente doble) a la
+  columna de grid y la tarjeta del portal se salía del viewport a 390; las
+  opciones de una palabra del segmento se recortaban. Corregido con
+  `minmax(0, 1fr)`, base flex 0 y opciones que bajan de fila.
+
+Las 14 piezas pasaron a `candidate` 0.2.0. El registry guarda la
+**procedencia** de cada evidencia, no un ✓ plano: `runtime-verified` solo
+donde un navegador real lo ejecutó (Playwright/pane), `-emulated` para
+touch, `-approx` para zoom, `manual-playbook`/`degraded` para las pasadas
+de impeccable que se aplicaron a mano sin sub-agentes ni detector. Lo que
+sigue pendiente (zoom nativo a mano, forced-colors, harden/audit) es la
+compuerta Stable y solo se corre cuando el dueño pida estabilizar.
+
+`production.path` ya apunta al código real aunque la pieza sea candidate:
+en PULZ coco implementa directo en el stack (CLAUDE.md §3) y el Hub se
+construye desde ese código; no hay promoción aparte.
+
 ## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
 
 El test de "dos transferencias simultáneas del último litro" está escrito
