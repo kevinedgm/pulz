@@ -59,7 +59,19 @@ comprobable en este plan**; **pantallas: pendientes de la ronda de kiwi**.
 
 ## Qué falta
 
-1. **Ronda de `kiwi` r01 escrita, esperando aprobación del dueño**:
+1. **Ronda de `kiwi` r01 APROBADA por el dueño (2026-09-27), junto con la
+   vista solo-admin `equipo_miembros`. Estructura congelada.**
+   **`lima` hecho (2026-09-27)**: 14 entradas `draft` en
+   `design-hub/system/registry.json` (6 componentes: button, text-field,
+   password-field, segmented-choice, status-chip, row-menu · 4 patrones:
+   banner, state-block, task-layer, list-stack · 4 pantallas
+   product-application), todas con contrato (estados, variantes, adaptativo,
+   a11y) atado a `tokens.css`; dependencias verificadas sin huérfanos. Orden
+   de construcción para coco en `design-hub/lab/acceso/r01/orden-coco.md`
+   (base primero: migración `equipo_miembros` + pgTAP; luego shared/ui con
+   demos F3 en el Hub; luego pantallas y guardias; luego pruebas y
+   auditoría). **Siguiente: `coco`**, cuando el dueño lo indique.
+   Detalle de la ronda:
    `design-hub/lab/acceso/r01/` (`brief.md` con 3 user flows, `index.html`
    wireframe F2 de las 4 pantallas × 3 espacios × 13 estados, `hallazgos.md`,
    `declaracion.md`). Verificado: `check_artifact.py` 0/0, 156 combinaciones
