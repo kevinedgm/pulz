@@ -1,0 +1,75 @@
+# PULZ · Design Hub
+
+Referencia operativa del sistema de interfaz de PULZ. Documenta **solo lo que
+existe en el código y pasó una compuerta de lima**; el estado de cada pieza
+sale de [`system/registry.json`](system/registry.json), nunca de esta página.
+
+> Hub en Markdown. La estructura HTML (shell, navegación, inicio) está
+> encargada a kiwi en [`lab/hub/encargo-mora.md`](lab/hub/encargo-mora.md);
+> mientras tanto, estas páginas son el contenido verificado que ese shell
+> mostrará.
+
+## Cómo se usa
+
+- **Ver una pieza funcionando:** `pnpm --filter @pulz/web build:hub` construye
+  [`Components/demo/`](Components/demo/index.html) desde el código real
+  (`apps/web/src/shared/ui/`); se sirve con `python3 -m http.server 4321` en
+  la raíz → `http://localhost:4321/design-hub/Components/demo/#<id>`.
+- **Ver las pantallas reales:** dev server (`.claude/launch.json` → `web`) con
+  los usuarios de `supabase/seed.sql`.
+- **Evidencia:** [`qa/evidence/acceso-r01/`](qa/evidence/acceso-r01/) —
+  104 capturas, 1440/1024/768/390 × claro/oscuro, generadas por
+  `qa/evidencia-acceso.mjs`; zoom 200 % aproximado por `qa/zoom-acceso.mjs`.
+
+## Madurez (registry, 2026-09-27)
+
+| Estado | Significa | Señal en las fichas |
+|---|---|---|
+| draft | en exploración | «Estado: draft» |
+| **candidate** | pasó la compuerta Candidate de lima; el dueño puede pedir cambios o estabilizar | «Estado: candidate 0.2.0» |
+| stable | contrato aprobado explícitamente por el dueño | — (ninguna todavía) |
+
+Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, ronda
+[`lab/acceso/r01`](lab/acceso/r01/).
+
+## Foundations
+
+- [Tokens](Foundations/Tokens.md) — variables reales de `tokens.css`, claro y oscuro, con el contraste medido.
+- [Iconos](Foundations/Icons.md) — los 12 símbolos del sprite y qué no existe.
+
+## Components (sistema, `apps/web/src/shared/ui/`)
+
+| Pieza | id | Archivo |
+|---|---|---|
+| [Botón](Components/button.md) | `button` | `Boton.vue` |
+| [Campo de texto](Components/text-field.md) | `text-field` | `CampoTexto.vue` |
+| [Campo de contraseña](Components/password-field.md) | `password-field` | `CampoContrasena.vue` |
+| [Segmento de opciones](Components/segmented-choice.md) | `segmented-choice` | `SegmentoOpciones.vue` |
+| [Chip de estado](Components/status-chip.md) | `status-chip` | `ChipEstado.vue` |
+| [Menú de fila](Components/row-menu.md) | `row-menu` | `MenuFila.vue` |
+
+## Patterns (sistema)
+
+| Pieza | id | Archivo |
+|---|---|---|
+| [Aviso](Patterns/banner.md) | `banner` | `Aviso.vue` |
+| [Bloque de estado](Patterns/state-block.md) | `state-block` | `BloqueEstado.vue` |
+| [Capa de tarea](Patterns/task-layer.md) | `task-layer` | `CapaTarea.vue` |
+| [Lista apilada](Patterns/list-stack.md) | `list-stack` | `ListaApilada.vue` |
+
+## Screens (product-application, `apps/web/src/modules/`)
+
+| Pantalla | id | Ruta |
+|---|---|---|
+| [Portal e inicio de sesión (+404)](Screens/acceso-portal.md) | `acceso-portal` | `/e/:slug`, `/e/:slug/no-encontrado` |
+| [Cambio obligatorio de contraseña](Screens/acceso-cambio-contrasena.md) | `acceso-cambio-contrasena` | `/e/:slug/cambiar-contrasena` |
+| [Bienvenida por enlace](Screens/acceso-bienvenida.md) | `acceso-bienvenida` | `/e/:slug/bienvenida#token` |
+| [Equipo](Screens/equipo.md) | `equipo` | `/e/:slug/equipo` |
+
+## Lo que NO está hecho (no lo busques aquí como hecho)
+
+- Sesión automática tras la bienvenida — `docs/DUDAS.md` #11.
+- Bloqueo por 5 intentos fallidos — hook fuera del plan, `docs/DUDAS.md` #9.
+- Ámbar (`--pend`) como color de texto en claro — `docs/DUDAS.md` #12.
+- Responsive/{Mobile,Tablet,Desktop} como secciones propias: el
+  comportamiento por rango está en cada ficha (sección «Responsive»).

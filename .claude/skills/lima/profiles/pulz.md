@@ -122,10 +122,11 @@ coco:
   component_doc_standard: # orden de secciones de la página de componente, o VACÍO
 
 mora:
-  doc_standard:        # ruta al estándar de documentación, o VACÍO (usa el interno de mora)
-  doc_shell:           # css/js del Hub cuyas clases reutilizan las páginas
-    # - design-hub/assets/hub-shell.css
-    # - design-hub/assets/hub-navigation.js
-  serve_command:       # cómo servir el Hub, o VACÍO ("python3 -m http.server" por defecto)
-  coverage_script:     # censo de cobertura | AUTO | VACÍO
-  hub_preview:         # cómo la Preview embebe el componente real, o VACÍO (no disponible/no verificada)
+  # Resuelto por mora el 2026-09-27 (ronda acceso/r01). Rutas reales, no ejemplos.
+  doc_standard:        # VACÍO = el mínimo interno de mora (Header → Overview → … → QA/Lifecycle)
+  doc_shell:           # NO EXISTE todavía: el Hub no tiene shell HTML. Las fichas son Markdown
+                       # (contenido de mora); la estructura HTML la define kiwi con el encargo
+                       # design-hub/lab/hub/encargo-mora.md. No se inventa un shell paralelo.
+  serve_command: "python3 -m http.server 4321"   # desde la raíz del repo (.claude/launch.json → hub)
+  coverage_script:     # VACÍO: no hay censo automático; el registry es el censo
+  hub_preview: "design-hub/Components/demo/index.html#<id> — demo construida desde el código real con `pnpm --filter @pulz/web build:hub`; capturas en design-hub/qa/evidence/<ronda>/"

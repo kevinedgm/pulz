@@ -83,11 +83,20 @@ adaptación probadas con Playwright); falta la compuerta de lima y mora.
    compuerta Candidate (2026-09-27, `design-hub/lab/acceso/r01/lima-compuerta.md`):
    **las 14 piezas están en `candidate` 0.2.0** en el registry, con QA por
    faceta (viewports, teclado, touch emulado, zoom 200 % aproximado,
-   contraste medido) y hallazgos devueltos a coco ya corregidos. **Falta
-   `mora-docs`** (documentar las piezas en el Hub según la tabla de entrega
-   de `lima-compuerta.md`). La compuerta Stable (harden + audit + zoom nativo
-   a mano + aprobación explícita) queda para cuando el dueño pida
-   estabilizar; no antes.
+   contraste medido) y hallazgos devueltos a coco ya corregidos.
+   **`mora-docs` hecho (2026-09-27)**: Hub en Markdown —
+   `design-hub/README.md` (inicio), `Foundations/{Tokens,Icons}.md`, 10
+   fichas en `Components/` y `Patterns/`, 4 en `Screens/`, todo contrastado
+   con el código y el registry; declaración en
+   `design-hub/lab/acceso/r01/mora-declaracion.md`. El Hub **no tiene shell
+   HTML**: mora dejó el encargo de estructura para kiwi en
+   `design-hub/lab/hub/encargo-mora.md` (ronda `lab/hub/r01`, cuando el
+   dueño la pida). Tres revisiones pequeñas para lima (texto del contrato de
+   `row-menu`, `registry.documentation` → ficha, taxonomía `Screens/`). La
+   compuerta Stable (harden + audit + zoom nativo a mano + aprobación
+   explícita) queda para cuando el dueño pida estabilizar; no antes.
+   **Con esto la Fase 3 queda cerrada salvo decisiones pendientes** (DUDAS
+   #11, #12); sigue `docs/plan/FASE-4.md`, pendiente de aprobación.
 2. Decidir `docs/DUDAS.md` #11 (que `set-password` devuelva el correo de
    acceso para que la bienvenida deje a la persona dentro). Es un cambio
    pequeño en la Edge Function + `BienvenidaPage.vue`.
