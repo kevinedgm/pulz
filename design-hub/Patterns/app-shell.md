@@ -2,7 +2,7 @@
 
 | Campo | Valor (fuente) |
 |---|---|
-| Tipo · Estado · Versión | pattern · **candidate 0.2.0** · owner lima (registry) |
+| Tipo · Estado · Versión | pattern · **candidate 0.3.0** · owner lima (registry) |
 | Ronda de origen | `lab/shell/r01` |
 | Código | `apps/web/src/app/AppShell.vue` (+ `CapaMas.vue`, `CapaCuenta.vue`, `destinos.ts`, `tema.ts`, `App.vue`) |
 | Demo real | las pantallas reales (dev server) — el Hub muestra sus piezas: `#page-header`, `#side-nav`, `#bottom-nav`, `#fab` |
@@ -60,6 +60,16 @@ por `aria-current="page"` (borde + negrita); targets 44/48/56 px; capas con
 `meta` de ruta: `shell: true`, `destino`, `titulo`, `fab?: { etiqueta, icono? }`.
 `destinosVisibles(esAdmin)`, `itemsNav(slug, destinos)`, `destinoDeRuta(nombre)`.
 `useTema()` → `{ tema, aplicarTema }`; `aplicarTemaGuardado()`.
+
+## Cola offline y FAB con acción (fermentacion/r01)
+
+- El shell llama `useCola().usarEmpresa(org)` al cambiar la membresía y
+  muestra el `banner` variante `cola` («N pendientes · M fallaron» +
+  Reintentar) cuando hay capturas en la cola; sin conexión, el aviso de
+  conexión incluye el conteo.
+- El FAB que declara la ruta (`meta.fab`) ejecuta la acción que la página
+  fija con `useFab(() => …)` (`app/fab.ts`); sin acción, el FAB queda
+  deshabilitado. Fermentación lo usa para «Medir» la primera tina por medir.
 
 ## QA y ciclo de vida
 

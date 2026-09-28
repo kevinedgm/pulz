@@ -124,6 +124,18 @@
    eso es un movimiento de ajuste ligado a la original (propuesta) o algo
    más.
 
+## De la Fase 5 (implementado el supuesto; fácil de cambiar)
+
+13. **Recordatorio diario de medición** (`measurement_reminder_hour`): no hay
+    notificaciones push en esta fase (necesitaría un servidor de push o un
+    cron con tokens por dispositivo). Inicio/hoy usa la hora solo para
+    ordenar «toca medir». ¿Quiere el dueño push (costo: servicio externo y
+    permiso del teléfono) o basta con el recordatorio al abrir la app?
+14. **Fotos como evidencia**: solo en medición y corte, opcionales, una por
+    captura, reducidas a 1600 px, tipo «Foto» del catálogo `tipo_adjunto`.
+    ¿Hacen falta en otras operaciones (recepción de maguey, compra de
+    granel ya tiene «Remisión o factura» por Storage)?
+
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
 Las 9 preguntas de §18 (escala de actividad/dulzor/acidez, precio del plan,

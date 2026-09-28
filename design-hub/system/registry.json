@@ -353,7 +353,7 @@
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/ChipEstado.vue"
     },
-    "version": "0.2.0",
+    "version": "0.3.0",
     "replacedBy": null,
     "updated": "2026-09-27",
     "evidence": "../qa/evidence/acceso-r01/",
@@ -369,6 +369,14 @@
         "findings": [
           "--pend sobre --pend-bg 3.03:1 en claro → texto en --text, ámbar en borde y punto; token a decidir en DUDAS #12 (lima→coco, mitigado)"
         ]
+      },
+      "extension-fermentacion": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/lima-compuerta.md"
+        ],
+        "findings": []
       }
     },
     "demo": "../Components/demo/index.html#status-chip"
@@ -488,7 +496,7 @@
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/Aviso.vue"
     },
-    "version": "0.2.0",
+    "version": "0.3.0",
     "replacedBy": null,
     "updated": "2026-09-27",
     "evidence": "../qa/evidence/acceso-r01/",
@@ -500,6 +508,14 @@
           "../lab/acceso/r01/coco-declaracion.md",
           "../lab/acceso/r01/lima-compuerta.md",
           "../qa/evidence/acceso-r01/"
+        ],
+        "findings": []
+      },
+      "extension-fermentacion": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/lima-compuerta.md"
         ],
         "findings": []
       }
@@ -1075,7 +1091,7 @@
       "framework": "vue-ts",
       "path": "apps/web/src/app/AppShell.vue"
     },
-    "version": "0.2.0",
+    "version": "0.3.0",
     "replacedBy": null,
     "updated": "2026-09-27",
     "demo": null,
@@ -1101,6 +1117,14 @@
           "layout por meta.shell, no rutas anidadas (excepción declarada)",
           "Cuenta como drawer de task-layer, no popover (excepción de lima)"
         ]
+      },
+      "extension-fermentacion": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/lima-compuerta.md"
+        ],
+        "findings": []
       }
     }
   },
@@ -2147,11 +2171,11 @@
   },
   "big-number-field": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/fermentacion/r01",
-    "documentation": null,
-    "demo": null,
+    "documentation": "../Components/big-number-field.md",
+    "demo": "../Components/demo/index.html#big-number-field",
     "source": "../../apps/web/src/shared/ui/CampoGrande.vue",
     "behavior": "../../apps/web/src/shared/ui/CampoGrande.vue",
     "dependencies": [
@@ -2171,32 +2195,58 @@
       "rules": "Valor number|null; inputmode decimal|numeric; sin spinners; valida al salir (min/max → error). Para capturar UN número por pantalla con una mano (§13.2 #4). Hereda number-field."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente: zoom-*.mjs de la ronda"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/CampoGrande.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/fermentacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/coco-declaracion.md",
+          "../lab/fermentacion/r01/lima-compuerta.md",
+          "../qa/evidence/fermentacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "botón Medir duplicado en compact (corregido)"
+        ]
+      }
+    }
   },
   "scale-choice": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/fermentacion/r01",
-    "documentation": null,
-    "demo": null,
+    "documentation": "../Components/scale-choice.md",
+    "demo": "../Components/demo/index.html#scale-choice",
     "source": "../../apps/web/src/shared/ui/EscalaOpciones.vue",
     "behavior": "../../apps/web/src/shared/ui/EscalaOpciones.vue",
     "dependencies": [],
@@ -2214,32 +2264,58 @@
       "rules": "modelValue number|null. Flechas mueven la selección. Selección por forma (borde 3px + fondo), nunca solo color. Escala 1–6 de actividad/dulzor/acidez (§18 #1, CHECK del esquema)."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente: zoom-*.mjs de la ronda"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/EscalaOpciones.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/fermentacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/coco-declaracion.md",
+          "../lab/fermentacion/r01/lima-compuerta.md",
+          "../qa/evidence/fermentacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "botón Medir duplicado en compact (corregido)"
+        ]
+      }
+    }
   },
   "datetime-field": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/fermentacion/r01",
-    "documentation": null,
-    "demo": null,
+    "documentation": "../Components/datetime-field.md",
+    "demo": "../Components/demo/index.html#datetime-field",
     "source": "../../apps/web/src/shared/ui/CampoCuando.vue",
     "behavior": "../../apps/web/src/shared/ui/CampoCuando.vue",
     "dependencies": [
@@ -2259,32 +2335,58 @@
       "rules": "modelValue string|null (ISO local; null = ahora al guardar). Nunca futuro: error al salir. Toda captura del proceso lo lleva (§3 operación: cuándo pasó ≠ cuándo se registró)."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente: zoom-*.mjs de la ronda"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/CampoCuando.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/fermentacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/coco-declaracion.md",
+          "../lab/fermentacion/r01/lima-compuerta.md",
+          "../qa/evidence/fermentacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "botón Medir duplicado en compact (corregido)"
+        ]
+      }
+    }
   },
   "step-flow": {
     "kind": "pattern",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/fermentacion/r01",
-    "documentation": null,
-    "demo": null,
+    "documentation": "../Patterns/step-flow.md",
+    "demo": "../Components/demo/index.html#step-flow",
     "source": "../../apps/web/src/shared/ui/FlujoPasos.vue",
     "behavior": "../../apps/web/src/shared/ui/FlujoPasos.vue",
     "dependencies": [
@@ -2305,32 +2407,58 @@
       "rules": "Una sola primaria. Atrás conserva valores (el consumidor guarda el estado). El foco va al primer control del paso al cambiar. Un concepto por paso."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente: zoom-*.mjs de la ronda"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/FlujoPasos.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/fermentacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/coco-declaracion.md",
+          "../lab/fermentacion/r01/lima-compuerta.md",
+          "../qa/evidence/fermentacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "botón Medir duplicado en compact (corregido)"
+        ]
+      }
+    }
   },
   "soft-warning-note": {
     "kind": "pattern",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/fermentacion/r01",
-    "documentation": null,
-    "demo": null,
+    "documentation": "../Patterns/soft-warning-note.md",
+    "demo": "../Components/demo/index.html#soft-warning-note",
     "source": "../../apps/web/src/shared/ui/AvisoNota.vue",
     "behavior": "../../apps/web/src/shared/ui/AvisoNota.vue",
     "dependencies": [
@@ -2349,31 +2477,57 @@
       "rules": "Textos por código en AVISOS (errores.ts). Se conoce ANTES de enviar cuando la interfaz tiene los rangos; si el servidor responde REQUIERE_NOTA:<código>, la misma pieza aparece con ese código (rama Corregir de la cola). La nota viaja como p_nota."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente: zoom-*.mjs de la ronda"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/AvisoNota.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/fermentacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/coco-declaracion.md",
+          "../lab/fermentacion/r01/lima-compuerta.md",
+          "../qa/evidence/fermentacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "botón Medir duplicado en compact (corregido)"
+        ]
+      }
+    }
   },
   "fermentacion": {
     "kind": "product-application",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/fermentacion/r01",
-    "documentation": null,
+    "documentation": "../Screens/fermentacion.md",
     "demo": null,
     "source": "../../apps/web/src/modules/fermentacion/pages/FermentacionPage.vue",
     "behavior": "../../apps/web/src/modules/fermentacion/pages/FermentacionPage.vue",
@@ -2411,23 +2565,64 @@
       "rules": "Toda medición entra por la cola (una sola ruta de escritura) con idempotency_key y occurred_at; sin señal la lista viene de la instantánea. Día del ciclo y «hoy» se calculan en el navegador. Operador: mide y ve; no anula, declara, cierra ni formula (rpc_guard 0017/0016). Cerrar ciclo: diálogo destructivo con Cancelar como primaria."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente: zoom-*.mjs de la ronda"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/modules/fermentacion/pages/FermentacionPage.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/fermentacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/fermentacion/r01/coco-declaracion.md",
+          "../lab/fermentacion/r01/lima-compuerta.md",
+          "../qa/evidence/fermentacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "botón Medir duplicado en compact (corregido)"
+        ]
+      }
+    },
+    "files": [
+      "../../apps/web/src/modules/fermentacion/api.ts",
+      "../../apps/web/src/modules/fermentacion/routes.ts",
+      "../../apps/web/src/modules/fermentacion/pages/FermentacionPage.vue",
+      "../../apps/web/src/modules/fermentacion/pages/UsoTinaPage.vue",
+      "../../apps/web/src/modules/fermentacion/pages/MedirPage.vue",
+      "../../apps/web/src/modules/fermentacion/pages/FormularPage.vue",
+      "../../apps/web/src/modules/fermentacion/components/FilaUso.vue",
+      "../../apps/web/src/modules/fermentacion/components/ConfirmarCiclo.vue",
+      "../../apps/web/src/modules/fermentacion/components/TinaFermentabaCapa.vue",
+      "../../apps/web/src/shared/offline/cola.ts",
+      "../../apps/web/src/shared/offline/useCola.ts",
+      "../../apps/web/src/shared/offline/instantanea.ts",
+      "../../apps/web/src/shared/offline/fotos.ts"
+    ]
   }
 }

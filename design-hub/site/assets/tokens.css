@@ -1,38 +1,90 @@
 /* PULZ · tokens de identidad (rescatados del kit). Semilla de apps/web/src/shared/ui/tokens.css */
-:root{
-  --ink-900:#173F87; --ink-700:#275AA5; --ink-100:#DDE7F5;
-  --clay-300:#F2CFC2; --clay-100:#FAEAE4;
-  --canvas:#F8F6F2; --surface:#FFFFFF;
-  --text:#18243A; --muted:#687184; --border:#DDE1E7;
-  --ok:#287A55; --pend:#C17A18; --late:#B93A2E; --info:#2B6CB0;
-  --ok-bg:#E4F2EA; --pend-bg:#FBEEDB; --late-bg:#FBE4E1; --info-bg:#E1ECF8;
-  --shadow:0 1px 2px rgba(23,63,135,.08), 0 8px 24px rgba(23,63,135,.08);
-  --font:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+:root {
+  --ink-900: #173f87;
+  --ink-700: #275aa5;
+  --ink-100: #dde7f5;
+  --clay-300: #f2cfc2;
+  --clay-100: #faeae4;
+  --canvas: #f8f6f2;
+  --surface: #ffffff;
+  --text: #18243a;
+  --muted: #687184;
+  --border: #dde1e7;
+  --ok: #287a55;
+  --pend: #c17a18;
+  --late: #b93a2e;
+  --info: #2b6cb0;
+  --ok-bg: #e4f2ea;
+  --pend-bg: #fbeedb;
+  --late-bg: #fbe4e1;
+  --info-bg: #e1ecf8;
+  --shadow: 0 1px 2px rgba(23, 63, 135, 0.08), 0 8px 24px rgba(23, 63, 135, 0.08);
+  --font:
+    "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
   /* geometría y espacio (derivados de los componentes del sistema) */
-  --r-sm:8px; --r-md:10px; --r-lg:12px; --r-xl:14px; --r-2xl:16px; --r-pill:999px;
-  --tap:44px;
-  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px;
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 12px;
+  --r-xl: 14px;
+  --r-2xl: 16px;
+  --r-pill: 999px;
+  --tap: 44px;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
   /* valores fijos de marca (no cambian con el tema) */
-  --brand-ink:#173F87; --brand-clay:#F2CFC2; --brand-ink-hover:#12336D; --brand-clay-hover:#E9BBA9;
+  --brand-ink: #173f87;
+  --brand-clay: #f2cfc2;
+  --brand-ink-hover: #12336d;
+  --brand-clay-hover: #e9bba9;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ink-900:#7FA3E0; --ink-700:#A4BEEB; --ink-100:#1E2B44;
-    --clay-300:#E0A98F; --clay-100:#3A2A25;
-    --canvas:#0F1521; --surface:#171F2E;
-    --text:#EEF1F7; --muted:#9AA5BB; --border:#2A3549;
-    --ok-bg:#163526; --pend-bg:#3A2A10; --late-bg:#3B1B18; --info-bg:#18304B;
-    --ok:#6FC79A; --pend:#E9B356; --late:#F0837A; --info:#7FB2F0;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink-900: #7fa3e0;
+    --ink-700: #a4beeb;
+    --ink-100: #1e2b44;
+    --clay-300: #e0a98f;
+    --clay-100: #3a2a25;
+    --canvas: #0f1521;
+    --surface: #171f2e;
+    --text: #eef1f7;
+    --muted: #9aa5bb;
+    --border: #2a3549;
+    --ok-bg: #163526;
+    --pend-bg: #3a2a10;
+    --late-bg: #3b1b18;
+    --info-bg: #18304b;
+    --ok: #6fc79a;
+    --pend: #e9b356;
+    --late: #f0837a;
+    --info: #7fb2f0;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 }
-:root[data-theme="dark"]{
-  --ink-900:#7FA3E0; --ink-700:#A4BEEB; --ink-100:#1E2B44;
-  --clay-300:#E0A98F; --clay-100:#3A2A25;
-  --canvas:#0F1521; --surface:#171F2E;
-  --text:#EEF1F7; --muted:#9AA5BB; --border:#2A3549;
-  --ok-bg:#163526; --pend-bg:#3A2A10; --late-bg:#3B1B18; --info-bg:#18304B;
-  --ok:#6FC79A; --pend:#E9B356; --late:#F0837A; --info:#7FB2F0;
-  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
+:root[data-theme="dark"] {
+  --ink-900: #7fa3e0;
+  --ink-700: #a4beeb;
+  --ink-100: #1e2b44;
+  --clay-300: #e0a98f;
+  --clay-100: #3a2a25;
+  --canvas: #0f1521;
+  --surface: #171f2e;
+  --text: #eef1f7;
+  --muted: #9aa5bb;
+  --border: #2a3549;
+  --ok-bg: #163526;
+  --pend-bg: #3a2a10;
+  --late-bg: #3b1b18;
+  --info-bg: #18304b;
+  --ok: #6fc79a;
+  --pend: #e9b356;
+  --late: #f0837a;
+  --info: #7fb2f0;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
 }
-

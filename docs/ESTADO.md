@@ -18,7 +18,14 @@ por el servidor (`0026_vistas_proceso.sql`, `0027_evidencias.sql`, pgTAP
 (fermentación → destilación → granel → maguey-horneado → inicio-hoy).**
 Servidor **hecho** (2026-09-27): `0026` (5 vistas) y `0027` (bucket
 `evidencias` + insert de `attachments`), pgTAP `proceso.test.sql` 57/57,
-configuración 37/37, advisors 0 errores. Sigue la cola offline.
+configuración 37/37, advisors 0 errores. **Cola offline hecha**
+(`shared/offline/`, Vitest). **Ronda fermentacion/r01 hecha** (ciclo
+completo del squad): usos de tinas, detalle, medición por pasos en dos
+modos con aviso de Brix, formulación, tina que ya fermentaba; 5 piezas
+nuevas del sistema + 3 extensiones; 35 piezas `candidate`; Vitest 90/90;
+Playwright 8/8 (61 capturas) y **e2e offline de aceptación en verde**
+(3 mediciones en modo avión llegan una sola vez y en orden). **Sigue:**
+ronda destilacion/r01 (corridas y cortes; los cortes entran a la cola).
 
 **Fase 4 cerrada el 2026-09-27**: servidor, shell, configuración, primer
 arranque, prueba e2e con empresa nueva y Design Hub con sitio HTML propio,

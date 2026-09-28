@@ -4,8 +4,13 @@ import sprite from "../src/shared/ui/iconos.svg?raw"
 import {
   Aviso,
   BloqueEstado,
+  AvisoNota,
   BloqueMarca,
   Boton,
+  CampoCuando,
+  CampoGrande,
+  EscalaOpciones,
+  FlujoPasos,
   BotonFlotante,
   CabeceraPagina,
   NavInferior,
@@ -45,6 +50,11 @@ const PIEZAS = [
   { id: "color-field", nombre: "Campo de color" },
   { id: "file-picker", nombre: "Selector de archivo" },
   { id: "brand-block", nombre: "Bloque de marca" },
+  { id: "big-number-field", nombre: "Campo grande" },
+  { id: "scale-choice", nombre: "Escala de opciones" },
+  { id: "datetime-field", nombre: "¿Cuándo pasó?" },
+  { id: "step-flow", nombre: "Flujo por pasos" },
+  { id: "soft-warning-note", nombre: "Aviso con nota" },
 ] as const
 type PiezaId = (typeof PIEZAS)[number]["id"]
 
@@ -103,6 +113,13 @@ const puntas = ref(false)
 const color = ref("#7A3E1D")
 const logoPrevia = ref<string | null>(null)
 const previaDe = (f: File) => (logoPrevia.value = URL.createObjectURL(f))
+// Fermentación (ronda fermentacion/r01)
+const temperatura = ref<number | null>(27.5)
+const brixDemo = ref<number | null>(19)
+const actividad = ref<number | null>(4)
+const cuando = ref<string | null>(null)
+const pasoDemo = ref(1)
+const notaDemo = ref("")
 const miembros = [
   { n: "Benito Cruz", u: null, rol: "admin", est: "on" as const, txt: "activo" },
   { n: "Aurelia Santiago", u: "aurelia", rol: "productor", est: "on" as const, txt: "activo" },
@@ -567,10 +584,137 @@ const miembros = [
         La misma pieza en el portal (antes de entrar) y en la vista previa de Configuración.
       </p>
     </section>
+    <section
+      v-if="visibles.some((p) => p.id === 'big-number-field')"
+      id="big-number-field"
+      class="pieza"
+    >
+      <h2>Campo grande <code>big-number-field</code></h2>
+      <div class="col col--angosta">
+        <CampoGrande
+          v-model="temperatura"
+          etiqueta="Temperatura"
+          unidad="°C"
+          rango="entre 0 y 100"
+          placeholder="27.5"
+        />
+        <CampoGrande :model-value="300" etiqueta="Brix" unidad="°Bx" error="Entre 0 y 40." />
+      </div>
+      <p class="nota">
+        Un número por pantalla, con una mano (§13.2 #4). Teclado decimal del teléfono.
+      </p>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'scale-choice')" id="scale-choice" class="pieza">
+      <h2>Escala de opciones <code>scale-choice</code></h2>
+      <div class="col col--angosta">
+        <EscalaOpciones
+          v-model="actividad"
+          etiqueta="Actividad"
+          :etiquetas="['quieta', 'apenas', 'poca', 'media', 'mucha', 'muy activa']"
+        />
+        <EscalaOpciones
+          :model-value="null"
+          etiqueta="Dulzor (opcional)"
+          :etiquetas="['nada', 'poco', 'algo', 'medio', 'dulce', 'muy dulce']"
+        />
+      </div>
+      <p class="nota">
+        Escala 1–6 con etiqueta viva; el tope vive en el CHECK del esquema (§18 #1).
+      </p>
+    </section>
+
+    <section
+      v-if="visibles.some((p) => p.id === 'datetime-field')"
+      id="datetime-field"
+      class="pieza"
+    >
+      <h2>¿Cuándo pasó? <code>datetime-field</code></h2>
+      <div class="col col--angosta">
+        <CampoCuando v-model="cuando" />
+        <CampoCuando :model-value="null" disabled />
+      </div>
+      <p class="nota">Por defecto «ahora»; «cambiar» abre fecha y hora; nunca futuro.</p>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'step-flow')" id="step-flow" class="pieza">
+      <h2>Flujo por pasos <code>step-flow</code></h2>
+      <div class="demo-flujo">
+        <FlujoPasos
+          :paso="pasoDemo"
+          :total="3"
+          :etiqueta-siguiente="pasoDemo === 3 ? 'Guardar medición' : 'Siguiente'"
+          @siguiente="pasoDemo = Math.min(3, pasoDemo + 1)"
+          @atras="pasoDemo = Math.max(1, pasoDemo - 1)"
+          @cancelar="pasoDemo = 1"
+        >
+          <template #cabecera>
+            <h3 style="margin: 0">Tina 2</h3>
+            <span>día <b>3</b></span>
+          </template>
+          <CampoGrande
+            v-if="pasoDemo === 1"
+            v-model="temperatura"
+            etiqueta="Temperatura"
+            unidad="°C"
+            rango="entre 0 y 100"
+          />
+          <CampoGrande
+            v-else-if="pasoDemo === 2"
+            v-model="brixDemo"
+            etiqueta="Brix"
+            unidad="°Bx"
+            rango="entre 0 y 40"
+          />
+          <EscalaOpciones
+            v-else
+            v-model="actividad"
+            etiqueta="Actividad"
+            :etiquetas="['quieta', 'apenas', 'poca', 'media', 'mucha', 'muy activa']"
+          />
+        </FlujoPasos>
+      </div>
+      <p class="nota">
+        Un concepto por paso; la barra baja a la zona del pulgar en compact (en este marco se ve
+        bajo el contenido).
+      </p>
+    </section>
+
+    <section
+      v-if="visibles.some((p) => p.id === 'soft-warning-note')"
+      id="soft-warning-note"
+      class="pieza"
+    >
+      <h2>Aviso con nota <code>soft-warning-note</code></h2>
+      <div class="col col--angosta">
+        <AvisoNota
+          v-model="notaDemo"
+          codigo="brix_fuera_rango"
+          detalle="Rango habitual: 12–14. Se guarda igual; escribe por qué."
+        />
+        <AvisoNota v-model="notaDemo" codigo="mezcla_clases_2a" />
+      </div>
+      <p class="nota">
+        El aviso blando no bloquea (§2.1): con nota, la misma captura pasa. Misma pieza para
+        «Corregir» un fallo de la cola.
+      </p>
+    </section>
   </main>
 </template>
 
 <style scoped>
+.col--angosta {
+  max-width: 420px;
+}
+.demo-flujo {
+  border: 1px dashed var(--border);
+  border-radius: var(--r-lg);
+}
+.demo-flujo :deep(.flujo__barra) {
+  position: static;
+  padding: 0;
+  border: 0;
+}
 .demo-lateral {
   display: flex;
   gap: var(--sp-4);

@@ -113,6 +113,26 @@ coco:
     NO reales (no diseñar como reales): nombre/usuario en la pantalla de bienvenida antes de
       canjear el token; correo real del titular en la lista de equipo; "último acceso";
       foto de perfil; contador de intentos; borrar persona (nada se borra, §0.3).
+    (fermentacion/r01, 2026-09-27; fuente: 0026, 0017, 0016, 0015, shared/offline)
+    UsoTina = fila de tinas_en_uso: cycle_id, tina_id, tina, capacidad_l?, capacity_policy, lot_id, folio,
+      status(fermentando|lista|en_vaciado), formulation_id?, formulacion?, started_at, started_by?, litros,
+      mediciones, ultima_medicion_at?, ultima_medicion_dia?, ultima_actividad?, ultima_temperatura?, ultimo_brix?
+    Medicion = fila de mediciones_del_ciclo: measurement_id, day_no, mode, activity?, notes?, occurred_at,
+      recorded_at, recorded_by?, voided_at?, void_reason?, temperatura?, brix?, temperatura_superficie?,
+      temperatura_fondo?, brix_superficie?, brix_fondo?, dulzor?, acidez?, lecturas
+    NuevaMedicion = cycle_id, dia, modo, actividad?, lecturas[{variable, zona, numero 1..3, valor}], nota?,
+      occurred_at?(null = ahora), foto? → registrar_medicion (arreglos paralelos) SIEMPRE por la cola
+    Formulacion = molino?, cocido[{lot_id, kg}], agua_l, insumos[{supply_id, cantidad}], tinas[{tina_id, litros,
+      folio?}], metodo?, nota?, occurred_at? → registrar_formulacion (señal)
+    TinaFermentaba = tina_id, litros, occurred_at? → registrar_entrada('fermentado') (señal)
+    Ajustes (parte): measurement_mode, fermentation_expected_days, brix_warn_min/max (viajan en la instantánea)
+    ElementoCola = id(=idempotency_key), org, rpc, params, resumen, occurred_at, estado(pendiente|enviando|fallo),
+      error?, errorCodigo?, requiereNota?, resultado?, foto?
+    Reglas de presentación: día del ciclo = días naturales desde started_at + 1 (zona del navegador);
+      «toca medir hoy» = fermentando sin medición válida con fecha local de hoy; el promedio de lecturas
+      nunca se guarda; aviso de Brix con los rangos de la empresa ANTES de enviar; operador no ve
+      declarar lista / cerrar / formular.
+    NO reales: curva de Brix; recordatorio push; edición de una medición (se anula y se captura otra).
   # Scripts de auditoría del proyecto. Si no los tienes, deja VACÍO (coco audita a
   # mano y lo marca) o pon AUTO para autodetectar.
   governance_scripts:

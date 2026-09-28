@@ -2,11 +2,11 @@
 
 | Campo | Valor (fuente) |
 |---|---|
-| Tipo · Estado · Versión | component · **candidate 0.2.0** · owner lima (registry) |
-| Ronda de origen | `lab/acceso/r01` |
+| Tipo · Estado · Versión | component · **candidate 0.3.0** · owner lima (registry) |
+| Ronda de origen | `lab/acceso/r01` · extendido en `lab/fermentacion/r01` |
 | Código | `apps/web/src/shared/ui/ChipEstado.vue` |
 | Demo real | `Components/demo/index.html#status-chip` |
-| Pruebas | `ui.test.ts` (1 caso: texto + variante de forma) |
+| Pruebas | `ui.test.ts` (1 caso: texto + variante de forma) · `fermentacion-ui.test.ts` (pending/failed) |
 | Evidencia | `qa/evidence/acceso-r01/equipo-*` |
 
 ## Para qué
@@ -17,7 +17,10 @@ solo refuerza. Regla de campo bajo el sol: nunca color solo.
 ## Uso
 
 Usos aprobados: estado de miembro — `on` = activo, `draft` = invitado, `off`
-= suspendido; `partial` reservado (mitad) para estados parciales.
+= suspendido; `partial` = fermentando (estado parcial); `on` = tina lista;
+`draft` = en vaciado. Cola offline (fermentacion/r01): `pending` = captura
+pendiente de enviar, `failed` = la captura falló (es futuro pendiente, no
+pasado: no se tacha).
 
 ## Anatomía
 
@@ -31,6 +34,8 @@ Usos aprobados: estado de miembro — `on` = activo, `draft` = invitado, `off`
 | `draft` | contorno **discontinuo** | `--text` | borde y punto `--pend` sobre `--pend-bg` |
 | `off` | contorno, texto **tachado** | `--muted` | `--surface` |
 | `partial` | medio relleno | `--info` | `--info` sobre `--info-bg` (4.5 / 6.1) |
+| `pending` | contorno **discontinuo** | `--text` | borde y punto `--pend` sobre `--pend-bg` |
+| `failed` | relleno, borde **doble** 3 px | `--late` | `--late` sobre `--surface` |
 
 `draft` lleva el texto en `--text` porque `--pend` sobre `--pend-bg` da 3.0:1
 en claro (compuerta de lima; token pendiente en `docs/DUDAS.md` #12).
@@ -42,7 +47,7 @@ Significado en el texto; forma distinta por variante; sin interacción.
 ## API real
 
 ```ts
-props: { variante?: "on" | "draft" | "off" | "partial" }   // on
+props: { variante?: "on" | "draft" | "off" | "partial" | "pending" | "failed" }   // on
 slots: default (el texto del estado)
 ```
 

@@ -2,12 +2,12 @@
 
 | Campo | Valor (fuente) |
 |---|---|
-| Tipo · Estado · Versión | pattern · **candidate 0.2.0** · owner lima (registry) |
-| Ronda de origen | `lab/acceso/r01` |
+| Tipo · Estado · Versión | pattern · **candidate 0.3.0** · owner lima (registry) |
+| Ronda de origen | `lab/acceso/r01` · extendido en `lab/fermentacion/r01` |
 | Código | `apps/web/src/shared/ui/Aviso.vue` |
 | Demo real | `Components/demo/index.html#banner` |
-| Pruebas | `ui.test.ts` (1 caso: `role=status` con título) |
-| Evidencia | solo en el Hub (la semilla no tiene empresa vencida ni se simuló offline) |
+| Pruebas | `ui.test.ts` (1 caso: `role=status` con título) · `fermentacion-ui.test.ts` (variante cola con acción) |
+| Evidencia | `qa/evidence/fase5-offline/1-sin-conexion.png`, `3-tres-pendientes.png` (offline y cola reales); solo lectura solo en el Hub |
 
 ## Para qué
 
@@ -17,7 +17,12 @@ cambia lo que la persona puede hacer: **sin conexión** o **solo lectura**
 
 ## Uso
 
-- Un solo aviso a la vez: sin conexión gana a solo lectura.
+- Un solo aviso a la vez: **sin conexión > cola > solo lectura**. Sin
+  conexión y con capturas en cola, el aviso de conexión ya dice cuántas
+  esperan.
+- Variante `cola` (fermentacion/r01): «N capturas pendientes de enviar · M
+  fallaron.» con la acción «Reintentar» en el slot `accion` — la única
+  excepción a «sin botón», porque la persona puede hacer algo.
 - Lo usan las pantallas de acceso (`PantallaAcceso`), Inicio y Equipo.
 - No es para errores de una acción (eso es `state-block` o el error bajo el
   campo).

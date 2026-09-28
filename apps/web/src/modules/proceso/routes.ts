@@ -3,9 +3,7 @@ import { DESTINOS } from "../../app/destinos"
 
 // Destinos de proceso (§13.1) como páginas vacías "próximamente" hasta la
 // Fase 5, dentro del shell. Configuración vive en modules/configuracion.
-export const rutasProceso: RouteRecordRaw[] = DESTINOS.filter(
-  (d) => d.id !== "inicio" && d.id !== "configuracion",
-).map((d) => ({
+export const rutasProceso: RouteRecordRaw[] = DESTINOS.filter((d) => d.proximamente).map((d) => ({
   path: `/e/:slug/${d.id}`,
   name: d.id,
   component: () => import("./pages/ProximamentePage.vue"),

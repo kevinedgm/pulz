@@ -42,7 +42,6 @@ export const DESTINOS: Destino[] = [
     titulo: "Fermentación",
     icono: "i-tina",
     fijoEnCompact: true,
-    proximamente: "ver las tinas en uso y medirlas",
   },
   {
     id: "destilacion",

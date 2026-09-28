@@ -623,3 +623,35 @@ Regla completa, con el diagrama del flujo, en `CLAUDE.md`.
   trigger `attachments_check_kind` falla antes que la RLS porque la RLS ya
   le esconde el catálogo de A. El resultado es el mismo (no puede); la
   prueba lo documenta en vez de forzar el mensaje de RLS.
+
+
+## 2026-09-27 · Fermentación (ronda fermentacion/r01): lo que se decidió construyendo
+
+- **Toda medición entra por la cola**, con señal o sin ella (una sola ruta de
+  escritura): la pantalla dice «enviada» o «pendiente de enviar» según lo que
+  quedó en IndexedDB tras intentar enviar. Evita dos caminos que derivan.
+- **La lista muestra la verdad del servidor** (o su instantánea) más el chip
+  «pendiente»: una tina con captura en cola sigue en «toca medir hoy» hasta
+  que la medición llega. No se finge que el servidor ya la tiene.
+- **El aviso de Brix se conoce antes de enviar**: los rangos viajan en la
+  instantánea y «Revisar» pide la nota ahí; si el servidor aun así responde
+  `REQUIERE_NOTA`, la fila queda en fallo con «Corregir» (misma clave).
+- **Día del ciclo y «hoy» en el navegador** (0026 entrega fechas): `día =
+  días naturales desde started_at + 1`, corregible en la cabecera.
+- **Modo completo = un concepto por paso** (5 pasos + revisar); el promedio
+  se calcula en vivo y nunca se guarda.
+- **FAB con acción de la página** (`app/fab.ts`): el shell pinta el FAB de
+  la ruta y la página fija qué hace; sin acción, deshabilitado. El botón
+  «Medir» de la cabecera vive en ≥600; en compact solo el FAB.
+- **Boton es un fragmento**: un `class` scoped de página no le aplica; se
+  envuelve en un `div`. Encontrado por la evidencia (botón duplicado).
+- **`useCola` refresca también sin señal**: el banner no contaba lo recién
+  encolado hasta reconectar. Encontrado por el e2e offline.
+- **En dev server, sin señal no se puede abrir una ruta no visitada** (Vite
+  sirve módulos bajo demanda; en producción los precachea el SW): el e2e
+  visita Medir antes del modo avión y lo declara.
+- **Limpieza de datos de prueba por operación, nunca por fecha**: un `update
+  … where recorded_at::date = hoy` anuló también las mediciones de la
+  semilla (todas registradas el día del reset). `db reset` lo devolvió; el
+  e2e limpia sus 3 por `limit 3 order by recorded_at desc`.
+- Aprobaciones de kiwi, lima, coco y mora en automático (CLAUDE.md §4).

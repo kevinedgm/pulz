@@ -4,6 +4,7 @@ import type { ChipVariante } from "./tipos"
 // Contrato: registry "status-chip". Punto de forma + texto; el color
 // semántico solo refuerza (uso bajo el sol: nunca color solo).
 // on = relleno · draft = discontinuo · off = tachado · partial = medio
+// pending = discontinuo (espera envío) · failed = borde doble (falló; futuro, no pasado)
 withDefaults(defineProps<{ variante?: ChipVariante }>(), { variante: "on" })
 </script>
 
@@ -60,5 +61,24 @@ withDefaults(defineProps<{ variante?: ChipVariante }>(), { variante: "on" })
 }
 .chip--partial::before {
   background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+.chip--pending {
+  color: var(--text);
+  background: var(--pend-bg);
+  border-color: var(--pend);
+  border-style: dashed;
+}
+.chip--pending::before {
+  border-color: var(--pend);
+  border-style: dashed;
+}
+.chip--failed {
+  color: var(--late);
+  background: var(--surface);
+  border-style: double;
+  border-width: 3px;
+}
+.chip--failed::before {
+  background: currentColor;
 }
 </style>

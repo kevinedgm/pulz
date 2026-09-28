@@ -31,7 +31,11 @@ async function refrescar() {
 
 async function enviarAhora(llamador?: Llamador) {
   if (!orgActual.value || enviando.value) return
-  if (typeof navigator !== "undefined" && navigator.onLine === false) return
+  if (typeof navigator !== "undefined" && navigator.onLine === false) {
+    // Sin señal no se envía, pero la fila sí cambió (se acaba de encolar)
+    await refrescar()
+    return
+  }
   enviando.value = true
   try {
     await enviar(orgActual.value, llamador)

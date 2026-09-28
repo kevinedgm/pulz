@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from "vue"
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import {
   Aviso,
+  Boton,
   BotonFlotante,
   CabeceraPagina,
   NavInferior,
@@ -10,8 +11,10 @@ import {
   type IconoNombre,
 } from "../shared/ui"
 import { useConexion } from "../shared/utils/conexion"
+import { useCola } from "../shared/offline/useCola"
 import { useAcceso } from "../modules/acceso/store"
 import { DESTINOS, destinoDeRuta, destinosVisibles, itemsNav } from "./destinos"
+import { fabAccion } from "./fab"
 import CapaCuenta from "./CapaCuenta.vue"
 import CapaMas from "./CapaMas.vue"
 
@@ -23,6 +26,18 @@ const acceso = useAcceso()
 const route = useRoute()
 const router = useRouter()
 const { enLinea } = useConexion()
+// Cola offline (§8.3): cuántas capturas esperan y cuáles fallaron, por empresa
+const cola = useCola()
+watch(
+  () => acceso.membresiaActual?.organization_id ?? null,
+  (org) => void cola.usarEmpresa(org),
+  { immediate: true },
+)
+const pendientesTexto = computed(() => {
+  const p = cola.pendientes.value
+  const f = cola.fallos.value.length
+  return `${p} captura${p === 1 ? "" : "s"} pendiente${p === 1 ? "" : "s"} de enviar${f ? ` · ${f} fall${f === 1 ? "ó" : "aron"}` : ""}.`
+})
 
 const slug = computed(() => String(route.params.slug ?? acceso.slug ?? ""))
 const membresia = computed(() => acceso.membresiaActual)
@@ -151,8 +166,22 @@ async function irA(to: string) {
         @cuenta="cuentaAbierta = true"
       />
       <Aviso v-if="!enLinea" variante="offline" titulo="Sin conexión."
-        >Puedes ver lo último cargado; para registrar necesitas señal.</Aviso
+        ><template v-if="cola.pendientes.value"
+          >{{ pendientesTexto }} Se envían al volver la señal; puedes seguir midiendo.</template
+        ><template v-else>Puedes medir; lo demás necesita señal.</template></Aviso
       >
+      <Aviso
+        v-else-if="cola.pendientes.value || cola.fallos.value.length"
+        variante="cola"
+        :titulo="pendientesTexto"
+      >
+        <template v-if="cola.fallos.value.length">Revisa las que fallaron en su pantalla.</template>
+        <template #accion
+          ><Boton intent="quiet" :loading="cola.enviando.value" @click="cola.enviarAhora()"
+            >Reintentar</Boton
+          ></template
+        >
+      </Aviso>
       <Aviso v-else-if="acceso.modoLectura" variante="readonly" titulo="Solo lectura."
         >La suscripción venció: puedes consultar y exportar, no registrar.</Aviso
       >
@@ -169,7 +198,13 @@ async function irA(to: string) {
       :oculta="tecladoAbierto"
       @mas="masAbierto = true"
     />
-    <BotonFlotante v-if="fabVisible && fab" :etiqueta="fab.etiqueta" :icono="fab.icono" />
+    <BotonFlotante
+      v-if="fabVisible && fab"
+      :etiqueta="fab.etiqueta"
+      :icono="fab.icono"
+      :disabled="!fabAccion"
+      @click="fabAccion?.()"
+    />
 
     <CapaMas
       :abierta="masAbierto"

@@ -4,8 +4,8 @@
 export type BotonIntent = "primary" | "secondary" | "quiet" | "danger"
 export type BotonAdapt = "default" | "page-primary"
 export type CampoSize = "md" | "lg"
-export type ChipVariante = "on" | "draft" | "off" | "partial"
-export type AvisoVariante = "offline" | "readonly"
+export type ChipVariante = "on" | "draft" | "off" | "partial" | "pending" | "failed"
+export type AvisoVariante = "offline" | "readonly" | "cola"
 export type BloqueEstadoVariante = "empty" | "error" | "denied"
 
 // Símbolos reales del sprite apps/web/src/shared/ui/iconos.svg (un solo set)

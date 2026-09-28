@@ -20,5 +20,10 @@ export { default as Interruptor } from "./Interruptor.vue" // switch
 export { default as CampoColor } from "./CampoColor.vue" // color-field
 export { default as SelectorArchivo } from "./SelectorArchivo.vue" // file-picker
 export { default as BloqueMarca } from "./BloqueMarca.vue" // brand-block
+export { default as CampoGrande } from "./CampoGrande.vue" // big-number-field
+export { default as EscalaOpciones } from "./EscalaOpciones.vue" // scale-choice
+export { default as CampoCuando } from "./CampoCuando.vue" // datetime-field
+export { default as FlujoPasos } from "./FlujoPasos.vue" // step-flow
+export { default as AvisoNota } from "./AvisoNota.vue" // soft-warning-note
 export { default as Icono } from "./Icono.vue" // ayuda local: un solo set (sprite)
 export * from "./tipos"

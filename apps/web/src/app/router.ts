@@ -5,6 +5,7 @@ import { rutasEquipo } from "../modules/equipo/routes"
 import { rutasArranque } from "../modules/arranque/routes"
 import { rutasConfiguracion } from "../modules/configuracion/routes"
 import { rutasProceso } from "../modules/proceso/routes"
+import { rutasFermentacion } from "../modules/fermentacion/routes"
 import type { IconoNombre } from "../shared/ui"
 
 declare module "vue-router" {
@@ -34,6 +35,7 @@ const router = createRouter({
       component: () => import("../modules/inicio/pages/InicioEmpresaPage.vue"),
       meta: { shell: true, destino: "inicio", titulo: "Inicio" },
     },
+    ...rutasFermentacion,
     ...rutasProceso,
     ...rutasConfiguracion,
     ...rutasArranque,

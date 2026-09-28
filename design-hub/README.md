@@ -26,7 +26,9 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
   [`qa/evidence/configuracion-r01/`](qa/evidence/configuracion-r01/) 67 ·
   [`qa/evidence/arranque-r01/`](qa/evidence/arranque-r01/) 13 ·
   [`qa/evidence/hub-r01/`](qa/evidence/hub-r01/) 36 (el sitio mismo) ·
-  [`qa/evidence/fase4-e2e/`](qa/evidence/fase4-e2e/) 9; generadas por
+  [`qa/evidence/fase4-e2e/`](qa/evidence/fase4-e2e/) 9 ·
+  [`qa/evidence/fermentacion-r01/`](qa/evidence/fermentacion-r01/) 61 ·
+  [`qa/evidence/fase5-offline/`](qa/evidence/fase5-offline/) 4 (e2e en modo avión); generadas por
   `qa/evidencia-*.mjs`; zoom 200 % aproximado por `qa/zoom-acceso.mjs`;
   enlaces del sitio por `qa/enlaces-hub.mjs`.
 
@@ -38,10 +40,12 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
 | **candidate** | pasó la compuerta Candidate de lima; el dueño puede pedir cambios o estabilizar | «Estado: candidate 0.2.0» |
 | stable | contrato aprobado explícitamente por el dueño | — (ninguna todavía) |
 
-Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
-[`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/),
-[`lab/configuracion/r01`](lab/configuracion/r01/), [`lab/arranque/r01`](lab/arranque/r01/)
-y [`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`).
+Ninguna pieza es `stable`. Todo lo de abajo es **candidate** (0.2.0; 0.3.0
+las extendidas en fermentación: `status-chip`, `banner`, `app-shell`),
+rondas [`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/),
+[`lab/configuracion/r01`](lab/configuracion/r01/), [`lab/arranque/r01`](lab/arranque/r01/),
+[`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`) y
+[`lab/fermentacion/r01`](lab/fermentacion/r01/).
 
 ## Foundations
 
@@ -68,6 +72,9 @@ y [`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`).
 | [Campo de color](Components/color-field.md) | `color-field` | `CampoColor.vue` |
 | [Selector de archivo](Components/file-picker.md) | `file-picker` | `SelectorArchivo.vue` |
 | [Bloque de marca](Components/brand-block.md) | `brand-block` | `BloqueMarca.vue` |
+| [Campo grande](Components/big-number-field.md) | `big-number-field` | `CampoGrande.vue` |
+| [Escala de opciones](Components/scale-choice.md) | `scale-choice` | `EscalaOpciones.vue` |
+| [¿Cuándo pasó?](Components/datetime-field.md) | `datetime-field` | `CampoCuando.vue` |
 
 ## Patterns (sistema)
 
@@ -78,6 +85,8 @@ y [`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`).
 | [Capa de tarea](Patterns/task-layer.md) | `task-layer` | `CapaTarea.vue` |
 | [Lista apilada](Patterns/list-stack.md) | `list-stack` | `ListaApilada.vue` |
 | [Shell de la app](Patterns/app-shell.md) | `app-shell` | `app/AppShell.vue` |
+| [Flujo por pasos](Patterns/step-flow.md) | `step-flow` | `FlujoPasos.vue` |
+| [Aviso con nota](Patterns/soft-warning-note.md) | `soft-warning-note` | `AvisoNota.vue` |
 
 ## Screens (product-application, `apps/web/src/modules/`)
 
@@ -90,6 +99,7 @@ y [`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`).
 | [Inicio](Screens/inicio.md) | `inicio` | `/e/:slug/inicio` |
 | [Configuración](Screens/configuracion.md) | `configuracion` | `/e/:slug/configuracion/{recursos,catalogos,ajustes,portal}` |
 | [Primer arranque](Screens/arranque.md) | `arranque` | `/e/:slug/arranque` |
+| [Fermentación](Screens/fermentacion.md) | `fermentacion` | `/e/:slug/fermentacion`, `/…/formular`, `/…/:ciclo`, `/…/:ciclo/medir` |
 
 ## Lo que NO está hecho (no lo busques aquí como hecho)
 

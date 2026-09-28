@@ -299,3 +299,17 @@ adelantar las rondas 2–4 mientras coco construye la 1.
 | pgTAP de proceso | `supabase db query --linked -f supabase/tests/proceso.test.sql` | **57/57**: las vistas reproducen §15.1 (Tina 1 870 L en vaciado con 5 mediciones; Tina 2 1,400; Tina 3 1,300 sin formulación; DES-001 290 L cargados / 60 cortados; DES-003 2ª pasada con dos orígenes; Colector colas COL-002 16 L a 10 %; Tanque 1 250 L G-COMPRA-01 46 % declarada; Tanque 2 341.8 L a 44.9 % por Benito), Prueba B ve vacío, bucket privado con 2 políticas, el operador adjunta su foto, nadie edita, B no adjunta a A |
 | pgTAP de configuración tras renombrar `storage_org_of` | `…configuracion.test.sql` | **37/37** |
 | Advisors | `supabase db advisors --linked` | 0 errores |
+
+## Resultados reales (2026-09-27) — cola offline y ronda fermentacion/r01 (tareas 2–3)
+
+| Qué | Comando real | Resultado |
+|---|---|---|
+| Cola offline (`shared/offline/`) | `vitest` (`cola.test.ts` 8, `rpc.test.ts` 4) | **OK**: en orden, una sola vez, red detiene, dominio no bloquea, corregir/reintentar/descartar, foto tras la RPC, sobrevive a recargar |
+| Ronda fermentacion/r01 (kiwi → lima → coco → mora) | `lab/fermentacion/r01/` completo; 6 piezas candidate 0.2.0; 3 extensiones 0.3.0; 6 fichas + sitio regenerado (36 fichas, 39 páginas, 0 rotos) | **OK** |
+| Evidencia | `node design-hub/qa/evidencia-fermentacion.mjs` | **8/8**, 61 capturas, escrituras reales (medición con aviso y nota → anulada) |
+| **E2E offline (§16)**: 3 mediciones en modo avión, reconectar, una sola vez y en orden | `node design-hub/qa/e2e-offline.mjs` | **OK**: 390 px, `setOffline` → 3 «pendiente de enviar» → banner «3 capturas» → señal → `operations` 13 → 16, claves únicas, `en_orden = true`, recargar no duplica (16 → 16). Los cortes se agregan en la ronda de destilación |
+| Tipos · lint · Vitest | `vue-tsc -b` · `pnpm lint` · `vitest run` | ✔ · 0/0 · 90/90 |
+
+Nota: la limpieza a mano de una corrida abortada anuló también las
+mediciones de la semilla (ver DECISIONES); `db reset --linked` ejecutado
+después y pgTAP `proceso.test.sql` en verde.
