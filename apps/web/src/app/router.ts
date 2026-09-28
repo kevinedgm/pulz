@@ -6,6 +6,8 @@ import { rutasArranque } from "../modules/arranque/routes"
 import { rutasConfiguracion } from "../modules/configuracion/routes"
 import { rutasProceso } from "../modules/proceso/routes"
 import { rutasFermentacion } from "../modules/fermentacion/routes"
+import { rutasDestilacion } from "../modules/destilacion/routes"
+import { rutasGranel } from "../modules/granel/routes"
 import type { IconoNombre } from "../shared/ui"
 
 declare module "vue-router" {
@@ -36,6 +38,8 @@ const router = createRouter({
       meta: { shell: true, destino: "inicio", titulo: "Inicio" },
     },
     ...rutasFermentacion,
+    ...rutasDestilacion,
+    ...rutasGranel,
     ...rutasProceso,
     ...rutasConfiguracion,
     ...rutasArranque,

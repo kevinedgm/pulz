@@ -24,8 +24,14 @@ completo del squad): usos de tinas, detalle, medición por pasos en dos
 modos con aviso de Brix, formulación, tina que ya fermentaba; 5 piezas
 nuevas del sistema + 3 extensiones; 35 piezas `candidate`; Vitest 90/90;
 Playwright 8/8 (61 capturas) y **e2e offline de aceptación en verde**
-(3 mediciones en modo avión llegan una sola vez y en orden). **Sigue:**
-ronda destilacion/r01 (corridas y cortes; los cortes entran a la cola).
+(3 mediciones en modo avión llegan una sola vez y en orden). **Ronda
+destilacion/r01 hecha** (corridas, cortes por la cola, `origin-allocation`
+extraído) y **e2e offline completo de §16 en verde** (3 mediciones y 2
+cortes en modo avión: una sola vez y en orden). **Ronda granel/r01 hecha**
+(tanques con grado declarado vigente, movimiento armado por concepto con la
+diferencia conocida antes, transferir). 38 piezas `candidate`; Vitest
+107/107. **Sigue:** ronda maguey-horneado/r01 (kiwi y orden de lima
+escritos; falta coco) → inicio-hoy/r01 → e2e del proceso completo.
 
 **Fase 4 cerrada el 2026-09-27**: servidor, shell, configuración, primer
 arranque, prueba e2e con empresa nueva y Design Hub con sitio HTML propio,

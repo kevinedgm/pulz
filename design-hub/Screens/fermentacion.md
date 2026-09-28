@@ -45,8 +45,9 @@ enviar», y «Medir la siguiente».
 con Reintentar; cada fila lleva su chip; un fallo de dominio trae
 «Corregir» (reabre Revisar con la nota que pedía el servidor).
 
-**Formulación.** Página: agave cocido con saldo (kg), molino, agua, insumo,
-reparto a tinas libres (litros, folio opcional), cuándo y método →
+**Formulación.** Página: agave cocido con saldo (kg) y reparto a tinas
+libres (litros) con `origin-allocation` (extraído en destilacion/r01),
+molino, agua, insumo, folio opcional, cuándo y método →
 `registrar_formulacion`. Requiere señal. **Tina que ya fermentaba:** capa
 de tres campos → `registrar_entrada('fermentado')` (DUDAS #7).
 

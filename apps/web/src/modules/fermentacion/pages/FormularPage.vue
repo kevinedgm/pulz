@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { ErrorAcceso } from "../../../shared/supabase/errores"
 import {
+  AsignacionOrigenes,
   AvisoNota,
   BloqueEstado,
   Boton,
@@ -10,6 +11,7 @@ import {
   CampoNumero,
   CampoTexto,
   Selector,
+  type OrigenAsignable,
 } from "../../../shared/ui"
 import { useConexion } from "../../../shared/utils/conexion"
 import { useAcceso } from "../../acceso/store"
@@ -29,7 +31,8 @@ import {
 
 // Formulación (§4.3; ronda fermentacion/r01): agave cocido (kg) + agua +
 // insumos → reparto a tinas LIBRES (una por tina, regla dura). Página, no
-// capa. Admin y productor; requiere señal.
+// capa. Admin y productor; requiere señal. Las dos listas con cantidad usan
+// el patrón origin-allocation (extraído en destilacion/r01).
 const acceso = useAcceso()
 const route = useRoute()
 const router = useRouter()
@@ -84,29 +87,39 @@ onMounted(() => {
   if (puede.value) cargar()
 })
 
+const origenesCocido = computed<OrigenAsignable[]>(() =>
+  (cocido.value ?? []).map((l) => ({
+    id: l.lot_id,
+    titulo: l.folio,
+    sub: `quedan ${l.remaining_kg} kg`,
+    saldo: l.remaining_kg,
+    unidad: "kg",
+  })),
+)
+const origenesTinas = computed<OrigenAsignable[]>(() =>
+  tinas.value.map((t) => ({
+    id: t.id,
+    titulo: t.code,
+    sub: t.capacity ? `${litros(t.capacity)} · libre` : "libre",
+    saldo: t.capacity,
+    unidad: "L",
+  })),
+)
 const kgTotal = computed(() => Object.values(kgPor.value).reduce<number>((a, b) => a + (b ?? 0), 0))
 const litrosTotal = computed(() =>
   Object.values(litrosPor.value).reduce<number>((a, b) => a + (b ?? 0), 0),
 )
-const errores = computed(() => {
-  const e: string[] = []
-  for (const l of cocido.value ?? []) {
-    const kg = kgPor.value[l.lot_id]
-    if (kg !== null && kg !== undefined && kg > l.remaining_kg)
-      e.push(`${l.folio}: quedan ${l.remaining_kg} kg.`)
-  }
-  for (const t of tinas.value) {
-    const v = litrosPor.value[t.id]
-    if (v && t.capacity && v > t.capacity)
-      e.push(`${t.code}: capacidad ${litros(t.capacity)} (se avisa al guardar).`)
-  }
-  return e
-})
+const conError = computed(
+  () =>
+    (cocido.value ?? []).some((l) => (kgPor.value[l.lot_id] ?? 0) > l.remaining_kg) ||
+    tinas.value.some((t) => t.capacity !== null && (litrosPor.value[t.id] ?? 0) > t.capacity),
+)
 const valido = computed(
   () =>
     kgTotal.value > 0 &&
     litrosTotal.value > 0 &&
     (agua.value ?? 0) >= 0 &&
+    !conError.value &&
     !(avisoCodigo.value && !nota.value.trim()),
 )
 async function guardar() {
@@ -199,20 +212,7 @@ const opInsumos = computed(() => [
       <form v-else class="form__form" @submit.prevent="guardar">
         <fieldset class="form__grupo">
           <legend>Agave cocido</legend>
-          <div v-for="l in cocido" :key="l.lot_id" class="form__asig">
-            <div>
-              <b>{{ l.folio }}</b
-              ><span class="form__sub"> · quedan {{ l.remaining_kg }} kg</span>
-            </div>
-            <CampoNumero
-              v-model="kgPor[l.lot_id]"
-              etiqueta="Kilos"
-              unidad="kg"
-              :min="0"
-              :max="l.remaining_kg"
-              :disabled="ocupado"
-            />
-          </div>
+          <AsignacionOrigenes v-model="kgPor" :origenes="origenesCocido" :disabled="ocupado" />
           <Selector
             v-if="molinos.length"
             v-model="molino"
@@ -242,26 +242,17 @@ const opInsumos = computed(() => [
         </fieldset>
         <fieldset class="form__grupo">
           <legend>Reparto a tinas libres</legend>
-          <div v-for="t in tinas" :key="t.id" class="form__asig">
-            <div>
-              <b>{{ t.code }}</b
-              ><span v-if="t.capacity" class="form__sub"> · {{ litros(t.capacity) }} · libre</span>
-            </div>
-            <CampoNumero
-              v-model="litrosPor[t.id]"
-              etiqueta="Litros"
-              unidad="L"
-              :min="0"
-              :disabled="ocupado"
-            />
+          <AsignacionOrigenes v-model="litrosPor" :origenes="origenesTinas" :disabled="ocupado" />
+          <div v-for="t in tinas" :key="t.id">
             <CampoTexto
+              v-if="(litrosPor[t.id] ?? 0) > 0"
               v-model="folioPor[t.id]"
-              etiqueta="Folio (opcional)"
+              :etiqueta="`Folio para ${t.code} (opcional)`"
               placeholder="automático"
               :disabled="ocupado"
             />
           </div>
-          <p class="form__sub">Total {{ litros(litrosTotal) }} · {{ kgTotal }} kg de cocido</p>
+          <p class="form__sub">{{ kgTotal }} kg de cocido → {{ litros(litrosTotal) }} en tinas</p>
         </fieldset>
         <fieldset class="form__grupo">
           <legend>Cuándo y cómo</legend>
@@ -282,9 +273,6 @@ const opInsumos = computed(() => [
           />
         </fieldset>
         <AvisoNota v-model="nota" :codigo="avisoCodigo" :disabled="ocupado" />
-        <ul v-if="errores.length" class="form__avisos">
-          <li v-for="e in errores" :key="e">{{ e }}</li>
-        </ul>
         <p v-if="error" class="form__error" role="alert">{{ error }}</p>
         <div class="form__acciones">
           <Boton
@@ -341,27 +329,12 @@ const opInsumos = computed(() => [
   padding: 0 var(--sp-1);
   font-weight: 700;
 }
-.form__asig {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--sp-2);
-  align-items: end;
-  padding-bottom: var(--sp-3);
-  border-bottom: 1px solid var(--border);
-}
-.form__asig:last-of-type {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
 .form__fila {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--sp-3);
 }
 @media (min-width: 600px) {
-  .form__asig {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
-  }
   .form__fila {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -370,13 +343,6 @@ const opInsumos = computed(() => [
   font-size: 0.875rem;
   color: var(--muted);
   margin: 0;
-}
-.form__avisos {
-  margin: 0;
-  padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-6);
-  border: 1px dashed var(--muted);
-  border-radius: var(--r-md);
-  font-size: 0.9375rem;
 }
 .form__error {
   margin: 0;

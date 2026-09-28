@@ -655,3 +655,73 @@ Regla completa, con el diagrama del flujo, en `CLAUDE.md`.
   semilla (todas registradas el día del reset). `db reset` lo devolvió; el
   e2e limpia sus 3 por `limit 3 order by recorded_at desc`.
 - Aprobaciones de kiwi, lima, coco y mora en automático (CLAUDE.md §4).
+
+## 2026-09-27 · Destilación (ronda destilacion/r01): lo que se decidió construyendo
+
+- **El colector se elige por la clase del corte**, no la persona: la RPC
+  exige la misma clase (0018), así que la pantalla lo resuelve sola (select
+  solo si hay varios de la clase; bloqueo con enlace a Recursos si no hay).
+- **«Ya mezcal va directo a granel» es `transferir`, no un corte a tanque**
+  (0019, admin/productor): Destilación muestra los colectores con contenido
+  y «Pasar a granel» abre la transferencia de la ronda de Granel; el
+  operador ve quién lo hace.
+- **Abrir y cerrar corrida requieren señal** (consumen saldos que decide el
+  servidor); **los cortes entran por la cola** como las mediciones.
+- **Avisos conocidos antes de enviar**: capacidad estricta del alambique o
+  colector bloquea con motivo; flexible pide nota (`excede_capacidad`); 2ª
+  con ordinario y colas pide nota (`mezcla_clases_2a`) si el ajuste avisa.
+- **`origin-allocation` se extrae de la formulación** y se reutiliza en
+  abrir corrida (y en horneado después): tres consumidores de la misma
+  lista «de dónde sale cuánto».
+- **Un corte no se anula** (no hay RPC): se dice en la corrida y se abre
+  `DUDAS.md` #15 (vinazas y anulación de cortes).
+- **Cada RPC devuelve algo distinto** (medición → id de la medición; corte →
+  id del lote): la subida de fotos resuelve la operación y el lote según la
+  RPC (`fotos.ts`), en vez de suponer un id de operación.
+- **Un `legend` no es un heading**: Playwright espera fieldsets por texto.
+- Aprobaciones de kiwi, lima, coco y mora en automático (CLAUDE.md §4).
+
+## 2026-09-27 · Granel (ronda granel/r01): lo que se decidió construyendo
+
+- **El formulario se arma con el concepto** (`camposDe`: `source_lot`,
+  `creates_lot`, `asks_result`, `asks_counterparty`): un solo
+  `MovimientoPage` para agua, puntas, unión, compra, ajustes, venta,
+  envasado, muestras y merma. Si un tercer módulo lo necesita, se extrae
+  como patrón; hoy es local.
+- **El sistema no calcula el grado, pero sí dice qué hará con el volumen**:
+  con `asks_result` se muestra el ledger esperado y la diferencia que
+  registrará la conciliación; `diferencia_volumen`, `abv_fuera_rango` y
+  `excede_capacidad` se conocen antes de enviar (nota).
+- **Sin FAB en Granel**: la acción depende del tanque (Entrada / Salida /
+  Transferir por tarjeta); en el tanque, Entrada es la primaria porque es la
+  que declara grado.
+- **`movement_log` expone códigos de recurso, no ids**: el historial se
+  filtra por `code` del recurso (una consulta previa a `resources`). Las
+  patas de conciliación se agrupan bajo su operación y se leen como «el
+  sistema registró una diferencia de ±X L».
+- **«Pasar a granel» desde Destilación** llega a `/granel?transferir=<colector>`
+  y Granel redirige a `/granel/transferir?origen=` (el enlace de la ronda
+  anterior no cambia).
+- **`default_folio_decision` de la empresa** precarga la decisión conservar /
+  renombrar; el folio sugerido es el del lote mayor del destino.
+- **«Carga inicial» no aparece entre los conceptos** del movimiento: vive en
+  el primer arranque (y Recursos); evita duplicar el camino.
+- Aprobaciones de kiwi, lima, coco y mora en automático (CLAUDE.md §4).
+
+
+## 2026-09-27 · Entorno: vista previa con Node 22 y tooling de Codex fuera del lint
+
+- **La vista previa del servidor de desarrollo arrancaba con el Node 20 del
+  sistema** (el proyecto exige Node ≥ 22) y moría con
+  `ERR_PNPM_UNSUPPORTED_ENGINE`. `.claude/launch.json` → `web` ahora corre
+  por `/bin/sh -c` con el Node 22 de nvm al frente del `PATH`. Revertir:
+  volver a `runtimeExecutable: pnpm` cuando el Node del sistema sea ≥ 22.
+- **Apareció en el repo la instalación del Fruti Squad para Codex**
+  (`.codex/`, `.fruti/`, `AGENTS.md`, 2026-09-27 23:43, fuera de esta
+  sesión). No se modificó ni se versionó; se excluyó de ESLint y Prettier
+  igual que `.claude/` y `.agents/` (tooling de terceros). Si el dueño la
+  quiere versionada, basta con `git add`.
+- **Las evidencias que escriben datos se corren en orden y una a la vez**:
+  dos corridas simultáneas (una tarea vieja esperando al servidor) cruzaron
+  escrituras; Granel necesita mezcal en un colector, así que tras un
+  `db reset` corre primero la evidencia de Destilación.

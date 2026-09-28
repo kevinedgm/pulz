@@ -2627,11 +2627,11 @@
   },
   "origin-allocation": {
     "kind": "pattern",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/destilacion/r01",
-    "documentation": null,
-    "demo": null,
+    "documentation": "../Patterns/origin-allocation.md",
+    "demo": "../Components/demo/index.html#origin-allocation",
     "source": "../../apps/web/src/shared/ui/AsignacionOrigenes.vue",
     "behavior": "../../apps/web/src/shared/ui/AsignacionOrigenes.vue",
     "dependencies": [
@@ -2652,31 +2652,57 @@
       "rules": "modelValue Record<id, number|null>. Sin dominio: la página decide qué orígenes y qué destino. Extraída de FormularPage (fermentación) y reutilizada en abrir corrida y horneado."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/shared/ui/AsignacionOrigenes.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/destilacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/destilacion/r01/coco-declaracion.md",
+          "../lab/destilacion/r01/lima-compuerta.md",
+          "../qa/evidence/destilacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "cierre de corrida navegaba antes del popstate de la capa (corregido)"
+        ]
+      }
+    }
   },
   "destilacion": {
     "kind": "product-application",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/destilacion/r01",
-    "documentation": null,
+    "documentation": "../Screens/destilacion.md",
     "demo": null,
     "source": "../../apps/web/src/modules/destilacion/pages/DestilacionPage.vue",
     "behavior": "../../apps/web/src/modules/destilacion/pages/DestilacionPage.vue",
@@ -2715,31 +2741,68 @@
       "rules": "El corte solo va a un colector de su clase: se elige solo por la clase (select si hay varios; bloqueo con enlace a Recursos si no hay). Puntas solo con record_puntas. Abrir y cerrar requieren señal; los cortes entran por la cola. «Pasar a granel» es transferir (ronda granel; admin/productor). Cerrar corrida: diálogo destructivo con Cancelar como primaria. Un corte no se anula (ajuste en Granel)."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/modules/destilacion/pages/DestilacionPage.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/destilacion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/destilacion/r01/coco-declaracion.md",
+          "../lab/destilacion/r01/lima-compuerta.md",
+          "../qa/evidence/destilacion-r01/",
+          "../qa/evidence/fase5-offline/"
+        ],
+        "findings": [
+          "cierre de corrida navegaba antes del popstate de la capa (corregido)"
+        ]
+      }
+    },
+    "files": [
+      "../../apps/web/src/modules/destilacion/api.ts",
+      "../../apps/web/src/modules/destilacion/routes.ts",
+      "../../apps/web/src/modules/destilacion/pages/DestilacionPage.vue",
+      "../../apps/web/src/modules/destilacion/pages/AbrirCorridaPage.vue",
+      "../../apps/web/src/modules/destilacion/pages/CorridaPage.vue",
+      "../../apps/web/src/modules/destilacion/pages/CortePage.vue",
+      "../../apps/web/src/modules/destilacion/components/FilaCorrida.vue",
+      "../../apps/web/src/modules/destilacion/components/FilaColector.vue",
+      "../../apps/web/src/modules/destilacion/components/ConfirmarCierre.vue"
+    ]
   },
   "granel": {
     "kind": "product-application",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/granel/r01",
-    "documentation": null,
+    "documentation": "../Screens/granel.md",
     "demo": null,
     "source": "../../apps/web/src/modules/granel/pages/GranelPage.vue",
     "behavior": "../../apps/web/src/modules/granel/pages/GranelPage.vue",
@@ -2772,6 +2835,101 @@
       "rules": "El sistema no calcula el grado: entradas con asks_result declaran volumen y % Alc.; la diferencia con el ledger se muestra antes y se registra como conciliación (nota). Contraparte obligatoria por concepto. Todo requiere señal (§8.3). Admin y productor; el operador ve. Sin FAB: la acción depende del tanque."
     },
     "qa": {
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "pendiente"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "static-reviewed",
+      "states": "runtime-verified-partial"
+    },
+    "refinement": {
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/modules/granel/pages/GranelPage.vue"
+    },
+    "version": "0.2.0",
+    "replacedBy": null,
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/granel-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/granel/r01/coco-declaracion.md",
+          "../lab/granel/r01/lima-compuerta.md",
+          "../qa/evidence/granel-r01/"
+        ],
+        "findings": [
+          "etiqueta de transferir sin espacio (corregido)",
+          "contraparte ausente en el historial (corregido)"
+        ]
+      }
+    },
+    "files": [
+      "../../apps/web/src/modules/granel/api.ts",
+      "../../apps/web/src/modules/granel/routes.ts",
+      "../../apps/web/src/modules/granel/pages/GranelPage.vue",
+      "../../apps/web/src/modules/granel/pages/TanquePage.vue",
+      "../../apps/web/src/modules/granel/pages/MovimientoPage.vue",
+      "../../apps/web/src/modules/granel/pages/TransferirPage.vue",
+      "../../apps/web/src/modules/granel/components/TarjetaTanque.vue"
+    ]
+  },
+  "maguey-horneado": {
+    "kind": "product-application",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/maguey-horneado/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/modules/maguey/pages/MagueyPage.vue",
+    "behavior": "../../apps/web/src/modules/horneado/pages/HorneadoPage.vue",
+    "dependencies": [
+      "app-shell",
+      "page-header",
+      "fab",
+      "list-stack",
+      "row-menu",
+      "state-block",
+      "task-layer",
+      "banner",
+      "button",
+      "origin-allocation",
+      "datetime-field",
+      "select",
+      "number-field",
+      "text-field",
+      "status-chip"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "screens": [
+        "maguey: lotes con saldo en kg + agotados plegados; FAB Registrar recepción",
+        "recepción (solo kilos obligatorios)",
+        "horneado: abiertas / cocido con saldo / últimas; FAB Abrir horneada",
+        "abrir horneada (origin-allocation en kg)",
+        "cerrar horneada (capa: kg cocidos, combustible)",
+        "cocido que ya tenía (capa)"
+      ],
+      "rules": "Solo los kilos son obligatorios en la recepción. Abrir consume saldo sólido (bloqueo por fila antes). Cerrar es irreversible y crea el lote AC con linaje; la merma se ve, no se guarda. Todo requiere señal. Admin y productor; el operador ve."
+    },
+    "qa": {
       "candidate": false,
       "visual": "pending",
       "stable": false
@@ -2785,7 +2943,7 @@
     },
     "production": {
       "framework": "vue-ts",
-      "path": "apps/web/src/modules/granel/pages/GranelPage.vue"
+      "path": "apps/web/src/modules/maguey/"
     },
     "version": "0.1.0",
     "replacedBy": null,

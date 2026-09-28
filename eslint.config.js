@@ -15,6 +15,8 @@ export default tseslint.config(
       "docs/**",
       ".claude/**",
       ".agents/**",
+      ".codex/**",
+      ".fruti/**",
       "design-hub/**",
       "supabase/.temp/**",
     ],

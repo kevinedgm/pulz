@@ -4,6 +4,7 @@ import sprite from "../src/shared/ui/iconos.svg?raw"
 import {
   Aviso,
   BloqueEstado,
+  AsignacionOrigenes,
   AvisoNota,
   BloqueMarca,
   Boton,
@@ -55,6 +56,7 @@ const PIEZAS = [
   { id: "datetime-field", nombre: "¿Cuándo pasó?" },
   { id: "step-flow", nombre: "Flujo por pasos" },
   { id: "soft-warning-note", nombre: "Aviso con nota" },
+  { id: "origin-allocation", nombre: "Asignación de orígenes" },
 ] as const
 type PiezaId = (typeof PIEZAS)[number]["id"]
 
@@ -120,6 +122,24 @@ const actividad = ref<number | null>(4)
 const cuando = ref<string | null>(null)
 const pasoDemo = ref(1)
 const notaDemo = ref("")
+// Destilación (ronda destilacion/r01)
+const litrosPor = ref<Record<string, number | null>>({ t1: 290 })
+const origenesDemo = [
+  {
+    id: "t1",
+    titulo: "Tina 1",
+    sub: "FER-T1-001 · 870 L · lista",
+    saldo: 870,
+    unidad: "L" as const,
+  },
+  {
+    id: "c1",
+    titulo: "Colector ordinario",
+    sub: "ORD-002 · 40 L · 24 %",
+    saldo: 40,
+    unidad: "L" as const,
+  },
+]
 const miembros = [
   { n: "Benito Cruz", u: null, rol: "admin", est: "on" as const, txt: "activo" },
   { n: "Aurelia Santiago", u: "aurelia", rol: "productor", est: "on" as const, txt: "activo" },
@@ -697,6 +717,26 @@ const miembros = [
       <p class="nota">
         El aviso blando no bloquea (§2.1): con nota, la misma captura pasa. Misma pieza para
         «Corregir» un fallo de la cola.
+      </p>
+    </section>
+    <section
+      v-if="visibles.some((p) => p.id === 'origin-allocation')"
+      id="origin-allocation"
+      class="pieza"
+    >
+      <h2>Asignación de orígenes <code>origin-allocation</code></h2>
+      <div class="col">
+        <AsignacionOrigenes
+          v-model="litrosPor"
+          :origenes="origenesDemo"
+          :capacidad="300"
+          politica="estricta"
+          destino="Alambique 1"
+        />
+      </div>
+      <p class="nota">
+        Cantidad por origen con saldo, total en vivo y capacidad del destino: estricta bloquea,
+        flexible avisa. La usan la formulación y abrir corrida.
       </p>
     </section>
   </main>

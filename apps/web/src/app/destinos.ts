@@ -48,14 +48,12 @@ export const DESTINOS: Destino[] = [
     titulo: "Destilación",
     icono: "i-destila",
     fijoEnCompact: true,
-    proximamente: "llevar corridas y cortes",
   },
   {
     id: "granel",
     titulo: "Granel",
     icono: "i-tanque",
     fijoEnCompact: true,
-    proximamente: "ver tanques, saldos y movimientos",
   },
   {
     id: "trazabilidad",

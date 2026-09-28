@@ -36,7 +36,7 @@ export interface Llamador {
     nombre: RpcEnCola,
     params: Record<string, unknown>,
   ) => Promise<{ data: unknown; error: unknown }>
-  subirFoto: (org: string, operationId: string, foto: FotoPendiente) => Promise<void>
+  subirFoto: (org: string, resultado: string, foto: FotoPendiente, rpc: RpcEnCola) => Promise<void>
 }
 
 const NOMBRE_DB = "pulz-cola"
@@ -180,7 +180,7 @@ async function enviarAhora(org: string, llamador: Llamador): Promise<ResultadoEn
         el.resultado = String(data)
         await guardar(el)
       }
-      if (el.foto) await llamador.subirFoto(org, el.resultado, el.foto)
+      if (el.foto) await llamador.subirFoto(org, el.resultado, el.foto, el.rpc)
       await borrar(el.id)
       r.enviados += 1
     } catch (e) {

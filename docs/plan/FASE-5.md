@@ -313,3 +313,23 @@ adelantar las rondas 2–4 mientras coco construye la 1.
 Nota: la limpieza a mano de una corrida abortada anuló también las
 mediciones de la semilla (ver DECISIONES); `db reset --linked` ejecutado
 después y pgTAP `proceso.test.sql` en verde.
+
+## Resultados reales (2026-09-27) — ronda destilacion/r01 (tarea 4)
+
+| Qué | Comando real | Resultado |
+|---|---|---|
+| Ronda destilacion/r01 (kiwi → lima → coco → mora) | `lab/destilacion/r01/` completo; `origin-allocation` extraído de la formulación y reutilizado; `destilacion` candidate 0.2.0; 2 fichas nuevas + sitio regenerado | **OK** |
+| Evidencia | `node design-hub/qa/evidencia-destilacion.mjs` | **8/8**, 37 capturas, escrituras reales (corrida abierta con 290 L de la Tina 1; 3 cortes por la cola; cierre con diálogo) |
+| **E2E offline completo (§16)**: 3 mediciones **y 2 cortes** en modo avión | `node design-hub/qa/e2e-offline.mjs` | **OK**: 390 px; con señal abre una corrida chica y precarga Medir y Corte navegando dentro de la app; sin señal 3 mediciones + 2 cortes → «5 capturas pendientes» → señal → `operations` (medición + corte) 24 → 29, claves únicas, `en_orden = true`, recargar no duplica (29 → 29) |
+| Tipos · lint · Vitest | `vue-tsc -b` · `pnpm lint` · `vitest run` | ✔ · 0/0 · 98/98 (107/107 con granel) |
+
+## Resultados reales (2026-09-27) — ronda granel/r01 (tarea 5)
+
+| Qué | Comando real | Resultado |
+|---|---|---|
+| Ronda granel/r01 (kiwi → lima → coco → mora) | `lab/granel/r01/` completo; `granel` candidate 0.2.0; ficha + sitio (42 páginas, 0 rotos) | **OK** |
+| Evidencia | `db reset --linked` → `evidencia-destilacion.mjs` (deja mezcal en el colector) → `evidencia-granel.mjs` | **8/8** y **8/8**: 37 + 36 capturas; transferencia conservando G-COMPRA-01, agua con diferencia −0.2 L conocida antes y conciliada, venta con contraparte; historial con los tres |
+| Tipos · lint · format · Vitest | `vue-tsc -b` · `pnpm lint` · `pnpm format` · `vitest run` | ✔ · 0/0 · ✔ · 107/107 |
+
+Siguiente: ronda `maguey-horneado/r01` (kiwi y orden de lima ya escritos:
+60 combinaciones, 0 hallazgos) → coco.

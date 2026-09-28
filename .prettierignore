@@ -18,5 +18,9 @@ apps/web/functions/e/
 # código nuestro, no se reformatea.
 .claude/
 .agents/
+.codex/
+.fruti/
+# Bloque generado por el instalador del Fruti Squad para Codex
+AGENTS.md
 design-hub/
 supabase/.temp/

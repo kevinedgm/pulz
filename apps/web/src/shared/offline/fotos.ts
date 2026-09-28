@@ -4,6 +4,7 @@
 // evidencias/<org>/<operation_id>/<uuid>.<ext> con su fila en attachments.
 import { supabase } from "../supabase/client"
 import { nuevaClave } from "../utils/claves"
+import type { RpcEnCola } from "./cola"
 
 export interface FotoPendiente {
   blob: Blob
@@ -44,11 +45,40 @@ const extension = (tipo: string) =>
         ? "pdf"
         : "jpg"
 
+// Cada RPC devuelve algo distinto (0017: id de la medición; 0018: id del
+// lote del corte): de ahí se resuelven la operación y el lote del adjunto.
+async function resolver(
+  resultado: string,
+  rpc: RpcEnCola,
+  lotId: string,
+): Promise<{ operationId: string; lotId: string }> {
+  if (rpc === "registrar_medicion") {
+    const { data, error } = await supabase
+      .from("fermentation_measurements")
+      .select("operation_id")
+      .eq("id", resultado)
+      .single()
+    if (error) throw error
+    return { operationId: data.operation_id as string, lotId }
+  }
+  const { data, error } = await supabase
+    .from("operations")
+    .select("id")
+    .eq("result_lot_id", resultado)
+    .order("recorded_at", { ascending: false })
+    .limit(1)
+    .single()
+  if (error) throw error
+  return { operationId: data.id as string, lotId: lotId || resultado }
+}
+
 export async function subirEvidencia(
   org: string,
-  operationId: string,
+  resultado: string,
   foto: FotoPendiente,
+  rpc: RpcEnCola = "registrar_medicion",
 ): Promise<void> {
+  const { operationId, lotId } = await resolver(resultado, rpc, foto.lot_id)
   const ruta = `${org}/${operationId}/${nuevaClave()}.${extension(foto.tipo)}`
   const { error } = await supabase.storage
     .from("evidencias")
@@ -57,7 +87,7 @@ export async function subirEvidencia(
   const { error: e2 } = await supabase.from("attachments").insert({
     organization_id: org,
     operation_id: operationId,
-    lot_id: foto.lot_id,
+    lot_id: lotId,
     kind_item_id: foto.kind_item_id,
     storage_path: `evidencias/${ruta}`,
     caption: foto.caption ?? null,

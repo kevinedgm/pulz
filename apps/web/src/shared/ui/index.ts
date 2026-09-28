@@ -25,5 +25,7 @@ export { default as EscalaOpciones } from "./EscalaOpciones.vue" // scale-choice
 export { default as CampoCuando } from "./CampoCuando.vue" // datetime-field
 export { default as FlujoPasos } from "./FlujoPasos.vue" // step-flow
 export { default as AvisoNota } from "./AvisoNota.vue" // soft-warning-note
+export { default as AsignacionOrigenes } from "./AsignacionOrigenes.vue" // origin-allocation
+export type { OrigenAsignable } from "./AsignacionOrigenes.vue"
 export { default as Icono } from "./Icono.vue" // ayuda local: un solo set (sprite)
 export * from "./tipos"

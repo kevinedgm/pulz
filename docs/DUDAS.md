@@ -136,6 +136,12 @@
     ¿Hacen falta en otras operaciones (recepción de maguey, compra de
     granel ya tiene «Remisión o factura» por Storage)?
 
+15. **Cortes y vinazas**: un corte no se anula (no hay RPC; se corrige con
+    un ajuste en Granel). La diferencia entre lo cargado y lo cortado
+    (vinazas, pérdida) se ve en la corrida pero no se guarda como lote.
+    ¿Quiere el dueño un campo «vinazas» al cerrar, o anular cortes con
+    motivo como las mediciones? (cambio de esquema: 0009/0018).
+
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
 Las 9 preguntas de §18 (escala de actividad/dulzor/acidez, precio del plan,

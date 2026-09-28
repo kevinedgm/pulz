@@ -133,6 +133,38 @@ coco:
       nunca se guarda; aviso de Brix con los rangos de la empresa ANTES de enviar; operador no ve
       declarar lista / cerrar / formular.
     NO reales: curva de Brix; recordatorio push; edición de una medición (se anula y se captura otra).
+    (destilacion/r01, 2026-09-27; fuente: 0026, 0018, 0019)
+    Corrida = fila de corridas: run_id, folio, still_id, alambique, capacidad_l?, pass(primera|segunda),
+      status(abierta|cerrada), started_at, started_by?, closed_at?, litros_cargados,
+      origenes[{resource_id?, recurso?, lot_id, folio, litros, abv?}], litros_cortados,
+      cortes[{movement_id, clase, litros, abv?, resource_id?, destino?, lot_id, folio, occurred_at}]
+    ColectorConSaldo = fila de colectores_con_saldo: resource_id, colector, liquid_class, capacidad_l?,
+      lot_id, folio, litros, abv?, abv_at?, abv_by?
+    NuevaCorrida = alambique, pasada, origenes[{resource_id, lot_id, litros}], nota?, folio?, occurred_at?
+      → abrir_corrida (señal; admin, productor y operador)
+    NuevoCorte = corrida, clase, litros, abv, colector (de la misma clase), nota?, folio?, occurred_at?, foto?
+      → registrar_corte SIEMPRE por la cola (devuelve el lote del corte)
+    cerrar_corrida(corrida, nota?, cuándo) (señal). «Pasar a granel» = transferir (ronda granel).
+    Reglas de presentación: colector elegido por clase (select si hay varios; bloqueo con enlace a
+      Recursos si no hay); puntas solo con record_puntas; capacidad estricta bloquea antes y flexible
+      pide nota (excede_capacidad); 2ª con ordinario y colas pide nota (mezcla_clases_2a) si el ajuste
+      avisa; un corte no se anula; la diferencia cargado − cortado no se guarda.
+    NO reales: vinazas/pérdida como dato; anular corte; reabrir corrida; rendimiento en %.
+    (granel/r01, 2026-09-27; fuente: 0026, 0019, 0011, movement_concepts)
+    Tanque = fila de tanques: resource_id, tanque, capacidad_l?, capacity_policy, location?, litros,
+      lotes[{lot_id, folio, litros, history, origin, abv?, abv_at?, abv_by?}]
+    Concepto = movement_concepts: id, direction, name, source_lot(no_aplica|opcional|requerido), creates_lot,
+      asks_result, asks_counterparty, sort_order
+    Pata = fila de movement_log: movement_id, operation_id, kind, concept?, movement_type, folio, volume_l, abv?,
+      source?, destination? (códigos de recurso), occurred_at, recorded_at, recorded_by?, note?
+    Movimiento = concepto, tanque, litros, lote?, lote_origen?, recurso_origen?, resultado_l?, resultado_abv?,
+      abv?, decision?, folio_nuevo?, contraparte?, documento?, proveedor?, proveedor_nombre?, folio_certificado?,
+      organismo?, especie?, predio_declarado?, nota?, occurred_at? → registrar_movimiento_granel (señal; admin/productor)
+    Transferencia = origen, destino, lote, litros, abv?, decision?, folio_nuevo?, nota?, occurred_at? → transferir
+    Reglas de presentación: el formulario se arma con el concepto (camposDe); ledger esperado y diferencia
+      antes de enviar; contraparte obligatoria por concepto; folio sugerido = lote mayor del destino;
+      «Carga inicial» no se ofrece aquí; sin FAB; el operador solo ve.
+    NO reales: envasado con presentaciones; filtro de historial por fecha; exportar bitácora.
   # Scripts de auditoría del proyecto. Si no los tienes, deja VACÍO (coco audita a
   # mano y lo marca) o pon AUTO para autodetectar.
   governance_scripts:

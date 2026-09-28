@@ -28,7 +28,9 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
   [`qa/evidence/hub-r01/`](qa/evidence/hub-r01/) 36 (el sitio mismo) ·
   [`qa/evidence/fase4-e2e/`](qa/evidence/fase4-e2e/) 9 ·
   [`qa/evidence/fermentacion-r01/`](qa/evidence/fermentacion-r01/) 61 ·
-  [`qa/evidence/fase5-offline/`](qa/evidence/fase5-offline/) 4 (e2e en modo avión); generadas por
+  [`qa/evidence/destilacion-r01/`](qa/evidence/destilacion-r01/) 37 ·
+  [`qa/evidence/granel-r01/`](qa/evidence/granel-r01/) 36 ·
+  [`qa/evidence/fase5-offline/`](qa/evidence/fase5-offline/) (e2e en modo avión: 3 mediciones + 2 cortes); generadas por
   `qa/evidencia-*.mjs`; zoom 200 % aproximado por `qa/zoom-acceso.mjs`;
   enlaces del sitio por `qa/enlaces-hub.mjs`.
 
@@ -44,8 +46,9 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate** (0.2.0; 0.3.0
 las extendidas en fermentación: `status-chip`, `banner`, `app-shell`),
 rondas [`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/),
 [`lab/configuracion/r01`](lab/configuracion/r01/), [`lab/arranque/r01`](lab/arranque/r01/),
-[`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`) y
-[`lab/fermentacion/r01`](lab/fermentacion/r01/).
+[`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`),
+[`lab/fermentacion/r01`](lab/fermentacion/r01/), [`lab/destilacion/r01`](lab/destilacion/r01/)
+y [`lab/granel/r01`](lab/granel/r01/).
 
 ## Foundations
 
@@ -87,6 +90,7 @@ rondas [`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/),
 | [Shell de la app](Patterns/app-shell.md) | `app-shell` | `app/AppShell.vue` |
 | [Flujo por pasos](Patterns/step-flow.md) | `step-flow` | `FlujoPasos.vue` |
 | [Aviso con nota](Patterns/soft-warning-note.md) | `soft-warning-note` | `AvisoNota.vue` |
+| [Asignación de orígenes](Patterns/origin-allocation.md) | `origin-allocation` | `AsignacionOrigenes.vue` |
 
 ## Screens (product-application, `apps/web/src/modules/`)
 
@@ -100,6 +104,8 @@ rondas [`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/),
 | [Configuración](Screens/configuracion.md) | `configuracion` | `/e/:slug/configuracion/{recursos,catalogos,ajustes,portal}` |
 | [Primer arranque](Screens/arranque.md) | `arranque` | `/e/:slug/arranque` |
 | [Fermentación](Screens/fermentacion.md) | `fermentacion` | `/e/:slug/fermentacion`, `/…/formular`, `/…/:ciclo`, `/…/:ciclo/medir` |
+| [Destilación](Screens/destilacion.md) | `destilacion` | `/e/:slug/destilacion`, `/…/abrir`, `/…/:corrida`, `/…/:corrida/corte` |
+| [Granel](Screens/granel.md) | `granel` | `/e/:slug/granel`, `/…/transferir`, `/…/:tanque`, `/…/:tanque/movimiento` |
 
 ## Lo que NO está hecho (no lo busques aquí como hecho)
 
