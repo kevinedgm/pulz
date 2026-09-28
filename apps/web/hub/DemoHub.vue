@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue"
 import sprite from "../src/shared/ui/iconos.svg?raw"
+import FilaUso from "../src/modules/fermentacion/components/FilaUso.vue"
+import type { UsoTina } from "../src/modules/fermentacion/api"
 import {
   Aviso,
   BloqueEstado,
@@ -57,6 +59,7 @@ const PIEZAS = [
   { id: "step-flow", nombre: "Flujo por pasos" },
   { id: "soft-warning-note", nombre: "Aviso con nota" },
   { id: "origin-allocation", nombre: "Asignación de orígenes" },
+  { id: "fermentation-vat", nombre: "Tina en fermentación" },
 ] as const
 type PiezaId = (typeof PIEZAS)[number]["id"]
 
@@ -122,6 +125,29 @@ const actividad = ref<number | null>(4)
 const cuando = ref<string | null>(null)
 const pasoDemo = ref(1)
 const notaDemo = ref("")
+const ahoraTinaDemo = Date.now()
+const tinaDemo: UsoTina = {
+  organization_id: "org-demo",
+  cycle_id: "ciclo-t2",
+  tina_id: "tina-2",
+  tina: "Tina 2",
+  capacidad_l: 1500,
+  capacity_policy: "flexible",
+  lot_id: "lote-t2",
+  folio: "FER-T2-001",
+  status: "fermentando",
+  formulation_id: "form-1",
+  formulacion: "Formulación 1",
+  started_at: new Date(ahoraTinaDemo - 5 * 86_400_000).toISOString(),
+  started_by: "user-demo",
+  litros: 1300,
+  mediciones: 4,
+  ultima_medicion_at: new Date(ahoraTinaDemo - 28 * 3_600_000).toISOString(),
+  ultima_medicion_dia: 5,
+  ultima_actividad: 4,
+  ultima_temperatura: 28.5,
+  ultimo_brix: 10.1,
+}
 // Destilación (ronda destilacion/r01)
 const litrosPor = ref<Record<string, number | null>>({ t1: 290 })
 const origenesDemo = [
@@ -739,6 +765,28 @@ const miembros = [
         flexible avisa. La usan la formulación y abrir corrida.
       </p>
     </section>
+    <section
+      v-if="visibles.some((p) => p.id === 'fermentation-vat')"
+      id="fermentation-vat"
+      class="pieza"
+    >
+      <h2>Tina en fermentación <code>fermentation-vat</code></h2>
+      <ul class="demo-tina">
+        <FilaUso
+          :uso="tinaDemo"
+          :dia="6"
+          :esperados="7"
+          slug="cuatro-vientos"
+          :puede-medir="true"
+          :puede-gestionar="false"
+          :ahora-ms="ahoraTinaDemo"
+        />
+      </ul>
+      <p class="nota">
+        Componente real de producción con una medición de hace 28 horas. La alerta usa texto, forma
+        y color de refuerzo; la acción abre el flujo existente de medición.
+      </p>
+    </section>
   </main>
 </template>
 
@@ -754,6 +802,12 @@ const miembros = [
   position: static;
   padding: 0;
   border: 0;
+}
+.demo-tina {
+  max-width: 920px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .demo-lateral {
   display: flex;

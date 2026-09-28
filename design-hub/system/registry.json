@@ -2522,6 +2522,64 @@
       }
     }
   },
+  "fermentation-vat": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/fermentation-vat/r01",
+    "documentation": "../Components/fermentation-vat.md",
+    "demo": "../Components/demo/index.html#fermentation-vat",
+    "source": "../../apps/web/src/modules/fermentacion/components/FilaUso.vue",
+    "behavior": "../../apps/web/src/modules/fermentacion/components/FilaUso.vue",
+    "dependencies": [
+      "button",
+      "status-chip",
+      "row-menu"
+    ],
+    "profileDependencies": [],
+    "contract": {
+      "anatomy": "identidad (tina + día) · estado de ciclo · antigüedad de última medición · temperatura/Brix/actividad · acción Registrar medición · menú de gestión",
+      "adaptive": "compact: métricas en filas y acción expandida; medium: tres métricas en columnas; expanded: identidad, antigüedad, métricas y acciones en una línea densa sin ocultar datos",
+      "states": [
+        "default",
+        "overdue-more-than-24h",
+        "never-measured",
+        "read-only",
+        "pending",
+        "failed",
+        "long-content",
+        "missing-values"
+      ],
+      "rules": "Extiende FilaUso como componente Feature/Domain. Atraso estrictamente >24 h con texto + borde + color de refuerzo. Actividad 1–6. Props controladas; navegación y efectos pertenecen al consumidor."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false,
+      "viewports": "pending",
+      "keyboard": "pending",
+      "touch": "pending",
+      "zoom200": "pending",
+      "contrast": "pending",
+      "longText": "pending",
+      "states": "pending"
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/modules/fermentacion/components/FilaUso.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/fermentation-vat-r01/"
+  },
   "fermentacion": {
     "kind": "product-application",
     "status": "candidate",

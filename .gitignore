@@ -17,3 +17,6 @@ supabase/.temp/
 # Cobertura y logs
 coverage/
 *.log
+
+# Caché de paquetes de pnpm (si se crea dentro del repo)
+.pnpm-store/

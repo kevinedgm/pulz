@@ -1,0 +1,112 @@
+artifact: fermentation-vat
+display_name: Tina en fermentación
+round: r01
+owner: lima
+classification:
+  artifact_type: component
+  architectural_type: Feature/Domain
+  disposition: extend
+  existing_piece: apps/web/src/modules/fermentacion/components/FilaUso.vue
+  rationale: "FilaUso ya representa una tina/ciclo y conoce el vocabulario UsoTina; una pieza paralela duplicaría el dominio."
+reuse:
+  - id: button
+    source: apps/web/src/shared/ui/Boton.vue
+    disposition: reuse
+  - id: status-chip
+    source: apps/web/src/shared/ui/ChipEstado.vue
+    disposition: reuse
+  - id: design-system-tokens
+    source: apps/web/src/shared/ui/tokens.css
+    disposition: reuse-as-versioned-evidence
+frozen_structure:
+  anatomy:
+    - identity: "nombre de tina + día de fermentación"
+    - lifecycle: "estado del ciclo"
+    - freshness: "tiempo transcurrido y alerta explícita si >24 h"
+    - metrics: "temperatura, Brix y actividad de la última medición"
+    - primary_action: "Registrar medición"
+  hierarchy: "freshness becomes primary only when overdue; identity remains first in reading order"
+  variants: []
+  states:
+    - default
+    - overdue
+    - never-measured
+    - loading-owned-by-parent
+    - error-owned-by-parent
+    - offline-context-owned-by-parent
+    - read-only
+    - long-content
+    - missing-values
+    - pending
+    - failed
+  content_rules:
+    - "No infer missing measurements: render an em dash."
+    - "Overdue means elapsed time strictly greater than 24 hours."
+    - "Overdue is communicated with text plus non-color shape."
+    - "Activity uses the real 1–6 domain scale and existing labels."
+  behavior:
+    event: "medir via existing router destination"
+    controlled_state: "all business state arrives through typed props; component emits domain actions"
+    repeated_action: "navigation control respects disabled state"
+  adaptive:
+    compact: "one column; metrics become label/value rows; primary action full-width in the component action area"
+    medium: "identity/status header, three-column metrics, action aligned to end"
+    expanded: "identity/freshness/metrics/action compose as a denser grid without hiding data"
+    preserved: "name, day, freshness, all metrics, lifecycle state and action"
+    hidden: "only primary action when permission is absent"
+  accessibility:
+    target: WCAG-2.2-AA
+    main_target: ">=44 CSS px"
+    semantics: "li with labelled heading; metric description list; native link via Boton"
+    focus: "visible system focus and stable single tab stop"
+    color: "meaning never depends on color"
+public_api:
+  props:
+    uso: UsoTina
+    dia: number
+    esperados: number
+    slug: string
+    pendiente: boolean
+    fallo: string|null
+    puedeMedir: boolean
+    puedeGestionar: boolean
+    ahora: "Date|number|string (optional deterministic clock for tests/previews)"
+  emits:
+    - ver
+    - lista
+    - cerrar
+    - corregir
+  slots: []
+implementation:
+  framework: vue3
+  language: typescript
+  style: scoped-css-consuming-existing-css-custom-properties
+  target: apps/web/src/modules/fermentacion/components/FilaUso.vue
+  demo_target: apps/web/hub/DemoHub.vue
+  documentation_target: design-hub/Components/fermentation-vat.md
+registry:
+  id: fermentation-vat
+  initial_status: draft
+  candidate_transition: "only after Candidate Gate evidence"
+  stable_transition: "blocked pending explicit user approval and full Stable Gate"
+normative_sources:
+  present:
+    - .fruti/tests/current/kiwi-decisions.yaml
+    - design-hub/system/registry.json
+    - apps/web/src/shared/ui/tokens.css
+    - apps/web/src/modules/fermentacion/api.ts
+    - docs/DECISIONES.md
+  missing:
+    - "profile truth_sources"
+    - "profile color_law"
+    - "profile type_law"
+validation:
+  result: approved-for-coco
+  returned_to_kiwi: false
+  rules_checked:
+    - "geometry has explicit size, spacing, hierarchy and provenance"
+    - "compact/medium/expanded preserve the complete task"
+    - "no generic card container; grouping follows one actionable domain object"
+    - "primary control is >=44 CSS px"
+  gaps:
+    - "The active profile's design system is NEW and visual normative sources are missing; Coco may only reuse checked-in tokens/components and must report this gap."

@@ -1,0 +1,14 @@
+artifact: fermentation-vat
+framework: vue3
+language: typescript
+component_syntax: script-setup
+styling: scoped-css-with-existing-tokens
+target: apps/web/src/modules/fermentacion/components/FilaUso.vue
+demo: apps/web/hub/DemoHub.vue
+tests: apps/web/src/modules/fermentacion/__tests__/FilaUso.test.ts
+constraints:
+  - preserve_frozen_structure
+  - no_new_global_tokens
+  - props_down_events_up
+  - container_queries_for_component_adaptation
+  - no_business_side_effects_inside_component

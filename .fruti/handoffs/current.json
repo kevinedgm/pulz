@@ -1,0 +1,24 @@
+{
+  "artifact": "fermentation-vat",
+  "round": "r01",
+  "owner": "lima",
+  "nextOwner": "coco",
+  "frozenStructure": true,
+  "evidence": [
+    ".fruti/tests/current/kiwi-f2.html",
+    ".fruti/tests/current/kiwi-decisions.yaml"
+  ],
+  "pieces": [
+    { "name": "FilaUso", "classification": "Feature/Domain component", "disposition": "extend" },
+    { "name": "Boton", "classificationProposal": "primitive", "disposition": "reuse" }
+  ],
+  "requiredStates": ["default", "overdue", "never-measured", "loading", "error", "offline", "read-only", "long-content", "missing-values"],
+  "dataProposal": "UsoTina fields plus dia, puedeMedir and toMedir; derive hours and overdue state from ultima_medicion_at.",
+  "openQuestions": [],
+  "implementationTarget": "apps/web/src/modules/fermentacion/components/FilaUso.vue",
+  "implementationLanguage": "Vue 3 SFC + TypeScript",
+  "stylingStrategy": "Scoped CSS consuming apps/web/src/shared/ui/tokens.css",
+  "registryStatus": "draft",
+  "gaps": ["Active profile has no normative truth_sources, color_law or type_law."],
+  "delta": "Lima approved an extension of FilaUso and froze its anatomy, adaptive behavior, state and API contract."
+}

@@ -1,0 +1,120 @@
+artifact: fermentation-vat
+round: r01
+route: R1
+fidelity: F2
+status: frozen-for-lima
+question: "¿Puede el operador reconocer en menos de unos segundos si una tina requiere medición y actuar sin perder el contexto de su última lectura?"
+primary_verb: registrar_medicion
+observable_result: "La acción abre el flujo de medición existente para el ciclo de la tina."
+facts:
+  - "UsoTina existe en apps/web/src/modules/fermentacion/api.ts."
+  - "La entidad aporta nombre, started_at, ultima_medicion_at, ultima_temperatura, ultimo_brix y ultima_actividad."
+  - "El producto ya tiene una ruta de medición por cycle_id."
+assumptions:
+  - "El umbral solicitado es estrictamente más de 24 horas desde ultima_medicion_at."
+  - "Actividad se muestra como escala 1–6 con etiqueta cuando existe."
+unknowns:
+  - "El perfil no declara fuentes normativas visuales; F2 no reconstruye ninguna."
+geometry:
+  - id: GEO-HEAD-001
+    region: identity-and-status
+    choice: "Nombre con wrap libre; día debajo; estado al extremo en medium/expanded y bajo la identidad en compact."
+    size: "mínimo 44 px de altura útil; nombre sin truncado"
+    spacing: "8 px interno, 16 px hacia antigüedad"
+    hierarchy: primary
+    source: product-context
+    because: "Nombre y día identifican la tina antes de interpretar métricas."
+    affects: [compact, medium, expanded]
+    status: frozen
+  - id: GEO-AGE-001
+    region: measurement-age
+    choice: "Línea propia de 32 px mínimo; al vencer, borde inicial de 4 px + texto explícito."
+    size: "32 px mínimo"
+    spacing: "12 px vertical; 12 px después del borde"
+    hierarchy: primary-when-overdue
+    source: product-context
+    because: "El atraso de más de 24 h determina la urgencia operativa."
+    affects: [compact, medium, expanded]
+    status: frozen
+  - id: GEO-METRICS-001
+    region: last-measurement
+    choice: "Tres métricas pares: columnas en medium/expanded; filas etiqueta-valor en compact."
+    size: "3 columnas minmax(112 px, 1fr); valor 22–24 px tabular"
+    spacing: "12×16 px por celda; separadores de 1 px"
+    density: "exactamente temperatura, Brix y actividad; valor faltante = raya"
+    hierarchy: secondary-comparable
+    overflow: "labels y valores envuelven; nunca scroll horizontal"
+    source: rule
+    because: "Comparar pares en ancho y conservar lectura lineal en compact."
+    affects: [compact, medium, expanded]
+    status: frozen
+  - id: GEO-ACTION-001
+    region: primary-action
+    choice: "Una primaria: al pie y a la derecha en medium/expanded; persistente y full-width en compact."
+    size: "mínimo 44 px; ancho completo en compact"
+    spacing: "16 px después de métricas; respeta safe-area en implementación"
+    hierarchy: primary-action
+    source: rule
+    because: "Una sola acción primaria y alcance de pulgar en compact."
+    affects: [compact, medium, expanded]
+    status: frozen
+adaptive_matrix:
+  - element: identity
+    compact: "preserva nombre, día y estado; una columna"
+    medium: "preserva todo; identidad y estado en dos columnas"
+    expanded: "igual que medium con más aire, sin escalar tipografía"
+    hidden: "nada"
+    technique: "container query"
+    focus_state: "sin impacto"
+  - element: metrics
+    compact: "tres filas etiqueta/valor"
+    medium: "tres columnas iguales"
+    expanded: "tres columnas iguales"
+    hidden: "nada; faltante se representa con raya"
+    technique: "container query + CSS grid"
+    focus_state: "sin controles internos"
+  - element: primary-action
+    compact: "barra inferior persistente, ancho completo"
+    medium: "al pie, alineada al final"
+    expanded: "al pie, alineada al final"
+    hidden: "se oculta únicamente sin permiso"
+    technique: "una sola instancia lógica; presentación adaptativa"
+    focus_state: "orden de tab único y estable"
+states:
+  - default
+  - overdue-more-than-24h
+  - never-measured
+  - loading-same-footprint
+  - empty-no-cycle
+  - recoverable-error
+  - offline-stale-data
+  - read-only-permission
+  - long-content
+  - missing-values
+  - repeated-action-disabled-during-navigation
+accessibility:
+  target: WCAG-2.2-AA
+  primary_touch_target: ">=44 CSS px"
+  color_independence: "texto + peso + borde para atraso"
+  keyboard: "orden identidad → información → acción; foco visible"
+  zoom: "wrap y grid sin ancho fijo; probar 200%"
+standards:
+  loaded:
+    - kiwi/references/brief-funcional.md
+    - kiwi/references/fidelidad.md
+    - kiwi/references/wireframing.md
+    - kiwi/references/geometry-contract.md
+    - kiwi/references/validacion.md
+    - kiwi/references/hig-web-pwa.md
+  missing:
+    - "El perfil PULZ no declara truth_sources, color_law ni type_law normativas."
+handoff:
+  pieces:
+    - name: TinaFermentacion
+      candidate_reuse: domain-component
+      local_or_system: pending-lima
+    - name: Boton
+      candidate_reuse: existing
+      local_or_system: system
+  data_proposal: "UsoTina + dia + puedeMedir + toMedir; derivados: horasDesdeMedicion y vencida24h."
+  open_questions: []

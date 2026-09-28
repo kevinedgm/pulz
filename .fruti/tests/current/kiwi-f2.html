@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="wf-fidelidad" content="F2">
+  <title>Wireframe F2 · Tina en fermentación · r01</title>
+  <link rel="stylesheet" href="../../../.codex/skills/kiwi/assets/wireframe-kit.css">
+  <style>
+    /* Geometría de estructura, no estilo final. Solo tokens neutrales del kit. */
+    .vat { border-block: 1px solid var(--wf-g3); padding-block: var(--wf-s4); }
+    .vat__head { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--wf-s2) var(--wf-s4); align-items:start; }
+    .vat__title { margin:0; font-size:20px; overflow-wrap:anywhere; }
+    .vat__day { margin:2px 0 0; font-weight:700; }
+    .vat__age { display:flex; gap:var(--wf-s2); align-items:center; margin-block:var(--wf-s3); min-height:32px; }
+    .vat__age--late { border-inline-start:4px solid var(--wf-g9); padding-inline-start:var(--wf-s3); font-weight:700; }
+    .vat__metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-block:1px solid var(--wf-g3); }
+    .vat__metric { min-width:0; padding:var(--wf-s3) var(--wf-s4); }
+    .vat__metric + .vat__metric { border-inline-start:1px solid var(--wf-g3); }
+    .vat__label { display:block; color:var(--wf-g6); font-size:12px; }
+    .vat__value { display:block; margin-top:var(--wf-s1); font-size:24px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+    .vat__foot { display:flex; justify-content:flex-end; padding-top:var(--wf-s4); }
+    .state-panel { margin-top:var(--wf-s6); padding-top:var(--wf-s4); border-top:1px dashed var(--wf-g4); }
+    .state-panel h2 { margin-top:0; }
+    .skeleton { display:grid; gap:var(--wf-s3); }
+    .skeleton .wf-line { height:18px; }
+    @container wf (max-width: 1023px) {
+      .vat__metrics { grid-template-columns:repeat(3,minmax(112px,1fr)); }
+    }
+    @container wf (max-width: 599px) {
+      .vat { padding-bottom:calc(var(--wf-s7) + var(--wf-s3)); }
+      .vat__head { grid-template-columns:1fr; }
+      .vat__status { justify-self:start; }
+      .vat__metrics { grid-template-columns:1fr; }
+      .vat__metric { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:baseline; gap:var(--wf-s3); padding:var(--wf-s3) 0; }
+      .vat__metric + .vat__metric { border-inline-start:0; border-block-start:1px solid var(--wf-g3); }
+      .vat__value { font-size:22px; text-align:end; }
+      .vat__foot { display:none; }
+    }
+  </style>
+</head>
+<body class="wf">
+  <div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+    <strong>Tina en fermentación · r01 · F2</strong>
+    <fieldset><legend>Espacio</legend>
+      <button data-w="1440" aria-pressed="true">expanded 1440</button>
+      <button data-w="834" aria-pressed="false">medium 834</button>
+      <button data-w="393" aria-pressed="false">compact 393</button>
+    </fieldset>
+    <label>Estado
+      <select id="wf-state" data-wf-states>
+        <option value="default">Al día</option>
+        <option value="late">Más de 24 h</option>
+        <option value="never">Nunca medida</option>
+        <option value="loading">Carga</option>
+        <option value="empty">Vacío</option>
+        <option value="error">Error</option>
+        <option value="offline">Sin conexión</option>
+        <option value="denied">Sin permiso</option>
+        <option value="long">Contenido largo</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+  </div>
+
+  <div class="wf-stage">
+    <p class="wf-frame-label" id="wf-label"></p>
+    <div class="wf-frame" id="wf-frame">
+      <main class="wf-main" id="wf-view" tabindex="-1"></main>
+      <div class="wf-bottom">
+        <button class="wf-btn wf-btn--primary" style="flex:1" data-action>Registrar medición</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const metricas = (temp = "28.5 °C", brix = "10.1 °Bx", actividad = "Media · 4/6") => `
+      <div class="vat__metrics" aria-label="Última medición">
+        <div class="vat__metric"><span class="vat__label">Temperatura</span><strong class="vat__value">${temp}</strong></div>
+        <div class="vat__metric"><span class="vat__label">Brix</span><strong class="vat__value">${brix}</strong></div>
+        <div class="vat__metric"><span class="vat__label">Actividad</span><strong class="vat__value">${actividad}</strong></div>
+      </div>`
+    const tina = ({ nombre="Tina 2", edad="Hace 3 h", alerta="", temp, brix, actividad } = {}) => `
+      <article class="vat" aria-labelledby="vat-title">
+        <div class="vat__head">
+          <div><h1 class="vat__title" id="vat-title">${nombre}</h1><p class="vat__day">Día 6 de fermentación</p></div>
+          <span class="wf-status wf-status--partial vat__status">Fermentando</span>
+        </div>
+        <p class="vat__age ${alerta ? "vat__age--late" : ""}"><span aria-hidden="true">◷</span><span><b>Última medición:</b> ${edad}${alerta ? ` · ${alerta}` : ""}</span></p>
+        ${metricas(temp, brix, actividad)}
+        <div class="vat__foot"><button class="wf-btn wf-btn--primary" data-wf-persist data-action>Registrar medición</button></div>
+      </article>`
+    const nota = `<span class="wf-note">Grupo funcional: la tina es una unidad de decisión independiente. La antigüedad gobierna la urgencia; las tres métricas se comparan como una sola lectura.</span>`
+    const V = {
+      default: () => tina() + nota,
+      late: () => tina({ edad:"Hace 27 h", alerta:"Medición atrasada" }) + `<span class="wf-note">La alerta usa texto, peso y borde; nunca depende del color.</span>`,
+      never: () => tina({ edad:"Sin mediciones", alerta:"Registra la primera medición", temp:"—", brix:"—", actividad:"—" }) + nota,
+      loading: () => `<article class="vat skeleton" aria-busy="true" aria-label="Cargando tina"><div class="wf-line" style="width:45%"></div><div class="wf-line" style="width:28%"></div><div class="wf-line" style="height:92px"></div><div class="wf-line" style="width:150px;justify-self:end;height:44px"></div></article><span class="wf-note">Skeleton con la misma huella principal.</span>`,
+      empty: () => `<div class="wf-state"><h1>No hay una tina asignada</h1><p class="wf-muted">El componente no se muestra sin un ciclo; vuelve a la lista para elegir una tina en fermentación.</p><button class="wf-btn">Volver a tinas</button></div>`,
+      error: () => `<div class="wf-state" role="alert"><h1>No pudimos cargar esta tina</h1><p class="wf-muted">Revisa tu conexión. No se perdió ninguna captura.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div>`,
+      offline: () => `<p class="wf-banner" role="status"><b>Sin conexión.</b> Ves la última medición guardada. Puedes registrar otra; se enviará al reconectar.</p>` + tina({edad:"Hace 27 h", alerta:"Dato guardado · puede estar desactualizado"}),
+      denied: () => tina() + `<div class="state-panel"><h2>Solo lectura</h2><p class="wf-muted">Puedes revisar la tina, pero tu rol no permite registrar mediciones.</p></div>`,
+      long: () => tina({nombre:"Tina de sabino del lote experimental de septiembre — sección norte", edad:"Hace 128 h", alerta:"Medición muy atrasada", actividad:"Muy activa · 6/6"}) + nota,
+    }
+    let S = { w: 1440, state: "default" }
+    function render() {
+      const frame = document.getElementById("wf-frame")
+      frame.style.setProperty("--wf-w", S.w + "px")
+      const label = document.getElementById("wf-label")
+      label.style.setProperty("--wf-w", S.w + "px")
+      label.textContent = `Marco ${S.w}px · ${S.w < 600 ? "compact" : S.w < 1024 ? "medium" : "expanded"} · referencia del perfil`
+      document.getElementById("wf-view").innerHTML = V[S.state]()
+      document.querySelector(".wf-bottom").hidden = S.state === "denied" || S.state === "loading" || S.state === "error"
+      document.querySelectorAll("[data-w]").forEach((button) => button.setAttribute("aria-pressed", String(+button.dataset.w === S.w)))
+    }
+    document.addEventListener("click", (event) => {
+      const size = event.target.closest("[data-w]")
+      if (size) { S.w = +size.dataset.w; render() }
+      if (event.target.closest("[data-action]")) alert("Endpoint observable: abre el flujo existente para registrar una medición.")
+    })
+    document.getElementById("wf-state").addEventListener("change", (event) => { S.state = event.target.value; render() })
+    document.getElementById("wf-notes").addEventListener("change", (event) => document.body.classList.toggle("wf-no-notes", !event.target.checked))
+    render()
+  </script>
+</body>
+</html>

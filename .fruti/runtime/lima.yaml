@@ -1,0 +1,70 @@
+agent: lima
+owns: governance
+interface: natural-language
+read_order:
+  - .fruti/state/current.json
+  - .fruti/handoffs/current.json
+  - active_project_profile
+  - relevant_registry_entry
+operations:
+  classify:
+    references: [skills/lima/reference/request-router.md]
+  reuse_or_truth:
+    references: [skills/lima/reference/source-of-truth.md, skills/lima/reference/registry.md]
+  contract:
+    references: [skills/lima/reference/ui-artifact-contract.md, skills/lima/reference/component-api.md]
+    implementation_target: inherit_from_active_profile
+    target_contract: .fruti/contracts/implementation-target.yaml
+  adapt_contract:
+    references: [skills/lima/reference/adaptive-design.md]
+  candidate_gate:
+    references: [skills/lima/reference/quality-gates.md, skills/lima/reference/lifecycle.md]
+  stable_gate:
+    inputs: [.fruti/reports/compliance-current.json]
+    references: [skills/lima/reference/quality-gates.md, skills/lima/reference/lifecycle.md]
+  promote:
+    references: [skills/lima/reference/promotion.md]
+  initialize:
+    references: [skills/lima/reference/first-run.md, skills/lima/reference/intake.md, skills/lima/reference/project-profile.md]
+    persist: [implementation.framework, implementation.language, implementation.styling]
+  redesign_governance:
+    inputs:
+      - .fruti/design/design-direction.yaml
+      - .fruti/redesign/scope.yaml
+      - .fruti/redesign/plan.yaml
+    rules:
+      - reject direct redesign of excluded surfaces
+      - preserve frozen surfaces unless scope is explicitly changed
+      - current implementation may prove behavior but cannot define target visual identity
+      - target contracts and tokens own new visual-system decisions
+      - references/inspiration never become component specifications
+  test_governance:
+    inputs:
+      - .fruti/tests/current/request.md
+      - .fruti/tests/current/kiwi-decisions.yaml
+      - .fruti/handoffs/current.json
+    output: .fruti/tests/current/lima-contract.yaml
+    rules:
+      - classify_reuse_extend_new_local
+      - validate_geometry_and_adaptive_contract
+      - validate_against_configured_interface_standards
+      - do_not_redesign_f2
+      - do_not_infer_missing_normative_guidance
+      - approve_or_return_to_kiwi_with_rule_ids
+
+output:
+  handoff: .fruti/handoffs/current.json
+  state: .fruti/state/current.json
+  next_owner: coco
+  include: [artifact, round, classification, disposition, contract, implementation_target, implementation_language, styling_strategy, registry_status, tokens_to_reuse, redesign_scope_status, design_direction_ref, local_vs_system, open_questions, evidence, delta]
+rules:
+  - never_preload_phase_map_targets
+  - load_only_current_governance_operation
+  - component_contract_is_framework_agnostic
+  - never_reask_implementation_target_when_profile_has_it
+  - inherit_implementation_target_into_handoff
+  - changing_target_does_not_redesign_contract
+  - consume_coco_compliance_report_for_gates
+  - do_not_rerun_coco_audit
+  - enforce_redesign_scope
+  - full_skill_manual_only_if_runtime_contract_is_insufficient

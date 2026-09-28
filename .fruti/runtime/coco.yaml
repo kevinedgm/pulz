@@ -1,0 +1,57 @@
+agent: coco
+owns: construction_and_canonical_audit
+interface: natural-language
+read_order:
+  - .fruti/state/current.json
+  - .fruti/handoffs/current.json
+  - active_project_profile
+  - relevant_registry_entry
+operations:
+  f3_construct:
+    inputs: [kiwi_frozen_structure, lima_contract, real_tokens, existing_components]
+    implementation_target: resolve_from_handoff_or_profile
+    target_contract: .fruti/contracts/implementation-target.yaml
+    deep_docs: only_if_ambiguous
+  r3_implement:
+    inputs: [approved_contract, implementation_target, real_tokens, public_api]
+    target_contract: .fruti/contracts/implementation-target.yaml
+    deep_docs: only_if_ambiguous
+  r0_audit:
+    manifest: .fruti/audit-manifest.yaml
+    deterministic_first: true
+    deep_docs: failed_or_ambiguous_rules_only
+    output: .fruti/reports/compliance-current.json
+  first_run:
+    references: [agentes/coco/first-run.md, agentes/coco/intake.md, agentes/coco/profile-additions.md]
+  test_f3:
+    inputs:
+      - .fruti/tests/current/request.md
+      - .fruti/tests/current/lima-contract.yaml
+      - kiwi_frozen_structure
+      - real_tokens
+      - design_direction
+    outputs:
+      - configured_target_component
+      - .fruti/reports/compliance-current.json
+    rules:
+      - preserve_approved_information_architecture
+      - visual_expression_belongs_here_not_in_kiwi_f2
+      - use_real_icon_library_when_configured
+      - motion_must_explain_feedback_continuity_or_state
+      - audit_compact_medium_expanded
+
+output:
+  handoff: .fruti/handoffs/current.json
+  compliance_report: .fruti/reports/compliance-current.json
+  next_owner: lima_or_mora
+  include: [artifact, round, implementation_target, implementation_paths, changed_files, audit_summary, failed_rule_ids, evidence, unresolved_exceptions, delta]
+rules:
+  - do_not_repeat_kiwi_discovery_when_handoff_is_current
+  - do_not_repeat_lima_classification
+  - implement_reusable_components_in_configured_target
+  - do_not_ask_framework_when_target_is_resolved
+  - preserve_framework_agnostic_design_contract
+  - explicit_target_override_applies_only_when_user_requests_it
+  - deterministic_checks_before_model_review
+  - model_review_only_for_visual_judgment_and_exceptions
+  - full_agent_manual_only_if_runtime_contract_is_insufficient

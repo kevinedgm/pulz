@@ -16,6 +16,7 @@ import { encolar, nuevaClave, type ElementoCola } from "../../shared/offline/col
 import type { FotoPendiente } from "../../shared/offline/fotos"
 import { guardarInstantanea, leerInstantanea } from "../../shared/offline/instantanea"
 import type { Ajustes } from "../configuracion/api"
+export { ETIQUETAS_ACIDEZ, ETIQUETAS_ACTIVIDAD, ETIQUETAS_DULZOR, litros } from "./dominio"
 
 export type EstadoCiclo = "fermentando" | "lista" | "en_vaciado" | "cerrado"
 export type ModoMedicion = "minimo" | "completo"
@@ -155,9 +156,6 @@ export function lecturasParaRpc(lecturas: Lectura[]) {
     p_valores: lecturas.map((l) => l.valor),
   }
 }
-export const ETIQUETAS_ACTIVIDAD = ["quieta", "apenas", "poca", "media", "mucha", "muy activa"]
-export const ETIQUETAS_DULZOR = ["nada", "poco", "algo", "medio", "dulce", "muy dulce"]
-export const ETIQUETAS_ACIDEZ = ["nada", "poca", "algo", "media", "ácida", "muy ácida"]
 
 // ── Lecturas con instantánea ───────────────────────────────────────────
 export interface DatosFermentacion {
@@ -418,4 +416,3 @@ export function cuandoCorto(iso: string | null, hoy = new Date()): string {
   if (dias === 1) return `ayer ${hora}`
   return new Intl.DateTimeFormat("es-MX", { day: "numeric", month: "short" }).format(d)
 }
-export const litros = (n: number) => `${new Intl.NumberFormat("es-MX").format(n)} L`
