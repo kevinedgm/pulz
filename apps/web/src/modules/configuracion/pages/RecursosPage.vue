@@ -3,32 +3,28 @@ import { computed, onMounted, ref } from "vue"
 import {
   BloqueEstado,
   Boton,
-  CampoNumero,
   CampoTexto,
   CapaTarea,
   ChipEstado,
   ListaApilada,
   MenuFila,
-  SegmentoOpciones,
   Selector,
   type AccionFila,
 } from "../../../shared/ui"
 import { useAcceso } from "../../acceso/store"
 import {
   catalogoDeKind,
-  crearRecurso,
   editarRecurso,
   elementosCatalogo,
   KINDS,
   recursos as cargarRecursos,
   recursosEnUso,
-  type CapacityPolicy,
   type ElementoCatalogo,
-  type LiquidClass,
   type Recurso,
   type RecursoEnUso,
   type ResourceKind,
 } from "../api"
+import RecursoCapa from "../components/RecursoCapa.vue"
 import SoloAdmin from "../components/SoloAdmin.vue"
 
 // Recursos (§3, §10.3; ronda configuracion/r01, congelada). Un modelo para
@@ -51,50 +47,13 @@ const capa = ref<Capa>(null)
 const ocupado = ref(false)
 const errorCapa = ref<string | null>(null)
 
-const form = ref({
-  kind: "tanque" as ResourceKind,
-  code: "",
-  type_item_id: "",
-  capacity: null as number | null,
-  capacity_policy: "flexible" as CapacityPolicy,
-  liquid_class: "" as LiquidClass | "",
-  location: "",
-})
-const tocado = ref({ code: false, capacity: false })
-
-const OPC_KIND = KINDS.map((k) => ({ valor: k.valor, etiqueta: k.etiqueta }))
 const OPC_FILTRO = [
   { valor: "todos", etiqueta: "Todos" },
   ...KINDS.map((k) => ({ valor: k.valor, etiqueta: k.plural })),
 ]
-const OPC_POLITICA = [
-  {
-    valor: "estricta" as CapacityPolicy,
-    etiqueta: "Estricta",
-    ayuda: "No deja pasarse de la capacidad.",
-  },
-  {
-    valor: "flexible" as CapacityPolicy,
-    etiqueta: "Flexible",
-    ayuda: "Avisa si te pasas, pero deja.",
-  },
-  { valor: "libre" as CapacityPolicy, etiqueta: "Libre", ayuda: "No mira la capacidad." },
-]
-const OPC_CLASE = [
-  { valor: "mezcal", etiqueta: "Mezcal" },
-  { valor: "ordinario", etiqueta: "Ordinario" },
-  { valor: "colas", etiqueta: "Colas" },
-  { valor: "puntas", etiqueta: "Puntas" },
-]
-const unidadDe = (k: ResourceKind) => KINDS.find((x) => x.valor === k)!.unidad
 const tipoNombre = (r: Recurso) =>
   tipos.value[catalogoDeKind(r.kind)]?.find((t) => t.id === r.type_item_id)?.name ?? "—"
 const kindEtiqueta = (k: ResourceKind) => KINDS.find((x) => x.valor === k)!.etiqueta
-const opcTipos = computed(() =>
-  (tipos.value[catalogoDeKind(form.value.kind)] ?? [])
-    .filter((t) => t.active || t.id === form.value.type_item_id)
-    .map((t) => ({ valor: t.id, etiqueta: t.name })),
-)
 const visibles = computed(() => {
   const q = busqueda.value.trim().toLowerCase()
   return (lista.value ?? []).filter(
@@ -103,24 +62,8 @@ const visibles = computed(() => {
       (!q || r.code.toLowerCase().includes(q)),
   )
 })
-const errorCode = computed(() =>
-  tocado.value.code && !form.value.code.trim() ? "Falta el código." : undefined,
-)
-const errorCap = computed(() =>
-  tocado.value.capacity && form.value.capacity !== null && form.value.capacity <= 0
-    ? "Debe ser mayor a cero."
-    : undefined,
-)
-const errorClase = computed(() =>
-  form.value.kind === "colector" && !form.value.liquid_class
-    ? "Elige la clase de líquido."
-    : undefined,
-)
-const valido = computed(
-  () =>
-    form.value.code.trim().length > 0 &&
-    !errorCap.value &&
-    (form.value.kind !== "colector" || !!form.value.liquid_class),
+const kindInicial = computed<ResourceKind>(() =>
+  filtro.value === "todos" ? "tanque" : filtro.value,
 )
 
 async function cargar() {
@@ -129,9 +72,8 @@ async function cargar() {
     const [rs, uso] = await Promise.all([cargarRecursos(org.value), recursosEnUso(org.value)])
     lista.value = rs
     enUso.value = Object.fromEntries(uso.map((u) => [u.resource_id, u]))
-    const kinds = [...new Set(rs.map((r) => r.kind))]
-    for (const k of KINDS.map((x) => x.valor)) {
-      if (!tipos.value[catalogoDeKind(k)] && (kinds.includes(k) || true))
+    for (const k of [...new Set(rs.map((r) => r.kind))]) {
+      if (!tipos.value[catalogoDeKind(k)])
         tipos.value[catalogoDeKind(k)] = await elementosCatalogo(org.value, catalogoDeKind(k))
     }
   } catch (e) {
@@ -142,79 +84,15 @@ onMounted(() => {
   if (acceso.esAdmin) cargar()
 })
 
-function cambiarKind() {
-  form.value.type_item_id = ""
-  form.value.liquid_class = ""
-}
-function abrirAlta() {
-  const kind = filtro.value === "todos" ? "tanque" : filtro.value
-  form.value = {
-    kind,
-    code: "",
-    type_item_id: "",
-    capacity: null,
-    capacity_policy: kind === "horno" || kind === "molino" ? "libre" : "flexible",
-    liquid_class: "",
-    location: "",
-  }
-  tocado.value = { code: false, capacity: false }
-  errorCapa.value = null
-  capa.value = { tipo: "alta" }
-}
-function abrirEditar(r: Recurso) {
-  form.value = {
-    kind: r.kind,
-    code: r.code,
-    type_item_id: r.type_item_id ?? "",
-    capacity: r.capacity,
-    capacity_policy: r.capacity_policy,
-    liquid_class: r.liquid_class ?? "",
-    location: r.location ?? "",
-  }
-  tocado.value = { code: false, capacity: false }
-  errorCapa.value = null
-  capa.value = { tipo: "editar", r }
-}
 function cerrarCapa() {
-  if (
-    (capa.value?.tipo === "alta" || capa.value?.tipo === "editar") &&
-    form.value.code &&
-    !confirm("¿Descartar lo que escribiste?")
-  )
-    return
   capa.value = null
   errorCapa.value = null
 }
-async function guardar() {
-  tocado.value = { code: true, capacity: true }
-  if (!valido.value || ocupado.value || !capa.value) return
-  ocupado.value = true
-  errorCapa.value = null
-  const f = form.value
-  const datos = {
-    code: f.code.trim(),
-    type_item_id: f.type_item_id || null,
-    capacity: f.capacity,
-    capacity_unit: unidadDe(f.kind),
-    capacity_policy: f.capacity_policy,
-    liquid_class: f.kind === "colector" ? (f.liquid_class as LiquidClass) : null,
-    location: f.location.trim() || null,
-  }
-  try {
-    if (capa.value.tipo === "alta") {
-      await crearRecurso(org.value, { kind: f.kind, ...datos })
-      aviso.value = `${datos.code} quedó dado de alta.`
-    } else if (capa.value.tipo === "editar") {
-      await editarRecurso(org.value, capa.value.r.id, datos)
-      aviso.value = `${datos.code} quedó actualizado.`
-    }
-    capa.value = null
-    await cargar()
-  } catch (e) {
-    errorCapa.value = (e as Error).message
-  } finally {
-    ocupado.value = false
-  }
+async function guardado(code: string) {
+  aviso.value =
+    capa.value?.tipo === "editar" ? `${code} quedó actualizado.` : `${code} quedó dado de alta.`
+  capa.value = null
+  await cargar()
 }
 function accionesDe(r: Recurso): AccionFila[] {
   return r.active
@@ -229,7 +107,7 @@ function accionesDe(r: Recurso): AccionFila[] {
 }
 async function accion(id: string, r: Recurso) {
   aviso.value = null
-  if (id === "editar") abrirEditar(r)
+  if (id === "editar") capa.value = { tipo: "editar", r }
   else if (id === "desactivar") capa.value = { tipo: "desactivar", r }
   else if (id === "reactivar") {
     try {
@@ -260,7 +138,7 @@ const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
 </script>
 
 <template>
-  <SoloAdmin v-slot="{ puedeEscribir }" seccion="Recursos">
+  <SoloAdmin v-slot="{ puedeEscribir, slug }" seccion="Recursos">
     <div class="rec__cab">
       <Boton
         v-if="lista && lista.length"
@@ -270,7 +148,7 @@ const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
         :motivo-deshabilitado="
           !puedeEscribir ? 'Para cambiar algo necesitas señal y suscripción vigente.' : undefined
         "
-        @click="abrirAlta"
+        @click="capa = { tipo: 'alta' }"
         >Agregar recurso</Boton
       >
       <CampoTexto
@@ -282,6 +160,11 @@ const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
       />
       <Selector v-model="filtro" etiqueta="Tipo de recurso" :opciones="OPC_FILTRO" />
     </div>
+    <p class="rec__enlace">
+      <RouterLink :to="`/e/${slug}/arranque`"
+        >Registrar lo que hay en tanques, tinas y colectores</RouterLink
+      >
+    </p>
     <p v-if="aviso" class="rec__aviso" role="status">{{ aviso }}</p>
 
     <div v-if="lista === null && !errorCarga" class="rec__esqueleto" aria-busy="true">
@@ -301,7 +184,9 @@ const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
       titulo="Aún no hay recursos"
       texto="Empieza por lo que ya tienes: tinas, alambiques y tanques. Los tipos vienen listos."
     >
-      <Boton v-if="puedeEscribir" intent="primary" @click="abrirAlta">Agregar recurso</Boton>
+      <Boton v-if="puedeEscribir" intent="primary" @click="capa = { tipo: 'alta' }"
+        >Agregar recurso</Boton
+      >
     </BloqueEstado>
     <BloqueEstado
       v-else-if="visibles.length === 0"
@@ -361,80 +246,15 @@ const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
       </tr>
     </ListaApilada>
 
-    <!-- Alta / edición -->
-    <CapaTarea
+    <RecursoCapa
+      :org="org"
       :abierta="capa?.tipo === 'alta' || capa?.tipo === 'editar'"
-      :titulo="capa?.tipo === 'editar' ? `Editar ${capa.r.code}` : 'Agregar recurso'"
-      etiqueta-cerrar="Cancelar"
+      :recurso="capa?.tipo === 'editar' ? capa.r : null"
+      :kind-inicial="kindInicial"
+      :puede-escribir="puedeEscribir"
       @cerrar="cerrarCapa"
-    >
-      <form id="form-recurso" class="rec__form" novalidate @submit.prevent="guardar">
-        <Selector
-          v-if="capa?.tipo === 'alta'"
-          v-model="form.kind"
-          etiqueta="Tipo de recurso"
-          :opciones="OPC_KIND"
-          ayuda="Define qué catálogo de tipos y qué unidad aplican."
-          @update:model-value="cambiarKind()"
-        />
-        <CampoTexto
-          v-model="form.code"
-          etiqueta="Código (como le dicen)"
-          autocapitalize="sentences"
-          autocomplete="off"
-          ayuda="Único en la empresa. Ej.: «Tanque 3», «Alambique chico»."
-          :error="errorCode"
-          @blur="tocado.code = true"
-        />
-        <Selector
-          v-model="form.type_item_id"
-          etiqueta="Tipo (catálogo)"
-          :opciones="opcTipos"
-          placeholder="Sin tipo"
-          :ayuda="`Solo los ${KINDS.find((k) => k.valor === form.kind)?.plural.toLowerCase()}; se editan en Catálogos.`"
-        />
-        <CampoNumero
-          v-model="form.capacity"
-          etiqueta="Capacidad"
-          :unidad="unidadDe(form.kind)"
-          :error="errorCap"
-          ayuda="Opcional. Sirve para avisar o frenar según la política."
-          @blur="tocado.capacity = true"
-        />
-        <SegmentoOpciones
-          v-model="form.capacity_policy"
-          etiqueta="Política de capacidad"
-          :opciones="OPC_POLITICA"
-        />
-        <Selector
-          v-if="form.kind === 'colector'"
-          v-model="form.liquid_class"
-          etiqueta="Clase de líquido"
-          :opciones="OPC_CLASE"
-          placeholder="Elige una"
-          :error="errorClase"
-          ayuda="Un colector recibe una sola clase."
-        />
-        <CampoTexto
-          v-model="form.location"
-          etiqueta="Ubicación (opcional)"
-          autocapitalize="sentences"
-          placeholder="Cuarto de atrás"
-        />
-        <p v-if="errorCapa" class="rec__rechazo" role="alert">{{ errorCapa }}</p>
-      </form>
-      <template #acciones>
-        <Boton
-          intent="primary"
-          type="submit"
-          form="form-recurso"
-          :loading="ocupado"
-          :disabled="!puedeEscribir"
-          >Guardar recurso</Boton
-        >
-        <Boton intent="secondary" @click="cerrarCapa">Cancelar</Boton>
-      </template>
-    </CapaTarea>
+      @guardado="guardado"
+    />
 
     <!-- Desactivar -->
     <CapaTarea
@@ -484,6 +304,13 @@ const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
     align-items: end;
   }
 }
+.rec__enlace {
+  margin: 0 0 var(--sp-4);
+  font-size: 0.9375rem;
+}
+.rec__enlace a {
+  color: var(--ink-900);
+}
 .rec__aviso {
   margin: 0 0 var(--sp-3);
   padding: var(--sp-2) var(--sp-3);
@@ -504,10 +331,6 @@ const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
   display: block;
   font-size: 0.8125rem;
   color: var(--muted);
-}
-.rec__form {
-  display: grid;
-  gap: var(--sp-4);
 }
 .rec__texto {
   margin: 0 0 var(--sp-3);

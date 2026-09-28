@@ -47,7 +47,7 @@ watch(() => acceso.membresiaActual?.organization_id, cargar)
       titulo="¿Qué tienes hoy?"
       texto="Dinos qué hay en tus tanques y tinas para empezar a registrar desde el día uno."
     >
-      <Boton v-if="!acceso.modoLectura" intent="primary" :to="`/e/${acceso.slug}/granel`"
+      <Boton v-if="!acceso.modoLectura" intent="primary" :to="`/e/${acceso.slug}/arranque`"
         >Empezar</Boton
       >
     </BloqueEstado>
