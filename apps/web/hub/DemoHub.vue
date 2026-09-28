@@ -4,12 +4,15 @@ import sprite from "../src/shared/ui/iconos.svg?raw"
 import {
   Aviso,
   BloqueEstado,
+  BloqueMarca,
   Boton,
   BotonFlotante,
   CabeceraPagina,
   NavInferior,
   NavLateral,
+  CampoColor,
   CampoContrasena,
+  CampoNumero,
   CampoTexto,
   CapaTarea,
   ChipEstado,
@@ -36,6 +39,12 @@ const PIEZAS = [
   { id: "side-nav", nombre: "Menú lateral" },
   { id: "bottom-nav", nombre: "Navegación inferior" },
   { id: "fab", nombre: "Botón flotante" },
+  { id: "select", nombre: "Select" },
+  { id: "number-field", nombre: "Campo numérico" },
+  { id: "switch", nombre: "Interruptor" },
+  { id: "color-field", nombre: "Campo de color" },
+  { id: "file-picker", nombre: "Selector de archivo" },
+  { id: "brand-block", nombre: "Bloque de marca" },
 ] as const
 type PiezaId = (typeof PIEZAS)[number]["id"]
 
@@ -87,6 +96,13 @@ const fijos = destinos.filter((d) =>
 )
 const navActual = ref("fermentacion")
 const cuentaAbierta = ref(false)
+// Configuración (ronda configuracion/r01)
+const catalogo = ref("tipo_tina")
+const capacidad = ref<number | null>(1500)
+const puntas = ref(false)
+const color = ref("#7A3E1D")
+const logoPrevia = ref<string | null>(null)
+const previaDe = (f: File) => (logoPrevia.value = URL.createObjectURL(f))
 const miembros = [
   { n: "Benito Cruz", u: null, rol: "admin", est: "on" as const, txt: "activo" },
   { n: "Aurelia Santiago", u: "aurelia", rol: "productor", est: "on" as const, txt: "activo" },
@@ -445,6 +461,110 @@ const miembros = [
       <p class="nota">
         Solo compact: la primaria del destino, 56 px, sobre la navegación inferior. En ≥600 no se
         muestra.
+      </p>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'select')" id="select" class="pieza">
+      <h2>Select <code>select</code></h2>
+      <div class="col">
+        <Selector
+          v-model="catalogo"
+          etiqueta="Catálogo"
+          :opciones="[
+            { valor: 'tipo_tina', etiqueta: 'Tipos de tina' },
+            { valor: 'tipo_tanque', etiqueta: 'Tipos de tanque' },
+            { valor: 'concepto', etiqueta: 'Conceptos de movimiento' },
+            { valor: 'especie', etiqueta: 'Especies' },
+          ]"
+          ayuda="Para 4 o más opciones; con 3 o menos, segmento."
+        />
+        <Selector
+          model-value=""
+          etiqueta="Tipo (catálogo)"
+          placeholder="Sin tipo"
+          :opciones="[{ valor: 'a', etiqueta: 'Tanque de acero inoxidable' }]"
+          error="Elige el tipo."
+        />
+      </div>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'number-field')" id="number-field" class="pieza">
+      <h2>Campo numérico <code>number-field</code></h2>
+      <div class="col">
+        <CampoNumero v-model="capacidad" etiqueta="Capacidad" unidad="L" ayuda="Opcional." />
+        <CampoNumero
+          :model-value="9"
+          etiqueta="Hora del recordatorio"
+          :decimales="false"
+          error="Entre 0 y 23."
+        />
+      </div>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'switch')" id="switch" class="pieza">
+      <h2>Interruptor <code>switch</code></h2>
+      <div class="col">
+        <Interruptor
+          v-model="puntas"
+          etiqueta="¿Capturan puntas?"
+          ayuda="Casi nadie (menos de 300 mL)."
+        />
+        <Interruptor
+          :model-value="true"
+          etiqueta="Avisar si una segunda pasada mezcla tinas"
+          disabled
+        />
+      </div>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'color-field')" id="color-field" class="pieza">
+      <h2>Campo de color <code>color-field</code></h2>
+      <div class="col">
+        <CampoColor
+          v-model="color"
+          etiqueta="Color de la empresa"
+          ayuda="Solo como acento; nunca detrás de texto."
+        />
+      </div>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'file-picker')" id="file-picker" class="pieza">
+      <h2>Selector de archivo <code>file-picker</code></h2>
+      <div class="col">
+        <SelectorArchivo
+          etiqueta="Logo"
+          :preview-url="logoPrevia"
+          ayuda="PNG, JPG o WebP hasta 2 MB."
+          texto-subir="Subir logo…"
+          @elegir="previaDe($event)"
+          @quitar="logoPrevia = null"
+        />
+      </div>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'brand-block')" id="brand-block" class="pieza">
+      <h2>Bloque de marca <code>brand-block</code></h2>
+      <div class="col">
+        <BloqueMarca
+          :marca="{
+            nombre: 'Mezcal Cuatro Vientos',
+            mensaje: 'Registro de producción del palenque',
+            acento: color,
+          }"
+          nivel="p"
+        />
+        <BloqueMarca
+          :marca="{
+            nombre:
+              'Destilería Artesanal de los Cuatro Vientos del Valle de Tlacolula y Anexas, S. de R.L. de C.V.',
+            acento: '#173F87',
+          }"
+          nivel="p"
+        />
+        <BloqueMarca />
+      </div>
+      <p class="nota">
+        La misma pieza en el portal (antes de entrar) y en la vista previa de Configuración.
       </p>
     </section>
   </main>

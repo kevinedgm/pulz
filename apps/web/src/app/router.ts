@@ -2,7 +2,8 @@ import { createRouter, createWebHistory, type RouteLocationRaw } from "vue-route
 import { rutasAcceso } from "../modules/acceso/routes"
 import { useAcceso } from "../modules/acceso/store"
 import { rutasEquipo } from "../modules/equipo/routes"
-import { rutaConfiguracion, rutasProceso } from "../modules/proceso/routes"
+import { rutasConfiguracion } from "../modules/configuracion/routes"
+import { rutasProceso } from "../modules/proceso/routes"
 import type { IconoNombre } from "../shared/ui"
 
 declare module "vue-router" {
@@ -33,7 +34,7 @@ const router = createRouter({
       meta: { shell: true, destino: "inicio", titulo: "Inicio" },
     },
     ...rutasProceso,
-    rutaConfiguracion,
+    ...rutasConfiguracion,
     ...rutasEquipo,
     // Cualquier otra ruta: el mismo 404 genérico (§7.4)
     {

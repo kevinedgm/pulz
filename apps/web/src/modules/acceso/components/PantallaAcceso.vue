@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { Aviso } from "../../../shared/ui"
+import { computed } from "vue"
+import { Aviso, BloqueMarca } from "../../../shared/ui"
 import { useConexion } from "../../../shared/utils/conexion"
-import type { PortalBranding } from "../api"
-import MarcaPortal from "./MarcaPortal.vue"
+import { urlLogo, type PortalBranding } from "../api"
 
 // Composición común de las pantallas sin sesión (portal, cambio obligatorio,
 // bienvenida): tarjeta de 440 centrada en medium/expanded, una columna a
 // sangre en compact con la acción primaria persistente abajo (slot
 // "primaria"). Un solo aviso a la vez: sin conexión gana a solo lectura.
-defineProps<{ portal: PortalBranding | undefined; soloLectura?: boolean }>()
+const props = defineProps<{ portal: PortalBranding | undefined; soloLectura?: boolean }>()
 const { enLinea } = useConexion()
+// brand-block del sistema (antes MarcaPortal local): lo único que se ve sin sesión (§7.1)
+const marca = computed(() =>
+  props.portal
+    ? {
+        nombre: props.portal.name,
+        mensaje: props.portal.welcome_message,
+        logoUrl: urlLogo(props.portal.logo_path),
+        acento: props.portal.brand_color,
+      }
+    : undefined,
+)
 defineExpose({ enLinea })
 </script>
 
@@ -22,7 +33,7 @@ defineExpose({ enLinea })
       >La suscripción venció: puedes consultar y exportar, no registrar.</Aviso
     >
     <main class="pantalla__tarjeta">
-      <MarcaPortal :portal="portal" />
+      <BloqueMarca :marca="marca" />
       <div class="pantalla__cuerpo"><slot :en-linea="enLinea" /></div>
       <div v-if="$slots.primaria" class="pantalla__primaria">
         <slot name="primaria" :en-linea="enLinea" />

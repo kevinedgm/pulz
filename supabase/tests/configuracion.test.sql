@@ -1,4 +1,5 @@
--- pgTAP · Configuración (Fase 4): quién escribe qué según §11.1 y la RLS
+-- pgTAP · Configuración (Fase 4): quién escribe qué según §11.1 y la RLS,
+-- recurso_en_uso (0025)
 -- real (0013); nunca se borra (active = false); el cambio de slug deja
 -- historial y el viejo redirige; la carga inicial crea lote y saldo; el
 -- bucket 'branding' existe con sus políticas (0024).
@@ -136,6 +137,18 @@ begin
   return next throws_like(
     format($q$select registrar_entrada('%s', gen_random_uuid(), now(), 'granel', '%s', 10)$q$, a, v_tanque),
     'NO_PERMITIDO:%', 'el operador no registra cargas iniciales');
+
+  -- ── recurso_en_uso (0025): saldo y ciclos abiertos por recurso ───────
+  perform pg_temp.como(prod_a);
+  return next ok((select saldo_l from recurso_en_uso(a) where resource_id = v_tanque) = 300,
+                 'la productora ve 300 L en el tanque nuevo (recurso_en_uso)');
+  return next ok((select ciclos_abiertos from recurso_en_uso(a)
+                   where resource_id = (select id from resources where organization_id = a and code = 'Tina 1')) >= 0,
+                 'recurso_en_uso devuelve ciclos abiertos de una tina');
+  return next is((select count(*) from recurso_en_uso(a)), (select count(*) from resources where organization_id = a),
+                 'una fila por recurso de la empresa');
+  perform pg_temp.como(admin_b);
+  return next is((select count(*) from recurso_en_uso(a)), 0::bigint, 'el admin de B no ve los recursos de A');
 
   -- ── Storage: bucket y políticas (0024) ───────────────────────────────
   perform pg_temp.superuser();

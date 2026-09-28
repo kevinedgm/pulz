@@ -14,5 +14,11 @@ export { default as CabeceraPagina } from "./CabeceraPagina.vue" // page-header
 export { default as NavLateral } from "./NavLateral.vue" // side-nav
 export { default as NavInferior } from "./NavInferior.vue" // bottom-nav
 export { default as BotonFlotante } from "./BotonFlotante.vue" // fab
+export { default as Selector } from "./Selector.vue" // select
+export { default as CampoNumero } from "./CampoNumero.vue" // number-field
+export { default as Interruptor } from "./Interruptor.vue" // switch
+export { default as CampoColor } from "./CampoColor.vue" // color-field
+export { default as SelectorArchivo } from "./SelectorArchivo.vue" // file-picker
+export { default as BloqueMarca } from "./BloqueMarca.vue" // brand-block
 export { default as Icono } from "./Icono.vue" // ayuda local: un solo set (sprite)
 export * from "./tipos"

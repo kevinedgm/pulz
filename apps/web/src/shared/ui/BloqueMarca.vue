@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import { urlLogo, type PortalBranding } from "../api"
 
-// Bloque de marca del portal (product-application, local: solo existe aquí).
-// Lo único que se ve sin sesión (§7.1). El brand_color de la empresa entra
-// solo como acento (franja fina y fondo del monograma) sobre superficie
-// neutra: nunca detrás de texto (ley de color del perfil).
-const props = defineProps<{ portal: PortalBranding | undefined }>()
-
-const logo = computed(() => (props.portal ? urlLogo(props.portal.logo_path) : null))
+// Contrato: registry "brand-block" (sube al sistema desde
+// modules/acceso/MarcaPortal: la misma pieza en el portal y en la vista
+// previa de Configuración). Logo 56px o monograma, nombre en 2 líneas
+// (completo en title), mensaje ≤140, línea de acento con el color de la
+// empresa — solo acento, nunca detrás de texto. Sin `marca` = esqueleto.
+const props = defineProps<{
+  marca?: {
+    nombre: string
+    mensaje?: string | null
+    logoUrl?: string | null
+    acento?: string | null
+  }
+  nivel?: "h1" | "p"
+}>()
 const iniciales = computed(() =>
-  (props.portal?.name ?? "")
+  (props.marca?.nombre ?? "")
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
@@ -20,16 +26,22 @@ const iniciales = computed(() =>
 </script>
 
 <template>
-  <header
-    class="marca"
-    :style="portal?.brand_color ? { '--acento': portal.brand_color } : undefined"
-  >
-    <template v-if="portal">
-      <img v-if="logo" class="marca__logo" :src="logo" alt="" width="56" height="56" />
+  <header class="marca" :style="marca?.acento ? { '--acento': marca.acento } : undefined">
+    <template v-if="marca">
+      <img
+        v-if="marca.logoUrl"
+        class="marca__logo"
+        :src="marca.logoUrl"
+        alt=""
+        width="56"
+        height="56"
+      />
       <span v-else class="marca__monograma" aria-hidden="true">{{ iniciales }}</span>
       <div class="marca__texto">
-        <h1 class="marca__nombre" :title="portal.name">{{ portal.name }}</h1>
-        <p v-if="portal.welcome_message" class="marca__mensaje">{{ portal.welcome_message }}</p>
+        <component :is="nivel ?? 'h1'" class="marca__nombre" :title="marca.nombre">{{
+          marca.nombre
+        }}</component>
+        <p v-if="marca.mensaje" class="marca__mensaje">{{ marca.mensaje }}</p>
       </div>
     </template>
     <template v-else>
@@ -50,6 +62,7 @@ const iniciales = computed(() =>
   align-items: center;
   padding-top: var(--sp-3);
   border-top: 4px solid var(--acento);
+  min-width: 0;
 }
 .marca__logo,
 .marca__monograma {

@@ -47,3 +47,10 @@ export interface ItemNav {
   icono: IconoNombre
   to: string
 }
+
+// Opción de un select nativo (registry: select)
+export interface OpcionSelect {
+  valor: string
+  etiqueta: string
+  disabled?: boolean
+}
