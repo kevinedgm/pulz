@@ -156,6 +156,10 @@ ciclo completo):** recursos, catálogos (14), ajustes, portal y marca con
 logo real a Storage y cambio de enlace; `0025_recurso_en_uso.sql`; 6 piezas
 nuevas del sistema (select, number-field, switch, color-field, file-picker,
 brand-block); 27 piezas `candidate`; pgTAP 37/37; Vitest 47/47; Playwright
-8/8 con escrituras reales deshechas (67 capturas). **Siguiente:** ronda
-`arranque/r01` → prueba de punta a punta con empresa nueva (tarea 5) →
-ronda del Hub HTML (`lab/hub/r01`).
+8/8 con escrituras reales deshechas (67 capturas). **Primer arranque hecho
+(ronda `arranque/r01`, ciclo completo):** lista de recipientes con
+vacío/tiene algo, carga inicial real por `registrar_entrada` idempotente,
+`RecursoCapa` compartida con Recursos; 28 piezas `candidate`; Vitest 52/52;
+Playwright 8/8 con escrituras reales en Prueba B (Tanque B1, 300 L @ 47).
+**Siguiente:** prueba de punta a punta con empresa nueva (tarea 5) → ronda
+del Hub HTML (`lab/hub/r01`) → cierre de la Fase 4 (`db reset --linked`).

@@ -491,6 +491,22 @@ pedir una ronda `rNN+1` o cambiar la regla en `CLAUDE.md`.
    anota. Se prueba con archivos reales en coco.
 6. Reordenar catálogos (`sort_order`) no entra (Could).
 
+## 2026-09-27 · arranque/r01 aprobada con estas decisiones (CLAUDE.md §4)
+
+1. **Lista de recipientes, no asistente de pasos**: cada tanque, tina o
+   colector activo es una tarjeta que decide «vacío» o «tiene algo» y guarda
+   sola. Se puede dejar a medias y volver; no hay orden obligatorio.
+2. **Guardar es irreversible sin modal**: el botón dice exactamente
+   «Guardar 300 L en Tanque 1» y la tarjeta muestra lo guardado; los litros
+   se corrigen después en Granel con un ajuste (Fase 5).
+3. **«Vacío» no existe en la base**: se guarda en el navegador por empresa.
+   Lo real (saldo o ciclo abierto) sale de `recurso_en_uso`. Si molesta en
+   uso real: `organization_settings.arranque_hecho` en r02.
+4. **`RecursoCapa` sale de `RecursosPage`** como componente del módulo de
+   configuración (no del sistema): la usan Recursos y Arranque.
+5. Solo líquidos (tanques, tinas, colectores); kilos iniciales de maguey u
+   horneadas a medias son otra ronda.
+
 ## 2026-09-27 · coco, configuracion/r01: lo que salió al construir
 
 - **Manejadores inline de una sola sentencia.** Prettier partió

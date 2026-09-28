@@ -1,7 +1,7 @@
 // Evidencia de la ronda configuracion/r01 (coco, R3). Recorre las cuatro
 // secciones reales como admin (Benito) contra el dev server y el proyecto
 // alojado en 1440/1024/768/390 × claro/oscuro. En 1440/light además ejecuta
-// escrituras REALES y las deshace: alta de "Tanque QA" y su desactivación,
+// escrituras REALES y las deshace: alta de TANQUE y su desactivación,
 // especie propia y su ocultado, guardado de ajustes (sin cambios de valor),
 // logo real a Storage y su retiro, cambio de enlace y vuelta al original.
 //   node design-hub/qa/evidencia-configuracion.mjs   (con `web` corriendo)
@@ -15,6 +15,10 @@ const SLUG = "cuatro-vientos"
 const AQUI = path.dirname(fileURLToPath(import.meta.url))
 const OUT = path.join(AQUI, "evidence", "configuracion-r01")
 const LOGO = path.join(AQUI, "..", "..", "apps", "web", "public", "icons", "pwa-192x192.png")
+// Códigos únicos por corrida: la semilla conserva los de corridas previas hasta el db reset
+const SUF = Math.random().toString(36).slice(2, 6)
+const TANQUE = `Tanque QA ${SUF}`
+const ESPECIE = `Especie QA ${SUF}`
 const ANCHOS = [1440, 1024, 768, 390]
 const TEMAS = ["light", "dark"]
 const fallos = []
@@ -76,17 +80,17 @@ for (const tema of TEMAS) {
     if (escribe) {
       const capaAlta = page.getByRole("dialog", { name: "Agregar recurso" })
       await capaAlta.getByLabel("Tipo de recurso").selectOption("tanque")
-      await capaAlta.getByLabel("Código (como le dicen)").fill("Tanque QA")
+      await capaAlta.getByLabel("Código (como le dicen)").fill(TANQUE)
       await capaAlta.getByLabel("Capacidad", { exact: true }).fill("250")
       await page.getByRole("button", { name: "Guardar recurso" }).click()
-      await page.getByRole("button", { name: "Acciones para Tanque QA" }).waitFor({ timeout: 15000 })
+      await page.getByRole("button", { name: `Acciones para ${TANQUE}` }).waitFor({ timeout: 15000 })
       await foto("recursos-creado")
-      await page.getByRole("button", { name: "Acciones para Tanque QA" }).click()
+      await page.getByRole("button", { name: `Acciones para ${TANQUE}` }).click()
       await page.getByRole("menuitem", { name: "Desactivar…" }).click()
-      await page.getByRole("dialog", { name: "¿Desactivar Tanque QA?" }).waitFor()
+      await page.getByRole("dialog", { name: `¿Desactivar ${TANQUE}?` }).waitFor()
       await foto("recursos-desactivar")
       await page.getByRole("button", { name: "Desactivar", exact: true }).click()
-      await page.getByText("Tanque QA ya no aparece").waitFor({ timeout: 15000 })
+      await page.getByText(`${TANQUE} ya no aparece`).waitFor({ timeout: 15000 })
       // Tanque 2 tiene saldo real (carga inicial de la semilla): la confirmación avisa
       await page.getByRole("button", { name: "Acciones para Tanque 2" }).click()
       await page.getByRole("menuitem", { name: "Desactivar…" }).click()
@@ -110,15 +114,15 @@ for (const tema of TEMAS) {
       await page.getByRole("button", { name: "Agregar especie" }).first().click()
       await page.getByRole("dialog", { name: "Agregar especie" }).waitFor()
       const capaEsp = page.getByRole("dialog", { name: "Agregar especie" })
-      await capaEsp.getByLabel("Nombre", { exact: true }).fill("Especie QA")
+      await capaEsp.getByLabel("Nombre", { exact: true }).fill(ESPECIE)
       await capaEsp.getByLabel("Nombre científico (opcional)").fill("Agave qa")
       await foto("catalogos-alta")
       await page.getByRole("button", { name: "Guardar", exact: true }).click()
-      await page.getByRole("button", { name: "Acciones para Especie QA" }).waitFor({ timeout: 15000 })
-      await page.getByRole("button", { name: "Acciones para Especie QA" }).click()
+      await page.getByRole("button", { name: `Acciones para ${ESPECIE}` }).waitFor({ timeout: 15000 })
+      await page.getByRole("button", { name: `Acciones para ${ESPECIE}` }).click()
       await page.getByRole("menuitem", { name: "Ocultar…" }).click()
       await page.getByRole("button", { name: "Ocultar", exact: true }).click()
-      await page.getByText("Especie QA ya no se ofrece").waitFor({ timeout: 15000 })
+      await page.getByText(`${ESPECIE} ya no se ofrece`).waitFor({ timeout: 15000 })
       await foto("catalogos-oculto")
     }
 

@@ -33,7 +33,7 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
 
 Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
 [`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/) y
-[`lab/configuracion/r01`](lab/configuracion/r01/).
+[`lab/configuracion/r01`](lab/configuracion/r01/) y [`lab/arranque/r01`](lab/arranque/r01/).
 
 ## Foundations
 
@@ -81,6 +81,7 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
 | [Equipo](Screens/equipo.md) | `equipo` | `/e/:slug/equipo` |
 | [Inicio](Screens/inicio.md) | `inicio` | `/e/:slug/inicio` |
 | [Configuración](Screens/configuracion.md) | `configuracion` | `/e/:slug/configuracion/{recursos,catalogos,ajustes,portal}` |
+| [Primer arranque](Screens/arranque.md) | `arranque` | `/e/:slug/arranque` |
 
 ## Lo que NO está hecho (no lo busques aquí como hecho)
 
