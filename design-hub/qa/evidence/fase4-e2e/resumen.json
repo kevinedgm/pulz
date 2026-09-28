@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-09-28T03:26:36.397Z",
+  "slug": "prueba-d-35ip3",
+  "correo": "duena-d-35ip3@pulz-qa.mx",
+  "confirmacionSimuladaPorSQL": true,
+  "pasos": [
+    "signup-company",
+    "portal",
+    "inicio sin lotes",
+    "arranque: Tanque 1 creado",
+    "300 L @ 47 guardados",
+    "Listo → Inicio Hoy",
+    "logo a Storage",
+    "Recursos 300 L dentro",
+    "portal público con logo"
+  ],
+  "fallos": []
+}

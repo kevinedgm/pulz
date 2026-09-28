@@ -203,3 +203,13 @@ arranque usa las piezas de Configuración).
 
 Nota: el smoke dejó a `prueba.auto` en Cuatro Vientos del proyecto de
 desarrollo; el siguiente `db reset --linked` lo borra.
+
+## Resultados reales (2026-09-27) — interfaz, tareas 2–6
+
+| Criterio (§16 Fase 4) | Comando real | Resultado |
+|---|---|---|
+| Un dueño nuevo, desde cero, configura su palenque y registra una carga inicial en un tanque sin ayuda | `node design-hub/qa/e2e-fase4.mjs` (signup-company real → portal → Inicio «¿Qué tienes hoy?» → arranque: Tanque 1 creado → 300 L @ 47 guardados → Listo → Inicio «Hoy» → logo a Storage → Recursos «300 L dentro» → portal público con logo) | **OK** a la primera. `prueba-d-<sufijo>` queda en el proyecto de desarrollo hasta el `db reset`. **Nota:** Auth exige confirmar el correo; la prueba lo simula por SQL con el CLI (en producción llega por correo): se declara, no se finge |
+| Cada pantalla con ronda de kiwi aprobada y auditoría de coco | `lab/{shell,configuracion,arranque}/r01/` con brief, wireframe, declaración, orden de lima, declaración de coco y compuerta de lima (aprobaciones automáticas per CLAUDE.md §4, anotadas en DECISIONES) | **OK** |
+| mora documentó en el Design Hub | `design-hub/README.md` + 15 fichas nuevas (6 shell, 7 configuración, 2 pantallas) | **OK** (Markdown; el shell HTML del Hub es la ronda `lab/hub/r01`) |
+| Capturas 390/1024/1440 claro y oscuro sin desbordes | `qa/evidence/{shell,configuracion,arranque}-r01/` = 50 + 67 + 13; `zoom-acceso.mjs` 18/18 | **OK** (más 768 por el perfil) |
+| pgTAP · Vitest · lint · tipos | `configuracion.test.sql` 37/37 · `vitest` 52/52 · eslint 0/0 · `vue-tsc` ✔ | **OK** |
