@@ -156,8 +156,8 @@ begin
   return next is((select array_length(allowed_mime_types, 1) from storage.buckets where id = 'branding'), 3, 'solo png/jpeg/webp');
   return next is((select count(*) from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname like 'branding_%'), 4::bigint,
                  'cuatro políticas branding_* en storage.objects');
-  return next is(branding_org_of(a::text || '/logo.png'), a, 'branding_org_of lee la carpeta raíz');
-  return next is(branding_org_of('logo.png'), null::uuid, 'sin carpeta no hay empresa');
+  return next is(storage_org_of(a::text || '/logo.png'), a, 'storage_org_of lee la carpeta raíz');
+  return next is(storage_org_of('logo.png'), null::uuid, 'sin carpeta no hay empresa');
 end $$;
 
 select * from runtests((select nspname from pg_namespace where oid = pg_my_temp_schema())::name, '^test_');

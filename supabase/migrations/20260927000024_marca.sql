@@ -15,8 +15,9 @@ on conflict (id) do update
       file_size_limit = excluded.file_size_limit,
       allowed_mime_types = excluded.allowed_mime_types;
 
--- La carpeta raíz del objeto es la empresa: 'b66cf468-…/logo.png'
-create function branding_org_of(p_name text) returns uuid
+-- La carpeta raíz del objeto es la empresa: 'b66cf468-…/logo.png'. Sirve a
+-- todos los buckets por empresa (branding aquí, evidencias en 0027).
+create function storage_org_of(p_name text) returns uuid
 language sql immutable set search_path = public as $$
   select case when (storage.foldername(p_name))[1] ~ '^[0-9a-f-]{36}$'
               then (storage.foldername(p_name))[1]::uuid end;
@@ -27,14 +28,14 @@ create policy branding_select on storage.objects for select to public
 
 create policy branding_insert on storage.objects for insert to authenticated
   with check (bucket_id = 'branding'
-              and (select has_role(branding_org_of(name), array['admin']::member_role[])));
+              and (select has_role(storage_org_of(name), array['admin']::member_role[])));
 
 create policy branding_update on storage.objects for update to authenticated
   using (bucket_id = 'branding'
-         and (select has_role(branding_org_of(name), array['admin']::member_role[])))
+         and (select has_role(storage_org_of(name), array['admin']::member_role[])))
   with check (bucket_id = 'branding'
-              and (select has_role(branding_org_of(name), array['admin']::member_role[])));
+              and (select has_role(storage_org_of(name), array['admin']::member_role[])));
 
 create policy branding_delete on storage.objects for delete to authenticated
   using (bucket_id = 'branding'
-         and (select has_role(branding_org_of(name), array['admin']::member_role[])));
+         and (select has_role(storage_org_of(name), array['admin']::member_role[])));

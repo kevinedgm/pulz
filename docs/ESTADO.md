@@ -16,6 +16,9 @@
 por el servidor (`0026_vistas_proceso.sql`, `0027_evidencias.sql`, pgTAP
 `proceso.test.sql`) y la cola offline, luego cinco rondas de kiwi
 (fermentación → destilación → granel → maguey-horneado → inicio-hoy).**
+Servidor **hecho** (2026-09-27): `0026` (5 vistas) y `0027` (bucket
+`evidencias` + insert de `attachments`), pgTAP `proceso.test.sql` 57/57,
+configuración 37/37, advisors 0 errores. Sigue la cola offline.
 
 **Fase 4 cerrada el 2026-09-27**: servidor, shell, configuración, primer
 arranque, prueba e2e con empresa nueva y Design Hub con sitio HTML propio,
@@ -119,7 +122,7 @@ adaptación probadas con Playwright); falta la compuerta de lima y mora.
 | Node / pnpm | 22.23.3 vía `nvm` · pnpm 9.15.9 vía Corepack |
 | git | `github.com/kevinedgm/pulz`, rama `main` |
 | Supabase CLI | 2.118.0, enlazado a `ypgeiyorgktshgbzhgfh`. Nunca `supabase start` ni `test db` (Docker); pgTAP por `db query --linked -f`; funciones con `deploy --use-api`; **`config diff` antes de cualquier `config push`** |
-| Proyecto Supabase | 25 migraciones + semilla por RPC; 3 Edge Functions desplegadas; hook de intentos no disponible (plan); **cada `db reset --linked` lo reconstruye** |
+| Proyecto Supabase | 27 migraciones + semilla por RPC; 3 Edge Functions desplegadas; hook de intentos no disponible (plan); **cada `db reset --linked` lo reconstruye** |
 | Cloudflare | `apps/web/wrangler.toml` (Pages, `dist/`); la Pages Function se prueba con `pnpm --filter @pulz/web test:portal` (requiere `pnpm build` antes) |
 | Docker / Colima / Podman | desinstalados a propósito, regla permanente |
 | Dev server / Hub | `.claude/launch.json`: `web` (Vite 5173) y `hub` (`python3 -m http.server 4321` → `http://localhost:4321/design-hub/site/`); demos con `pnpm --filter @pulz/web build:hub`, sitio con `pnpm build:hub-site` (versionado; regenerar con cada cambio de ficha o registry) |

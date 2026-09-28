@@ -422,7 +422,7 @@ construye desde ese código; no hay promoción aparte.
   no en el panel: `insert into storage.buckets … on conflict` y `create
   policy … on storage.objects` funcionan con `db reset --linked` en el plan
   actual. La carpeta raíz del objeto es la empresa (`<org_id>/logo.png`) y
-  `branding_org_of(name)` + `has_role(…, admin)` deciden quién escribe; la
+  `storage_org_of(name)` + `has_role(…, admin)` deciden quién escribe; la
   lectura es pública porque el portal se ve antes de iniciar sesión. SVG
   queda fuera de `allowed_mime_types` a propósito (puede llevar script y se
   sirve público); 2 MB de tope.
@@ -598,3 +598,28 @@ Regla completa, con el diagrama del flujo, en `CLAUDE.md`.
   presentación que corresponde al ancho, no un solo selector.
 - Aprobaciones de kiwi/mora/lima decididas en automático (CLAUDE.md §4):
   tooling interno, sin reglas de negocio del maestro.
+
+## 2026-09-27 · Fase 5, servidor: vistas de proceso y evidencias
+
+- **Las vistas de 0026 entregan fechas, no "días"**: `tinas_en_uso` da
+  `started_at` y la última medición; qué día del ciclo es hoy y si "toca
+  medir" lo calcula el navegador en su zona horaria. El servidor corre en
+  UTC y no sabe dónde está el palenque; meter una zona fija en SQL habría
+  sido inventar un dato. Revertir: columna `dia_hoy` con `at time zone` si
+  algún día `organizations` guarda su zona.
+- **`corridas` incluye cerradas** (la interfaz filtra por `status`): la
+  lista de Destilación necesita el historial, no solo las abiertas.
+  Orígenes y cortes van como `jsonb` para una sola consulta por pantalla.
+- **`tanques` lista los activos aunque estén vacíos**; los lotes dentro van
+  con su grado declarado vigente, quién y cuándo (§5.1).
+- **Bucket `evidencias` privado, 10 MB, jpeg/png/webp/pdf**: cualquier
+  miembro lee y sube dentro de su carpeta `<organization_id>/…`; **nadie
+  borra ni reemplaza** (no hay política): una evidencia es evidencia.
+  `attachments` gana política de insert para cualquier miembro (0013 solo
+  daba lectura) y sigue sin update/delete.
+- **`branding_org_of` → `storage_org_of`** (0024, régimen "desde cero"):
+  la misma función sirve a los dos buckets por empresa.
+- **Aislamiento y triggers**: cuando el admin de B intenta adjuntar a A, el
+  trigger `attachments_check_kind` falla antes que la RLS porque la RLS ya
+  le esconde el catálogo de A. El resultado es el mismo (no puede); la
+  prueba lo documenta en vez de forzar el mensaje de RLS.

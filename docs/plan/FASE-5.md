@@ -290,3 +290,12 @@ adelantar las rondas 2–4 mientras coco construye la 1.
 4. Toda captura lleva "¿Cuándo pasó?" con valor por defecto ahora.
 5. Foto opcional solo en medición y corte; bucket `evidencias` privado por
    migración.
+
+## Resultados reales (2026-09-27) — servidor, tarea 1
+
+| Qué | Comando real | Resultado |
+|---|---|---|
+| `0026_vistas_proceso.sql` (`tinas_en_uso`, `mediciones_del_ciclo`, `corridas`, `colectores_con_saldo`, `tanques`) y `0027_evidencias.sql` (bucket privado + políticas + insert de `attachments`) | `supabase db reset --linked --yes` | **OK**: 27 migraciones + semilla |
+| pgTAP de proceso | `supabase db query --linked -f supabase/tests/proceso.test.sql` | **57/57**: las vistas reproducen §15.1 (Tina 1 870 L en vaciado con 5 mediciones; Tina 2 1,400; Tina 3 1,300 sin formulación; DES-001 290 L cargados / 60 cortados; DES-003 2ª pasada con dos orígenes; Colector colas COL-002 16 L a 10 %; Tanque 1 250 L G-COMPRA-01 46 % declarada; Tanque 2 341.8 L a 44.9 % por Benito), Prueba B ve vacío, bucket privado con 2 políticas, el operador adjunta su foto, nadie edita, B no adjunta a A |
+| pgTAP de configuración tras renombrar `storage_org_of` | `…configuracion.test.sql` | **37/37** |
+| Advisors | `supabase db advisors --linked` | 0 errores |
