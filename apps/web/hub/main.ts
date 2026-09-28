@@ -3,6 +3,7 @@
 // los tokens REALES. No es una copia paralela del sistema.
 import { createApp, defineComponent } from "vue"
 import { createMemoryHistory, createRouter } from "vue-router"
+import "../src/shared/ui/fonts.css"
 import "../src/shared/ui/tokens.css"
 import "../src/style.css"
 import DemoHub from "./DemoHub.vue"

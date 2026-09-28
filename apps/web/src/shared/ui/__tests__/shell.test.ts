@@ -66,7 +66,9 @@ describe("NavLateral (side-nav)", () => {
       "Destilería Artesanal de los Cuatro Vientos",
     )
     expect(w.findAll("a")).toHaveLength(4)
-    expect(w.get('a[aria-current="page"]').text()).toContain("Fermentación")
+    const destino = w.get('a[aria-current="page"]')
+    expect(destino.text().replaceAll("\u00ad", "")).toBe("Fermentación")
+    expect(destino.attributes("aria-label")).toBe("Fermentación")
     await w.get("button").trigger("click")
     expect(w.emitted("cuenta")).toHaveLength(1)
 

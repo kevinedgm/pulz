@@ -1,0 +1,11 @@
+{
+  "from": "coco",
+  "to": "lima",
+  "round": "r01",
+  "status": "ready-for-candidate-gate",
+  "historicalApprovalUsed": false,
+  "contract": ".fruti/tests/r01/lima-contract.yaml",
+  "compliance": ".fruti/tests/r01/coco-compliance.json",
+  "implementation": "apps/web/src/modules/fermentacion/components/FilaUso.vue",
+  "evidence": "design-hub/qa/evidence/fermentation-vat-immutable-r01/resultado.json"
+}

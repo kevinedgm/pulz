@@ -1,0 +1,37 @@
+round: maguey-horneado/r03
+evaluated_at: '2026-09-28'
+owner: lima
+operation: validate_f2
+classification: product-application
+status: rejected
+approval_reused: false
+coco_authorized: false
+mora_eligible: false
+f2_owner: kiwi
+geometry_owner: kiwi
+geometry_frozen_for_implementation: false
+artifact: design-hub/lab/maguey-horneado/r03/index.html
+decisions: design-hub/lab/maguey-horneado/r03/kiwi-decisions.yaml
+preserve: [dos_destinos, grupos_horneado, saldo_restante, agotados_plegados, continuidad_formulacion, cantidades_vacias, revision_antes_de_consumir, borrador_en_memoria, error_reactivo, unidades_kg, foco_dialog, columnas_alineadas, rail_completo]
+reuse_proposed: [origin-allocation, number-field, datetime-field, select, button, state-block, task-layer, app-shell]
+new_system_pieces: []
+registry_mutated: false
+foundations: [.fruti/foundations/approval.yaml, .fruti/tokens.json]
+dimensions:
+  technical: pass_f2_local
+  structural: fail
+  visual: fail
+  accessibility: partial
+  design_system: pending_f3_validation
+  documentation: partial
+resolved_rule_ids: [MH-MINIMAL-02, MH-STATE-02, MH-DATA-02, MH-ERROR-02, MH-A11Y-02, MH-UNIT-02]
+partially_resolved_rule_ids: [MH-ADAPT-02]
+failed_rule_ids: [MH-NAV-03, MH-DOC-03]
+return_to: kiwi
+reconsider:
+  - 'MH-NAV-03: separación y composición de etiquetas de navegación inferior a 320 px, sin truncar destinos ni reducir targets'
+  - 'MH-DOC-03: notas del propio F2 deben coincidir con la acción primaria de cabecera, no mencionar FAB retirado'
+next_round: maguey-horneado/r04
+evidence: design-hub/lab/maguey-horneado/r03/evidence
+review_limit: 'Impeccable: una revisión, un lote de corrección, una confirmación; detener el pulido de esta ronda'
+unverified: [text_zoom_200, forced_colors, physical_touch, screen_reader, production_f3, real_persistence]

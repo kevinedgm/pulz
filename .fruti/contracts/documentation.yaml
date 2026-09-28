@@ -1,0 +1,37 @@
+artifact: fermentation-vat
+mode: M2+M3
+canonical_page: design-hub/Components/fermentation-vat.md
+generated_page: design-hub/site/Components/fermentation-vat.html
+registry: design-hub/system/registry.json#fermentation-vat
+code:
+  - apps/web/src/modules/fermentacion/components/FilaUso.vue
+  - apps/web/src/modules/fermentacion/dominio.ts
+preview:
+  kind: real-compiled-component
+  source: apps/web/hub/DemoHub.vue#fermentation-vat
+  build: design-hub/Components/demo/index.html?pieza=fermentation-vat&solo=1
+  verified_by: .fruti/reports/compliance-current.json
+doc_standard:
+  source: mora-internal-minimum
+  order:
+    - overview
+    - usage
+    - preview
+    - anatomy
+    - states
+    - behavior
+    - responsive
+    - accessibility
+    - api
+    - implementation
+    - qa-lifecycle
+shell:
+  status: mechanically-resolved-profile-gap
+  files:
+    - design-hub/assets/hub-shell.css
+    - design-hub/assets/hub-navigation.js
+build_command: node design-hub/scripts/build-hub.mjs
+gaps:
+  - "mora.doc_standard is empty; internal minimum used"
+  - "mora.doc_shell is empty; active shell resolved from build-hub.mjs"
+  - "mora.hub_preview is empty; registry demo + build script prove the real preview route"

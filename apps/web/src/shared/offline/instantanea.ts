@@ -3,6 +3,31 @@
 // se abran sin señal con "datos de hace X". No es caché de verdad: es lo
 // mínimo para poder capturar donde no hay señal (§8.3).
 import { abrirDb, STORE_INSTANTANEAS } from "./cola"
+import { ErrorAcceso, esErrorDeRed, MENSAJE_RED } from "../supabase/errores"
+
+export interface ConInstantanea<T> {
+  datos: T
+  instantanea: string | null
+}
+
+// Solo una pérdida de red permite datos antiguos; un rechazo de permisos
+// o del dominio nunca se sustituye por una lectura de caché.
+export async function conInstantanea<T>(
+  org: string,
+  nombre: string,
+  pedir: () => Promise<T>,
+): Promise<ConInstantanea<T>> {
+  try {
+    const datos = await pedir()
+    await guardarInstantanea(org, nombre, datos).catch(() => {})
+    return { datos, instantanea: null }
+  } catch (e) {
+    if (!esErrorDeRed(e)) throw e
+    const guardada = await leerInstantanea<T>(org, nombre).catch(() => null)
+    if (!guardada) throw new ErrorAcceso("RED", MENSAJE_RED)
+    return { datos: guardada.datos, instantanea: guardada.guardado_en }
+  }
+}
 
 export interface Instantanea<T> {
   datos: T

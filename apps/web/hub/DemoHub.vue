@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue"
-import sprite from "../src/shared/ui/iconos.svg?raw"
 import FilaUso from "../src/modules/fermentacion/components/FilaUso.vue"
+import DemoMagueyHorneado from "./DemoMagueyHorneado.vue"
 import type { UsoTina } from "../src/modules/fermentacion/api"
 import {
   Aviso,
@@ -33,6 +33,7 @@ import {
 // Demos F3 de las piezas registradas (design-hub/system/registry.json).
 // ?pieza=<id> muestra una sola pieza; ?solo=1 sin cromo (para los marcos).
 const PIEZAS = [
+  { id: "maguey-horneado", nombre: "Maguey y Horneado" },
   { id: "button", nombre: "Botón" },
   { id: "text-field", nombre: "Campo de texto" },
   { id: "password-field", nombre: "Campo de contraseña" },
@@ -181,9 +182,6 @@ const miembros = [
 </script>
 
 <template>
-  <!-- eslint-disable-next-line vue/no-v-html -- sprite estático del repo, no dato de usuario -->
-  <div class="sprite" aria-hidden="true" v-html="sprite"></div>
-
   <header v-if="!solo" class="hub-barra">
     <strong><Icono nombre="pulz-mark" :size="22" /> Design Hub · PULZ · demos F3</strong>
     <label
@@ -459,6 +457,13 @@ const miembros = [
       <p v-if="ultimaAccion" class="nota" role="status">Acción elegida: {{ ultimaAccion }}</p>
     </section>
 
+    <section
+      v-if="visibles.some((p) => p.id === 'maguey-horneado')"
+      id="maguey-horneado"
+      class="pieza pieza--mh"
+    >
+      <DemoMagueyHorneado />
+    </section>
     <section v-if="visibles.some((p) => p.id === 'page-header')" id="page-header" class="pieza">
       <h2>Cabecera de página <code>page-header</code></h2>
       <CabeceraPagina
@@ -804,7 +809,7 @@ const miembros = [
   border: 0;
 }
 .demo-tina {
-  max-width: 920px;
+  max-width: 1120px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -829,12 +834,6 @@ const miembros = [
 .demo-inferior--fab :deep(.fab) {
   display: inline-flex;
   bottom: var(--sp-4);
-}
-.sprite {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
 }
 .hub-barra {
   position: sticky;
@@ -876,6 +875,9 @@ const miembros = [
 }
 .hub--solo {
   max-width: none;
+}
+.hub--solo:has(.pieza--mh) {
+  padding: 0;
 }
 .pieza {
   margin-bottom: var(--sp-10);

@@ -1,4 +1,148 @@
 {
+  "color": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Color.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true, "contrast": "static-reviewed" },
+    "production": { "framework": "css-custom-properties", "path": "apps/web/src/shared/ui/tokens.css" },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "typography": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Typography.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true, "fontDelivery": "pending" },
+    "production": { "framework": "css-custom-properties", "path": "apps/web/src/shared/ui/tokens.css" },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "spacing": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Spacing.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true },
+    "production": { "framework": "css-custom-properties", "path": "apps/web/src/shared/ui/tokens.css" },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "geometry": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Geometry.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": ["spacing"],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true },
+    "production": { "framework": "css-custom-properties", "path": "apps/web/src/shared/ui/tokens.css" },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "icons": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Icons.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": ["geometry"],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true, "migration": "pending" },
+    "production": { "framework": "lucide", "path": null },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "motion": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Motion.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true, "reducedMotion": "static-reviewed" },
+    "production": { "framework": "css-custom-properties", "path": "apps/web/src/shared/ui/tokens.css" },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "adaptive": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Adaptive.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": ["spacing", "geometry"],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true },
+    "production": { "framework": "css-custom-properties", "path": "apps/web/src/shared/ui/tokens.css" },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "accessibility": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Accessibility.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": ["color", "geometry", "motion"],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true, "policy": "static-reviewed" },
+    "production": { "framework": null, "path": null },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
+  "tokens": {
+    "kind": "token",
+    "status": "stable",
+    "owner": "lima",
+    "sourceRound": ".fruti/foundations/approval.yaml",
+    "documentation": "../Foundations/Tokens.md",
+    "source": "../../.fruti/tokens.json",
+    "behavior": null,
+    "dependencies": ["color", "typography", "spacing", "geometry", "icons", "motion", "adaptive", "accessibility"],
+    "profileDependencies": [],
+    "qa": { "candidate": true, "visual": "n/a", "stable": true, "parse": "passed-with-reviewed-findings" },
+    "production": { "framework": "css-custom-properties", "path": "apps/web/src/shared/ui/tokens.css" },
+    "version": "1.0.0",
+    "replacedBy": null,
+    "updated": "2026-09-28"
+  },
   "button": {
     "kind": "component",
     "status": "candidate",
@@ -2524,9 +2668,9 @@
   },
   "fermentation-vat": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
-    "sourceRound": "lab/fermentation-vat/r01",
+    "sourceRound": ".fruti/tests/r01",
     "documentation": "../Components/fermentation-vat.md",
     "demo": "../Components/demo/index.html#fermentation-vat",
     "source": "../../apps/web/src/modules/fermentacion/components/FilaUso.vue",
@@ -2536,49 +2680,90 @@
       "status-chip",
       "row-menu"
     ],
-    "profileDependencies": [],
+    "profileDependencies": [
+      "design_system.tokens",
+      "design_system.typography",
+      "design_system.geometry",
+      "design_system.adaptive",
+      "design_system.accessibility"
+    ],
     "contract": {
-      "anatomy": "identidad (tina + día) · estado de ciclo · antigüedad de última medición · temperatura/Brix/actividad · acción Registrar medición · menú de gestión",
-      "adaptive": "compact: métricas en filas y acción expandida; medium: tres métricas en columnas; expanded: identidad, antigüedad, métricas y acciones en una línea densa sin ocultar datos",
+      "anatomy": "contexto (tina, día, estado y antigüedad) · métricas (temperatura, Brix y actividad) · footer de acción separado",
+      "adaptive": "compact: métricas en filas y CTA full-width; medium: contexto apilado, tres métricas en columnas y footer; expanded del contenedor desde 1024 px: contexto min 280 px a la izquierda, métricas min 480 px a la derecha y footer que abarca ambas regiones",
       "states": [
         "default",
         "overdue-more-than-24h",
         "never-measured",
+        "loading",
+        "empty",
+        "error",
+        "offline",
         "read-only",
         "pending",
         "failed",
         "long-content",
-        "missing-values"
+        "missing-values",
+        "repeated-action"
       ],
-      "rules": "Extiende FilaUso como componente Feature/Domain. Atraso estrictamente >24 h con texto + borde + color de refuerzo. Actividad 1–6. Props controladas; navegación y efectos pertenecen al consumidor."
+      "rules": "Extiende FilaUso como Feature/Domain. Preserva GEO-CONTEXT-001, GEO-METRICS-001 y GEO-ACTION-001 de Kiwi. El CTA nunca comparte track con las métricas. Atraso estrictamente >24 h con texto + borde + color; actividad 1–6; null = raya; navegación y efectos pertenecen al consumidor."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
+      "candidate": true,
+      "visual": "runtime-verified",
       "stable": false,
-      "viewports": "pending",
-      "keyboard": "pending",
-      "touch": "pending",
-      "zoom200": "pending",
-      "contrast": "pending",
-      "longText": "pending",
-      "states": "pending"
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": {
+        "status": "runtime-verified-emulated",
+        "caveat": "CTA de 48 CSS px y menú de 44 CSS px verificados; falta dispositivo físico para Stable"
+      },
+      "zoom200": {
+        "status": "runtime-verified",
+        "caveat": "zoom nativo 200 % en navegador y reflow aproximado persistido en evidencia"
+      },
+      "contrast": {
+        "status": "static-measured",
+        "caveat": "ink/surface 16.76:1; muted/surface 6.33:1; blanco/primary 5.15:1; danger-text/surface 6.54:1"
+      },
+      "longText": "static-reviewed",
+      "states": {
+        "status": "runtime-verified-partial",
+        "caveat": "Vitest cubre atraso, primera medición, solo lectura, límite de 24 h y repeated-action; pending/failed pertenecen al contrato existente"
+      }
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
-      "detector": "not-run"
+      "critique": "manual-playbook-r01",
+      "distill": "manual-playbook-r01",
+      "adapt": "manual-playbook-r01",
+      "polish": "manual-playbook-r01",
+      "detector": "passed"
     },
     "production": {
       "framework": "vue-ts",
       "path": "apps/web/src/modules/fermentacion/components/FilaUso.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27",
-    "evidence": "../qa/evidence/fermentation-vat-r01/"
+    "updated": "2026-09-28",
+    "evidence": "../qa/evidence/fermentation-vat-immutable-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-28",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../../.fruti/reports/compliance-current.json",
+          "../../.fruti/tests/r01/kiwi-decisions.yaml",
+          "../../.fruti/tests/r01/lima-contract.yaml",
+          "../qa/evidence/fermentation-vat-immutable-r01/"
+        ],
+        "findings": [
+          "geometría F2 de Kiwi preservada",
+          "sin colisión, crowding ni overflow en 1440 / 1024 / 768 / 390",
+          "CTA primario dominante en footer separado",
+          "PULZ Foundations canónicas consumidas"
+        ]
+      }
+    }
   },
   "fermentacion": {
     "kind": "product-application",
@@ -2951,17 +3136,16 @@
     "kind": "product-application",
     "status": "draft",
     "owner": "lima",
-    "sourceRound": "lab/maguey-horneado/r01",
-    "documentation": null,
-    "demo": null,
-    "source": "../../apps/web/src/modules/maguey/pages/MagueyPage.vue",
-    "behavior": "../../apps/web/src/modules/horneado/pages/HorneadoPage.vue",
+    "sourceRound": "lab/maguey-horneado/r05",
+    "documentation": "Screens/maguey-horneado.md",
+    "demo": "Components/demo/index.html#maguey-horneado",
+    "source": "../../apps/web/src/modules/maguey-horneado/components/SuperficieMH.vue",
+    "behavior": "../../apps/web/src/modules/maguey-horneado/api.ts",
     "dependencies": [
       "app-shell",
       "page-header",
-      "fab",
-      "list-stack",
-      "row-menu",
+      "bottom-nav",
+      "side-nav",
       "state-block",
       "task-layer",
       "banner",
@@ -2978,9 +3162,9 @@
     ],
     "contract": {
       "screens": [
-        "maguey: lotes con saldo en kg + agotados plegados; FAB Registrar recepción",
+        "maguey: lotes con saldo en kg + agotados plegados; primaria de cabecera Registrar recepción",
         "recepción (solo kilos obligatorios)",
-        "horneado: abiertas / cocido con saldo / últimas; FAB Abrir horneada",
+        "horneado: abiertas / cocido con saldo / últimas; primaria de cabecera Abrir horneada",
         "abrir horneada (origin-allocation en kg)",
         "cerrar horneada (capa: kg cocidos, combustible)",
         "cocido que ya tenía (capa)"
@@ -2989,7 +3173,12 @@
     },
     "qa": {
       "candidate": false,
-      "visual": "pending",
+      "technical": "partial — r05: 183 local tests and 5 hosted access tests PASS; business RPC E2E pending",
+      "structural": "pass-local — Kiwi geometry, runtime demo and code parity",
+      "visual": "pass-local — r05: seven CSS widths, normal/long content; medium syllable wrap fixed",
+      "accessibility": "partial — keyboard verified; physical/native zoom/forced-colors/AT pending",
+      "design_system": "pass-local — canonical tokens, fonts and icons",
+      "documentation": "draft — factual reference and simulated Vue preview",
       "stable": false
     },
     "refinement": {
@@ -3001,10 +3190,10 @@
     },
     "production": {
       "framework": "vue-ts",
-      "path": "apps/web/src/modules/maguey/"
+      "path": "apps/web/src/modules/maguey-horneado/"
     },
-    "version": "0.1.0",
+    "version": "0.2.1",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-28"
   }
 }

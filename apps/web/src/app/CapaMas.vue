@@ -19,7 +19,7 @@ const emit = defineEmits<{ cerrar: []; ir: [to: string] }>()
             :aria-current="it.id === actual ? 'page' : undefined"
             @click.prevent="emit('ir', it.to)"
           >
-            <Icono :nombre="it.icono" :size="22" />
+            <Icono :nombre="it.icono" :size="24" />
             <span>{{ it.etiqueta }}</span>
           </a>
         </li>

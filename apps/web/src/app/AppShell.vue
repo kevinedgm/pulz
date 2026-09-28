@@ -70,6 +70,7 @@ const restantes = computed(() =>
 )
 const destinoActual = computed(() => destinoDeRuta(route.meta.destino ?? route.name))
 const actualId = computed(() => destinoActual.value?.id ?? "")
+const esMH = computed(() => ["maguey", "horneado"].includes(actualId.value))
 const titulo = computed(
   () => (route.meta.titulo as string | undefined) ?? destinoActual.value?.titulo ?? "",
 )
@@ -152,6 +153,7 @@ async function irA(to: string) {
     <NavLateral
       v-if="modo !== 'compact'"
       class="shell__lateral"
+      :class="{ 'mh-navigation': esMH }"
       :items="items"
       :actual="actualId"
       :empresa="modo === 'expanded' ? empresa : undefined"
@@ -161,7 +163,8 @@ async function irA(to: string) {
     />
     <div class="shell__columna">
       <CabeceraPagina
-        :titulo="titulo"
+        v-if="!esMH || modo !== 'expanded'"
+        :titulo="esMH ? '' : titulo"
         :empresa="modo === 'expanded' ? undefined : empresa"
         @cuenta="cuentaAbierta = true"
       />

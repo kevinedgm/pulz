@@ -14,7 +14,8 @@ import {
 } from "../../shared/supabase/errores"
 import { encolar, nuevaClave, type ElementoCola } from "../../shared/offline/cola"
 import type { FotoPendiente } from "../../shared/offline/fotos"
-import { guardarInstantanea, leerInstantanea } from "../../shared/offline/instantanea"
+import { conInstantanea, type ConInstantanea } from "../../shared/offline/instantanea"
+export type { ConInstantanea } from "../../shared/offline/instantanea"
 import type { Ajustes } from "../configuracion/api"
 export { ETIQUETAS_ACIDEZ, ETIQUETAS_ACTIVIDAD, ETIQUETAS_DULZOR, litros } from "./dominio"
 
@@ -164,27 +165,6 @@ export interface DatosFermentacion {
   // id del elemento "Foto" del catálogo tipo_adjunto (para la evidencia)
   tipoFoto: string | null
 }
-export interface ConInstantanea<T> {
-  datos: T
-  // ISO de cuándo se guardó la instantánea si se leyó sin señal; null = fresco
-  instantanea: string | null
-}
-async function conInstantanea<T>(
-  org: string,
-  clave: string,
-  pedir: () => Promise<T>,
-): Promise<ConInstantanea<T>> {
-  try {
-    const datos = await pedir()
-    guardarInstantanea(org, clave, datos).catch(() => {})
-    return { datos, instantanea: null }
-  } catch (e) {
-    if (!esErrorDeRed(e)) throw e
-    const i = await leerInstantanea<T>(org, clave).catch(() => null)
-    if (!i) throw new ErrorAcceso("RED", MENSAJE_RED)
-    return { datos: i.datos, instantanea: i.guardado_en }
-  }
-}
 export function cargarUsos(org: string): Promise<ConInstantanea<DatosFermentacion>> {
   return conInstantanea(org, "fermentacion", async () => {
     const [u, a, f] = await Promise.all([
@@ -313,6 +293,7 @@ export interface RecursoBreve {
   id: string
   code: string
   capacity: number | null
+  capacity_policy: "estricta" | "flexible" | "libre"
 }
 export interface Insumo {
   id: string
@@ -332,7 +313,7 @@ export async function lotesCocido(org: string): Promise<LoteCocido[]> {
 export async function recursosDe(org: string, kind: "tina" | "molino"): Promise<RecursoBreve[]> {
   const { data, error } = await supabase
     .from("resources")
-    .select("id, code, capacity")
+    .select("id, code, capacity, capacity_policy")
     .eq("organization_id", org)
     .eq("kind", kind)
     .eq("active", true)

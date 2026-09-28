@@ -214,11 +214,12 @@ for (const f of fichas) {
     f.reg?.status === "deprecated"
       ? `<div class="hub-aviso"><b>Reemplazada por</b> ${f.reg.replacedBy ? `<a href="../${GRUPOS.find((g) => registry[f.reg.replacedBy] && true)?.dir ?? "Components"}/${esc(f.reg.replacedBy)}.html">${esc(f.reg.replacedBy)}</a>` : "(pendiente)"} · la demo sigue disponible.</div>`
       : ""
-  const preview = f.grupo.dir === "Screens" ? await galeria(f.reg) : previewDemo(f.reg)
+  const preview = f.reg?.demo ? previewDemo(f.reg) : f.grupo.dir === "Screens" ? await galeria(f.reg) : ""
   // Preview tras la primera sección (Para qué / Propósito)
   const idx = html.search(/<h2 id="(?!para-que|proposito)[^"]+">/)
   const primera = html.search(/<h2 id="(para-que|proposito)">/)
-  if (preview && primera >= 0 && idx > primera) html = html.slice(0, idx) + preview + html.slice(idx)
+  if (html.includes("<!-- hub-preview -->")) html = html.replace("<!-- hub-preview -->", preview)
+  else if (preview && primera >= 0 && idx > primera) html = html.slice(0, idx) + preview + html.slice(idx)
   else if (preview) html = preview + html
   const cuerpo = `<h1>${esc(f.titulo)} <code>${esc(f.id)}</code></h1>${metaDe(f.reg)}${banner}${html}${facetas(f.reg)}`
   await writeFile(

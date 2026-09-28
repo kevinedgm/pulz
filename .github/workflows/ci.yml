@@ -25,6 +25,8 @@ jobs:
       - run: pnpm format
       - run: pnpm build
       - run: pnpm test
+      - run: pnpm test:db:runner
 
-      # Los pasos de Supabase (db reset, pgTAP) se agregan en la Fase 1,
-      # cuando exista esquema y migraciones que probar (PULZ_MAESTRO.md §15).
+      # pgTAP remoto: pnpm test:db en PULZ desarrollo, nunca Supabase local.
+      # Aún no se automatiza aquí: requiere credencial acotada y un fixture
+      # aislado. Un run verde de este job NO certifica la base alojada.

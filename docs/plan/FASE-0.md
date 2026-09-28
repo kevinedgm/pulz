@@ -1,5 +1,9 @@
 # Fase 0 · Arranque
 
+> **Revisión vigente: 2026-09-28.** Ver
+> [implementación, pruebas nuevas y pendientes](CONTINUACION-2026-09-28.md).
+> Los resultados fechados de abajo son históricos, no certifican el estado actual.
+
 > Sigue `PULZ_MAESTRO.md` §0.1, §9 y §16. Objetivo: dejar el monorepo, el
 > tooling y el design system instalados y verificables — **sin lógica de
 > negocio todavía**. Esta fase no toca el esquema ni las RPC (eso es Fase 1

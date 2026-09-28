@@ -29,13 +29,11 @@ export const DESTINOS: Destino[] = [
     id: "maguey",
     titulo: "Maguey",
     icono: "i-maguey",
-    proximamente: "registrar recepciones de maguey",
   },
   {
     id: "horneado",
     titulo: "Horneado",
     icono: "i-horno",
-    proximamente: "abrir y cerrar horneadas",
   },
   {
     id: "fermentacion",

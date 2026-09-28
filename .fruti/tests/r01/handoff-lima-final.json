@@ -1,0 +1,12 @@
+{
+  "from": "lima",
+  "to": "mora",
+  "round": "r01",
+  "status": "eligible",
+  "historicalApprovalUsed": false,
+  "candidateGate": "PASS",
+  "registryTransition": "draft-to-candidate",
+  "implementation": "apps/web/src/modules/fermentacion/components/FilaUso.vue",
+  "compliance": ".fruti/tests/r01/coco-compliance.json",
+  "documentationTarget": "design-hub/Components/fermentation-vat.md"
+}

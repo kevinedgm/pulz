@@ -18,7 +18,7 @@ const emit = defineEmits<{ click: [] }>()
     :aria-disabled="disabled ? 'true' : undefined"
     @click="emit('click')"
   >
-    <Icono v-if="icono" :nombre="icono" :size="22" />
+    <Icono v-if="icono" :nombre="icono" :size="24" />
     <span>{{ etiqueta }}</span>
   </button>
 </template>

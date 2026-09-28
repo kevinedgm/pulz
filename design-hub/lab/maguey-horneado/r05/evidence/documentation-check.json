@@ -1,0 +1,22 @@
+{
+  "checked": 121,
+  "missing": [],
+  "duplicateIds": [],
+  "previews": 1,
+  "title": "Maguey y Horneado · Design Hub PULZ",
+  "headings": [
+    "Propósito",
+    "Uso",
+    "Ejemplos",
+    "Preview",
+    "Anatomía",
+    "Comportamiento",
+    "Adaptación",
+    "Accesibilidad",
+    "API real",
+    "Implementación",
+    "QA y lifecycle",
+    "Facetas de QA (registry)",
+    "En esta página"
+  ]
+}

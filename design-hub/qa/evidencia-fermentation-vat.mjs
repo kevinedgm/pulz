@@ -1,4 +1,4 @@
-// Evidencia de fermentation-vat/r01 sobre la demo F3 real compilada desde Vue.
+// Evidencia inmutable de .fruti/tests/r01 sobre la demo F3 real compilada desde Vue.
 //   node design-hub/qa/evidencia-fermentation-vat.mjs
 import { chromium } from "@playwright/test"
 import { mkdir, writeFile } from "node:fs/promises"
@@ -10,7 +10,7 @@ const URL = `${HUB}/design-hub/Components/demo/index.html?pieza=fermentation-vat
 const OUT = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   "evidence",
-  "fermentation-vat-r01",
+  "fermentation-vat-immutable-r01",
 )
 const viewports = [1440, 1024, 768, 390]
 const failures = []
@@ -52,9 +52,62 @@ for (const width of viewports) {
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
   )
   check(!overflow, `${width}: overflow horizontal`)
-  const action = page.getByRole("link", { name: "Medir Tina 2" })
+  const action = page.getByRole("link", { name: "Registrar medición en Tina 2" })
   const box = await action.boundingBox()
   check(Boolean(box && box.height >= 44), `${width}: acción menor a 44 CSS px`)
+
+  const geometry = await component.evaluate((node) => {
+    const box = (selector) => {
+      const rect = node.querySelector(selector)?.getBoundingClientRect()
+      return rect
+        ? {
+            x: rect.x,
+            y: rect.y,
+            width: rect.width,
+            height: rect.height,
+            right: rect.right,
+            bottom: rect.bottom,
+          }
+        : null
+    }
+    const css = (selector, property) => {
+      const target = node.querySelector(selector)
+      return target ? getComputedStyle(target)[property] : null
+    }
+    return {
+      component: box(".tina-fermentacion"),
+      context: box(".fila__contexto"),
+      metrics: box(".fila__metricas"),
+      actions: box(".fila__acciones"),
+      cta: box(".fila__cta"),
+      bodyColumns: css(".fila__cuerpo", "gridTemplateColumns"),
+      metricColumns: css(".fila__metricas", "gridTemplateColumns"),
+      font: css(".tina-fermentacion", "fontFamily"),
+    }
+  })
+  check(
+    geometry.actions &&
+      geometry.context &&
+      geometry.metrics &&
+      geometry.actions.y >= Math.max(geometry.context.bottom, geometry.metrics.bottom),
+    `${width}: el CTA dejó de vivir en un footer separado`,
+  )
+  if (width === 390) {
+    check(
+      geometry.cta && geometry.actions && Math.abs(geometry.cta.width - geometry.actions.width) < 1,
+      `${width}: el CTA no ocupa el ancho completo`,
+    )
+  }
+  if (width === 1440) {
+    check(
+      geometry.context &&
+        geometry.metrics &&
+        geometry.context.right <= geometry.metrics.x &&
+        geometry.context.width >= 280 &&
+        geometry.metrics.width >= 480,
+      `${width}: las regiones expanded colisionan o incumplen sus mínimos`,
+    )
+  }
   for (let step = 0; step < 20; step += 1) {
     if (await action.evaluate((node) => node === document.activeElement)) break
     await page.keyboard.press("Tab")
@@ -67,7 +120,13 @@ for (const width of viewports) {
     path: path.join(OUT, `fermentation-vat-${width}-light.png`),
     fullPage: true,
   })
-  observations.push({ width, overflow, actionHeight: box?.height ?? null, pageErrors: errors })
+  observations.push({
+    width,
+    overflow,
+    actionHeight: box?.height ?? null,
+    geometry,
+    pageErrors: errors,
+  })
   check(errors.length === 0, `${width}: errores JS ${errors.join(" | ")}`)
   await context.close()
 }

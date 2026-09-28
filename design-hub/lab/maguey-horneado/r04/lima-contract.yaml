@@ -1,0 +1,38 @@
+round: maguey-horneado/r04
+owner: lima
+operation: validate_f2
+status: approved_structure_only
+approval_basis: 'Autonomía explícita del usuario 2026-09-28 y CLAUDE.md §4; evaluación nueva'
+f2_owner: kiwi
+geometry_owner: kiwi
+geometry_frozen: true
+coco_authorized: true
+authorized_stage: 'F3 y código Vue local verificable; no despliegue ni escrituras remotas de prueba'
+mora_eligible: false
+stable_approved: false
+classification: product-application
+resolved_rule_ids: [MH-NAV-03, MH-DOC-03]
+regressions: '12/12 PASS; check_artifact 0 errores/0 avisos'
+evidence: design-hub/lab/maguey-horneado/r04/evidence/f2-runtime.json
+reuse: [button, number-field, text-field, datetime-field, select, origin-allocation, status-chip, state-block, task-layer, app-shell]
+local: [listas_maguey_horneado, formularios_recepcion_apertura_cierre, adaptador_datos, coordinacion_borrador]
+extend:
+  bottom-nav: 'tracks minmax(0,1fr), separación 8px, etiquetas largas con guiones discrecionales; cinco destinos conservados'
+  task-layer: 'foco inicial opcional en primer campo para cierre; tamaño de referencia r04; fondo no interactivo'
+foundations: [.fruti/foundations/approval.yaml, .fruti/tokens.json, apps/web/src/shared/ui/tokens.css]
+requirements:
+  - 'No valores opcionales precargados; no consumir un lote sin kg explícitos y revisión'
+  - 'API usa contratos reales existentes; no migraciones ni datos remotos escritos durante QA'
+  - 'Permisos admin/productor, lectura para operador/read_only; escritura requiere conexión'
+  - 'Fallo conserva borrador y clave idempotente para reintentar; doble envío bloqueado'
+  - 'Resultado usa cantidad real; fecha editable; cierre anterior al inicio advierte sin nueva regla dura'
+  - 'Coco preserva geometría Kiwi; no nuevas leyes de color, tipo, iconos o spacing'
+dimensions_f2:
+  technical: pass
+  structural: pass
+  visual: pass_neutral_f2
+  accessibility: partial
+  design_system: pending_f3
+  documentation: pass_round_only
+qualification: 'Aprobar estructura permite construir F3; NO es overall PASS, Candidate Gate ni Stable Gate'
+pending_acceptance: [physical_touch, native_text_zoom_200, forced_colors, production_integration]

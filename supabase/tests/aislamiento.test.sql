@@ -115,9 +115,14 @@ begin
   -- 5) Estructura: criterios de aceptación de §16 Fase 1
   return next is((select count(*) from pg_policies where schemaname = 'public' and cmd = 'ALL'), 0::bigint,
                  'ninguna política for all');
-  return next is((select count(*) from information_schema.columns
-                   where table_schema = 'public' and data_type in ('json', 'jsonb')), 0::bigint,
-                 'ninguna columna json/jsonb en public');
+  -- §16 prohíbe JSON en tablas, no en las vistas de lectura de 0026.
+  -- Las agregaciones de corridas/tanques no almacenan datos desnormalizados.
+  return next is((select count(*) from information_schema.columns c
+                   join information_schema.tables t
+                     using (table_catalog, table_schema, table_name)
+                   where c.table_schema = 'public' and t.table_type = 'BASE TABLE'
+                     and c.data_type in ('json', 'jsonb')), 0::bigint,
+                 'ninguna columna json/jsonb en tablas de public');
   return next is((select count(*) from pg_tables where schemaname = 'public' and not rowsecurity), 0::bigint,
                  'todas las tablas de public tienen RLS activada');
 

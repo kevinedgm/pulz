@@ -27,6 +27,23 @@ operations:
   initialize:
     references: [skills/lima/reference/first-run.md, skills/lima/reference/intake.md, skills/lima/reference/project-profile.md]
     persist: [implementation.framework, implementation.language, implementation.styling]
+  foundations_new:
+    inputs: [.fruti/foundations/proposal.yaml, active_project_profile]
+    references: [skills/lima/reference/intake.md, skills/lima/reference/source-of-truth.md]
+    outputs:
+      - design-hub/Foundations
+      - .fruti/tokens.json
+      - updated_active_project_profile
+    approval_required: true
+    rules:
+      - proposal_must_be_explicitly_approved_before_becoming_truth
+      - materialize_semantic_tokens_from_approved_roles
+      - derive_tonal_scales_without_changing_approved_base_roles
+      - materialize_foundation_pages_color_type_geometry_icons_motion_adaptive_accessibility
+      - persist_truth_sources_color_law_type_law_icon_geometry_motion
+      - proposal_text_fields_must_be_preserved_verbatim_as_intent_not_parsed_as_tokens
+      - change_design_system_from_NEW_to_project_system_name
+      - do_not_design_product_components_during_foundations_init
   redesign_governance:
     inputs:
       - .fruti/design/design-direction.yaml
@@ -49,8 +66,11 @@ operations:
       - validate_geometry_and_adaptive_contract
       - validate_against_configured_interface_standards
       - do_not_redesign_f2
+      - if_f2_invalid_return_to_kiwi_with_failed_rule_ids_and_preserve_frozen_decisions
       - do_not_infer_missing_normative_guidance
       - approve_or_return_to_kiwi_with_rule_ids
+      - block_f3_visual_pass_when_design_system_new_and_minimum_foundations_missing
+      - require_multidimensional_verdict_technical_structural_visual_accessibility_design_system_documentation
 
 output:
   handoff: .fruti/handoffs/current.json

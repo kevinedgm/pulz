@@ -1,90 +1,193 @@
-/* PULZ · tokens de identidad (rescatados del kit). Semilla de apps/web/src/shared/ui/tokens.css */
+/* GENERATED BINDING · canonical source: /.fruti/tokens.json
+ * PULZ Foundations 1.0.0 · approved 2026-09-28.
+ * Do not change base roles here; update the approved foundation source first.
+ */
 :root {
-  --ink-900: #173f87;
-  --ink-700: #275aa5;
-  --ink-100: #dde7f5;
-  --clay-300: #f2cfc2;
-  --clay-100: #faeae4;
-  --canvas: #f8f6f2;
-  --surface: #ffffff;
-  --text: #18243a;
-  --muted: #687184;
-  --border: #dde1e7;
-  --ok: #287a55;
-  --pend: #c17a18;
-  --late: #b93a2e;
-  --info: #2b6cb0;
-  --ok-bg: #e4f2ea;
-  --pend-bg: #fbeedb;
-  --late-bg: #fbe4e1;
-  --info-bg: #e1ecf8;
-  --shadow: 0 1px 2px rgba(23, 63, 135, 0.08), 0 8px 24px rgba(23, 63, 135, 0.08);
-  --font:
-    "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI",
-    Roboto, sans-serif;
-  /* geometría y espacio (derivados de los componentes del sistema) */
-  --r-sm: 8px;
-  --r-md: 10px;
-  --r-lg: 12px;
-  --r-xl: 14px;
-  --r-2xl: 16px;
-  --r-pill: 999px;
-  --tap: 44px;
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 20px;
-  --sp-6: 24px;
-  --sp-8: 32px;
-  --sp-10: 40px;
-  /* valores fijos de marca (no cambian con el tema) */
-  --brand-ink: #173f87;
-  --brand-clay: #f2cfc2;
-  --brand-ink-hover: #12336d;
-  --brand-clay-hover: #e9bba9;
+  color-scheme: light;
+
+  /* Approved base color roles — immutable without a new approval. */
+  --color-primary: #6d4aff;
+  --color-secondary: #ff876f;
+  --color-surface: #f8f8fa;
+  --color-ink: #18171f;
+  --color-danger: #c94d5d;
+  --color-success: #187a5b;
+  --color-warning: #9a6715;
+
+  /* Derived tonal scales. 500 always aliases the approved base. */
+  --color-primary-50: #eae7fa;
+  --color-primary-100: #dcd5fb;
+  --color-primary-200: #c0b2fc;
+  --color-primary-300: #a590fd;
+  --color-primary-400: #896dfe;
+  --color-primary-500: var(--color-primary);
+  --color-primary-600: #6042dd;
+  --color-primary-700: #543bbc;
+  --color-primary-800: #47339a;
+  --color-primary-900: #3a2b79;
+  --color-secondary-50: #f9edec;
+  --color-secondary-100: #f9e1de;
+  --color-secondary-200: #fbcbc2;
+  --color-secondary-300: #fcb4a7;
+  --color-secondary-400: #fe9e8b;
+  --color-secondary-500: var(--color-secondary);
+  --color-secondary-600: #dc7663;
+  --color-secondary-700: #ba6557;
+  --color-secondary-800: #97554b;
+  --color-secondary-900: #74443f;
+  --color-danger-50: #f3e7ea;
+  --color-danger-100: #efd6db;
+  --color-danger-200: #e5b4bb;
+  --color-danger-300: #dc919c;
+  --color-danger-400: #d26f7c;
+  --color-danger-500: var(--color-danger);
+  --color-danger-600: #ae4554;
+  --color-danger-700: #943d4a;
+  --color-danger-800: #793541;
+  --color-danger-900: #5f2d38;
+  --color-success-50: #e2ebea;
+  --color-success-100: #cbdfda;
+  --color-success-200: #9ec6ba;
+  --color-success-300: #72ac9b;
+  --color-success-400: #45937b;
+  --color-success-500: var(--color-success);
+  --color-success-600: #186b52;
+  --color-success-700: #185c49;
+  --color-success-800: #184d40;
+  --color-success-900: #183f37;
+  --color-warning-50: #efeae3;
+  --color-warning-100: #e5dbcc;
+  --color-warning-200: #d2be9e;
+  --color-warning-300: #c0a171;
+  --color-warning-400: #ad8443;
+  --color-warning-500: var(--color-warning);
+  --color-warning-600: #865b16;
+  --color-warning-700: #734f18;
+  --color-warning-800: #60431a;
+  --color-warning-900: #4c371b;
+
+  /* Semantic roles. */
+  --color-background: var(--color-surface);
+  --color-text: var(--color-ink);
+  --color-text-muted: #5d5a68;
+  --color-border: #d9d8de;
+  --color-focus: var(--color-primary);
+  --color-action: var(--color-primary);
+  --color-action-text: #ffffff;
+  --color-accent: var(--color-secondary);
+  --color-accent-text: var(--color-ink);
+  --color-danger-text: var(--color-danger-700);
+  --color-success-text: var(--color-success-700);
+  --color-warning-text: var(--color-warning-700);
+
+  /* Typography. Font delivery is external to tokens; fallbacks are explicit. */
+  --font-primary: "Manrope", system-ui, sans-serif;
+  --font-secondary: "Instrument Serif", Georgia, serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.75rem;
+  --font-size-3xl: 2.25rem;
+  --font-size-4xl: 3rem;
+  --line-height-tight: 1.15;
+  --line-height-heading: 1.25;
+  --line-height-body: 1.5;
+
+  /* Spacing · base 4 px. */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Sizing and geometry. */
+  --size-control-height: 48px;
+  --size-touch-min: 44px;
+  --size-icon-sm: 16px;
+  --size-icon-md: 20px;
+  --size-icon-lg: 24px;
+  --radius-control: 10px;
+  --radius-surface: 16px;
+  --radius-sm: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-pill: 999px;
+
+  /* Motion. */
+  --motion-fast: 140ms;
+  --motion-standard: 220ms;
+  --motion-emphasis: 320ms;
+  --motion-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Adaptive reference thresholds. Prefer container queries for components. */
+  --breakpoint-compact-max: 599px;
+  --breakpoint-medium-min: 600px;
+  --breakpoint-medium-max: 1023px;
+  --breakpoint-expanded-min: 1024px;
+
+  /* Legacy aliases consumed by the current Vue application. */
+  --ink-900: var(--color-primary);
+  --ink-700: var(--color-primary-600);
+  --ink-100: var(--color-primary-100);
+  --clay-300: var(--color-secondary);
+  --clay-100: var(--color-secondary-100);
+  --canvas: var(--color-background);
+  --surface: var(--color-surface);
+  --text: var(--color-text);
+  --muted: var(--color-text-muted);
+  --border: var(--color-border);
+  --ok: var(--color-success);
+  --ok-bg: var(--color-success-50);
+  --pend: var(--color-warning);
+  --pend-bg: var(--color-warning-50);
+  --late: var(--color-danger);
+  --late-bg: var(--color-danger-50);
+  --info: var(--color-primary);
+  --info-bg: var(--color-primary-50);
+  --shadow: 0 1px 2px rgb(24 23 31 / 8%), 0 8px 24px rgb(24 23 31 / 10%);
+  --font: var(--font-primary);
+  --r-sm: var(--radius-sm);
+  --r-md: var(--radius-control);
+  --r-lg: var(--radius-lg);
+  --r-xl: var(--radius-xl);
+  --r-2xl: var(--radius-surface);
+  --r-pill: var(--radius-pill);
+  --tap: var(--size-touch-min);
+  --sp-1: var(--space-1);
+  --sp-2: var(--space-2);
+  --sp-3: var(--space-3);
+  --sp-4: var(--space-4);
+  --sp-5: var(--space-5);
+  --sp-6: var(--space-6);
+  --sp-8: var(--space-8);
+  --sp-10: var(--space-10);
+  --brand-ink: var(--color-primary);
+  --brand-clay: var(--color-secondary);
+  --brand-ink-hover: var(--color-primary-600);
+  --brand-clay-hover: var(--color-secondary-600);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ink-900: #7fa3e0;
-    --ink-700: #a4beeb;
-    --ink-100: #1e2b44;
-    --clay-300: #e0a98f;
-    --clay-100: #3a2a25;
-    --canvas: #0f1521;
-    --surface: #171f2e;
-    --text: #eef1f7;
-    --muted: #9aa5bb;
-    --border: #2a3549;
-    --ok-bg: #163526;
-    --pend-bg: #3a2a10;
-    --late-bg: #3b1b18;
-    --info-bg: #18304b;
-    --ok: #6fc79a;
-    --pend: #e9b356;
-    --late: #f0837a;
-    --info: #7fb2f0;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 1ms;
+    --motion-standard: 1ms;
+    --motion-emphasis: 1ms;
   }
 }
-:root[data-theme="dark"] {
-  --ink-900: #7fa3e0;
-  --ink-700: #a4beeb;
-  --ink-100: #1e2b44;
-  --clay-300: #e0a98f;
-  --clay-100: #3a2a25;
-  --canvas: #0f1521;
-  --surface: #171f2e;
-  --text: #eef1f7;
-  --muted: #9aa5bb;
-  --border: #2a3549;
-  --ok-bg: #163526;
-  --pend-bg: #3a2a10;
-  --late-bg: #3b1b18;
-  --info-bg: #18304b;
-  --ok: #6fc79a;
-  --pend: #e9b356;
-  --late: #f0837a;
-  --info: #7fb2f0;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+
+@media (forced-colors: active) {
+  :root {
+    --color-focus: Highlight;
+    --color-border: CanvasText;
+  }
 }

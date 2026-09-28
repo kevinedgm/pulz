@@ -1,0 +1,179 @@
+[
+  {
+    "nav": [
+      {
+        "client": 54,
+        "label": "Inicio",
+        "rect": {
+          "bottom": 1032.5,
+          "height": 48,
+          "left": 8,
+          "right": 62.390625,
+          "top": 984.5,
+          "width": 54.390625,
+          "x": 8,
+          "y": 984.5
+        },
+        "scroll": 54
+      },
+      {
+        "client": 54,
+        "label": "Fermenta­ción",
+        "rect": {
+          "bottom": 1032.5,
+          "height": 48,
+          "left": 70.390625,
+          "right": 124.796875,
+          "top": 984.5,
+          "width": 54.40625,
+          "x": 70.390625,
+          "y": 984.5
+        },
+        "scroll": 54
+      },
+      {
+        "client": 54,
+        "label": "Destila­ción",
+        "rect": {
+          "bottom": 1032.5,
+          "height": 48,
+          "left": 132.796875,
+          "right": 187.1875,
+          "top": 984.5,
+          "width": 54.390625,
+          "x": 132.796875,
+          "y": 984.5
+        },
+        "scroll": 54
+      },
+      {
+        "client": 54,
+        "label": "Granel",
+        "rect": {
+          "bottom": 1032.5,
+          "height": 48,
+          "left": 195.1875,
+          "right": 249.59375,
+          "top": 984.5,
+          "width": 54.40625,
+          "x": 195.1875,
+          "y": 984.5
+        },
+        "scroll": 54
+      },
+      {
+        "client": 52,
+        "label": "Más",
+        "rect": {
+          "bottom": 1032.5,
+          "height": 48,
+          "left": 257.59375,
+          "right": 312,
+          "top": 984.5,
+          "width": 54.40625,
+          "x": 257.59375,
+          "y": 984.5
+        },
+        "scroll": 52
+      }
+    ],
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "nav": [
+      {
+        "client": 68,
+        "label": "Inicio",
+        "rect": {
+          "bottom": 1012.5,
+          "height": 48,
+          "left": 8,
+          "right": 76.390625,
+          "top": 964.5,
+          "width": 68.390625,
+          "x": 8,
+          "y": 964.5
+        },
+        "scroll": 68
+      },
+      {
+        "client": 68,
+        "label": "Fermenta­ción",
+        "rect": {
+          "bottom": 1012.5,
+          "height": 48,
+          "left": 84.390625,
+          "right": 152.796875,
+          "top": 964.5,
+          "width": 68.40625,
+          "x": 84.390625,
+          "y": 964.5
+        },
+        "scroll": 68
+      },
+      {
+        "client": 68,
+        "label": "Destila­ción",
+        "rect": {
+          "bottom": 1012.5,
+          "height": 48,
+          "left": 160.796875,
+          "right": 229.1875,
+          "top": 964.5,
+          "width": 68.390625,
+          "x": 160.796875,
+          "y": 964.5
+        },
+        "scroll": 68
+      },
+      {
+        "client": 68,
+        "label": "Granel",
+        "rect": {
+          "bottom": 1012.5,
+          "height": 48,
+          "left": 237.1875,
+          "right": 305.59375,
+          "top": 964.5,
+          "width": 68.40625,
+          "x": 237.1875,
+          "y": 964.5
+        },
+        "scroll": 68
+      },
+      {
+        "client": 66,
+        "label": "Más",
+        "rect": {
+          "bottom": 1012.5,
+          "height": 48,
+          "left": 313.59375,
+          "right": 382,
+          "top": 964.5,
+          "width": 68.40625,
+          "x": 313.59375,
+          "y": 964.5
+        },
+        "scroll": 66
+      }
+    ],
+    "scroll": 390,
+    "width": 390
+  },
+  {
+    "frame": 768,
+    "scroll": 768,
+    "width": 768
+  },
+  {
+    "frame": 1024,
+    "scroll": 1024,
+    "width": 1024
+  },
+  {
+    "frame": 1440,
+    "scroll": 1440,
+    "width": 1440
+  }
+]

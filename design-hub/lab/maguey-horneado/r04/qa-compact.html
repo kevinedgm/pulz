@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QA r04 · viewport compacto</title>
+<style>body{margin:0;background:#eee;font:14px system-ui}header{padding:8px}button{min-height:44px}iframe{display:block;border:0;width:390px;height:900px;background:white}</style>
+<header>Arnés de prueba local: viewport CSS del iframe <output id="width">390</output> px.
+<button data-width="320">320 px</button><button data-width="390">390 px</button></header>
+<iframe title="Prototipo Kiwi r04" src="index.html"></iframe>
+<script>document.querySelectorAll('button').forEach(button=>button.onclick=()=>{document.querySelector('iframe').style.width=button.dataset.width+'px';document.querySelector('output').textContent=button.dataset.width;});</script>
+</html>

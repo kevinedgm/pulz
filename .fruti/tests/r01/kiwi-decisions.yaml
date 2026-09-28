@@ -1,0 +1,127 @@
+artifact: fermentation-vat
+round: r01
+protocol: immutable-test-v1
+route: R1
+fidelity: F2
+owner: kiwi
+status: frozen-for-lima-validation
+source_request: .fruti/tests/r01/request.md
+historical_approval_used: false
+question: "¿Puede el operador reconocer en pocos segundos si una tina necesita medición y abrir el registro sin perder el contexto de la última lectura?"
+primary_verb: registrar_medicion
+observable_result: "La acción abre la ruta real de medición del cycle_id."
+dominant_information: "antigüedad de la última medición, con urgencia estrictamente >24 h"
+facts:
+  - source: apps/web/src/modules/fermentacion/api.ts
+    value: "UsoTina contiene tina, started_at, ultima_medicion_at, ultima_temperatura, ultimo_brix y ultima_actividad."
+  - source: apps/web/src/modules/fermentacion/routes.ts
+    value: "Existe /e/:slug/fermentacion/:ciclo/medir."
+  - source: .codex/skills/lima/profiles/pulz.md
+    value: "Los rangos canónicos son compact 0–599, medium 600–1023 y expanded desde 1024."
+assumptions:
+  - "Atraso significa tiempo transcurrido estrictamente mayor a 24 horas."
+  - "El permiso para medir llega del consumidor y no se infiere en la pieza."
+unknowns: []
+grouping:
+  rationale: "La tina es una unidad operativa independiente con una acción propia; borde y divisores expresan límite funcional, no una card decorativa."
+geometry:
+  - id: GEO-CONTEXT-001
+    region: identity-and-freshness
+    role: "identificar la tina y decidir urgencia"
+    choice: "Nombre/día/estado seguidos por antigüedad; en expanded forman la región izquierda."
+    size: "compact/medium: ancho completo; expanded: min 280 px y 1 fr"
+    spacing: "12 px interno; 24 px hacia métricas en expanded"
+    density: "nombre, día, estado y una línea de antigüedad; wrap sin truncado"
+    hierarchy: "identidad primaria; antigüedad primaria solo cuando está atrasada"
+    source: product-context
+    because: "El operador debe reconocer objeto y urgencia antes de leer métricas."
+    affects: [compact, medium, expanded]
+    status: frozen
+  - id: GEO-METRICS-001
+    region: last-measurement
+    role: "comparar temperatura, Brix y actividad"
+    choice: "Filas etiqueta/valor en compact; tres columnas en medium/expanded."
+    size: "cada columna mínimo 112 px; región expanded mínimo 480 px"
+    spacing: "12 px vertical, 16 px horizontal; separadores de 1 px"
+    density: "exactamente tres métricas; null se muestra como raya"
+    hierarchy: secondary-comparable
+    overflow: "wrap; sin truncado ni scroll horizontal"
+    source: rule
+    because: "Los tres valores pertenecen a la misma lectura y deben compararse sin competir con la urgencia."
+    affects: [compact, medium, expanded]
+    status: frozen
+  - id: GEO-ACTION-001
+    region: action-footer
+    role: "iniciar el registro de una medición"
+    choice: "Footer separado de contenido; full-width en compact y alineado al final en medium/expanded. Nunca comparte columna con métricas."
+    size: "alto mínimo 44 px; ancho completo solo en compact"
+    spacing: "12 px sobre la acción; safe-area en compact"
+    hierarchy: primary-action
+    source: rule
+    because: "Separar el CTA evita colisiones y mantiene una única acción dominante."
+    alternatives_rejected: ["columna de acciones dentro de la fila expanded", "acción superpuesta a métricas"]
+    affects: [compact, medium, expanded]
+    status: frozen
+adaptive_matrix:
+  - element: context
+    compact: "una columna: identidad, estado y antigüedad"
+    medium: "cabecera identidad/estado; antigüedad debajo"
+    expanded: "región izquierda min 280 px con identidad y antigüedad"
+    preserved: "nombre, día, estado, antigüedad y alerta"
+    changed: "se agrupa como región izquierda solo en expanded"
+    hidden: "nada"
+    technique: "container query"
+    focus_state: "sin controles internos"
+  - element: metrics
+    compact: "tres filas etiqueta/valor"
+    medium: "tres columnas iguales"
+    expanded: "región derecha min 480 px, tres columnas"
+    preserved: "temperatura, Brix y actividad"
+    changed: "fila vertical a columnas"
+    hidden: "nada; null = raya"
+    technique: "container query + grid"
+    focus_state: "sin controles internos"
+  - element: primary_action
+    compact: "footer full-width y alcanzable"
+    medium: "footer separado, alineado al final"
+    expanded: "footer separado que abarca ambas regiones, alineado al final"
+    preserved: "misma acción y mismo destino"
+    changed: "solo cambia el ancho y alineación"
+    hidden: "sin permiso de medición"
+    technique: "una instancia lógica"
+    focus_state: "un único tab stop; conserva foco durante estado busy"
+states:
+  - { id: default, trigger: "medición <=24 h", recovery: "no aplica" }
+  - { id: overdue, trigger: ">24 h", recovery: "registrar medición" }
+  - { id: never-measured, trigger: "ultima_medicion_at null", recovery: "registrar primera medición" }
+  - { id: loading, trigger: "datos pendientes", recovery: "misma huella al resolver" }
+  - { id: empty, trigger: "sin ciclo/tina", recovery: "volver a tinas" }
+  - { id: error, trigger: "fallo recuperable", recovery: "reintentar" }
+  - { id: offline, trigger: "sin conexión", recovery: "encolar y sincronizar" }
+  - { id: read-only, trigger: "sin permiso", recovery: "acción oculta y explicación visible" }
+  - { id: long-content, trigger: "texto +30%", recovery: "wrap" }
+  - { id: missing-values, trigger: "métricas null", recovery: "raya; no inventar" }
+  - { id: repeated-action, trigger: "navegación iniciada", recovery: "control disabled hasta resolver" }
+accessibility:
+  target: WCAG-2.2-AA
+  primary_touch_target: ">=44 CSS px"
+  color_independence: "texto + peso + borde para atraso"
+  keyboard: "orden lectura → acción; foco visible; un solo tab stop"
+  zoom: "wrap y grid sin ancho fijo; verificar 200%"
+standards_loaded:
+  - kiwi/references/brief-funcional.md
+  - kiwi/references/fidelidad.md
+  - kiwi/references/wireframing.md
+  - kiwi/references/geometry-contract.md
+  - kiwi/references/validacion.md
+  - kiwi/references/hig-web-pwa.md
+handoff:
+  pieces:
+    - { name: TinaFermentacion, candidate_reuse: domain-component, local_or_system: pending-lima }
+    - { name: primary-action, candidate_reuse: existing-button, local_or_system: system }
+  data_proposal: "UsoTina + dia + puedeMedir + slug; derivados horasDesdeMedicion y vencida24h."
+  immutable_decisions:
+    - GEO-CONTEXT-001
+    - GEO-METRICS-001
+    - GEO-ACTION-001
+  open_questions: []

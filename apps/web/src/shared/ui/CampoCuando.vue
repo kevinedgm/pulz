@@ -136,7 +136,7 @@ function onBlur() {
 .cuando__error {
   margin: 0;
   font-size: 0.8125rem;
-  color: var(--late);
+  color: var(--color-danger-text);
   font-weight: 600;
 }
 </style>

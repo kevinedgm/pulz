@@ -1,0 +1,549 @@
+[
+  {
+    "mode": "maguey-long",
+    "width": 320,
+    "controls": [
+      {
+        "h": 59.28125,
+        "name": "Inicio",
+        "w": 54.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Fermentación",
+        "w": 54.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Destilación",
+        "w": 54.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Granel",
+        "w": 54.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Más",
+        "w": 54.40625
+      }
+    ],
+    "inset": "16px",
+    "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+    "rail": 0,
+    "scroll": 320,
+    "viewport": 320
+  },
+  {
+    "mode": "maguey-long",
+    "width": 390,
+    "controls": [
+      {
+        "h": 59.28125,
+        "name": "Inicio",
+        "w": 68.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Fermentación",
+        "w": 68.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Destilación",
+        "w": 68.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Granel",
+        "w": 68.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Más",
+        "w": 68.40625
+      }
+    ],
+    "inset": "16px",
+    "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+    "rail": 0,
+    "scroll": 390,
+    "viewport": 390
+  },
+  {
+    "mode": "maguey-long",
+    "width": 600,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 135
+      }
+    ],
+    "inset": "24px",
+    "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+    "rail": 160,
+    "scroll": 600,
+    "viewport": 600
+  },
+  {
+    "mode": "maguey-long",
+    "width": 768,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 135
+      }
+    ],
+    "inset": "24px",
+    "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+    "rail": 160,
+    "scroll": 768,
+    "viewport": 768
+  },
+  {
+    "mode": "maguey-long",
+    "width": 1023,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 135
+      }
+    ],
+    "inset": "24px",
+    "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+    "rail": 160,
+    "scroll": 1023,
+    "viewport": 1023
+  },
+  {
+    "mode": "maguey-long",
+    "width": 1024,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 215
+      }
+    ],
+    "inset": "24px",
+    "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+    "rail": 240,
+    "scroll": 1024,
+    "viewport": 1024
+  },
+  {
+    "mode": "maguey-long",
+    "width": 1440,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 215
+      }
+    ],
+    "inset": "24px",
+    "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+    "rail": 240,
+    "scroll": 1440,
+    "viewport": 1440
+  },
+  {
+    "mode": "horneado-normal",
+    "width": 320,
+    "controls": [
+      {
+        "h": 59.28125,
+        "name": "Inicio",
+        "w": 54.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Fermentación",
+        "w": 54.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Destilación",
+        "w": 54.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Granel",
+        "w": 54.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Más",
+        "w": 54.40625
+      }
+    ],
+    "inset": "16px",
+    "rail": 0,
+    "scroll": 320,
+    "viewport": 320
+  },
+  {
+    "mode": "horneado-normal",
+    "width": 390,
+    "controls": [
+      {
+        "h": 59.28125,
+        "name": "Inicio",
+        "w": 68.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Fermentación",
+        "w": 68.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Destilación",
+        "w": 68.390625
+      },
+      {
+        "h": 59.28125,
+        "name": "Granel",
+        "w": 68.40625
+      },
+      {
+        "h": 59.28125,
+        "name": "Más",
+        "w": 68.40625
+      }
+    ],
+    "inset": "16px",
+    "rail": 0,
+    "scroll": 390,
+    "viewport": 390
+  },
+  {
+    "mode": "horneado-normal",
+    "width": 600,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 135
+      }
+    ],
+    "inset": "24px",
+    "rail": 160,
+    "scroll": 600,
+    "viewport": 600
+  },
+  {
+    "mode": "horneado-normal",
+    "width": 768,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 135
+      }
+    ],
+    "inset": "24px",
+    "rail": 160,
+    "scroll": 768,
+    "viewport": 768
+  },
+  {
+    "mode": "horneado-normal",
+    "width": 1023,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 135
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 135
+      }
+    ],
+    "inset": "24px",
+    "rail": 160,
+    "scroll": 1023,
+    "viewport": 1023
+  },
+  {
+    "mode": "horneado-normal",
+    "width": 1024,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 215
+      }
+    ],
+    "inset": "24px",
+    "rail": 240,
+    "scroll": 1024,
+    "viewport": 1024
+  },
+  {
+    "mode": "horneado-normal",
+    "width": 1440,
+    "controls": [
+      {
+        "h": 48,
+        "name": "Inicio",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Maguey",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Horneado",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Fermentación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Destilación",
+        "w": 215
+      },
+      {
+        "h": 48,
+        "name": "Granel",
+        "w": 215
+      }
+    ],
+    "inset": "24px",
+    "rail": 240,
+    "scroll": 1440,
+    "viewport": 1440
+  }
+]

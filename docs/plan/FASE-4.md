@@ -1,5 +1,9 @@
 # Fase 4 · Interfaz base y configuración
 
+> **Revisión vigente: 2026-09-28.** Ver
+> [implementación, pruebas nuevas y pendientes](CONTINUACION-2026-09-28.md).
+> Los resultados fechados de abajo son históricos, no certifican el estado actual.
+
 > Sigue `PULZ_MAESTRO.md` §16 (Fase 4), §13 (interfaz), §11.1 (roles), §7.3
 > (slug), §8.1 (Storage `branding`), §10.3 (catálogos e infraestructura) y
 > `CLAUDE.md` (nunca Docker; migraciones "desde cero"; **toda pantalla empieza

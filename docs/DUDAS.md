@@ -39,25 +39,18 @@
    `20260927000009_etapas.sql` y quitar el recorte de la semilla. Pendiente
    de confirmación, no bloquea.
 
-5. **Prueba de concurrencia (§16 Fase 2) — pendiente de dos sesiones
-   reales.** `supabase/tests/rpc_concurrencia.test.sql` la hace con `dblink`,
-   pero Supabase alojado exige contraseña para abrir la segunda sesión y esa
-   contraseña nunca se ha pedido. Queda en **SKIP** (no en verde). Para
-   probarla de verdad, el dueño puede hacerlo él mismo con dos terminales de
-   `psql` contra la cadena de conexión del proyecto (Project Settings →
-   Database), pegando en cada una, casi al mismo tiempo:
-
-       select set_config('request.jwt.claims',
-         '{"sub":"a88771d6-e323-5b36-991d-c42e5880e507","role":"authenticated"}', false);
-       select transferir('b66cf468-47f7-51ee-a8f2-994d907440b9', gen_random_uuid(), now(),
-         (select id from resources where code = 'Tanque 1'), (select id from resources where code = 'Tanque 2'),
-         (select id from lots where folio = 'G-COMPRA-01'), 250, null, 'conservar');
-
-   Una debe regresar el id del lote y la otra fallar con
-   `SALDO_INSUFICIENTE:`. Después, `supabase db reset --linked` deja todo
-   como estaba. Alternativa: dar la contraseña de Postgres del proyecto para
-   que el test con `dblink` la use (es un secreto de cuenta; mejor la opción
-   de las dos terminales).
+5. **Concurrencia real (§16 Fase 2) — FAIL de infraestructura, no certificada.**
+   El SQL histórico con `dblink` se bloqueó con `PRUEBA_REEMPLAZADA`: sus
+   commits remotos no se revierten con el rollback exterior. No ejecutar
+   transferencias contra la demo ni resetearla para limpiar una prueba.
+   `pnpm test:db:concurrency` prepara un tenant desechable con UUID propios,
+   dos sesiones y limpieza exacta. Los tres intentos del 2026-09-28 no
+   observaron la barrera de la primera sesión; terminaron FAIL, todos con
+   limpieza confirmada. No prueban un fallo ni un éxito del bloqueo de saldo.
+   Una repetición directa del SQL de escritura fue rechazada por el control
+   de seguridad; no se reintentó ni se eludió. Antes de nuevas escrituras,
+   revisar mecanismo y obtener aprobación del alcance concreto de prueba.
+   Evidencia y siguiente paso: [continuación](plan/CONTINUACION-2026-09-28.md).
 
 9. **Hook de intentos de contraseña (§7.5, §18 #9) — RESPONDIDO: no está en
    el plan del proyecto.** `supabase config push` devolvió `402 "The

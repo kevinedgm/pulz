@@ -1,0 +1,193 @@
+{
+  "measures": [
+    {
+      "actions": [
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Cerrar horneada",
+          "w": 146.21875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Más",
+          "w": 62.546875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Llenar tinas",
+          "w": 112.59375
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Ver",
+          "w": 56.203125
+        }
+      ],
+      "frame": 1440,
+      "height": 904,
+      "nav": "240px 1200px",
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "actions": [
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Cerrar horneada",
+          "w": 146.21875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Más",
+          "w": 62.546875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Llenar tinas",
+          "w": 112.59375
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Ver",
+          "w": 56.203125
+        }
+      ],
+      "frame": 1024,
+      "height": 904,
+      "nav": "240px 784px",
+      "scroll": 1024,
+      "width": 1024
+    },
+    {
+      "actions": [
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Cerrar horneada",
+          "w": 146.21875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Más",
+          "w": 62.546875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Llenar tinas",
+          "w": 112.59375
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Ver",
+          "w": 56.203125
+        }
+      ],
+      "frame": 768,
+      "height": 904,
+      "nav": "160px 608px",
+      "scroll": 768,
+      "width": 768
+    },
+    {
+      "actions": [
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Cerrar horneada",
+          "w": 146.21875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Más",
+          "w": 62.546875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Llenar tinas",
+          "w": 112.59375
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Ver",
+          "w": 56.203125
+        }
+      ],
+      "frame": 480,
+      "height": 904,
+      "nav": "480px",
+      "scroll": 480,
+      "width": 480
+    },
+    {
+      "actions": [
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Cerrar horneada",
+          "w": 146.21875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Más",
+          "w": 62.546875
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Llenar tinas",
+          "w": 112.59375
+        },
+        {
+          "h": 48,
+          "overflow": false,
+          "text": "Ver",
+          "w": 56.203125
+        }
+      ],
+      "frame": 480,
+      "height": 904,
+      "nav": "480px",
+      "scroll": 480,
+      "width": 480
+    }
+  ],
+  "preserved": {
+    "date": "2026-09-28T12:00",
+    "description": null,
+    "error": "",
+    "folio": "R03-PRUEBA",
+    "invalid": "false",
+    "k1": "123.456",
+    "k2": "1000",
+    "total": "1,123.456 kg"
+  },
+  "reverseFocus": {
+    "id": "",
+    "inside": false,
+    "text": "\n\n  MAGUEY · HORNEADO · r03 · F2\n  Espacio\n    expanded 1440\n    expanded 1024\n    medium 768\n    compact 390\n  \n  Estado\n    \n      Maguey · default (lotes con saldo + agotados)\n      Maguey · carga\n      Maguey · vacío (sin lotes)\n      Maguey · sin conexión\n      Maguey · solo lectura\n      Maguey · operador (ve, no registra)\n      Maguey · contenido largo\n      Maguey · recepción (formulario)\n      Maguey · recepción sin catálogos (solo kilos)\n      Maguey · recepción con error del servidor\n      Horneado · default (1 abierta + cocido + últimas)\n      Horneado · vacío (sin horneadas ni cocido)\n      Horneado · sin hornos\n      Horneado · sin conexión\n      Horneado · abrir (kg por lote)\n      Horneado · abrir con kg por encima del saldo (bloquea)\n      Horneado · abrir sin maguey con saldo\n      Horneado · cierre registradoHorneado · ya cerrada por otra personaMaguey · recepción registradaHorneado · operadorHorneado · cargaHorneado · error recuperableHorneado · cerrar (capa)\n      Horneado · cocido que ya tenía (capa)\n      Horneado · revisión de aperturaHorneado · apertura registradaHorneado · entrada directa registradaHorneado · solo lecturaHorneado · menú de una horneada\n    \n  \n   Notas\n\n\n  Ejemplo F2 · marco 390px · compact · no guarda datos\n  \n    \n      Mezcal Cuatro VientosInicioMagueyHorneadoFermentaciónDestilaciónGranelTrazabilidadConfiguración\n      \n        CV · Mezcal Cuatro Vientos · Aurelia · productoraHorneadoAbrir horneada\n        \n        1 horneada abierta · 4,900 kg de cocido con saldoHorneadas abiertasHOR-003 ejemploHorno 1 · empezó hoy 09:00 · AureliaCargó 5,200 kg · MAG-004 3,200 · MAG-005 2,000abiertaCerrar horneadaMásAgave cocido con saldoAC-002 ejemplode HOR-002 · cerrada hoy 08:00 · Aurelia4,900 kg restantes de 4,900 · leña de encinocon saldoLlenar tinasÚltimas horneadasHOR-001Horno 1 · 2 sep → 6 sep · Aurelia8,000 kg (MAG-001) → 6,200 kg cocidos (AC-001, agotado en F-001) · leñacerradaVerCocido que ya tenía\n        Abrir horneada\n        InicioFermentaciónDestilaciónGranelMás\n      \n    \n    Cerrar HOR-003Cargó 5,200 kg de maguey (MAG-004 3,200 · MAG-005 2,000). Se registra el agave cocido y sus lotes de origen. No se reabre.Kilos cocidosDiferencia: 300 kg (5,200 kg cargados → 4,900 kg cocidos).Combustible (opcional)¿Cuándo terminó?Folio del cocido (opcional)Inicio: 28 sep 2026, 09:00. Revisa la fecha real del cierre.Nota (opcional)Cerrar con 4,900 kg cocidosCancelartask-layer (drawer / hoja). cerrar_horneado → lote AC con linaje (0016). Irreversible: el botón dice los kilos.\n  \n\n\n// Ejemplo: Cuatro Vientos (semilla: MAG-001 agotado en HOR-001; AC-001 agotado en F-001) + ejemplos rotulados\nconst side = (actual) => `<strong>Mezcal Cuatro Vientos</strong><ul>${['Inicio','Maguey','Horneado','Fermentación','Destilación','Granel','Trazabilidad','Configuración'].map(d => `<li ${d === actual ? 'aria-current=\"page\"' : ''}>${d}</li>`).join('')}</ul>`;\nconst topLista = (h1, prim, o = {}) => `<span class=\"wf-small wf-muted\">CV · Mezcal Cuatro Vientos · ${o.operador ? 'Tomás · operador' : 'Aurelia · productora'}</span><h1>${h1}</h1>${o.operador || o.sinPrim ? '' : `<a class=\"wf-btn wf-btn--primary\" href=\"#\" ${o.dis ? 'aria-disabled=\"true\"' : ''}>${prim}</a>`}`;\nconst fab = (prim, o = {}) => o.operador || o.sinPrim ? '' : `<a class=\"wf-btn wf-btn--primary mh-fab\" href=\"#\" ${o.dis ? 'aria-disabled=\"true\"' : ''}>${prim}</a>`;\nconst topSub = (h1, atras) => `<a class=\"wf-btn wf-btn--quiet\" href=\"#\">‹ ${atras}</a><h1>${h1}</h1>`;\n// ── Maguey ──\nconst loteM = (l, o = {}) => `<li class=\"mh-row\"><div><h3>${l.f}${l.ej ? ' <span class=\"wf-tag\">ejemplo</span>' : ''}</h3><span class=\"sub\">${l.esp} · ${l.de} · ${l.cuando} · ${l.quien}</span></div><div class=\"mh-datos\"><b>${l.rest.toLocaleString('es-MX')} kg</b> restantes de ${l.kg.toLocaleString('es-MX')}${l.pinas ? ` · ${l.pinas} piñas` : ''}${l.nota ? ` · ${l.nota}` : ''}</div><span class=\"wf-status ${l.rest > 0 ? 'wf-status--on' : 'wf-status--off'}\">${l.rest > 0 ? 'con saldo' : 'agotado'}</span><div class=\"wf-actions\"><a class=\"wf-btn wf-btn--quiet\" href=\"#\">Ver</a></div></li>`;\nconst M = [\n  { f: 'MAG-003', ej: true, esp: 'Tobalá', de: 'Loma del Toro · Magueyes Don Pedro', cuando: 'hoy 07:30', quien: 'Aurelia', kg: 2000, rest: 2000, pinas: 60 },\n  { f: 'MAG-002', ej: true, esp: 'Espadín', de: 'Loma del Toro', cuando: '25 sep', quien: 'Aurelia', kg: 4500, rest: 1300, pinas: 110, nota: 'maduro, sin daño' },\n];\nconst agotados = () => `<details class=\"mh-plegado\"><summary>Agotados (últimos 10)</summary><ul class=\"mh-lista\" style=\"margin-top:8px\">${loteM({ f: 'MAG-001', esp: 'Espadín', de: 'Loma del Toro · Magueyes Don Pedro', cuando: '2 sep', quien: 'Aurelia', kg: 8000, rest: 0, pinas: 180 })}</ul></details>`;\nconst magueyLista = (o = {}) => `<p class=\"mh-resumen\" role=\"status\">2 lotes con saldo · <b>3,300 kg de maguey</b></p><ul class=\"mh-lista\">${M.map(l => loteM(l, o)).join('')}</ul>${agotados()}`;\nconst recepcion = (o = {}) => `<form class=\"mh-form\">\n  <fieldset><legend>Lo que llegó</legend><div class=\"mh-fila\"><div class=\"wf-field\"><label for=\"kg\">Kilos (obligatorio)</label><input class=\"wf-input\" id=\"kg\" inputmode=\"decimal\" type=\"number\" min=\"0.001\" step=\"0.001\" required placeholder=\"Ej. 2,000\"></div></div><details class=\"mh-plegado\"><summary>Detalles opcionales</summary><div class=\"mh-fila\"><div class=\"wf-field\"><label for=\"pi\">Piñas (opcional)</label><input class=\"wf-input\" id=\"pi\" inputmode=\"numeric\" type=\"number\" min=\"0\" step=\"1\"></div></div>\n    ${o.sincat ? '<p class=\"mh-warn\">Sin especies, predios ni proveedores en el catálogo: puedes registrar solo con kilos. <a class=\"wf-btn wf-btn--quiet\" href=\"#\">Agregar en Catálogos</a>.</p>' : `<div class=\"mh-fila\"><div class=\"wf-field\"><label for=\"especie\">Especie (opcional)</label><select id=\"especie\" class=\"wf-input\"><option value=\"\">Sin especificar</option><option>Tobalá</option><option>Espadín</option></select></div><div class=\"wf-field\"><label for=\"predio\">Predio (opcional)</label><select id=\"predio\" class=\"wf-input\"><option value=\"\">Sin especificar</option><option>Loma del Toro · Santiago Matatlán</option></select></div></div><div class=\"wf-field\"><label for=\"proveedor\">Proveedor (opcional)</label><select id=\"proveedor\" class=\"wf-input\"><option value=\"\">Sin especificar</option><option>Magueyes Don Pedro</option></select></div>`}\n    <div class=\"wf-field\"><label for=\"no\">Nota de calidad (opcional)</label><input class=\"wf-input\" id=\"no\" placeholder=\"Ej. maduro, sin daño\"></div></details></fieldset>\n  <fieldset><legend>Cuándo y folio</legend><div class=\"mh-fila\"><div class=\"wf-field\"><label for=\"cu\">¿Cuándo pasó?</label><input class=\"wf-input\" id=\"cu\" type=\"datetime-local\" value=\"2026-09-28T07:30\"></div><div class=\"wf-field\"><label for=\"fo\">Folio (opcional)</label><input class=\"wf-input\" id=\"fo\" placeholder=\"MAG-… automático\"></div></div></fieldset>\n  ${o.error ? '<div class=\"mh-alert\" role=\"alert\">No pudimos conectar. Revisa tu señal. Lo que escribiste se conserva.</div>' : ''}\n  <div class=\"wf-actions\"><button class=\"wf-btn wf-btn--primary\" type=\"submit\" data-wf-persist>Registrar recepción</button><a class=\"wf-btn\" href=\"#\">Cancelar</a></div><div class=\"mh-barra\"><button class=\"wf-btn wf-btn--primary\" type=\"submit\">Registrar recepción</button></div>\n  <span class=\"wf-note\">Solo los kilos son obligatorios (0015). El lote nace con historia «completa» (viene del maguey). Admin y productor; requiere señal.</span></form>`;\n// ── Horneado ──\nconst horneadaAbierta = (o = {}) => `<li class=\"mh-row\"><div><h3>HOR-003 <span class=\"wf-tag\">ejemplo</span></h3><span class=\"sub\">Horno 1 · empezó hoy 09:00 · Aurelia</span></div><div class=\"mh-datos\"><b>Cargó 5,200 kg</b> · MAG-004 3,200 · MAG-005 2,000</div><span class=\"wf-status wf-status--partial\">abierta</span><div class=\"wf-actions\"><button class=\"wf-btn\" ${o.dis ? 'disabled aria-disabled=\"true\"' : ''}>Cerrar horneada</button><button class=\"wf-btn wf-btn--quiet\" aria-haspopup=\"menu\" aria-expanded=\"${o.menu ? 'true' : 'false'}\">Más</button></div></li>`;\nconst cocido = (o = {}) => `<section class=\"mh-grupo\"><h2>Agave cocido con saldo</h2><ul class=\"mh-lista\"><li class=\"mh-row\"><div><h3>AC-002 <span class=\"wf-tag\">ejemplo</span></h3><span class=\"sub\">de HOR-002 · cerrada hoy 08:00 · Aurelia</span></div><div class=\"mh-datos\"><b>4,900 kg</b> restantes de 4,900 · leña de encino</div><span class=\"wf-status wf-status--on\">con saldo</span><div class=\"wf-actions\">${o.operador ? '<span class=\"wf-small wf-muted\">lo formula el productor</span>' : '<a class=\"wf-btn\" href=\"#\">Llenar tinas</a>'}</div></li></ul></section>`;\nconst ultimasH = () => `<section class=\"mh-grupo\"><h2>Últimas horneadas</h2><ul class=\"mh-lista\"><li class=\"mh-row\"><div><h3>HOR-001</h3><span class=\"sub\">Horno 1 · 2 sep → 6 sep · Aurelia</span></div><div class=\"mh-datos\">8,000 kg (MAG-001) → <b>6,200 kg cocidos</b> (AC-001, agotado en F-001) · leña</div><span class=\"wf-status wf-status--off\">cerrada</span><div class=\"wf-actions\"><a class=\"wf-btn wf-btn--quiet\" href=\"#\">Ver</a></div></li></ul></section>`;\nconst horneadoLista = (o = {}) => `<p class=\"mh-resumen\" role=\"status\">1 horneada abierta · <b>4,900 kg de cocido con saldo</b></p><section class=\"mh-grupo\"><h2>Horneadas abiertas</h2><ul class=\"mh-lista\">${horneadaAbierta(o)}</ul></section>${cocido(o)}${ultimasH()}${o.operador ? '' : `<div class=\"wf-actions\" style=\"margin-top:24px\"><button class=\"wf-btn\" ${o.dis ? 'disabled aria-disabled=\"true\"' : ''}>Cocido que ya tenía</button></div>`}`;\nconst abrir = (o = {}) => `<form class=\"mh-form\">\n  <fieldset><legend>Horno</legend><div class=\"wf-field\"><label for=\"horno\">Horno</label><select id=\"horno\" class=\"wf-input\"><option>Horno 1 · 10,000 kg · libre</option></select></div></fieldset>\n  <fieldset><legend>Maguey que entra (con kilos)</legend><p>Indica kilos solo en los lotes que usarás. Vacío o cero deja el lote fuera.</p>\n    ${o.sin ? '<p class=\"wf-muted\" style=\"margin:0\">No hay maguey con saldo. Registra una recepción en Maguey.</p><a class=\"wf-btn\" href=\"#\">Ir a Maguey</a>' : `\n    <div class=\"mh-asig\"><div><b>MAG-003</b><span class=\"sub\"> · Tobalá · quedan 2,000 kg</span></div><div class=\"wf-field\"><label for=\"k1\">Kilos</label><input class=\"wf-input\" id=\"k1\" aria-label=\"Kilos de MAG-003\" type=\"number\" min=\"0\" max=\"2000\" step=\"0.001\" data-saldo=\"2000\" value=\"${o.saldo ? '2000' : ''}\"></div></div>\n    <div class=\"mh-asig\"><div><b>MAG-002</b><span class=\"sub\"> · Espadín · quedan 1,300 kg</span></div><div class=\"wf-field\"><label for=\"k2\">Kilos</label><input class=\"wf-input\" id=\"k2\" aria-label=\"Kilos de MAG-002\" type=\"number\" min=\"0\" max=\"1300\" step=\"0.001\" data-saldo=\"1300\" aria-describedby=\"k2-error\" aria-invalid=\"${o.saldo ? 'true' : 'false'}\" value=\"${o.saldo ? '1500' : ''}\"></div>${o.saldo ? '<p id=\"k2-error\" class=\"wf-small\" style=\"margin:0;font-weight:600\">Solo hay 1,300 kg.</p>' : ''}</div>\n    <p class=\"mh-total\" aria-live=\"polite\">Total <b id=\"kg-total\">${o.saldo ? '3,500' : '0'} kg</b> de 10,000 kg (Horno 1)</p>`}\n    <span class=\"wf-note\">origin-allocation en kg: lotes de maguey con saldo (solid_lot_balances); kilos por encima del saldo → error en la fila antes de enviar (SALDO_INSUFICIENTE en el servidor si la instantánea estaba vieja). Capacidad del horno: informativa (política libre).</span></fieldset>\n  <fieldset><legend>Cuándo y folio</legend><div class=\"mh-fila\"><div class=\"wf-field\"><label for=\"ce\">¿Cuándo empezó?</label><input class=\"wf-input\" id=\"ce\" type=\"datetime-local\" value=\"2026-09-28T12:00\"></div><div class=\"wf-field\"><label for=\"fh\">Folio (opcional)</label><input class=\"wf-input\" id=\"fh\" placeholder=\"HOR-… automático\"></div></div></fieldset>\n  <div class=\"wf-actions\"><button class=\"wf-btn wf-btn--primary\" type=\"submit\" data-wf-persist disabled aria-disabled=\"true\">Revisar Horno 1 con ${o.saldo ? '3,500' : '0'} kg</button><a class=\"wf-btn\" href=\"#\">Cancelar</a></div><div class=\"mh-barra\"><button class=\"wf-btn wf-btn--primary\" type=\"submit\" disabled aria-disabled=\"true\">Revisar Horno 1 con ${o.saldo ? '3,500' : '0'} kg</button></div>\n  <span class=\"wf-note\">Abrir consume el saldo de maguey (irreversible; se corrige en Fase 6). Requiere señal; admin y productor.</span></form>`;\nconst V = {\n  'm-default': () => magueyLista() + '<span class=\"wf-note\">Lotes con saldo arriba; agotados plegados (últimos 10). Cada lote: especie, predio o proveedor, kg restantes de recibidos, piñas, cuándo y quién. Una primaria: Registrar recepción (FAB en compact).</span>',\n  'm-loading': () => `<p class=\"mh-resumen\">…</p><div class=\"wf-skel\" aria-busy=\"true\">${'<div class=\"wf-line\" style=\"height:64px;border-radius:6px\"></div>'.repeat(3)}</div>`,\n  'm-empty': () => `<div class=\"wf-state\"><h2>Aún no has registrado maguey</h2><p class=\"wf-muted\">Cuando llegue, registra los kilos; lo demás es opcional.</p><a class=\"wf-btn wf-btn--primary\" href=\"#\" >Registrar recepción</a></div>`,\n  'm-offline': () => `<p class=\"mh-warn\">Datos de <b>hace 8 min</b>. Registrar una recepción necesita señal.</p>${magueyLista({ dis: true })}`,\n  'm-readonly': () => magueyLista({ dis: true }),\n  'm-operador': () => magueyLista({ operador: true }) + '<span class=\"wf-note\">Operador: ve los lotes; no registra (§18 #4, supuesto vigente; rpc_guard 0015). Sin primaria.</span>',\n  'm-long': () => `<p class=\"mh-resumen\" role=\"status\">1 lote con saldo · <b>12,500 kg</b></p><ul class=\"mh-lista\">${loteM({ f: 'MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001', esp: 'Tobalá silvestre de la ladera norte', de: 'Predio Loma del Toro parcela catorce · Magueyes Don Pedro y Familia', cuando: '27 sep', quien: 'Aurelia Santiago', kg: 12500, rest: 12500, pinas: 340, nota: 'llegó en dos viajes; piñas grandes, algunas con quiote' })}</ul>`,\n  'm-recepcion': () => recepcion(), 'm-sincat': () => recepcion({ sincat: true }), 'm-error': () => recepcion({ error: true }),\n  'h-default': () => horneadoLista() + '<span class=\"wf-note\">Horneadas abiertas con Cerrar; cocido con saldo (lotes AC) con «Llenar tinas» → Fermentación/formular; últimas horneadas con cargado → cocido. Una primaria: Abrir horneada (FAB en compact); «Cocido que ya tenía» secundaria.</span>',\n  'h-empty': () => `<div class=\"wf-state\"><h2>Aún no hay horneadas ni agave cocido</h2><p class=\"wf-muted\">Abre una horneada con el maguey que tengas, o registra cocido que ya tenías.</p><a class=\"wf-btn wf-btn--primary\" href=\"#\" >Abrir horneada</a><p style=\"margin-top:12px\"><button class=\"wf-btn wf-btn--quiet\">Cocido que ya tenía</button></p></div>`,\n  'h-sinhornos': () => `<div class=\"wf-state\"><h2>Tu palenque aún no tiene hornos</h2><p class=\"wf-muted\">Agrégalos en Configuración → Recursos y después abre tu primera horneada.</p><a class=\"wf-btn\" href=\"#\">Ir a Recursos</a></div>`,\n  'h-offline': () => `<p class=\"mh-warn\">Datos de <b>hace 8 min</b>. Abrir y cerrar horneadas necesita señal.</p>${horneadoLista({ dis: true })}`,\n  'h-abrir': () => abrir(), 'h-abrir-saldo': () => abrir({ saldo: true }), 'h-abrir-sin': () => abrir({ sin: true }),\n  'h-cerrar': () => horneadoLista(), 'h-cocido': () => horneadoLista(), 'h-menu': () => horneadoLista({ menu: true }),\n};\nconst OV = {\n  'h-cerrar': () => `<dialog class=\"mh-drawer\" aria-modal=\"true\" aria-labelledby=\"ce-t\"><h2 id=\"ce-t\" style=\"margin:0\">Cerrar HOR-003</h2><p class=\"wf-small wf-muted\" style=\"margin:0\">Cargó <b>5,200 kg</b> de maguey (MAG-004 3,200 · MAG-005 2,000). Se registra el agave cocido y sus lotes de origen. No se reabre.</p><div class=\"wf-field\"><label for=\"kc\">Kilos cocidos</label><input class=\"wf-input\" id=\"kc\" inputmode=\"decimal\" type=\"number\" min=\"0.001\" step=\"0.001\" required value=\"4900\"></div><p class=\"mh-warn\">Merma: 300 kg (5,200 → 4,900). Diferencia entre lo cargado y lo obtenido.</p><div class=\"wf-field\"><label for=\"cb\">Combustible (opcional)</label><input class=\"wf-input\" id=\"cb\" placeholder=\"Ej. leña de encino\"></div><div class=\"mh-fila\"><div class=\"wf-field\"><label for=\"ct\">¿Cuándo terminó?</label><input class=\"wf-input\" id=\"ct\" type=\"datetime-local\" value=\"2026-09-28T12:00\" aria-describedby=\"ct-hint\"></div><div class=\"wf-field\"><label for=\"fc\">Folio del cocido (opcional)</label><input class=\"wf-input\" id=\"fc\" placeholder=\"AC-… automático\"></div></div><p id=\"ct-hint\" class=\"wf-small\" role=\"status\">Inicio: 28 sep 2026, 09:00. Revisa la fecha real del cierre.</p><div class=\"wf-field\"><label for=\"cn\">Nota (opcional)</label><input class=\"wf-input\" id=\"cn\"></div><div class=\"wf-actions\"><button class=\"wf-btn wf-btn--primary\">Cerrar con 4,900 kg cocidos</button><button class=\"wf-btn\">Cancelar</button></div><span class=\"wf-note\">task-layer (drawer / hoja). cerrar_horneado → lote AC con linaje (0016). Irreversible: el botón dice los kilos.</span></dialog>`,\n  'h-cocido': () => `<dialog class=\"mh-drawer\" aria-modal=\"true\" aria-labelledby=\"co-t\"><h2 id=\"co-t\" style=\"margin:0\">Cocido que ya tenía</h2><p class=\"wf-small wf-muted\" style=\"margin:0\">Agave cocido de antes de usar PULZ: nace un lote sin historia.</p><div class=\"wf-field\"><label for=\"ck\">Kilos</label><input class=\"wf-input\" id=\"ck\" inputmode=\"decimal\" type=\"number\" min=\"0.001\" step=\"0.001\" required></div><div class=\"wf-field\"><label for=\"cc\">¿Cuándo pasó?</label><input class=\"wf-input\" id=\"cc\" type=\"datetime-local\" value=\"2026-09-28T10:00\"></div><div class=\"wf-field\"><label for=\"cn2\">Nota (opcional)</label><input class=\"wf-input\" id=\"cn2\"></div><div class=\"wf-actions\"><button class=\"wf-btn wf-btn--primary\">Registrar 1,500 kg de cocido</button><button class=\"wf-btn\">Cancelar</button></div><span class=\"wf-note\">registrar_entrada('agave_cocido', sin recurso, kg) — carga inicial (0015). Mismo camino que el arranque.</span></dialog>`,\n  'h-menu': () => `<div style=\"position:absolute;right:24px;top:180px;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:6px;z-index:21;min-width:240px;padding:4px\" role=\"menu\"><button role=\"menuitem\" style=\"display:block;width:100%;text-align:left;min-height:44px;border:0;background:none;padding:0 12px;font:inherit\">Ver horneada</button><button role=\"menuitem\" style=\"display:block;width:100%;text-align:left;min-height:44px;border:0;background:none;padding:0 12px;font:inherit\">Cerrar horneada…</button></div>`,\n};\n\n\n\n\n\n"
+  },
+  "forwardFocus": {
+    "id": "",
+    "inside": false
+  },
+  "restoredFocus": {
+    "dialog": false,
+    "text": "Cerrar horneada"
+  },
+  "viewportLimitation": "Native browser clamps below 480 CSS px; 390/320 files in initial attempt actually 480. Compact iframe checks follow."
+}

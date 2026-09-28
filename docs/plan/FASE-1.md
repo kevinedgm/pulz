@@ -1,5 +1,9 @@
 # Fase 1 · Base de datos
 
+> **Revisión vigente: 2026-09-28.** Ver
+> [implementación, pruebas nuevas y pendientes](CONTINUACION-2026-09-28.md).
+> Los resultados fechados de abajo son históricos, no certifican el estado actual.
+
 > Sigue `PULZ_MAESTRO.md` §0.1, §10, §11.3, §15 y §16, más las tres reglas
 > permanentes de `CLAUDE.md` (nunca Docker, migraciones "desde cero" mientras
 > no haya lanzamiento, kiwi primero para interfaz — esta fase no toca
@@ -26,7 +30,7 @@ Es decir: el ciclo completo de la Fase 1 — reset, migrar, sembrar, probar,
 consultar — existe en el CLI apuntando al proyecto alojado, sin Docker en
 ningún paso. Esto resuelve la duda de `docs/DUDAS.md`.
 
-## Bloqueo antes de poder ejecutar nada de esto
+## Bloqueo inicial (histórico, resuelto antes de esta revisión)
 
 `supabase link` pidió autenticarse:
 
@@ -42,11 +46,9 @@ desbloquear, el dueño necesita hacer **una** de estas dos cosas:
 1. **Recomendado**: correr `supabase login` en su propia terminal (fuera de
    esta sesión) una vez. Con eso el CLI guarda la sesión localmente y esta
    sesión la reutiliza sin que nadie tenga que pegar un token en el chat.
-2. Generar un *personal access token* en
-   `supabase.com/dashboard/account/tokens` y decírmelo para exportarlo como
-   `SUPABASE_ACCESS_TOKEN` en esta sesión. Funciona, pero es un token de
-   cuenta (más amplio que una sola API key de proyecto), así que la opción 1
-   es más segura.
+2. Configurar localmente `SUPABASE_ACCESS_TOKEN` mediante un mecanismo de
+   secretos, sin pegar su valor en el chat ni versionarlo. Es una credencial
+   de cuenta; se prefiere la autenticación local de la opción 1.
 
 También es probable que `supabase link`/`db push` pidan la **contraseña de
 Postgres del proyecto** (no es el `anon`/`publishable key` que ya tenemos;

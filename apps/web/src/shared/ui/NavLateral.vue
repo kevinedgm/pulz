@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
 import Icono from "./Icono.vue"
+import { etiquetaNav } from "./etiquetaNav"
 import type { ItemNav } from "./tipos"
 
 // Contrato: registry "side-nav". 200px en medium, 240px en expanded (lo
@@ -30,10 +31,11 @@ const emit = defineEmits<{ cuenta: [] }>()
         <RouterLink
           class="lat__item"
           :to="it.to"
+          :aria-label="it.etiqueta"
           :aria-current="it.id === actual ? 'page' : undefined"
         >
-          <Icono :nombre="it.icono" :size="22" />
-          <span>{{ it.etiqueta }}</span>
+          <Icono :nombre="it.icono" :size="24" />
+          <span>{{ etiquetaNav(it.etiqueta) }}</span>
         </RouterLink>
       </li>
     </ul>
@@ -114,6 +116,10 @@ const emit = defineEmits<{ cuenta: [] }>()
 }
 .lat__item:hover {
   background: var(--ink-100);
+}
+.lat__item > span {
+  min-width: 0;
+  hyphens: manual;
 }
 .lat__item:focus-visible {
   outline: 3px solid var(--ink-900);

@@ -1,0 +1,63 @@
+{
+  "schema": "fruti-coco-compliance/v1",
+  "round": "r01",
+  "protocol": "immutable-test-v1",
+  "sourceRequest": ".fruti/tests/r01/request.md",
+  "historicalApprovalUsed": false,
+  "status": "PASS",
+  "authorizedBy": ".fruti/tests/r01/lima-contract.yaml",
+  "implementation": {
+    "component": "apps/web/src/modules/fermentacion/components/FilaUso.vue",
+    "tests": "apps/web/src/modules/fermentacion/__tests__/FilaUso.test.ts",
+    "preview": "apps/web/hub/DemoHub.vue",
+    "geometryOwner": "kiwi",
+    "geometryPreserved": [
+      "GEO-CONTEXT-001",
+      "GEO-METRICS-001",
+      "GEO-ACTION-001"
+    ]
+  },
+  "foundations": {
+    "canonical": ".fruti/tokens.json",
+    "binding": "apps/web/src/shared/ui/tokens.css",
+    "consumed": true,
+    "inventedTokens": false,
+    "iconRule": "No icon required; legacy sprite removed from this component"
+  },
+  "refinement": {
+    "critique": "Removed the four-track expanded composition, secondary CTA treatment and legacy clock icon that conflicted with the frozen contract/current Foundations.",
+    "distill": "Reduced the composition to context, metrics and one separate action footer without removing domain information.",
+    "adapt": "Implemented compact, medium and expanded compositions with container queries and the Kiwi minimums.",
+    "polish": "Bound color, type, spacing, radius and sizing directly to canonical PULZ custom properties.",
+    "detector": "PASS · 0 findings"
+  },
+  "visualQa": {
+    "status": "PASS",
+    "evidence": "design-hub/qa/evidence/fermentation-vat-immutable-r01/resultado.json",
+    "collision": "PASS",
+    "crowding": "PASS",
+    "hierarchy": "PASS",
+    "grouping": "PASS",
+    "alignment": "PASS",
+    "density": "PASS",
+    "actionDominance": "PASS",
+    "responsiveComposition": "PASS",
+    "foundationsAdherence": "PASS"
+  },
+  "verification": {
+    "kiwiArtifactCheck": "PASS · 0 errors · 0 warnings",
+    "focusedVitest": "PASS · 6/6",
+    "productionBuild": "PASS",
+    "hubDemoBuild": "PASS",
+    "impeccableDetector": "PASS · 0 findings",
+    "runtimeViewports": "PASS · 1440 / 1024 / 768 / 390",
+    "keyboardOrder": "PASS · Registrar medición → Acciones",
+    "nativeZoom200": "PASS",
+    "horizontalOverflow": "PASS · none"
+  },
+  "warnings": [
+    "Physical touch-device validation remains for Stable.",
+    "Forced-colors validation remains for Stable.",
+    "Foundation-level font delivery is still marked pending; the component consumes the canonical Manrope declaration with explicit fallbacks."
+  ]
+}

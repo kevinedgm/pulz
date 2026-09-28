@@ -1,0 +1,294 @@
+{
+  "fecha": "2026-09-28T20:01:38.913Z",
+  "proyecto": "ypgeiyorgktshgbzhgfh",
+  "resetEjecutado": false,
+  "resultados": [
+    {
+      "suite": "aislamiento",
+      "fixture": {
+        "tag": "qa-3b94a7a4b8464cb8",
+        "empresas": [
+          "7277a529-4342-46d6-8aff-3d5ecb7ccc86",
+          "97124588-60fc-476f-9d6f-f5ce010370aa"
+        ],
+        "semillaSha256": "02a11e4b24c5049b8e29007740005b6311ee23555a84e7281239f2856552a662",
+        "pruebaSha256": "874c7ed58615c449e1727e9782d1023cb9bfb96de4d57692f74c4f4a1a26d8ff"
+      },
+      "comando": "supabase db query --linked -f /Users/datateamconsulting/Downloads/PULZ/docs/plan/evidence/2026-09-28T20-01-38.913Z/aislamiento.sql",
+      "estado": "PASS",
+      "aserciones": 19,
+      "fallos": [],
+      "omitidas": [],
+      "tap": [
+        "# Subtest: pg_temp_53.test_aislamiento()",
+        "    ok 1 - benito ve exactamente una empresa",
+        "    ok 2 - benito ve los 12 recursos de Cuatro Vientos",
+        "    ok 3 - benito no ve recursos de la empresa B",
+        "    ok 4 - benito sí ve filas de su propia empresa",
+        "    ok 5 - dueña B ve solo su empresa",
+        "    ok 6 - dueña B no ve ninguna fila de A en ninguna tabla de negocio ni vista",
+        "    ok 7 - dueña B no puede insertar un recurso en A (RLS)",
+        "    ok 8 - dueña B no puede referenciar un catálogo de A (FK compuesta o trigger de tipo)",
+        "    ok 9 - un update sobre A desde B no revienta: la RLS simplemente filtra 0 filas",
+        "    ok 10 - el nombre de A sigue intacto tras el intento desde B",
+        "    ok 11 - un usuario sin membresía no ve empresas",
+        "    ok 12 - un usuario sin membresía no ve filas de negocio",
+        "    ok 13 - un operador no puede desbloquear miembros",
+        "    ok 14 - un operador no puede crear recursos",
+        "    ok 15 - ninguna política for all",
+        "    ok 16 - ninguna columna json/jsonb en tablas de public",
+        "    ok 17 - todas las tablas de public tienen RLS activada",
+        "    ok 18 - los saldos de resource_lot_balances coinciden con §15.1",
+        "    1..18",
+        "ok 1 - pg_temp_53.test_aislamiento",
+        "1..1"
+      ]
+    },
+    {
+      "suite": "rpc",
+      "fixture": {
+        "tag": "qa-48eeb13039414295",
+        "empresas": [
+          "2f07e716-b5ba-4798-b30a-21b104d66566",
+          "c22d4e4a-6423-4613-bcef-866815b2d6cf"
+        ],
+        "semillaSha256": "02a11e4b24c5049b8e29007740005b6311ee23555a84e7281239f2856552a662",
+        "pruebaSha256": "871b8415576c29befc1a89bae5fe8667eebe77ee6149680668a94546982a0e5f"
+      },
+      "comando": "supabase db query --linked -f /Users/datateamconsulting/Downloads/PULZ/docs/plan/evidence/2026-09-28T20-01-38.913Z/rpc.sql",
+      "estado": "PASS",
+      "aserciones": 27,
+      "fallos": [],
+      "omitidas": [],
+      "tap": [
+        "# Subtest: pg_temp_58.test_rpc()",
+        "    ok 1 - la simulación por RPC da los saldos de §15.1",
+        "    ok 2 - idempotencia: la segunda llamada devuelve el mismo lote",
+        "    ok 3 - idempotencia: la segunda llamada no agrega patas al ledger",
+        "    ok 4 - dura: no se puede sacar más de lo que hay",
+        "    ok 5 - dura: la capacidad estricta del alambique bloquea",
+        "    ok 6 - dura: un usuario de otra empresa no ejecuta RPC de A",
+        "    ok 7 - dura: un operador no registra recepción de maguey (§11.1, §18 #4)",
+        "    ok 8 - dura: un operador no transfiere granel",
+        "    ok 9 - blanda: Brix inicial fuera de rango sin nota pide nota",
+        "    ok 10 - blanda: con nota, la medición se registra",
+        "    ok 11 - blanda: el aviso queda en operation_warnings con su nota",
+        "    ok 12 - acumulación: se abre DES-004 desde la Tina 2",
+        "    ok 13 - acumulación: colector vacío → nace lote nuevo",
+        "    ok 14 - acumulación: el folio automático salta los que ya existen",
+        "    ok 15 - acumulación: se suma al lote vivo del colector (COL-002) porque no se cargó a esta corrida",
+        "    ok 16 - acumulación: se abre DES-005 cargando COL-002",
+        "    ok 17 - acumulación: el lote vivo se cargó a la misma corrida → nace lote nuevo (evita linaje circular)",
+        "    ok 18 - transferir: conservar devuelve el lote que ya estaba en el destino",
+        "    ok 19 - transferir: el destino suma los litros",
+        "    ok 20 - transferir: queda el aporte del lote que se unió",
+        "    ok 21 - conciliación: el saldo queda en lo declarado",
+        "    ok 22 - conciliación: la pata registra exactamente la diferencia",
+        "    ok 23 - conciliación: queda el aviso diferencia_volumen",
+        "    ok 24 - un lote sin saldo en ningún recurso queda agotado",
+        "    ok 25 - historia: carga inicial unida a producción con maguey → parcial",
+        "    ok 26 - historia: la compra recibió mezcal con historia → parcial",
+        "    1..26",
+        "ok 1 - pg_temp_58.test_rpc",
+        "1..1"
+      ]
+    },
+    {
+      "suite": "portal",
+      "fixture": {
+        "tag": "qa-5a4feb7d12bb4aae",
+        "empresas": [
+          "d0325d36-d707-4172-8b7b-3b3de3d63f37",
+          "af4268cd-2195-4d32-b1c4-82f19337f346"
+        ],
+        "semillaSha256": "02a11e4b24c5049b8e29007740005b6311ee23555a84e7281239f2856552a662",
+        "pruebaSha256": "6ac7f42859daaf2110f717cd9e4794e4fb5e60816493d29826c9645b69a42794"
+      },
+      "comando": "supabase db query --linked -f /Users/datateamconsulting/Downloads/PULZ/docs/plan/evidence/2026-09-28T20-01-38.913Z/portal.sql",
+      "estado": "PASS",
+      "aserciones": 12,
+      "fallos": [],
+      "omitidas": [],
+      "tap": [
+        "# Subtest: pg_temp_19.test_portal()",
+        "    ok 1 - portal_branding devuelve la marca por slug",
+        "    ok 2 - suscripción en prueba → abierto",
+        "    ok 3 - el slug viejo redirige al actual (historial de slugs)",
+        "    ok 4 - el slug no distingue mayúsculas",
+        "    ok 5 - empresa inexistente: ninguna fila",
+        "    ok 6 - anon no lee nada de negocio por PostgREST (sin grant, no solo RLS)",
+        "    ok 7 - anon no puede ejecutar is_member (revocado)",
+        "    ok 8 - vencida → read_only",
+        "    ok 9 - cancelada → ninguna fila, idéntico a inexistente (§7.4)",
+        "    ok 10 - vencida: has_role rechaza al admin (solo lectura)",
+        "    ok 11 - vencida: is_member sigue en true (la lectura sigue)",
+        "    1..11",
+        "ok 1 - pg_temp_19.test_portal",
+        "1..1"
+      ]
+    },
+    {
+      "suite": "equipo_miembros",
+      "fixture": {
+        "tag": "qa-cd0e326743ee4ec0",
+        "empresas": [
+          "f7562921-80a4-46ab-8a72-c5f85b716be8",
+          "276ee1c6-4faa-4ba6-be09-b9b6db6f0471"
+        ],
+        "semillaSha256": "02a11e4b24c5049b8e29007740005b6311ee23555a84e7281239f2856552a662",
+        "pruebaSha256": "3a81a042a10d7c79a9c88ae47752eac362d6b17c32f78044b218e08990da37d0"
+      },
+      "comando": "supabase db query --linked -f /Users/datateamconsulting/Downloads/PULZ/docs/plan/evidence/2026-09-28T20-01-38.913Z/equipo_miembros.sql",
+      "estado": "PASS",
+      "aserciones": 13,
+      "fallos": [],
+      "omitidas": [],
+      "tap": [
+        "# Subtest: pg_temp_6.test_equipo_miembros()",
+        "    ok 1 - un operador no ve el equipo",
+        "    ok 2 - una productora no ve el equipo",
+        "    ok 3 - el admin de otra empresa no ve el equipo de A",
+        "    ok 4 - el admin de B ve a su única persona",
+        "    ok 5 - Benito ve a las 3 personas de Cuatro Vientos",
+        "    ok 6 - el titular (admin) va primero",
+        "    ok 7 - Tomás debe cambiar la contraseña dictada",
+        "    ok 8 - Tomás no está bloqueado (3 fallos, sin locked_until)",
+        "    ok 9 - la invitación de Tomás no se ha usado",
+        "    ok 10 - la vigencia de la invitación se expone (el token nunca)",
+        "    ok 11 - el titular no tiene usuario simple",
+        "    ok 12 - con suscripción vencida el admin sigue viendo el equipo",
+        "    1..12",
+        "ok 1 - pg_temp_6.test_equipo_miembros",
+        "1..1"
+      ]
+    },
+    {
+      "suite": "configuracion",
+      "fixture": {
+        "tag": "qa-6638aa939f924ebd",
+        "empresas": [
+          "5f6c43f1-05ff-4a29-959e-de5f6cb15372",
+          "e38e99ce-9d4a-4580-b414-877143958561"
+        ],
+        "semillaSha256": "02a11e4b24c5049b8e29007740005b6311ee23555a84e7281239f2856552a662",
+        "pruebaSha256": "ac1d285e9b7f043387e93763d33a3c8a2d6b8ab485204aade636dff5e00e5b7b"
+      },
+      "comando": "supabase db query --linked -f /Users/datateamconsulting/Downloads/PULZ/docs/plan/evidence/2026-09-28T20-01-38.913Z/configuracion.sql",
+      "estado": "FAIL",
+      "aserciones": 1,
+      "fallos": [
+        "    # Test died: 23514: new row for relation \"organizations\" violates check constraint \"organizations_slug_check\"",
+        "not ok 1 - pg_temp_54.test_configuracion"
+      ],
+      "omitidas": [],
+      "tap": [
+        "# Subtest: pg_temp_54.test_configuracion()",
+        "    # Test died: 23514: new row for relation \"organizations\" violates check constraint \"organizations_slug_check\"",
+        "    #         SCHEMA:     public",
+        "    #         TABLE:      organizations",
+        "    #         CONSTRAINT: organizations_slug_check",
+        "    #         CONTEXT:",
+        "    #             SQL statement \"update organizations set slug = 'qa-6638aa939f924ebd-cuatro-vientos-mezcal' where id = a\"",
+        "    #             PL/pgSQL function pg_temp_54.test_configuracion() line 92 at SQL statement",
+        "    #             PL/pgSQL function _runner(text[],text[],text[],text[],text[]) line 62 at FOR over EXECUTE statement",
+        "    #             SQL function \"runtests\" statement 1",
+        "not ok 1 - pg_temp_54.test_configuracion",
+        "# Failed test 1: \"pg_temp_54.test_configuracion\"",
+        "1..1",
+        "# Looks like you failed 1 test of 1"
+      ]
+    },
+    {
+      "suite": "proceso",
+      "fixture": {
+        "tag": "qa-60898440ca3f4d39",
+        "empresas": [
+          "616d4e2f-5330-4ea0-af9e-7ff497c67906",
+          "3b0b0fad-b88b-4ac9-aa6f-01e286ebe28a"
+        ],
+        "semillaSha256": "02a11e4b24c5049b8e29007740005b6311ee23555a84e7281239f2856552a662",
+        "pruebaSha256": "1a9611de80cf65d7262cf461422ba690921d653da1b3325e5ed39289e855db1f"
+      },
+      "comando": "supabase db query --linked -f /Users/datateamconsulting/Downloads/PULZ/docs/plan/evidence/2026-09-28T20-01-38.913Z/proceso.sql",
+      "estado": "FAIL",
+      "aserciones": 58,
+      "fallos": [
+        "    not ok 42 - Tanque 2: el grado vigente es el de la unión (44.9)",
+        "not ok 1 - pg_temp_43.test_proceso"
+      ],
+      "omitidas": [],
+      "tap": [
+        "# Subtest: pg_temp_43.test_proceso()",
+        "    ok 1 - tres tinas en uso (Tina 1 en vaciado, Tina 2 y Tina 3 fermentando)",
+        "    ok 2 - Tina 1 quedó en vaciado al cargarse al alambique",
+        "    ok 3 - Tina 1: 870 L (§15.1)",
+        "    ok 4 - Tina 1: 5 mediciones válidas",
+        "    ok 5 - Tina 1: la última medición es del día 5",
+        "    ok 6 - Tina 1: actividad 3 en la última medición",
+        "    ok 7 - Tina 1: promedios de temperatura y Brix al vuelo",
+        "    ok 8 - Tina 1: lote FER-T1-001",
+        "    ok 9 - Tina 1 viene de una formulación",
+        "    ok 10 - Tina 2 fermentando",
+        "    ok 11 - Tina 2: 1,400 L (§15.1)",
+        "    ok 12 - Tina 2: 3 mediciones",
+        "    ok 13 - Tina 3: 1,300 L (§15.1)",
+        "    ok 14 - Tina 3 ya fermentaba: sin formulación (DUDAS #7)",
+        "    ok 15 - Tina 3: sin mediciones",
+        "    ok 16 - Tina 3: última medición nula, no un error",
+        "    ok 17 - mediciones_del_ciclo: 5 filas para Tina 1",
+        "    ok 18 - día 1 en modo mínimo",
+        "    ok 19 - día 1: temperatura y Brix promediados",
+        "    ok 20 - modo mínimo: sin dulzor ni acidez",
+        "    ok 21 - quién midió, con nombre",
+        "    ok 22 - tres corridas en la simulación",
+        "    ok 23 - ninguna abierta al final",
+        "    ok 24 - DES-001 cargó 290 L de la Tina 1",
+        "    ok 25 - DES-001 cortó 8 + 40 + 12 = 60 L",
+        "    ok 26 - DES-001: tres cortes",
+        "    ok 27 - DES-001: el origen es la Tina 1",
+        "    ok 28 - DES-003 es de 2ª pasada",
+        "    ok 29 - DES-003: ordinario y colas juntos (aviso con nota)",
+        "    ok 30 - DES-003 cargó 74 + 22 = 96 L",
+        "    ok 31 - solo el colector de colas tiene saldo",
+        "    ok 32 - es el Colector colas",
+        "    ok 33 - con el lote COL-002 (nació aparte por la regla de acumulación)",
+        "    ok 34 - Colector colas: 16 L",
+        "    ok 35 - grado declarado del corte: 10 %",
+        "    ok 36 - dos tanques activos",
+        "    ok 37 - Tanque 1: 250 L (G-COMPRA-01)",
+        "    ok 38 - Tanque 1: lote G-COMPRA-01",
+        "    ok 39 - Tanque 1: 46 % declarado en la compra",
+        "    ok 40 - la compra tiene historia declarada",
+        "    ok 41 - Tanque 2: 341.8 L (G-INI-01)",
+        "    not ok 42 - Tanque 2: el grado vigente es el de la unión (44.9)",
+        "    # Failed test 42: \"Tanque 2: el grado vigente es el de la unión (44.9)\"",
+        "    #         have: 47.00",
+        "    #         want: 44.9",
+        "    ok 43 - quién declaró el grado vigente",
+        "    ok 44 - Prueba B: sin tinas en uso",
+        "    ok 45 - Prueba B: sin corridas",
+        "    ok 46 - Prueba B: sin tanques (solo tiene Tina B1)",
+        "    ok 47 - Prueba B: sin colectores",
+        "    ok 48 - Prueba B no ve los adjuntos de A",
+        "    ok 49 - el bucket evidencias es privado",
+        "    ok 50 - límite 10 MB",
+        "    ok 51 - acepta PDF",
+        "    ok 52 - dos políticas: leer y subir (nadie borra)",
+        "    ok 53 - storage_org_of saca la empresa de la carpeta raíz",
+        "    ok 54 - el operador registra la foto de su medición",
+        "    ok 55 - el tipo del adjunto debe ser del catálogo tipo_adjunto",
+        "    ok 56 - nadie edita una evidencia (ni siquiera hay GRANT de update)",
+        "    ok 57 - el admin de B no adjunta nada a A (el trigger ya no le encuentra ni el catálogo de A: la RLS lo esconde antes de llegar a la política)",
+        "    1..57",
+        "    # Looks like you failed 1 test of 57",
+        "not ok 1 - pg_temp_43.test_proceso",
+        "# Failed test 1: \"pg_temp_43.test_proceso\"",
+        "1..1",
+        "# Looks like you failed 1 test of 1"
+      ]
+    }
+  ],
+  "noEjecutado": [
+    "Concurrencia con dos sesiones: no cubierta por estas suites"
+  ]
+}

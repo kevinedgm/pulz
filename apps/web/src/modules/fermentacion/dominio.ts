@@ -6,3 +6,12 @@ export const ETIQUETAS_DULZOR = ["nada", "poco", "algo", "medio", "dulce", "muy 
 export const ETIQUETAS_ACIDEZ = ["nada", "poca", "algo", "media", "ácida", "muy ácida"]
 
 export const litros = (valor: number) => `${new Intl.NumberFormat("es-MX").format(valor)} L`
+
+// La capacidad es un límite duro solo bajo política estricta (§2.1).
+// Flexible necesita nota en la RPC; libre no añade un límite de captura.
+export function limiteDeTina(tina: {
+  capacity: number | null
+  capacity_policy: "estricta" | "flexible" | "libre"
+}): number | null {
+  return tina.capacity_policy === "estricta" ? tina.capacity : null
+}

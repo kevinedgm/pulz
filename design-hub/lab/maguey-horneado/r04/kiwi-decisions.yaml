@@ -1,0 +1,59 @@
+round: maguey-horneado/r04
+owner: kiwi
+fidelity: F2
+route: R1
+status: proposed
+approval_reused: false
+geometry_owner: kiwi
+sources: [docs/PULZ_MAESTRO.md, docs/plan/FASE-5.md, .codex/skills/lima/profiles/pulz.md, .fruti/tokens.json]
+preserve: [dos_destinos, grupos_horneado, saldo_restante, agotados_plegados, continuidad_formulacion, rpcs_existentes, cantidades_vacias, revision_antes_de_consumir]
+geometry:
+  navigation:
+    compact: bottom navigation; Más abre destinos; tarea a una columna; primaria visible en cabecera sin FAB duplicado
+    medium: rail de referencia 160px con etiquetas completas y targets 48px
+    expanded: sidebar 240px
+  content:
+    max_width: 960px
+    compact_inset: 16px
+    medium_expanded_inset: 24px
+    group_gap: 24px
+    density: dos lotes de ejemplo; contrato máximo 50 activos y paginación posterior
+  rows:
+    dominant: kilos restantes 20px tabulares; folio 16px; contexto 13px
+    expanded_1200_up: identidad y kg en columnas; columna de acciones fija 14rem para alinear kg entre filas
+    expanded_1024_1199: identidad y estado; kg debajo; acciones en línea separada
+    medium: identidad y estado; kg debajo; acciones en línea separada
+    compact: identidad a todo el ancho; kg, estado y acciones en filas sucesivas
+    overflow: folios largos pueden envolver; botones nunca parten palabras
+    target: 48px de altura, mínimo 44px de ancho
+  form:
+    max_width: 720px
+    group_gap: 16px
+    field_gap: 12px
+    compact: una columna; barra de envío al pie del formulario
+    medium_expanded: pares compatibles; acción al final
+    hidden: únicamente detalles opcionales plegados y sin valores iniciales
+  review:
+    max_width: 640px
+    primary: abrir con horno y total kg explícitos
+    secondary: volver a cantidades con todos los datos conservados
+  closure:
+    medium_expanded: dialog lateral 440px; scroll interno
+    compact: hoja inferior hasta 90dvh; campos apilados; safe-area
+    keyboard: foco inicial en primer campo; dialog nativo más ciclo explícito Tab/Shift-Tab; Escape devuelve al disparador
+decisions:
+  - {id: MH-MINIMAL-02, source: product-context, choice: "Kilos y opcionales vacíos; no suponer especie", because: "captura mínima y no inventar datos", status: proposed}
+  - {id: MH-STATE-02, source: rule, choice: "Borrador único en memoria; resize no reconstruye DOM", because: "volver/revisar y cambiar espacio no pierde la intención", status: proposed}
+  - {id: MH-DATA-02, source: product-context, choice: "Cierre de ejemplo a 12:00 después de inicio 09:00; aviso si se edita a antes", because: "coherencia sin inventar bloqueo duro", status: proposed}
+  - {id: MH-ADAPT-02, source: inference, choice: "Rail 160px y acciones en fila propia cuando falta espacio", because: "etiquetas completas y acciones legibles", status: proposed}
+  - {id: MH-ERROR-02, source: rule, choice: "Error, descripción y aria-invalid derivan de la misma validez", because: "corregir elimina mensaje obsoleto", status: proposed}
+  - {id: MH-A11Y-02, source: rule, choice: "dialog nativo con foco inicial y devolución explícita", because: "recorrido por teclado sin escapar al fondo", status: proposed}
+  - {id: MH-UNIT-02, source: product-context, choice: "Una función de formato mantiene kg en total, revisión y éxito", because: "una cifra sin unidad es ambigua", status: proposed}
+unresolved:
+  - Revisión runtime y gate de Lima de esta ronda
+  - F3 y escrituras reales no implementadas ni verificadas
+  - Dispositivos físicos, zoom nativo 200% y tecnologías de asistencia requieren QA posterior
+
+continuation_decisions:
+  - {id: MH-NAV-03, source: inference, choice: 'Cinco tracks iguales; gap 8px; inset 8px; etiquetas completas en hasta dos líneas a tamaño normal', status: proposed}
+  - {id: MH-DOC-03, source: rule, choice: 'Nota describe primaria en cabecera y no FAB', status: proposed}

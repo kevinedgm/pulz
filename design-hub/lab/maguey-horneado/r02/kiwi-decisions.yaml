@@ -1,0 +1,81 @@
+round: maguey-horneado/r02
+owner: kiwi
+fidelity: F2
+status: proposed
+approval_reused: false
+sources:
+  - docs/PULZ_MAESTRO.md
+  - docs/plan/FASE-5.md
+  - .codex/skills/lima/profiles/pulz.md
+  - .fruti/tokens.json
+geometry:
+  navigation:
+    role: destinos del proceso
+    compact: bottom navigation; acción primaria alcanzable; contenido a una columna
+    medium: rail de referencia 96px, etiquetas visibles y wrapping
+    expanded: sidebar de referencia 240px
+  content:
+    max_width: 960px
+    compact_inset: 16px
+    medium_expanded_inset: 24px
+    spacing_between_groups: 24px
+    overflow: texto largo envuelve; nunca elipsis en saldo, folio o acción
+  rows:
+    dominant: kilos restantes; tamaño referencia 20px, tabular
+    secondary: folio 16px; contexto 13px
+    expanded: identidad / kilos / estado / acciones con columnas consistentes
+    medium_compact: identidad y estado; kilos debajo; acciones en línea separada
+    density: 2–50 activos; recientes plegados o limitados a 10
+    min_target: 44px
+  forms:
+    max_width: 720px
+    control_height: 48px
+    gaps: 16px entre grupos, 12px entre campos
+    compact: campos en una columna; acción inferior sin duplicarla
+    medium_expanded: pares de campos compatibles; primaria al final del formulario
+  closure:
+    expanded_medium: task-layer lateral, referencia 440px
+    compact: hoja inferior, máximo 90dvh y scroll interno
+    primary: cerrar con kilos obtenidos
+    secondary: cancelar con datos conservados mientras la capa siga abierta
+decisions:
+  - id: MH-ACTION-01
+    choice: la primaria del vacío permanece visible en compact; no depende de un FAB ausente
+    source: rule
+    because: la tarea inicial debe poder iniciarse en todos los rangos
+    affects: [compact, medium, expanded]
+    status: proposed
+  - id: MH-DATA-01
+    choice: HOR-003 abierta usa MAG-004/MAG-005; AC-002 proviene de HOR-002 ya cerrada
+    source: product-context
+    because: cada folio representa un estado temporal coherente; ejemplos explícitos
+    affects: [compact, medium, expanded]
+    status: proposed
+  - id: MH-SELECT-01
+    choice: cantidades inicialmente vacías, cero excluye; revisión de horno y cantidades antes de consumir
+    source: inference
+    because: evita consumir todos los lotes por defecto y hace explícita la consecuencia
+    affects: [compact, medium, expanded]
+    status: proposed
+  - id: MH-MINIMAL-01
+    choice: kilos al inicio, detalles opcionales desplegables
+    source: product-context
+    because: la RPC permite recepción solo con kilos
+    affects: [compact, medium, expanded]
+    status: proposed
+  - id: MH-HIERARCHY-01
+    choice: kilos separados de piñas, combustible y notas; peso superior al folio
+    source: product-context
+    because: el saldo decide qué puede usarse
+    affects: [compact, medium, expanded]
+    status: proposed
+  - id: MH-A11Y-01
+    choice: label asociado a cada select y nombre de lote en campos repetidos; error asociado
+    source: rule
+    because: el mismo recorrido debe entenderse sin depender de la posición visual
+    affects: [compact, medium, expanded]
+    status: proposed
+unresolved:
+  - revisión final de geometría, selección y hoja modal en r02
+  - fuentes e iconos canónicos todavía no entregados realmente por producción
+  - QA de F3 y aceptación real de escrituras aún no ejecutadas

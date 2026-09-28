@@ -1,24 +1,21 @@
 {
   "artifact": "fermentation-vat",
-  "round": "r01",
+  "round": "r02",
   "owner": "lima",
-  "nextOwner": "coco",
-  "frozenStructure": true,
+  "nextOwner": "kiwi",
+  "frozenStructure": false,
   "evidence": [
     ".fruti/tests/current/kiwi-f2.html",
-    ".fruti/tests/current/kiwi-decisions.yaml"
+    ".fruti/tests/current/kiwi-decisions.yaml",
+    ".fruti/tests/current/lima-contract.yaml",
+    ".fruti/reports/compliance-current.json"
   ],
-  "pieces": [
-    { "name": "FilaUso", "classification": "Feature/Domain component", "disposition": "extend" },
-    { "name": "Boton", "classificationProposal": "primitive", "disposition": "reuse" }
-  ],
-  "requiredStates": ["default", "overdue", "never-measured", "loading", "error", "offline", "read-only", "long-content", "missing-values"],
-  "dataProposal": "UsoTina fields plus dia, puedeMedir and toMedir; derive hours and overdue state from ultima_medicion_at.",
-  "openQuestions": [],
   "implementationTarget": "apps/web/src/modules/fermentacion/components/FilaUso.vue",
-  "implementationLanguage": "Vue 3 SFC + TypeScript",
-  "stylingStrategy": "Scoped CSS consuming apps/web/src/shared/ui/tokens.css",
   "registryStatus": "draft",
-  "gaps": ["Active profile has no normative truth_sources, color_law or type_law."],
-  "delta": "Lima approved an extension of FilaUso and froze its anatomy, adaptive behavior, state and API contract."
+  "failedRuleIds": ["LIMA-FROZEN-STRUCTURE-001", "VIS-COLLISION-001", "DS-FOUNDATIONS-001"],
+  "gaps": [
+    "Expanded geometry must return to Kiwi.",
+    "The NEW design system lacks approved minimum foundations."
+  ],
+  "delta": "Fresh r02 evaluation invalidated the prior candidate transition; return to Kiwi and foundation initialization."
 }

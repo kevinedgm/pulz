@@ -1,5 +1,9 @@
 # Fase 2 · Comandos (RPC)
 
+> **Revisión vigente: 2026-09-28.** Ver
+> [implementación, pruebas nuevas y pendientes](CONTINUACION-2026-09-28.md).
+> Los resultados fechados de abajo son históricos, no certifican el estado actual.
+
 > Sigue `PULZ_MAESTRO.md` §2, §4, §5, §12, §15 y §16, más `CLAUDE.md`
 > (nunca Docker; migraciones "desde cero"; kiwi primero — esta fase no toca
 > interfaz). Objetivo: que **toda escritura de producción pase por una RPC**

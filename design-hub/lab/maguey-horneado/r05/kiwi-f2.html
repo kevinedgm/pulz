@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Kiwi r05 · navegación completa</title>
+<link rel="stylesheet" href="../../../../.codex/skills/kiwi/assets/wireframe-kit.css">
+<style>
+.wf-stage{padding:16px}.wf-frame{width:100%;border:0;border-radius:0}
+.wf-shell{grid-template-columns:240px minmax(0,1fr)}
+.destinos{display:grid;gap:8px}.destinos a{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px;text-decoration:none}
+.destinos span{min-width:0;overflow-wrap:anywhere;hyphens:manual}
+.destinos i{width:24px;height:24px;flex:none;border:1px solid var(--wf-g6)}
+.wf-bottom{gap:8px;padding:8px}.wf-bottom a{flex:1;min-width:0;min-height:48px;overflow-wrap:anywhere;hyphens:manual;font-size:11px;text-align:center}
+@container wf (min-width:600px) and (max-width:1023px){.wf-shell{grid-template-columns:160px minmax(0,1fr)}}
+@container wf (max-width:599px){.wf-shell{grid-template-columns:1fr}.wf-main{padding:16px}}
+</style>
+<body class="wf">
+<header class="wf-ctl"><strong>Kiwi r05 · F2 acotada</strong><span>Target48px · ejemplo sin datos reales</span></header>
+<div class="wf-frame"><div class="wf-shell">
+<nav class="wf-side destinos" aria-label="Navegación principal">
+<a href="#destino"><i aria-hidden="true"></i><span>Inicio</span></a>
+<a href="#destino" aria-current="page"><i aria-hidden="true"></i><span>Horneado</span></a>
+<a href="#destino" aria-label="Fermentación"><i aria-hidden="true"></i><span>Fermenta&shy;ción</span></a>
+<a href="#destino" aria-label="Destilación"><i aria-hidden="true"></i><span>Destila&shy;ción</span></a>
+</nav>
+<main class="wf-main" id="destino" tabindex="-1"><h1>Reconocer el destino</h1>
+<p class="wf-tag">Ejemplo estructural de navegación, no formulario nuevo</p>
+<p class="wf-note">MH-NAV-05: corte silábico, nunca abreviación. Medium160px; expanded240px. Sin rediseñar la tarea.</p>
+<p>Estados de captura, carga, vacío, error, sin permiso y sin conexión pertenecen al flujo existente. No se simulan aprobaciones nuevas de ese flujo en este F2 acotado.</p>
+</main></div>
+<nav class="wf-bottom" aria-label="Navegación compacta"><a href="#destino">Inicio</a><a href="#destino" aria-label="Fermentación">Fermenta&shy;ción</a><a href="#destino" aria-label="Destilación">Destila&shy;ción</a><a href="#destino">Granel</a><a href="#destino">Más</a></nav>
+</div></body></html>

@@ -1,0 +1,126 @@
+artifact: fermentation-vat
+display_name: Tina en fermentación
+round: r01
+protocol: immutable-test-v1
+owner: lima
+source_request: .fruti/tests/r01/request.md
+historical_approval_used: false
+classification:
+  artifact_type: component
+  architectural_type: Feature/Domain
+  intent: create
+  scope: product-application
+  disposition: extend
+  existing_piece: apps/web/src/modules/fermentacion/components/FilaUso.vue
+  rationale: "El código actual ya representa UsoTina y expone el destino de medición; extenderlo evita duplicar conocimiento del dominio. Su apariencia actual es evidencia, no autoridad."
+reuse:
+  - { id: button, source: apps/web/src/shared/ui/Boton.vue, disposition: reuse }
+  - { id: status-chip, source: apps/web/src/shared/ui/ChipEstado.vue, disposition: reuse }
+  - { id: row-menu, source: apps/web/src/shared/ui/MenuFila.vue, disposition: reuse }
+  - { id: tokens, source: .fruti/tokens.json, disposition: consume-canonical }
+frozen_structure:
+  owner: kiwi
+  source: .fruti/tests/r01/kiwi-decisions.yaml
+  immutable_decision_ids: [GEO-CONTEXT-001, GEO-METRICS-001, GEO-ACTION-001]
+  anatomy:
+    - "contexto: nombre, día, estado y antigüedad"
+    - "métricas: temperatura, Brix y actividad"
+    - "footer de acción: Registrar medición"
+  hierarchy: "identidad primero; antigüedad domina cuando >24 h; métricas comparables; CTA único en footer separado"
+  variants: []
+  states:
+    - default
+    - overdue
+    - never-measured
+    - loading
+    - empty
+    - error
+    - offline
+    - read-only
+    - long-content
+    - missing-values
+    - repeated-action
+  content_rules:
+    - "Atraso es estrictamente mayor a 24 horas."
+    - "Null se representa como raya; no se inventan valores."
+    - "Actividad usa la escala real 1–6."
+    - "El atraso se comunica con texto y forma además de color."
+  adaptive:
+    compact: "una columna; métricas como filas; CTA full-width en footer"
+    medium: "contexto apilado; métricas en tres columnas; CTA al final en footer"
+    expanded: "contexto min 280 px a la izquierda, métricas min 480 px a la derecha; CTA abarca ambas regiones en footer"
+    preserved: "identidad, día, estado, antigüedad, tres métricas y acción"
+    hidden: "solo CTA cuando falta permiso"
+    forbidden_change: "La acción no puede convertirse en una cuarta columna ni compartir track con las métricas."
+  accessibility:
+    target: WCAG-2.2-AA
+    main_target: ">=44 CSS px"
+    semantics: "list item, heading asociado, description list, enlace de router para navegación"
+    focus: "foco visible y un solo tab stop primario"
+public_api:
+  props:
+    uso: UsoTina
+    dia: number
+    esperados: number
+    slug: string
+    pendiente: boolean
+    fallo: string|null
+    puedeMedir: boolean
+    puedeGestionar: boolean
+    ahoraMs: number|undefined
+    registrando: boolean
+  emits: [ver, lista, cerrar, corregir]
+  slots: []
+implementation:
+  framework: vue3
+  language: typescript
+  syntax: script-setup
+  style: scoped-css-consuming-canonical-custom-properties
+  target: apps/web/src/modules/fermentacion/components/FilaUso.vue
+  preview_target: apps/web/hub/DemoHub.vue
+  tests: apps/web/src/modules/fermentacion/__tests__/FilaUso.test.ts
+foundations:
+  status: approved
+  canonical_tokens: .fruti/tokens.json
+  production_binding: apps/web/src/shared/ui/tokens.css
+  required_roles:
+    - color.background
+    - color.text
+    - color.textMuted
+    - color.border
+    - color.action
+    - color.danger
+    - typography.family.primary
+    - spacing
+    - sizing.controlHeight
+    - sizing.touchMinimum
+    - radius.control
+    - radius.surface
+    - motion
+  icon_rule: "No nuevo icono requerido; no usar el sprite histórico como autoridad visual."
+validation:
+  status: PASS
+  result: approved-for-coco
+  returned_to_kiwi: false
+  rules_checked:
+    - "LIMA-FROZEN-STRUCTURE-001: estructura preservada sin rediseño"
+    - "LIMA-GEOMETRY-001: mínimos y relaciones caben matemáticamente"
+    - "LIMA-ADAPTIVE-001: compact/medium/expanded cambian composición"
+    - "LIMA-GROUPING-001: límite funcional justificado; no card genérica"
+    - "LIMA-A11Y-001: target, foco, semántica y zoom declarados"
+    - "LIMA-FOUNDATIONS-001: PULZ Foundations existen y son consumibles"
+  failed_rule_ids: []
+  preserve_if_returned: [GEO-CONTEXT-001, GEO-METRICS-001, GEO-ACTION-001]
+  reconsider_if_returned: []
+registry:
+  id: fermentation-vat
+  status_before_gate: draft
+  candidate_transition: "only after Coco compliance and Lima Candidate Gate"
+  stable_transition: "not requested"
+post_coco_candidate_gate:
+  source: .fruti/tests/r01/coco-compliance.json
+  status: PASS
+  geometry_preserved: [GEO-CONTEXT-001, GEO-METRICS-001, GEO-ACTION-001]
+  failed_rule_ids: []
+  transition: draft-to-candidate
+  mora_eligible: true

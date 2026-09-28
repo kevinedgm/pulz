@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "status": "proposed",
+  "approval": "pending",
+  "identity": {
+    "feeling": "Contemporáneo, altamente pulido, expresivo y distintivo, con fuerte contraste y composición editorial. Debe sentirse como un producto digital premium, moderno y cuidadosamente diseñado, pero seguir siendo claro, rápido y sencillo de operar en trabajo de campo.",
+    "avoid": "Estética SaaS genérica, dashboards administrativos convencionales, exceso de cards rectangulares, avatares circulares genéricos, clichés visuales asociados al mezcal o agave como verdes, dorados, kraft o estética rústica, ruido visual, decoración gratuita y apariencia de plantilla UI.",
+    "references": "Notion, Apple, Stripe",
+    "audience": "SaaS de trazabilidad para productos de maguey y agave. Aproximadamente 80% del uso ocurre en dispositivos móviles y 20% en desktop. Los usuarios operativos son principalmente trabajadores jóvenes de campo, con sesiones cortas y frecuentes, por lo que la información crítica y la siguiente acción deben entenderse rápidamente."
+  },
+  "color": {
+    "surface": "#F8F8FA",
+    "ink": "#18171F",
+    "primary": "#6D4AFF",
+    "secondary": "#FF876F",
+    "danger": "#C94D5D",
+    "success": "#187A5B",
+    "warning": "#9A6715"
+  },
+  "typography": {
+    "primary": "Manrope",
+    "secondary": "Instrument Serif",
+    "character": "Primaria muy legible, precisa y contemporánea para interfaz, operación y datos. Jerarquías fuertes y números claramente comparables. La secundaria aporta contraste editorial y personalidad únicamente en títulos, cifras protagonistas y momentos expresivos; nunca debe reducir la claridad operativa."
+  },
+  "geometry": {
+    "spacing_base_px": 4,
+    "control_radius_px": 10,
+    "surface_radius_px": 16,
+    "density": "equilibrada",
+    "control_height_px": 48,
+    "touch_min_px": 44
+  },
+  "iconography": {
+    "library": "lucide",
+    "rule": "Iconografía de trazo consistente, simple y contemporánea. Usar iconos para reforzar navegación, acciones y estados, no como decoración. Las acciones ambiguas combinan icono y texto. Ningún estado depende exclusivamente de icono o color. Mantener tamaños y stroke coherentes en todo el producto."
+  },
+  "motion": {
+    "character": "Rápido, físico, fluido y contenido. El movimiento debe comunicar continuidad, jerarquía, cambio de estado o feedback. Evitar animaciones decorativas gratuitas. Las transiciones deben contribuir a que PULZ se sienta vivo y altamente pulido.",
+    "fast_ms": 140,
+    "standard_ms": 220,
+    "emphasis_ms": 320,
+    "easing": "cubic-bezier(.2,.8,.2,1)",
+    "reduced_motion": "required"
+  },
+  "adaptive": {
+    "compact": "Una columna y jerarquía vertical fuerte. Bottom navigation para destinos principales. Acción primaria situada en zona fácilmente alcanzable. Progressive disclosure para información secundaria. Priorizar qué requiere atención y cuál es la siguiente acción. Evitar trasladar tablas o layouts desktop comprimidos.",
+    "medium": "Navigation rail compacto. Grid de 8 columnas. Aprovechar el espacio adicional para coexistencia selectiva de información y detalle contextual cuando aporte valor. No limitarse a ampliar el layout móvil.",
+    "expanded": "Sidebar persistente y grid de 12 columnas. Permitir master-detail, comparación y coexistencia de contexto operativo cuando mejore la tarea. Mantener un ancho de contenido controlado y evitar estirar componentes móviles para llenar la pantalla."
+  },
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "rule": "Foco siempre visible; significado nunca comunicado únicamente mediante color; navegación completa por teclado; targets táctiles mínimos de 44 px; interfaz usable con zoom de texto al 200%; soporte reduced-motion y forced-colors; contraste suficiente; estados con texto e iconografía cuando corresponda; contenido largo no debe romper la composición."
+  }
+}

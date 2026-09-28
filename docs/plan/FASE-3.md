@@ -1,5 +1,9 @@
 # Fase 3 · Portal, acceso y equipo
 
+> **Revisión vigente: 2026-09-28.** Ver
+> [implementación, pruebas nuevas y pendientes](CONTINUACION-2026-09-28.md).
+> Los resultados fechados de abajo son históricos, no certifican el estado actual.
+
 > Sigue `PULZ_MAESTRO.md` §7, §8.1 (Edge Functions, no Worker), §13.2 #1,
 > §15 y §16, más `CLAUDE.md` (nunca Docker; migraciones "desde cero";
 > **toda interfaz empieza por `kiwi`**). Objetivo: que una empresa entre por
@@ -9,9 +13,10 @@
 > de intentos, las guardias del router y la Pages Function del portal
 > funcionen — todo probado contra el proyecto alojado.
 >
-> **Estado (2026-09-27): aprobado. Servidor (tareas 1–8) implementado y
-> verificado contra el proyecto alojado; interfaz detenida en la compuerta
-> de `kiwi` esperando al dueño.** Resultados reales al final del documento.
+> **Estado actualizado (2026-09-28): servidor e interfaz implementados;
+> ciclo documental de acceso/r01 completado históricamente.** Ya no espera
+> a Kiwi. Persisten las limitaciones y verificaciones pendientes del informe
+> vigente. Resultados históricos al final del documento.
 > Es la **primera fase con interfaz**: las pantallas no se construyen hasta
 > que el dueño apruebe la ronda de `kiwi` (compuerta explícita abajo).
 

@@ -57,14 +57,16 @@ describe("FilaUso como tina en fermentación", () => {
     expect(wrapper.text()).toContain("28.5 °C")
     expect(wrapper.text()).toContain("10.1 °Bx")
     expect(wrapper.text()).toContain("Media · 4/6")
-    expect(wrapper.get('a[aria-label="Medir Tina 2"]').text()).toContain("Registrar medición")
+    expect(wrapper.get('a[aria-label="Registrar medición en Tina 2"]').text()).toContain(
+      "Registrar medición",
+    )
   })
 
   it("marca con texto una medición estrictamente mayor a 24 horas", async () => {
     const wrapper = await render()
     expect(wrapper.text()).toContain("Hace 28 h")
     expect(wrapper.text()).toContain("Medición atrasada")
-    expect(wrapper.classes()).toContain("fila--atrasada")
+    expect(wrapper.classes()).toContain("tina-fermentacion--atrasada")
   })
 
   it("explica el estado sin mediciones y no inventa valores", async () => {
@@ -83,7 +85,8 @@ describe("FilaUso como tina en fermentación", () => {
   it("oculta la acción primaria cuando el rol es solo lectura", async () => {
     const wrapper = await render()
     await wrapper.setProps({ puedeMedir: false })
-    expect(wrapper.find('a[aria-label="Medir Tina 2"]').exists()).toBe(false)
+    expect(wrapper.find('a[aria-label="Registrar medición en Tina 2"]').exists()).toBe(false)
+    expect(wrapper.text()).toContain("No tienes permiso para registrar mediciones.")
   })
 
   it("no marca atraso cuando han pasado exactamente 24 horas", async () => {
@@ -93,5 +96,13 @@ describe("FilaUso como tina en fermentación", () => {
     })
     expect(wrapper.text()).toContain("Hace 24 h")
     expect(wrapper.text()).not.toContain("Medición atrasada")
+  })
+
+  it("bloquea acciones repetidas mientras abre el registro", async () => {
+    const wrapper = await render()
+    await wrapper.setProps({ registrando: true })
+    const accion = wrapper.get('a[aria-label="Registrar medición en Tina 2"]')
+    expect(accion.attributes("aria-busy")).toBe("true")
+    expect(accion.attributes("aria-disabled")).toBe("true")
   })
 })

@@ -1,0 +1,21 @@
+{
+  "round": "maguey-horneado/r04",
+  "evaluated": "2026-09-28",
+  "status": "partial_verified_draft",
+  "overall_pass": false,
+  "approval_reused": false,
+  "candidate": false,
+  "stable": false,
+  "remote_writes": false,
+  "dimensions": {
+    "technical": {"status": "partial", "evidence": "App/types/PWA/demo build, scoped ESLint and 168/168 local tests PASS; 28 module tests. Five hosted auth tests failed RED; RPC E2E not run."},
+    "structural": {"status": "pass_local", "evidence": "Kiwi-owned F2 contract preserved; 16/24 insets, 160/240 rail/sidebar, 960 content, 720 form, 640 review, 440 layer. Authenticated shell integration inspected in code, not E2E."},
+    "visual": {"status": "partial", "evidence": "Collision, crowding, hierarchy, grouping, alignment, density, action dominance, responsive composition and Foundations reviewed at 320/390/768/1024/1440. Medium label wraps awkwardly before final n; no global visual PASS."},
+    "accessibility": {"status": "partial", "evidence": "Initial focus, Tab cycle, Escape/return, review/back/result focus and associated errors verified. Physical touch, native 200% text zoom, forced-colors and screen reader not verified."},
+    "design_system": {"status": "pass_local", "evidence": "Current canonical token binding, local Manrope/Instrument Serif assets, Lucide, primary #6D4AFF and danger-text role; no base-value changes."},
+    "documentation": {"status": "pass_draft_only", "evidence": "Hub build: 48 fichas. New page opened over HTTP, one real Vue preview, 120 local links/resources checked, zero broken links or duplicate IDs. Draft metadata and limits preserved."}
+  },
+  "mora": {"eligible": true, "scope": "document_verified_draft_only", "canonical_page": "design-hub/Screens/maguey-horneado.md", "accepted_final_page": false},
+  "evidence": ["evidence/f2-runtime.json", "evidence/f3-initial-runtime.json", "evidence/f3-confirmation.json", "coco-declaracion.md", "lima-f3-verdict.yaml"],
+  "warnings": ["Hosted checks unavailable; no remote write E2E", "Medium Fermentación label wrap needs polish", "Demo text200% is an approximation, not native zoom", "Clearing browser storage destroys unresolved local intent; manual retry only", "Draft is not a production release"]
+}

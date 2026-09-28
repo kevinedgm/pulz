@@ -1,0 +1,9 @@
+{
+  "time": "2026-09-28T21:24:06.677Z",
+  "host": "ypgeiyorgktshgbzhgfh.supabase.co",
+  "method": "GET",
+  "path": "/auth/v1/health",
+  "authenticated": false,
+  "reachable": false,
+  "error": "ENOTFOUND"
+}

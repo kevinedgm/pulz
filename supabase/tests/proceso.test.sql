@@ -95,6 +95,17 @@ begin
   return next is((t.lotes->0->>'abv')::numeric, 44.9::numeric, 'Tanque 2: el grado vigente es el de la unión (44.9)');
   return next is(t.lotes->0->>'abv_by', 'Benito Cruz', 'quién declaró el grado vigente');
 
+  -- Regresión: una unión guarda el grado del aporte en el ledger y el
+  -- grado resultante en operations, con EXACTAMENTE la misma fecha.
+  return next ok(exists (
+    select 1 from operations o join liquid_movements m on m.operation_id = o.id
+     where o.organization_id = a and o.result_lot_id = m.lot_id
+       and o.result_abv = 44.9 and m.abv = 47.0 and m.movement_type = 'entrada'
+  ), 'fixture: aporte 47 y resultado 44.9 coexisten en la misma operación');
+  return next is((select d.abv from lot_declared_abv d join lots l on l.id = d.lot_id
+                  where d.organization_id = a and l.folio = 'G-INI-01'),
+                 44.9::numeric, 'grado vigente prioriza resultado declarado, no grado del aporte');
+
   -- ── Aislamiento: Prueba B ve solo lo suyo ────────────────────────────
   perform pg_temp.como(admin_b);
   select count(*) into n from tinas_en_uso;

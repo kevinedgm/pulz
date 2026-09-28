@@ -1,0 +1,495 @@
+{
+  "reason": "click did not activate harness; all actual viewports remained 768; not acceptance evidence",
+  "measurements": [
+    {
+      "mode": "horneado-normal",
+      "width": 320,
+      "controls": [
+        {
+          "h": 48,
+          "name": "Inicio",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Maguey",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Horneado",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Fermentación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Destilación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Granel",
+          "w": 135
+        }
+      ],
+      "font": "Manrope, system-ui, sans-serif",
+      "inset": "24px",
+      "rail": 160,
+      "scroll": 768,
+      "titles": [
+        "Horneado",
+        "Horneadas abiertas",
+        "Agave cocido con saldo",
+        "Últimas horneadas"
+      ],
+      "viewport": 768
+    },
+    {
+      "mode": "horneado-normal",
+      "width": 390,
+      "controls": [
+        {
+          "h": 48,
+          "name": "Inicio",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Maguey",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Horneado",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Fermentación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Destilación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Granel",
+          "w": 135
+        }
+      ],
+      "font": "Manrope, system-ui, sans-serif",
+      "inset": "24px",
+      "rail": 160,
+      "scroll": 768,
+      "titles": [
+        "Horneado",
+        "Horneadas abiertas",
+        "Agave cocido con saldo",
+        "Últimas horneadas"
+      ],
+      "viewport": 768
+    },
+    {
+      "mode": "horneado-normal",
+      "width": 600,
+      "controls": [
+        {
+          "h": 48,
+          "name": "Inicio",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Maguey",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Horneado",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Fermentación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Destilación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Granel",
+          "w": 135
+        }
+      ],
+      "font": "Manrope, system-ui, sans-serif",
+      "inset": "24px",
+      "rail": 160,
+      "scroll": 768,
+      "titles": [
+        "Horneado",
+        "Horneadas abiertas",
+        "Agave cocido con saldo",
+        "Últimas horneadas"
+      ],
+      "viewport": 768
+    },
+    {
+      "mode": "horneado-normal",
+      "width": 768,
+      "controls": [
+        {
+          "h": 48,
+          "name": "Inicio",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Maguey",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Horneado",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Fermentación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Destilación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Granel",
+          "w": 135
+        }
+      ],
+      "font": "Manrope, system-ui, sans-serif",
+      "inset": "24px",
+      "rail": 160,
+      "scroll": 768,
+      "titles": [
+        "Horneado",
+        "Horneadas abiertas",
+        "Agave cocido con saldo",
+        "Últimas horneadas"
+      ],
+      "viewport": 768
+    },
+    {
+      "mode": "horneado-normal",
+      "width": 1023,
+      "controls": [
+        {
+          "h": 48,
+          "name": "Inicio",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Maguey",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Horneado",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Fermentación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Destilación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Granel",
+          "w": 135
+        }
+      ],
+      "font": "Manrope, system-ui, sans-serif",
+      "inset": "24px",
+      "rail": 160,
+      "scroll": 768,
+      "titles": [
+        "Horneado",
+        "Horneadas abiertas",
+        "Agave cocido con saldo",
+        "Últimas horneadas"
+      ],
+      "viewport": 768
+    },
+    {
+      "mode": "horneado-normal",
+      "width": 1024,
+      "controls": [
+        {
+          "h": 48,
+          "name": "Inicio",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Maguey",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Horneado",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Fermentación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Destilación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Granel",
+          "w": 135
+        }
+      ],
+      "font": "Manrope, system-ui, sans-serif",
+      "inset": "24px",
+      "rail": 160,
+      "scroll": 768,
+      "titles": [
+        "Horneado",
+        "Horneadas abiertas",
+        "Agave cocido con saldo",
+        "Últimas horneadas"
+      ],
+      "viewport": 768
+    },
+    {
+      "mode": "horneado-normal",
+      "width": 1440,
+      "controls": [
+        {
+          "h": 48,
+          "name": "Inicio",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Maguey",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Horneado",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Fermentación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Destilación",
+          "w": 135
+        },
+        {
+          "h": 48,
+          "name": "Granel",
+          "w": 135
+        }
+      ],
+      "font": "Manrope, system-ui, sans-serif",
+      "inset": "24px",
+      "rail": 160,
+      "scroll": 768,
+      "titles": [
+        "Horneado",
+        "Horneadas abiertas",
+        "Agave cocido con saldo",
+        "Últimas horneadas"
+      ],
+      "viewport": 768
+    },
+    {
+      "mode": "maguey-long",
+      "width": 320,
+      "inset": "24px",
+      "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+      "rail": 160,
+      "rect": [
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 0,
+          "w": 0
+        }
+      ],
+      "scroll": 768,
+      "viewport": 768
+    },
+    {
+      "mode": "maguey-long",
+      "width": 390,
+      "inset": "24px",
+      "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+      "rail": 160,
+      "rect": [
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 0,
+          "w": 0
+        }
+      ],
+      "scroll": 768,
+      "viewport": 768
+    },
+    {
+      "mode": "maguey-long",
+      "width": 600,
+      "inset": "24px",
+      "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+      "rail": 160,
+      "rect": [
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 0,
+          "w": 0
+        }
+      ],
+      "scroll": 768,
+      "viewport": 768
+    },
+    {
+      "mode": "maguey-long",
+      "width": 768,
+      "inset": "24px",
+      "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+      "rail": 160,
+      "rect": [
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 0,
+          "w": 0
+        }
+      ],
+      "scroll": 768,
+      "viewport": 768
+    },
+    {
+      "mode": "maguey-long",
+      "width": 1023,
+      "inset": "24px",
+      "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+      "rail": 160,
+      "rect": [
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 0,
+          "w": 0
+        }
+      ],
+      "scroll": 768,
+      "viewport": 768
+    },
+    {
+      "mode": "maguey-long",
+      "width": 1024,
+      "inset": "24px",
+      "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+      "rail": 160,
+      "rect": [
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 0,
+          "w": 0
+        }
+      ],
+      "scroll": 768,
+      "viewport": 768
+    },
+    {
+      "mode": "maguey-long",
+      "width": 1440,
+      "inset": "24px",
+      "longTitle": "MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001",
+      "rail": 160,
+      "rect": [
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 560,
+          "w": 560
+        },
+        {
+          "scroll": 0,
+          "w": 0
+        }
+      ],
+      "scroll": 768,
+      "viewport": 768
+    }
+  ]
+}

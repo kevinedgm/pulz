@@ -1,0 +1,45 @@
+operation: foundations_new
+status: PASS_WITH_WARNINGS
+completed_at: "2026-09-28"
+approval: .fruti/foundations/approval.yaml
+canonical_tokens: .fruti/tokens.json
+production_binding: apps/web/src/shared/ui/tokens.css
+profile: .codex/skills/lima/profiles/pulz.md
+truth_sources:
+  - .fruti/foundations/approval.yaml
+  - .fruti/tokens.json
+design_hub_foundations:
+  - Color
+  - Typography
+  - Spacing
+  - Geometry
+  - Icons
+  - Motion
+  - Adaptive
+  - Accessibility
+  - Tokens
+verification:
+  json_parse: PASS
+  yaml_parse: PASS
+  profile_parse: PASS
+  truth_sources_exist: PASS
+  approved_base_values_exact: PASS
+  unexpected_base_color_roles: NONE
+  derived_scale_500_aliases: PASS
+  spacing_base_4px: PASS
+  registry_references: PASS
+  design_hub_build: PASS
+  design_hub_pages: 50
+  broken_links: 0
+  vite_hub_build: PASS
+constraints_observed:
+  components_designed: false
+  fila_uso_modified: false
+  kiwi_executed: false
+  coco_executed: false
+  mora_executed: false
+  tina_test_executed: false
+warnings:
+  - "Manrope and Instrument Serif font binaries/provider are not present; production falls back to system-ui/Georgia until font delivery is approved."
+  - "Lucide is canonical, but lucide-vue-next is not installed and the existing sprite remains implementation evidence; migration is separate component work."
+  - "The npm wrapper selected an obsolete system Node and failed before compilation; the same Vite build passed with the bundled Node 24 runtime."

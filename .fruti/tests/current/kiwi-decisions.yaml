@@ -1,8 +1,12 @@
 artifact: fermentation-vat
-round: r01
+round: r02
 route: R1
 fidelity: F2
 status: frozen-for-lima
+evaluation:
+  identity: "fresh-r02"
+  prior_result_is_approval: false
+  note: "La ronda r01 es evidencia histórica; todos los gates se evalúan otra vez con las reglas actuales."
 question: "¿Puede el operador reconocer en menos de unos segundos si una tina requiere medición y actuar sin perder el contexto de su última lectura?"
 primary_verb: registrar_medicion
 observable_result: "La acción abre el flujo de medición existente para el ciclo de la tina."

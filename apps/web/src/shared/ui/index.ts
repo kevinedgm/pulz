@@ -27,5 +27,5 @@ export { default as FlujoPasos } from "./FlujoPasos.vue" // step-flow
 export { default as AvisoNota } from "./AvisoNota.vue" // soft-warning-note
 export { default as AsignacionOrigenes } from "./AsignacionOrigenes.vue" // origin-allocation
 export type { OrigenAsignable } from "./AsignacionOrigenes.vue"
-export { default as Icono } from "./Icono.vue" // ayuda local: un solo set (sprite)
+export { default as Icono } from "./Icono.vue" // ayuda local: Lucide + logotipo PULZ
 export * from "./tipos"

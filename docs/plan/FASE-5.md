@@ -1,5 +1,9 @@
 # Fase 5 · Captura por etapa y offline
 
+> **Revisión vigente: 2026-09-28.** Ver
+> [implementación, pruebas nuevas y pendientes](CONTINUACION-2026-09-28.md).
+> Los resultados fechados de abajo son históricos, no certifican el estado actual.
+
 > Sigue `PULZ_MAESTRO.md` §16 (Fase 5), §4 (el proceso etapa por etapa), §5
 > (granel y catálogo de movimientos), §8.3 (offline), §11.1 (roles), §12
 > (RPC), §13.2 (pantallas 3–6), §13.3 (accesibilidad de campo), §15 (pruebas)
@@ -331,5 +335,24 @@ después y pgTAP `proceso.test.sql` en verde.
 | Evidencia | `db reset --linked` → `evidencia-destilacion.mjs` (deja mezcal en el colector) → `evidencia-granel.mjs` | **8/8** y **8/8**: 37 + 36 capturas; transferencia conservando G-COMPRA-01, agua con diferencia −0.2 L conocida antes y conciliada, venta con contraparte; historial con los tres |
 | Tipos · lint · format · Vitest | `vue-tsc -b` · `pnpm lint` · `pnpm format` · `vitest run` | ✔ · 0/0 · ✔ · 107/107 |
 
-Siguiente: ronda `maguey-horneado/r01` (kiwi y orden de lima ya escritos:
-60 combinaciones, 0 hallazgos) → coco.
+Siguiente en aquel cierre: ronda `maguey-horneado/r01` → coco (antecedente,
+no aprobación vigente).
+
+### Actualización 2026-09-28 · frente único r05
+
+R05: navegación medium corregida; recuperación/identidad/origen de cocido y
+fecha de instantánea reparados.183 locales y5 acceso alojado PASS. Aceptación
+PARTIAL, draft0.2.1; no RPC de negocio reales ni accesibilidad física/nativa.
+Ver [checklist](CHECKLIST-MAGUEY-HORNEADO.md) y
+[resultado r05](../../design-hub/lab/maguey-horneado/r05/result.md).
+
+### Antecedente 2026-09-28 · frente único r04
+
+Maguey/Horneado implementado localmente en `modules/maguey-horneado/` con
+recepción, apertura revisada, cierre y entrada directa. F2r04 nueva; código
+con Foundations actuales;28 pruebas del módulo y168 locales app PASS.
+Build app/demo PASS. Intención persistida e idempotente, reconexión, permisos,
+foco, contraste y geometría verificados localmente. **Aceptación parcial**:
+E2E alojado y accesibilidad completa pendientes; draft, no Candidate/Stable.
+Ver [checklist vivo](CHECKLIST-MAGUEY-HORNEADO.md) y resultado r04. La evidencia
+histórica no cierra esos pendientes ni autoriza escrituras de prueba ahora.

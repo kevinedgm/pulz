@@ -1,0 +1,17 @@
+{
+  "artifact": "fermentation-vat",
+  "round": "r01",
+  "protocol": "immutable-test-v1",
+  "owner": "kiwi",
+  "nextOwner": "lima",
+  "frozenStructure": true,
+  "evidence": [
+    ".fruti/tests/r01/request.md",
+    ".fruti/tests/r01/kiwi-f2.html",
+    ".fruti/tests/r01/kiwi-decisions.yaml"
+  ],
+  "immutableDecisionIds": ["GEO-CONTEXT-001", "GEO-METRICS-001", "GEO-ACTION-001"],
+  "requiredStates": ["default", "overdue", "never-measured", "loading", "empty", "error", "offline", "read-only", "long-content", "missing-values", "repeated-action"],
+  "dataProposal": "UsoTina + dia + puedeMedir + slug; derived elapsed time and strictly-greater-than-24h overdue state.",
+  "historicalApprovalUsed": false
+}

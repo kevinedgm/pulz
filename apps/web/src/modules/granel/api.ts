@@ -14,7 +14,8 @@ import {
   type ErrorRpc,
 } from "../../shared/supabase/errores"
 import { nuevaClave } from "../../shared/utils/claves"
-import { guardarInstantanea, leerInstantanea } from "../../shared/offline/instantanea"
+import { conInstantanea, type ConInstantanea } from "../../shared/offline/instantanea"
+export type { ConInstantanea } from "../../shared/offline/instantanea"
 import type { Ajustes } from "../configuracion/api"
 import type { ColectorConSaldo } from "../destilacion/api"
 
@@ -189,26 +190,6 @@ export function folioSugerido(lotesDestino: LoteEnTanque[]): LoteEnTanque | null
 export const loteVivo = (t: Tanque) => folioSugerido(t.lotes)
 
 // ── Lecturas con instantánea ───────────────────────────────────────────
-export interface ConInstantanea<T> {
-  datos: T
-  instantanea: string | null
-}
-async function conInstantanea<T>(
-  org: string,
-  clave: string,
-  pedir: () => Promise<T>,
-): Promise<ConInstantanea<T>> {
-  try {
-    const datos = await pedir()
-    guardarInstantanea(org, clave, datos).catch(() => {})
-    return { datos, instantanea: null }
-  } catch (e) {
-    if (!esErrorDeRed(e)) throw e
-    const i = await leerInstantanea<T>(org, clave).catch(() => null)
-    if (!i) throw new ErrorAcceso("RED", MENSAJE_RED)
-    return { datos: i.datos, instantanea: i.guardado_en }
-  }
-}
 export function cargarGranel(org: string): Promise<ConInstantanea<DatosGranel>> {
   return conInstantanea(org, "granel", async () => {
     const [t, c, k, p, e, a] = await Promise.all([

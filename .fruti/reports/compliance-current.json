@@ -1,0 +1,142 @@
+{
+  "schema": "fruti-compliance/v2",
+  "generatedAt": "2026-09-28T00:51:00-06:00",
+  "round": "r01",
+  "protocol": "immutable-test-v1",
+  "sourceRequest": ".fruti/tests/r01/request.md",
+  "historicalArtifactsUsedAsApproval": false,
+  "overall": "PASS",
+  "lifecycleResult": "candidate",
+  "pipeline": [
+    {
+      "agent": "kiwi",
+      "status": "PASS",
+      "output": ".fruti/tests/r01/kiwi-decisions.yaml",
+      "notes": "F2 and geometry created fresh for r01."
+    },
+    {
+      "agent": "lima",
+      "stage": "pre-coco",
+      "status": "PASS",
+      "output": ".fruti/tests/r01/lima-contract.yaml",
+      "notes": "Validated F2 without redesign and authorized Coco."
+    },
+    {
+      "agent": "coco",
+      "status": "PASS",
+      "output": ".fruti/tests/r01/coco-compliance.json",
+      "notes": "Implemented F3 against canonical PULZ Foundations."
+    },
+    {
+      "agent": "lima",
+      "stage": "post-coco",
+      "status": "PASS",
+      "output": ".fruti/tests/r01/lima-review.yaml",
+      "notes": "Candidate Gate passed; draft-to-candidate transition recorded."
+    },
+    {
+      "agent": "mora",
+      "status": "PASS",
+      "output": "design-hub/Components/fermentation-vat.md",
+      "notes": "Rebuilt the canonical page from r01 evidence and synchronized registry/site."
+    }
+  ],
+  "dimensions": {
+    "technical": {
+      "status": "PASS",
+      "evidence": [
+        "focused Vitest: 6/6",
+        "vue-tsc and production Vite build: PASS",
+        "Hub demo build: PASS",
+        "Impeccable detector: 0 findings",
+        "fresh Playwright evidence: no page errors or horizontal overflow"
+      ]
+    },
+    "structural": {
+      "status": "PASS",
+      "evidence": [
+        "GEO-CONTEXT-001 preserved",
+        "GEO-METRICS-001 preserved",
+        "GEO-ACTION-001 preserved",
+        "CTA remains a separate footer and never a fourth metrics column",
+        "compact, medium and expanded are compositional transformations"
+      ]
+    },
+    "visual": {
+      "status": "PASS",
+      "collision": "PASS",
+      "crowding": "PASS",
+      "hierarchy": "PASS",
+      "grouping": "PASS",
+      "alignment": "PASS",
+      "density": "PASS",
+      "actionDominance": "PASS",
+      "responsiveComposition": "PASS",
+      "foundationsAdherence": "PASS",
+      "evidence": "design-hub/qa/evidence/fermentation-vat-immutable-r01/resultado.json"
+    },
+    "accessibility": {
+      "status": "PASS",
+      "evidence": [
+        "native link and menu-button semantics",
+        "browser keyboard order: Registrar medición then Acciones",
+        "visible focus",
+        "44 CSS px minimum targets",
+        "native browser zoom 200% without clipping",
+        "text plus weight plus border for overdue state",
+        "WCAG AA contrast ratios for used roles"
+      ]
+    },
+    "design_system": {
+      "status": "PASS",
+      "evidence": [
+        ".fruti/tokens.json parsed",
+        "apps/web/src/shared/ui/tokens.css consumed",
+        "canonical color, typography, spacing, geometry and adaptive properties used",
+        "no invented token or visual rule",
+        "legacy sprite dependency removed from the component"
+      ]
+    },
+    "documentation": {
+      "status": "PASS",
+      "evidence": [
+        "new r01 canonical Markdown page",
+        "registry synchronized to candidate 0.2.0",
+        "generated site rebuilt",
+        "50 generated pages checked with 0 broken internal links/resources",
+        "HTTP 200 for documentation page and live demo"
+      ]
+    }
+  },
+  "runtimeEvidence": {
+    "path": "design-hub/qa/evidence/fermentation-vat-immutable-r01/",
+    "viewports": [1440, 1024, 768, 390],
+    "failures": [],
+    "zoom200ApproxOverflow": false
+  },
+  "outputs": {
+    "kiwiF2": ".fruti/tests/r01/kiwi-f2.html",
+    "kiwiDecisions": ".fruti/tests/r01/kiwi-decisions.yaml",
+    "limaContract": ".fruti/tests/r01/lima-contract.yaml",
+    "cocoImplementation": "apps/web/src/modules/fermentacion/components/FilaUso.vue",
+    "result": ".fruti/tests/r01/result.md",
+    "designHubSource": "design-hub/Components/fermentation-vat.md",
+    "designHubPage": "design-hub/site/Components/fermentation-vat.html",
+    "designHubUrl": "http://127.0.0.1:4321/design-hub/site/Components/fermentation-vat.html"
+  },
+  "warnings": [
+    {
+      "severity": "non-blocking",
+      "scope": "stable-gate",
+      "message": "Physical touch-device validation and forced-colors validation remain pending."
+    },
+    {
+      "severity": "non-blocking",
+      "scope": "foundations",
+      "message": "Manrope/Instrument Serif font delivery remains marked pending at Foundation level; the component consumes the canonical declarations with explicit fallbacks."
+    }
+  ],
+  "gaps": [
+    "Stable was not attempted and still requires harden/audit, realistic-context acceptance and explicit user approval."
+  ]
+}

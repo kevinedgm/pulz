@@ -1,0 +1,52 @@
+{
+  "fecha": "2026-09-28T07:22:06.197Z",
+  "proyecto": "ypgeiyorgktshgbzhgfh",
+  "resetEjecutado": false,
+  "resultados": [
+    {
+      "suite": "aislamiento",
+      "comando": "supabase db query --linked -f supabase/tests/aislamiento.test.sql",
+      "estado": "FAIL",
+      "aserciones": 19,
+      "fallos": [
+        "    not ok 18 - los saldos de resource_lot_balances coinciden con §15.1",
+        "not ok 1 - pg_temp_33.test_aislamiento"
+      ],
+      "omitidas": [],
+      "tap": [
+        "# Subtest: pg_temp_33.test_aislamiento()",
+        "    ok 1 - benito ve exactamente una empresa",
+        "    ok 2 - benito ve los 12 recursos de Cuatro Vientos",
+        "    ok 3 - benito no ve recursos de la empresa B",
+        "    ok 4 - benito sí ve filas de su propia empresa",
+        "    ok 5 - dueña B ve solo su empresa",
+        "    ok 6 - dueña B no ve ninguna fila de A en ninguna tabla de negocio ni vista",
+        "    ok 7 - dueña B no puede insertar un recurso en A (RLS)",
+        "    ok 8 - dueña B no puede referenciar un catálogo de A (FK compuesta o trigger de tipo)",
+        "    ok 9 - un update sobre A desde B no revienta: la RLS simplemente filtra 0 filas",
+        "    ok 10 - el nombre de A sigue intacto tras el intento desde B",
+        "    ok 11 - un usuario sin membresía no ve empresas",
+        "    ok 12 - un usuario sin membresía no ve filas de negocio",
+        "    ok 13 - un operador no puede desbloquear miembros",
+        "    ok 14 - un operador no puede crear recursos",
+        "    ok 15 - ninguna política for all",
+        "    ok 16 - ninguna columna json/jsonb en tablas de public",
+        "    ok 17 - todas las tablas de public tienen RLS activada",
+        "    not ok 18 - los saldos de resource_lot_balances coinciden con §15.1",
+        "    # Failed test 18: \"los saldos de resource_lot_balances coinciden con §15.1\"",
+        "    #     Results differ beginning at row 1:",
+        "    #         have: (\"Colector colas\",COL-002,28.000)",
+        "    #         want: (\"Colector colas\",COL-002,16.000)",
+        "    1..18",
+        "    # Looks like you failed 1 test of 18",
+        "not ok 1 - pg_temp_33.test_aislamiento",
+        "# Failed test 1: \"pg_temp_33.test_aislamiento\"",
+        "1..1",
+        "# Looks like you failed 1 test of 1"
+      ]
+    }
+  ],
+  "noEjecutado": [
+    "Concurrencia con dos sesiones: no cubierta por estas suites"
+  ]
+}

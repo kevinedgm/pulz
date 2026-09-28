@@ -1,0 +1,49 @@
+artifact: fermentation-vat
+round: r01
+owner: lima
+stage: post-coco-candidate-gate
+historical_approval_used: false
+status: PASS
+eligible_for_mora: true
+frozen_geometry:
+  owner: kiwi
+  source: .fruti/tests/r01/kiwi-decisions.yaml
+  preserved: [GEO-CONTEXT-001, GEO-METRICS-001, GEO-ACTION-001]
+  redesigned_by_lima: false
+candidate_gate:
+  anatomy: PASS
+  variants: PASS
+  applicable_states: PASS
+  responsive_contract: PASS
+  accessibility_baseline: PASS
+  interactive_hub_demo: PASS
+  critique: PASS
+  distill: PASS
+  adapt: PASS
+  polish: PASS
+visual_qa:
+  collision: PASS
+  crowding: PASS
+  hierarchy: PASS
+  grouping: PASS
+  alignment: PASS
+  density: PASS
+  action_dominance: PASS
+  responsive_composition: PASS
+  pulz_foundations: PASS
+dimensions_before_mora:
+  technical: PASS
+  structural: PASS
+  visual: PASS
+  accessibility: PASS
+  design_system: PASS
+  documentation: PENDING_MORA
+transition:
+  from: draft
+  to: candidate
+  allowed: true
+  stable_attempted: false
+failed_rule_ids: []
+warnings:
+  - "Touch físico, forced-colors y harden/audit quedan para Stable."
+  - "La entrega binaria de Manrope/Instrument Serif sigue pendiente en Foundations; la declaración canónica sí se consume."

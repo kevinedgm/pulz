@@ -32,8 +32,14 @@ export function rechazoDeLogin(e: unknown): ErrorAcceso {
 }
 
 export function esErrorDeRed(e: unknown): boolean {
+  if (e instanceof ErrorAcceso) return e.codigo === "RED"
+  const detalle = e as { message?: string; code?: string; rpc?: { codigo: string } } | null
+  // PostgREST devuelve objetos planos. Un error de permisos/dominio recibido
+  // del servidor sigue siendo tal aunque el teléfono pierda señal después.
+  if (detalle?.rpc) return detalle.rpc.codigo === "RED"
+  if (detalle?.code && /^(?:[0-9A-Z]{5}|PGRST\d+)$/.test(detalle.code)) return false
   if (typeof navigator !== "undefined" && navigator.onLine === false) return true
-  const msg = e instanceof Error ? e.message : String(e ?? "")
+  const msg = e instanceof Error ? e.message : (detalle?.message ?? String(e ?? ""))
   return /fetch|network|Failed to fetch|NetworkError|timeout/i.test(msg)
 }
 

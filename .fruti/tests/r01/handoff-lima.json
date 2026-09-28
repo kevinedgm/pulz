@@ -1,0 +1,21 @@
+{
+  "artifact": "fermentation-vat",
+  "round": "r01",
+  "protocol": "immutable-test-v1",
+  "owner": "lima",
+  "nextOwner": "coco",
+  "contractApproved": true,
+  "historicalApprovalUsed": false,
+  "inputs": [
+    ".fruti/tests/r01/request.md",
+    ".fruti/tests/r01/kiwi-f2.html",
+    ".fruti/tests/r01/kiwi-decisions.yaml"
+  ],
+  "contract": ".fruti/tests/r01/lima-contract.yaml",
+  "implementationTarget": "apps/web/src/modules/fermentacion/components/FilaUso.vue",
+  "previewTarget": "apps/web/hub/DemoHub.vue",
+  "canonicalTokens": ".fruti/tokens.json",
+  "productionTokenBinding": "apps/web/src/shared/ui/tokens.css",
+  "forbiddenStructuralChange": "Do not place the primary action in a fourth expanded grid column; it remains a separate footer spanning the content regions.",
+  "registryStatus": "draft"
+}

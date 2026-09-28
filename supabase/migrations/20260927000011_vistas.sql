@@ -21,14 +21,19 @@ select distinct on (x.organization_id, x.lot_id)
        x.organization_id, x.lot_id, x.abv, x.occurred_at, x.recorded_by
 from (
   select o.organization_id, o.result_lot_id as lot_id, o.result_abv as abv,
-         o.occurred_at, o.recorded_by
+         o.occurred_at, o.recorded_by, o.recorded_at, o.id as operation_id, o.id as source_id
     from operations o where o.result_abv is not null and o.result_lot_id is not null
   union all
-  select m.organization_id, m.lot_id, m.abv, o.occurred_at, o.recorded_by
+  select m.organization_id, m.lot_id, m.abv, o.occurred_at, o.recorded_by,
+         o.recorded_at, o.id as operation_id, m.id as source_id
     from liquid_movements m join operations o on o.id = m.operation_id
    where m.abv is not null and m.movement_type in ('entrada', 'corte')
+     -- El grado del aporte no reemplaza el resultado declarado para ese
+     -- mismo lote/operación (unión: aporte 47 %, resultado 44.9 %).
+     and (o.result_lot_id is distinct from m.lot_id or o.result_abv is null)
 ) x
-order by x.organization_id, x.lot_id, x.occurred_at desc;
+order by x.organization_id, x.lot_id, x.occurred_at desc,
+         x.recorded_at desc, x.operation_id desc, x.source_id desc;
 
 -- Bitácora legible: cada pata con quién y cuándo (§6)
 create view movement_log with (security_invoker = true) as

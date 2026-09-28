@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-28",
+  "hub_pages": 48,
+  "page": "design-hub/site/Screens/maguey-horneado.html",
+  "http_and_preview_observed": true,
+  "local_links_and_resources_checked": 120,
+  "broken": [],
+  "duplicate_ids": [],
+  "preview_count": 1,
+  "truth_sources": [
+    {"path": ".fruti/foundations/approval.yaml", "exists": true},
+    {"path": ".fruti/tokens.json", "exists": true}
+  ],
+  "r03_hashed_artifacts_changed": [],
+  "registry_status": "draft",
+  "json_parse": "pass"
+}

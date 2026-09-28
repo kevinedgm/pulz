@@ -20,6 +20,7 @@ export const useAcceso = defineStore("acceso", () => {
   const portal = ref<PortalBranding | null | undefined>(undefined)
   const membresias = ref<MiMembresia[] | null>(null) // null = no cargadas
   const sesion = ref<boolean | null>(null) // null = no comprobada
+  let revisionSesion = 0
 
   const membresiaActual = computed(
     () => membresias.value?.find((m) => m.slug === slug.value) ?? null,
@@ -39,8 +40,14 @@ export const useAcceso = defineStore("acceso", () => {
 
   async function cargarSesion(forzar = false) {
     if (sesion.value !== null && !forzar) return
-    sesion.value = await haySesion()
-    membresias.value = sesion.value ? await misMembresias() : []
+    const revision = ++revisionSesion
+    const activa = await haySesion()
+    if (revision !== revisionSesion) return
+    const actuales = activa ? await misMembresias() : []
+    // Una consulta de la persona anterior nunca puede reponer sus roles.
+    if (revision !== revisionSesion) return
+    sesion.value = activa
+    membresias.value = actuales
   }
 
   async function entrar(usuarioOCorreo: string, contrasena: string) {
@@ -58,6 +65,7 @@ export const useAcceso = defineStore("acceso", () => {
   }
 
   async function cerrarSesion() {
+    revisionSesion++
     await apiCerrarSesion()
     sesion.value = false
     membresias.value = []

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="wf-fidelidad" content="F2">
+  <meta name="fruti-round" content="r01">
+  <title>Wireframe F2 · Tina en fermentación · r01 inmutable</title>
+  <link rel="stylesheet" href="../../../.codex/skills/kiwi/assets/wireframe-kit.css">
+  <style>
+    /* Geometría estructural: solo grises y tokens del kit neutral. */
+    .vat { container: vat / inline-size; border-block: 1px solid var(--wf-g3); padding-block: var(--wf-s4); }
+    .vat__body { display: grid; gap: var(--wf-s3); }
+    .vat__context { display: grid; gap: var(--wf-s3); min-width: 0; }
+    .vat__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--wf-s2) var(--wf-s4); align-items: start; }
+    .vat__title { margin: 0; font-size: 20px; overflow-wrap: anywhere; }
+    .vat__day { margin: 2px 0 0; font-weight: 700; }
+    .vat__age { display: flex; flex-wrap: wrap; align-items: center; gap: var(--wf-s2); min-height: 32px; margin: 0; overflow-wrap: anywhere; }
+    .vat__age--late { border-inline-start: 4px solid var(--wf-g9); padding-inline-start: var(--wf-s3); font-weight: 700; }
+    .vat__metrics { display: grid; grid-template-columns: repeat(3, minmax(112px, 1fr)); margin: 0; border-block: 1px solid var(--wf-g3); }
+    .vat__metric { min-width: 0; padding: var(--wf-s3) var(--wf-s4); }
+    .vat__metric + .vat__metric { border-inline-start: 1px solid var(--wf-g3); }
+    .vat__label { display: block; color: var(--wf-g6); font-size: 12px; }
+    .vat__value { display: block; margin-top: var(--wf-s1); font-size: 22px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .vat__actions { display: flex; justify-content: flex-end; gap: var(--wf-s2); padding-top: var(--wf-s1); }
+    .vat__actions .wf-btn--primary { min-height: 44px; }
+    .wf-state { margin-block: var(--wf-s4); }
+    .skeleton { display: grid; gap: var(--wf-s3); }
+    .skeleton .wf-line { height: 18px; }
+    @container vat (max-width: 599px) {
+      .vat { padding-bottom: calc(var(--wf-s4) + env(safe-area-inset-bottom)); }
+      .vat__head { grid-template-columns: 1fr; }
+      .vat__status { justify-self: start; }
+      .vat__metrics { grid-template-columns: 1fr; }
+      .vat__metric { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--wf-s3); padding: var(--wf-s3) 0; }
+      .vat__metric + .vat__metric { border-inline-start: 0; border-block-start: 1px solid var(--wf-g3); }
+      .vat__value { text-align: end; }
+      .vat__actions { align-items: stretch; }
+      .vat__actions .wf-btn--primary { width: 100%; }
+    }
+    @container vat (min-width: 1024px) {
+      .vat__body { grid-template-columns: minmax(280px, 1fr) minmax(480px, 1.4fr); gap: var(--wf-s4) var(--wf-s6); align-items: center; }
+      .vat__metrics { align-self: stretch; }
+      .vat__actions { grid-column: 1 / -1; border-top: 1px solid var(--wf-g3); padding-top: var(--wf-s3); }
+    }
+  </style>
+</head>
+<body class="wf">
+  <div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+    <strong>Tina en fermentación · r01 · F2</strong>
+    <fieldset><legend>Espacio</legend>
+      <button data-w="1440" aria-pressed="true">expanded 1440</button>
+      <button data-w="834" aria-pressed="false">medium 834</button>
+      <button data-w="393" aria-pressed="false">compact 393</button>
+    </fieldset>
+    <label>Estado
+      <select id="wf-state" data-wf-states>
+        <option value="default">Al día</option>
+        <option value="late">Más de 24 h</option>
+        <option value="never">Nunca medida</option>
+        <option value="loading">Carga</option>
+        <option value="empty">Vacío</option>
+        <option value="error">Error recuperable</option>
+        <option value="offline">Sin conexión</option>
+        <option value="denied">Sin permiso</option>
+        <option value="long">Contenido largo</option>
+        <option value="busy">Acción en curso</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+  </div>
+
+  <div class="wf-stage">
+    <p class="wf-frame-label" id="wf-label"></p>
+    <div class="wf-frame" id="wf-frame">
+      <main class="wf-main" id="wf-view" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <script>
+    const metrics = (temp = "28.5 °C", brix = "10.1 °Bx", activity = "Media · 4/6") => `
+      <dl class="vat__metrics" aria-label="Valores de la última medición">
+        <div class="vat__metric"><dt class="vat__label">Temperatura</dt><dd class="vat__value">${temp}</dd></div>
+        <div class="vat__metric"><dt class="vat__label">Brix</dt><dd class="vat__value">${brix}</dd></div>
+        <div class="vat__metric"><dt class="vat__label">Actividad</dt><dd class="vat__value">${activity}</dd></div>
+      </dl>`
+    const vat = ({ name = "Tina 2", age = "Hace 3 h", alert = "", temp, brix, activity, disabled = false, action = true } = {}) => `
+      <article class="vat" aria-labelledby="vat-title">
+        <div class="vat__body">
+          <section class="vat__context" aria-label="Identidad y antigüedad">
+            <div class="vat__head">
+              <div><h1 class="vat__title" id="vat-title">${name}</h1><p class="vat__day">Día 6 de fermentación</p></div>
+              <span class="wf-status wf-status--partial vat__status">Fermentando</span>
+            </div>
+            <p class="vat__age ${alert ? "vat__age--late" : ""}"><span aria-hidden="true">◷</span><span><b>Última medición:</b> ${age}${alert ? ` · ${alert}` : ""}</span></p>
+          </section>
+          ${metrics(temp, brix, activity)}
+          <div class="vat__actions">${action ? `<button class="wf-btn wf-btn--primary" ${disabled ? "disabled aria-busy=\"true\"" : ""}>${disabled ? "Abriendo registro…" : "Registrar medición"}</button>` : ""}</div>
+        </div>
+      </article>`
+    const note = `<span class="wf-note">Grupo funcional: una tina es una unidad operativa independiente. La antigüedad decide urgencia; las tres métricas forman una lectura comparable; la acción vive en su propio footer.</span>`
+    const views = {
+      default: () => vat() + note,
+      late: () => vat({ age: "Hace 27 h", alert: "Medición atrasada" }) + `<span class="wf-note">Atraso estrictamente mayor a 24 h; texto + peso + borde, nunca solo color.</span>`,
+      never: () => vat({ age: "Sin mediciones", alert: "Registra la primera medición", temp: "—", brix: "—", activity: "—" }) + note,
+      loading: () => `<article class="vat skeleton" aria-busy="true" aria-label="Cargando tina"><div class="wf-line" style="width:45%"></div><div class="wf-line" style="width:28%"></div><div class="wf-line" style="height:96px"></div><div class="wf-line" style="width:176px;justify-self:end;height:44px"></div></article><span class="wf-note">Skeleton con la misma huella de identidad, métricas y acción.</span>`,
+      empty: () => `<div class="wf-state"><h1>No hay una tina asignada</h1><p class="wf-muted">Vuelve a la lista para elegir un ciclo en fermentación.</p><button class="wf-btn">Volver a tinas</button></div>`,
+      error: () => `<div class="wf-state" role="alert"><h1>No pudimos cargar esta tina</h1><p class="wf-muted">Revisa tu conexión. No se perdió ninguna captura.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div>`,
+      offline: () => `<p class="wf-banner" role="status"><b>Sin conexión.</b> Ves datos guardados. El registro se encolará al reconectar.</p>` + vat({ age: "Hace 27 h", alert: "Dato guardado · puede estar desactualizado" }),
+      denied: () => vat({ action: false }) + `<div class="wf-state"><h2>Solo lectura</h2><p class="wf-muted">Puedes revisar la tina, pero tu rol no permite registrar mediciones.</p></div>`,
+      long: () => vat({ name: "Tina de sabino del lote experimental de septiembre — sección norte", age: "Hace 128 h", alert: "Medición muy atrasada", activity: "Muy activa · 6/6" }) + note,
+      busy: () => vat({ disabled: true }) + `<span class="wf-note">La acción repetida queda bloqueada durante la navegación; el foco permanece en el control.</span>`,
+    }
+    const state = { width: 1440, view: "default" }
+    function render() {
+      const frame = document.getElementById("wf-frame")
+      frame.style.setProperty("--wf-w", state.width + "px")
+      document.getElementById("wf-label").style.setProperty("--wf-w", state.width + "px")
+      document.getElementById("wf-label").textContent = `Marco ${state.width}px · ${state.width < 600 ? "compact" : state.width < 1024 ? "medium" : "expanded"}`
+      document.getElementById("wf-view").innerHTML = views[state.view]()
+      document.querySelectorAll("[data-w]").forEach((button) => button.setAttribute("aria-pressed", String(+button.dataset.w === state.width)))
+    }
+    document.addEventListener("click", (event) => {
+      const size = event.target.closest("[data-w]")
+      if (size) { state.width = +size.dataset.w; render() }
+      if (event.target.closest(".vat__actions .wf-btn--primary")) alert("Endpoint observable: abre el flujo existente de registro de medición.")
+    })
+    document.getElementById("wf-state").addEventListener("change", (event) => { state.view = event.target.value; render() })
+    document.getElementById("wf-notes").addEventListener("change", (event) => document.body.classList.toggle("wf-no-notes", !event.target.checked))
+    render()
+  </script>
+</body>
+</html>

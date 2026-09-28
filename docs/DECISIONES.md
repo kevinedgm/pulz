@@ -2,6 +2,103 @@
 
 > Qué se decidió, cuándo y por qué. Una entrada por decisión, no se borran.
 
+## 2026-09-28 · R04 autónoma: implementación local, no promoción
+
+- Autonomía del usuario: decidir detalles y continuar sólo Maguey/Horneado,
+  sin pedir aprobación de cada paso. Nueva F2r04 resuelve navegación compacta
+  y nota FAB; Lima permite construir F3 local, no release.
+- Coco implementa con cuatro RPC existentes, sin migraciones/escrituras remotas.
+  La intención incierta se guarda antes del envío por empresa/persona/destino,
+  con fecha fija y rechazo tipado. No es cola offline ni envío automático.
+- Dos revisores detectan y se corrigen problemas de reintento, reconexión,
+  paridad demo/app, contraste y foco;28 pruebas del módulo y168 locales PASS.
+- Lima mantiene draft0.2.0: falta E2E alojado, touch/AT/zoom/forced-colors y
+  pulido del corte de Fermentación en medium. Mora puede documentar hechos
+  verificados y límites, pero no presentar una página aceptada ni promover.
+- Reversión acotada: retirar rutas del nuevo módulo y sus extensiones si se
+  descarta; no tocar DB, FilaUso ni evidencia histórica. No borrar intenciones
+  locales pendientes sin reconciliarlas con el servidor.
+
+## 2026-09-28 · Frente único Maguey/Horneado y checklist verificable
+
+- **Un solo frente:** checklist en `plan/CHECKLIST-MAGUEY-HORNEADO.md`;
+  cada marca exige evidencia. No incluye concurrencia ni Inicio/hoy.
+- **Kiwi r03:** borradores locales preservados, cantidades explícitas,
+  controles de permiso, error/ARIA coherentes, foco cíclico y devolución.
+  Columnas numéricas alineadas y rail completo; compact usa identidad de fila
+  a todo el ancho y primaria en cabecera para no esconderla tras listas largas.
+  Son decisiones F2, no tokens ni cambios de producto.
+- **No aprobar por 11/11 tests:** confirmación muestra crowding de navegación
+  a 320 px y nota heredada de FAB. Lima devuelve `MH-NAV-03`/`MH-DOC-03` a Kiwi
+  r04; Coco/Mora bloqueados. Impeccable impide más pulido en este ciclo.
+- **Reversión:** no hay cambios de producto/DB que deshacer en esta ronda.
+  Para cambiar la propuesta, crear nueva ronda conservando r03 como evidencia;
+  nunca sobrescribir r02, usar un PASS histórico ni borrar los tests nuevos.
+
+## 2026-09-28 · Continuación: pruebas aisladas, grado declarado y assets canónicos
+
+- **Fixtures por ejecución y rollback:** los fallos sobre la demo mutable no
+  eran una base fiable para aceptar los planes. Se generan identidades nuevas
+  conservando catálogos globales, se siembra por RPC y se prueban seis suites
+  sin reset. Reversión: retirar el adaptador del runner, no restaurar/resetear
+  datos de usuarios. Evidencia y límites en `plan/CONTINUACION-2026-09-28.md`.
+- **El resultado declarado prevalece sobre el aporte en la misma operación:**
+  `lot_declared_abv` podía mostrar 47 en lugar de 44.9. Filtro y desempate
+  determinista, dos regresiones nuevas; primero candidato en rollback y luego
+  actualización acotada de la vista alojada. No se calcula grado ni cambia
+  la ley de negocio. Revertir exige reponer únicamente la definición anterior
+  de esa vista (conservar security_invoker), nunca resetear la base.
+- **Retirar el procedimiento dblink sobre la demo:** el rollback externo no
+  deshace commits de otras sesiones. El SQL histórico aborta; nuevo runner
+  de concurrencia usa tenant desechable. Tres intentos FAIL con limpieza;
+  no se afirma aceptación. No reactivar el script antiguo como alternativa.
+  El control de seguridad rechazó la repetición directa de una RPC durante
+  diagnóstico: no se eludió; nuevas escrituras requieren alcance aprobado.
+- **Assets canónicos, no nueva identidad visual:** dependencias fijadas de
+  Lucide y Fontsource; se entregan Manrope/Instrument Serif localmente,
+  preservando props del helper y geometría del logotipo. Cinco iconos de
+  22 px pasan a 24 px canónicos. No cambia aprobación ni tokens base.
+  Reversión acotada en `design-hub/lab/foundations-binding/r01/result.md`.
+- **No promover Maguey/Horneado por un check mecánico:** dos revisores
+  autorizados; nueva r02 mantiene defectos de flujo, composición y foco.
+  Lima devuelve rule_ids a Kiwi, Coco/Mora bloqueados. Se alcanzó el límite
+  de dos pasadas de Impeccable; la corrección siguiente vive en r03, no
+  sobreescribe r02 ni reutiliza aprobación de r01. Revertir una propuesta no
+  requiere cambiar producto: aún no se construyeron sus módulos.
+
+## 2026-09-28 · Revisión del maestro y continuación de pendientes
+
+- **Formulación respeta `capacity_policy`:** el cliente aplicaba capacidad
+  dura a tinas flexibles. Se consume la política real y solo `estricta`
+  bloquea. Flexible llega al aviso con nota de la RPC (§2.1). Sin cambiar
+  estructura/estilo. Revertir: restaurar el límite cliente anterior, lo que
+  reintroduciría la contradicción; mantener las nuevas pruebas como alarma.
+- **Instantánea compartida:** se completa el paso 1 de la orden de Lima
+  para Maguey/Horneado. Tres consumidores usan un solo helper y se preservan
+  sus tipos públicos. Se espera la copia y se distinguen fallos de red de
+  permisos/dominio. Revertir: restaurar las copias por módulo; conservar
+  aislamiento por empresa y pruebas de error. No modifica el esquema de IDB.
+- **Veredicto pgTAP, no exit code del CLI:** `db query` devuelve 0 aunque
+  TAP falle. Nuevo runner comprueba resultados/planes, trata SKIP/TODO como
+  parcial y guarda evidencia fechada; tests del parser añadidos a CI.
+  Revertir: retirar scripts/entradas de package y CI, nunca asumir que el
+  código 0 del CLI certifica negocio.
+- **Prohibición de JSON limitada a tablas:** maestro §16, Fase 1, dice
+  tablas; la prueba incluía vistas. Se filtra `BASE TABLE`, conservando las
+  agregaciones de lectura aprobadas para `0026`. Revertir: retirar ese
+  filtro solo si se aprueba extender la prohibición a vistas.
+- **Sin reset para ocultar deriva de fixtures:** suites de saldos y RPC
+  fallan con datos actuales. Se registra FAIL, no se cambian expectativas.
+  Concurrencia `dblink` queda fuera del runner por commits externos al
+  rollback. Próximo paso: fixtures aislados y dos sesiones verificables.
+  Revertir esta estrategia requiere un entorno descartable o autorización
+  específica para reconstruir el proyecto; no se resetea automáticamente.
+- **No reaprobar rondas antiguas:** auditoría de lógica/pruebas sin rediseño.
+  No se promueven piezas ni se publica Maguey/Horneado aún. Las siguientes
+  pantallas requieren reevaluar contrato contra Foundations actuales.
+  Revertir decisiones estructurales futuras mediante rNN+1, sin modificar
+  rondas evaluadas. Evidencia: `plan/VERIFICACION-2026-09-28.md`.
+
 ## 2026-09-26 · Reubicación del paquete de documentación
 
 `PULZ_MAESTRO.md` y `referencia/` llegaron en la raíz del repo. Se movieron a
@@ -725,3 +822,19 @@ Regla completa, con el diagrama del flujo, en `CLAUDE.md`.
   dos corridas simultáneas (una tarea vieja esperando al servidor) cruzaron
   escrituras; Granel necesita mezcal en un colector, así que tras un
   `db reset` corre primero la evidencia de Destilación.
+
+## 2026-09-28 · R05 Maguey/Horneado: cierre local, aceptación parcial
+
+- Autonomía explícita del usuario: Kiwi conserva rail160/240,insets16/24;
+  elige guion discrecional, no reducir tipografía ni abreviar. Lima autoriza
+  reutilización; Coco comparte helper y preserva nombre accesible original.
+- Revisión independiente detecta identidad obsoleta/carrera de membresías,
+  intención incompleta, contexto incorrecto del cocido y timestamp ausente.
+  Reparados con regresiones, sin modificar reglas de negocio ni esquema.
+-183/183 locales (34 módulo),5/5 acceso alojado después de autorización
+  específica. No operaciones de negocio remotas. Sin FilaUso/Foundations alteradas.
+- Draft0.2.1: no Candidate/Stable por pruebas alojadas y a11y física/nativa
+  pendientes. Mora sincroniza hechos; no convierte documentación en aprobación.
+- Reversibilidad: los cambios de código están acotados a navegación y garantías
+  de lectura/sesión; no hay migración ni datos remotos que revertir. No revertir
+  cambios ajenos en el árbol compartido. Evidencia: r05/result.md y checklist vivo.

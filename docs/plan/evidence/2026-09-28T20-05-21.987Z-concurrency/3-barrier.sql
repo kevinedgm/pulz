@@ -1,0 +1,1 @@
+select pid,application_name,wait_event_type,wait_event from pg_stat_activity where application_name='qa-race-e25af3f1-first';

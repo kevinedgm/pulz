@@ -1,0 +1,22 @@
+{
+  "round": "maguey-horneado/r02",
+  "evaluated_at": "2026-09-28",
+  "status": "REJECTED",
+  "f2_owner": "kiwi",
+  "geometry_owner": "kiwi",
+  "coco_authorized": false,
+  "mora_eligible": false,
+  "dimensions": {
+    "technical": "PARTIAL",
+    "structural": "FAIL",
+    "visual": "FAIL",
+    "accessibility": "FAIL",
+    "design_system": "PENDING_F3_VALIDATION",
+    "documentation": "PASS_TRACEABILITY_ONLY"
+  },
+  "failed_rule_ids": ["MH-MINIMAL-02", "MH-STATE-02", "MH-DATA-02", "MH-ADAPT-02", "MH-ERROR-02", "MH-A11Y-02", "MH-UNIT-02"],
+  "evidence": "docs/plan/evidence/maguey-r02-20260928",
+  "limitations": ["Second-pass reviewer A used fresh screenshots; reviewer B source only", "No F3, no RPC, no WCAG certification", "Two-pass critique limit reached"],
+  "next_owner": "kiwi",
+  "next_round": "maguey-horneado/r03"
+}

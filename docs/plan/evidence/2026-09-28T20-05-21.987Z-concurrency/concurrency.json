@@ -1,0 +1,10 @@
+{
+  "tag": "qa-race-e25af3f1",
+  "org": "7702ec30-13dc-4e39-b444-84f17edd4e0e",
+  "user": "f9d38529-75dc-4908-8ec9-7124938b5321",
+  "estado": "FAIL",
+  "sesiones": [],
+  "observaciones": [],
+  "limpieza": true,
+  "error": "CLI 130: Initialising login role...\n"
+}

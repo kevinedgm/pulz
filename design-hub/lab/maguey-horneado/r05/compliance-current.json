@@ -1,0 +1,24 @@
+{
+  "round": "r05",
+  "date": "2026-09-28",
+  "overall": "PARTIAL",
+  "lifecycle": "draft",
+  "version": "0.2.1",
+  "historical_approval_reused": false,
+  "dimensions": {
+    "technical": "PARTIAL",
+    "structural": "PASS",
+    "visual": "PASS",
+    "accessibility": "PARTIAL",
+    "design_system": "PASS",
+    "documentation": "PASS"
+  },
+  "evidence_scope": "Local production components in simulated demo; only five access tests exercise hosted service.",
+  "tests": { "local": { "passed": 183, "failed": 0 }, "module_included": 34, "hosted_access": { "passed": 5, "failed": 0 }, "hosted_business": "NOT_RUN" },
+  "widths": [320, 390, 600, 768, 1023, 1024, 1440],
+  "candidate": false,
+  "stable": false,
+  "mora": "factual-draft-only",
+  "blocked": ["authorized-isolated-business-fixtures", "physical-touch", "virtual-keyboard", "native-text-200", "forced-colors", "screen-reader"],
+  "evidence": ["acceptance-matrix.md", "evidence/vitest-final.json", "evidence/hosted-access.json", "evidence/visual-runtime.json", "evidence/keyboard.json", "evidence/preserved-baseline.json"]
+}

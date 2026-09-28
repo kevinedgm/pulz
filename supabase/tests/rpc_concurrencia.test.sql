@@ -1,3 +1,10 @@
+-- RETIRADA: el cuerpo histórico usa dblink con COMMIT fuera del rollback
+-- y datos de la demo. El guard evita cualquier escritura si se invoca.
+-- Prueba vigente aislada: pnpm test:db:concurrency.
+do $$ begin
+  raise exception 'PRUEBA_REEMPLAZADA: ejecuta pnpm test:db:concurrency';
+end $$;
+
 -- pgTAP · Concurrencia (PULZ_MAESTRO.md §16 Fase 2): dos transferencias
 -- simultáneas del último litro → una pasa y la otra falla con
 -- SALDO_INSUFICIENTE. Sin Docker y por la Management API no hay dos

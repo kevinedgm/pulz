@@ -27,7 +27,7 @@ const emit = defineEmits<{ cuenta: [] }>()
         <small class="cab__sub">{{ empresa.subtitulo }}</small>
       </span>
     </button>
-    <h1 class="cab__titulo">{{ titulo }}</h1>
+    <h1 v-if="titulo" class="cab__titulo">{{ titulo }}</h1>
   </header>
 </template>
 

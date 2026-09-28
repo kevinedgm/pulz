@@ -11,6 +11,40 @@
 
 ## Fase actual
 
+**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial.**
+R05 cierra el corte de navegación y corrige identidad concurrente, intención
+corrupta, origen de cocido y timestamp offline.183/183 locales (34 módulo),
+5/5 acceso alojado autorizado; tipos/build/demo/lint PASS. Siete anchos revisados.
+No operaciones de negocio remotas: requieren fixtures aislados autorizados.
+Accesibilidad física/nativa pendiente; draft0.2.1, sin Candidate/Stable/release.
+[Resultado r05](../design-hub/lab/maguey-horneado/r05/result.md).
+
+**Antecedente r04 (no aprobación vigente):**
+[Checklist vivo](plan/CHECKLIST-MAGUEY-HORNEADO.md): F2 nueva aprobada sólo en
+estructura; Coco implementó recepción/apertura/cierre/entrada y adaptador RPC.
+28 pruebas del módulo y168 locales app PASS; build app/demo PASS. Dos revisores
+independientes y confirmación runtime. Corregidos intención idempotente persistida,
+reconexión, insets/rail, foco y contraste. Mora sólo documenta draft con límites.
+Pendientes corte de etiqueta medium, E2E alojado y accesibilidad física/nativa.
+No overall PASS, Candidate/Stable ni release. [Resultado r04](../design-hub/lab/maguey-horneado/r04/result.md).
+Cinco tests alojados fallaron por RED; excluirlos del conjunto local no los aprueba.
+No escrituras DB, cambios de Foundations ni FilaUso en esta continuación.
+
+**Actualización 2026-09-28: Fase 5 abierta; aceptación global NO certificada.**
+Ver [continuación y evidencia vigente](plan/CONTINUACION-2026-09-28.md) y
+[primera verificación de todos los planes](plan/VERIFICACION-2026-09-28.md).
+Corregidos capacidad flexible, instantáneas/errores offline, aislamiento de
+fixtures y selección del grado declarado vigente. Aplicación **145/145**;
+runner **10/10**; seis suites DB aisladas **163 aserciones hoja PASS**.
+Concurrencia real **NO certificada**: tres intentos fallidos, limpieza de sus
+fixtures confirmada. No se reseteó la base. Manrope, Instrument Serif y Lucide
+se entregan localmente en app/demo. Maguey/Horneado **r02 rechazada** tras
+revisión nueva: antecedente de r03, cuyo estado vigente se indica arriba. Siguen
+Inicio/hoy real, E2E completo/offline y QA global. Evidencia histórica no
+certifica las Foundations actuales.
+
+### Antecedentes de implementación (2026-09-27, no resultados de hoy)
+
 **Fase 5 · Captura por etapa y offline — plan escrito
 (`docs/plan/FASE-5.md`, decidido en automático per `CLAUDE.md` §4); empieza
 por el servidor (`0026_vistas_proceso.sql`, `0027_evidencias.sql`, pgTAP
@@ -97,9 +131,23 @@ login por usuario y por correo **OK**; rechazos idénticos **OK** en GoTrue
 PULZ" **OK**; altas/canje/cambio obligatorio **OK**; **5 fallos bloquean: no
 comprobable en este plan**; **pantallas: construidas y verificadas** (texto
 único en los cuatro rechazos probado contra el proyecto alojado; guardias y
-adaptación probadas con Playwright); falta la compuerta de lima y mora.
+adaptación probadas con Playwright). Lima y Mora se completaron después
+(ver historial); esa compuerta ya no está pendiente. Los resultados nuevos
+y sus limitaciones están en la verificación del 2026-09-28.
 
 ## Qué falta
+
+1. Resolver y verificar concurrencia real con dos sesiones; suites normales
+   ya aisladas y en verde. No reejecutar SQL histórico sobre datos de demo.
+2. Cerrar aceptación de Maguey/Horneado r05: fixtures persistentes aislados
+   autorizados para E2E de negocio y accesibilidad física/nativa. Implementación
+   y correcciones locales terminadas; no reutilizar gates de rondas anteriores.
+3. Implementar Inicio/hoy real y E2E completo; repetir aceptación offline.
+4. Revalidar composición, accesibilidad y consumo real de Foundations.
+5. Comprobar CI en PR real; siguen las limitaciones del hook de intentos y
+   demás decisiones abiertas en `DUDAS.md`.
+
+### Lista histórica al cerrar Fase 3 (no pendientes actuales)
 
 1. **Cerrar el ciclo del squad para acceso/r01.** `lima` ya evaluó la
    compuerta Candidate (2026-09-27, `design-hub/lab/acceso/r01/lima-compuerta.md`):
@@ -159,7 +207,7 @@ hacia adelante).
   contraseñas filtradas · #5 concurrencia a mano · #4 escala 1–6 · #6–#8
   supuestos de negocio de la Fase 2.
 
-## Próxima fase
+## Historial de transición a Fase 4 (2026-09-27)
 
 **Fase 4 · Interfaz base y configuración — plan aprobado (2026-09-27);
 servidor hecho y verificado.** `0024_marca.sql` (bucket `branding` +

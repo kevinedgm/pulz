@@ -1,0 +1,56 @@
+[
+  {
+    "animation": "0s",
+    "background": "rgba(0, 0, 0, 0)",
+    "color": "rgb(24, 23, 31)",
+    "font": "Manrope, system-ui, sans-serif",
+    "outline": "rgb(24, 23, 31)",
+    "selector": ".mh-surface",
+    "transition": "0s"
+  },
+  {
+    "animation": "0s",
+    "background": "rgba(0, 0, 0, 0)",
+    "color": "rgb(93, 90, 104)",
+    "font": "Manrope, system-ui, sans-serif",
+    "outline": "rgb(93, 90, 104)",
+    "selector": ".mh-muted",
+    "transition": "0s"
+  },
+  {
+    "animation": "0s",
+    "background": "rgb(109, 74, 255)",
+    "color": "rgb(248, 248, 250)",
+    "font": "Manrope, system-ui, sans-serif",
+    "outline": "rgb(248, 248, 250)",
+    "selector": ".boton--primary",
+    "transition": "0s"
+  },
+  {
+    "animation": "0s",
+    "background": "rgba(0, 0, 0, 0)",
+    "color": "rgb(24, 23, 31)",
+    "font": "Manrope, system-ui, sans-serif",
+    "outline": "rgb(24, 23, 31)",
+    "selector": ".mh-result",
+    "transition": "0s"
+  },
+  {
+    "animation": "0s",
+    "background": "rgba(0, 0, 0, 0)",
+    "color": "rgb(24, 23, 31)",
+    "font": "Manrope, system-ui, sans-serif",
+    "outline": "rgb(24, 23, 31)",
+    "selector": ".lat__item",
+    "transition": "0s"
+  },
+  {
+    "animation": "0s",
+    "background": "rgba(0, 0, 0, 0)",
+    "color": "rgb(24, 23, 31)",
+    "font": "Manrope, system-ui, sans-serif",
+    "outline": "rgb(24, 23, 31)",
+    "selector": ".inf__item",
+    "transition": "0s"
+  }
+]

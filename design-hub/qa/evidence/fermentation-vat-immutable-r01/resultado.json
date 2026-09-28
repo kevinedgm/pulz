@@ -1,0 +1,211 @@
+{
+  "url": "http://localhost:4321/design-hub/Components/demo/index.html?pieza=fermentation-vat&solo=1",
+  "observations": [
+    {
+      "width": 1440,
+      "overflow": false,
+      "actionHeight": 48,
+      "geometry": {
+        "component": {
+          "x": 16,
+          "y": 66,
+          "width": 1120,
+          "height": 196.6875,
+          "right": 1136,
+          "bottom": 262.6875
+        },
+        "context": {
+          "x": 33,
+          "y": 83,
+          "width": 393.328125,
+          "height": 89.6875,
+          "right": 426.328125,
+          "bottom": 172.6875
+        },
+        "metrics": {
+          "x": 450.328125,
+          "y": 83,
+          "width": 668.65625,
+          "height": 75.5,
+          "right": 1118.984375,
+          "bottom": 158.5
+        },
+        "actions": {
+          "x": 33,
+          "y": 184.6875,
+          "width": 1085.984375,
+          "height": 61,
+          "right": 1118.984375,
+          "bottom": 245.6875
+        },
+        "cta": {
+          "x": 842.984375,
+          "y": 197.6875,
+          "width": 176.671875,
+          "height": 48,
+          "right": 1019.65625,
+          "bottom": 245.6875
+        },
+        "bodyColumns": "393.328px 668.656px",
+        "metricColumns": "222.875px 222.891px 222.891px",
+        "font": "Manrope, system-ui, sans-serif"
+      },
+      "pageErrors": []
+    },
+    {
+      "width": 1024,
+      "overflow": false,
+      "actionHeight": 48,
+      "geometry": {
+        "component": {
+          "x": 16,
+          "y": 66,
+          "width": 992,
+          "height": 284.1875,
+          "right": 1008,
+          "bottom": 350.1875
+        },
+        "context": {
+          "x": 33,
+          "y": 83,
+          "width": 958,
+          "height": 89.6875,
+          "right": 991,
+          "bottom": 172.6875
+        },
+        "metrics": {
+          "x": 33,
+          "y": 184.6875,
+          "width": 958,
+          "height": 75.5,
+          "right": 991,
+          "bottom": 260.1875
+        },
+        "actions": {
+          "x": 33,
+          "y": 272.1875,
+          "width": 958,
+          "height": 61,
+          "right": 991,
+          "bottom": 333.1875
+        },
+        "cta": {
+          "x": 715,
+          "y": 285.1875,
+          "width": 176.671875,
+          "height": 48,
+          "right": 891.671875,
+          "bottom": 333.1875
+        },
+        "bodyColumns": "958px",
+        "metricColumns": "319.328px 319.328px 319.344px",
+        "font": "Manrope, system-ui, sans-serif"
+      },
+      "pageErrors": []
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "actionHeight": 48,
+      "geometry": {
+        "component": {
+          "x": 16,
+          "y": 66,
+          "width": 736,
+          "height": 284.1875,
+          "right": 752,
+          "bottom": 350.1875
+        },
+        "context": {
+          "x": 33,
+          "y": 83,
+          "width": 702,
+          "height": 89.6875,
+          "right": 735,
+          "bottom": 172.6875
+        },
+        "metrics": {
+          "x": 33,
+          "y": 184.6875,
+          "width": 702,
+          "height": 75.5,
+          "right": 735,
+          "bottom": 260.1875
+        },
+        "actions": {
+          "x": 33,
+          "y": 272.1875,
+          "width": 702,
+          "height": 61,
+          "right": 735,
+          "bottom": 333.1875
+        },
+        "cta": {
+          "x": 459,
+          "y": 285.1875,
+          "width": 176.671875,
+          "height": 48,
+          "right": 635.671875,
+          "bottom": 333.1875
+        },
+        "bodyColumns": "702px",
+        "metricColumns": "234px 234px 234px",
+        "font": "Manrope, system-ui, sans-serif"
+      },
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "actionHeight": 48,
+      "geometry": {
+        "component": {
+          "x": 16,
+          "y": 66,
+          "width": 358,
+          "height": 477.1875,
+          "right": 374,
+          "bottom": 543.1875
+        },
+        "context": {
+          "x": 33,
+          "y": 83,
+          "width": 324,
+          "height": 135.6875,
+          "right": 357,
+          "bottom": 218.6875
+        },
+        "metrics": {
+          "x": 33,
+          "y": 230.6875,
+          "width": 324,
+          "height": 170.5,
+          "right": 357,
+          "bottom": 401.1875
+        },
+        "actions": {
+          "x": 33,
+          "y": 413.1875,
+          "width": 324,
+          "height": 113,
+          "right": 357,
+          "bottom": 526.1875
+        },
+        "cta": {
+          "x": 33,
+          "y": 426.1875,
+          "width": 324,
+          "height": 48,
+          "right": 357,
+          "bottom": 474.1875
+        },
+        "bodyColumns": "324px",
+        "metricColumns": "324px",
+        "font": "Manrope, system-ui, sans-serif"
+      },
+      "pageErrors": []
+    }
+  ],
+  "zoom200ApproxOverflow": false,
+  "failures": []
+}

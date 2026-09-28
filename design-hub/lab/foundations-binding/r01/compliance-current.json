@@ -1,0 +1,22 @@
+{
+  "round": "foundations-binding/r01",
+  "date": "2026-09-28",
+  "status": "VERIFIED_SCOPED_REPAIR",
+  "scope": "Local font delivery and existing semantic icon binding only",
+  "lifecycle_promoted": false,
+  "approved_base_tokens_modified": false,
+  "dimensions": {
+    "technical": "PASS",
+    "structural": "NOT_APPLICABLE_NO_NEW_STRUCTURE",
+    "visual": "PARTIAL_ASSET_DELIVERY_ONLY",
+    "accessibility": "PASS_HELPER_ONLY_GLOBAL_WCAG_UNVERIFIED",
+    "design_system": "PASS_BINDING_ONLY",
+    "documentation": "PASS_TWO_PAGES_SYNCED"
+  },
+  "tests": {"app_passed": 145, "icon_cases": 17, "db_runner_passed": 10},
+  "builds": {"app": "PASS", "demo": "PASS", "hub_site": "PASS"},
+  "hub_links": {"pages": 50, "broken": 0},
+  "mora_mode": "M3",
+  "mora_pages": ["Foundations/Typography.md", "Foundations/Icons.md"],
+  "limitations": ["No global visual or WCAG certification", "No Maguey/Horneado authorization", "Font smoke is pinned to evaluated build hash"]
+}

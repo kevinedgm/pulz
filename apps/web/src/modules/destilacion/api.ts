@@ -15,7 +15,8 @@ import {
 } from "../../shared/supabase/errores"
 import { encolar, nuevaClave, type ElementoCola } from "../../shared/offline/cola"
 import type { FotoPendiente } from "../../shared/offline/fotos"
-import { guardarInstantanea, leerInstantanea } from "../../shared/offline/instantanea"
+import { conInstantanea, type ConInstantanea } from "../../shared/offline/instantanea"
+export type { ConInstantanea } from "../../shared/offline/instantanea"
 import type { Ajustes } from "../configuracion/api"
 import type { UsoTina } from "../fermentacion/api"
 
@@ -156,26 +157,6 @@ export const fmt = (n: number) => new Intl.NumberFormat("es-MX").format(n)
 export const litros = (n: number) => `${fmt(n)} L`
 
 // ── Lecturas con instantánea ───────────────────────────────────────────
-export interface ConInstantanea<T> {
-  datos: T
-  instantanea: string | null
-}
-async function conInstantanea<T>(
-  org: string,
-  clave: string,
-  pedir: () => Promise<T>,
-): Promise<ConInstantanea<T>> {
-  try {
-    const datos = await pedir()
-    guardarInstantanea(org, clave, datos).catch(() => {})
-    return { datos, instantanea: null }
-  } catch (e) {
-    if (!esErrorDeRed(e)) throw e
-    const i = await leerInstantanea<T>(org, clave).catch(() => null)
-    if (!i) throw new ErrorAcceso("RED", MENSAJE_RED)
-    return { datos: i.datos, instantanea: i.guardado_en }
-  }
-}
 export function cargarDestilacion(org: string): Promise<ConInstantanea<DatosDestilacion>> {
   return conInstantanea(org, "destilacion", async () => {
     const [c, s, r, u, a, f] = await Promise.all([

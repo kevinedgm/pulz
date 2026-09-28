@@ -1,0 +1,33 @@
+round: r05
+owner: lima
+classification: reuse-existing-navigation
+status: APPROVED_SCOPED_IMPLEMENTATION
+approval_authority: user-autonomous-design-2026-09-28
+historical_approval_reused: false
+input: kiwi-decisions.yaml
+rules:
+  MH-NAV-05: PASS
+  MH-GEO-05: PASS
+  MH-NAME-05: PASS
+scope:
+  allowed:
+    - Share existing discretionary label wrapping between NavLateral and NavInferior.
+    - Preserve original accessible names using aria-label.
+    - Add regression tests; verify all seven sizes using real production components.
+  prohibited:
+    - Resize rail or reduce text to fit.
+    - Change Foundations, FilaUso, routes, roles or business operations.
+    - Promote Candidate or Stable without all applicable evidence.
+geometry: brief.md
+f2_validation:
+  checker_errors: 0
+  checker_warnings: 1
+  warning_disposition: No capture-state panel in navigation-only F2; no new stateful flow designed.
+  native_touch_zoom_reader: NOT_RUN
+order_to_coco: Implement only MH-NAV-05 and MH-NAME-05; return six-dimension evidence to Lima.
+local_correctness_addendum:
+  authority: user-execute-checklist-autonomously
+  kiwi: Existing state regions and geometry unchanged; timestamp stays in offline notice and origin in context line.
+  lima: APPROVED_EXISTING_CONTRACT_REPAIR
+  fixes: [identity-refresh, corrupt-intent-guard, cooked-origin-mapping, snapshot-timestamp]
+  constraints: No schema, RPC signature, role or business-rule changes; no remote mutations.

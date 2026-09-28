@@ -1,0 +1,25 @@
+round: r05
+owner: kiwi
+scope: navigation-word-wrapping
+authority: user-autonomous-design-2026-09-28
+historical_approval_reused: false
+decisions:
+  - id: MH-NAV-05
+    choice: Discretionary syllable breaks in complete destination labels.
+    source: inference
+    because: Avoid an isolated final letter without reducing type or increasing rail width.
+    alternatives_rejected: [abbreviation, smaller-type, wider-rail, hidden-overflow]
+    affects: [compact, medium, expanded]
+    status: frozen
+  - id: MH-GEO-05
+    choice: Preserve rail 160/240, insets 16/24, five compact destinations and 48px targets.
+    source: product-context
+    because: Local readability defect does not justify changing task composition.
+    affects: [compact, medium, expanded]
+    status: frozen
+  - id: MH-NAME-05
+    choice: Expose original unsplit string as accessible link name.
+    source: inference
+    because: Presentation wrapping must not change pronunciation or voice navigation.
+    affects: [compact, medium, expanded]
+    status: frozen

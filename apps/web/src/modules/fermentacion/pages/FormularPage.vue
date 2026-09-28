@@ -15,6 +15,7 @@ import {
 } from "../../../shared/ui"
 import { useConexion } from "../../../shared/utils/conexion"
 import { useAcceso } from "../../acceso/store"
+import { limiteDeTina } from "../dominio"
 import {
   cargarUsos,
   ErrorFermentacion,
@@ -101,7 +102,7 @@ const origenesTinas = computed<OrigenAsignable[]>(() =>
     id: t.id,
     titulo: t.code,
     sub: t.capacity ? `${litros(t.capacity)} · libre` : "libre",
-    saldo: t.capacity,
+    saldo: limiteDeTina(t),
     unidad: "L",
   })),
 )
@@ -112,7 +113,10 @@ const litrosTotal = computed(() =>
 const conError = computed(
   () =>
     (cocido.value ?? []).some((l) => (kgPor.value[l.lot_id] ?? 0) > l.remaining_kg) ||
-    tinas.value.some((t) => t.capacity !== null && (litrosPor.value[t.id] ?? 0) > t.capacity),
+    tinas.value.some((t) => {
+      const limite = limiteDeTina(t)
+      return limite !== null && (litrosPor.value[t.id] ?? 0) > limite
+    }),
 )
 const valido = computed(
   () =>
@@ -123,7 +127,7 @@ const valido = computed(
     !(avisoCodigo.value && !nota.value.trim()),
 )
 async function guardar() {
-  if (!valido.value || ocupado.value) return
+  if (!valido.value || ocupado.value || !puede.value || !enLinea.value) return
   ocupado.value = true
   error.value = null
   try {

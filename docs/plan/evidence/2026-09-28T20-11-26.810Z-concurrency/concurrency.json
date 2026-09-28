@@ -1,0 +1,15 @@
+{
+  "tag": "qa-race-4f52b889",
+  "org": "248fdba3-71f7-4574-8bbd-a315dfc8ca16",
+  "user": "9f8a6d8e-1708-4d5e-8436-67c27bd0bc16",
+  "estado": "FAIL",
+  "sesiones": [],
+  "observaciones": [],
+  "limpieza": true,
+  "error": "No se observó la primera sesión reteniendo locks; no certificar concurrencia",
+  "resultadosIntentos": [
+    {
+      "error": "first: CLI 130: Initialising login role...\n"
+    }
+  ]
+}

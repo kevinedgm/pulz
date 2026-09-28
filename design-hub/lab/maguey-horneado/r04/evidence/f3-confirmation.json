@@ -1,0 +1,68 @@
+{
+  "date": "2026-09-28",
+  "checks": [
+    {
+      "rail": 240,
+      "scroll": 1024,
+      "w": 1024
+    },
+    {
+      "labels": [
+        {
+          "scroll": 131,
+          "text": "Inicio",
+          "width": 135
+        },
+        {
+          "scroll": 131,
+          "text": "Maguey",
+          "width": 135
+        },
+        {
+          "scroll": 131,
+          "text": "Horneado",
+          "width": 135
+        },
+        {
+          "scroll": 131,
+          "text": "Fermentación",
+          "width": 135
+        },
+        {
+          "scroll": 131,
+          "text": "Destilación",
+          "width": 135
+        },
+        {
+          "scroll": 131,
+          "text": "Granel",
+          "width": 135
+        }
+      ],
+      "rail": 160,
+      "scroll": 768,
+      "w": 768
+    },
+    {
+      "scroll": 390,
+      "w": 390
+    },
+    {
+      "scroll": 320,
+      "w": 320
+    },
+    {
+      "scenario": "volver-cantidades",
+      "focus": true
+    },
+    {
+      "scenario": "error",
+      "data": {
+        "color": "rgb(148, 61, 74)",
+        "invalid": "true",
+        "text": "Solo hay 2,000 kg."
+      }
+    }
+  ],
+  "scope": "Demo compiled from production Vue; simulated writes only; not authenticated production E2E"
+}

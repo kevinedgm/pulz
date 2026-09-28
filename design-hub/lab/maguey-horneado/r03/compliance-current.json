@@ -1,0 +1,26 @@
+{
+  "round": "maguey-horneado/r03",
+  "evaluated_at": "2026-09-28",
+  "status": "REJECTED",
+  "scope": "Kiwi F2 local simulator, not Coco production audit",
+  "f2_owner": "kiwi",
+  "geometry_owner": "kiwi",
+  "coco_authorized": false,
+  "mora_eligible": false,
+  "dimensions": {
+    "technical": "PASS_F2_LOCAL",
+    "structural": "FAIL",
+    "visual": "FAIL",
+    "accessibility": "PARTIAL",
+    "design_system": "PENDING_F3_VALIDATION",
+    "documentation": "PARTIAL"
+  },
+  "failed_rule_ids": ["MH-NAV-03", "MH-DOC-03"],
+  "resolved_rule_ids": ["MH-MINIMAL-02", "MH-STATE-02", "MH-DATA-02", "MH-ERROR-02", "MH-A11Y-02", "MH-UNIT-02"],
+  "partially_resolved_rule_ids": ["MH-ADAPT-02"],
+  "checks": {"unit_pass": 11, "unit_fail": 0, "kiwi_checker_errors": 0, "kiwi_checker_warnings": 0},
+  "evidence": "design-hub/lab/maguey-horneado/r03/evidence/runtime-confirmation.json",
+  "limitations": ["Neutral F2 is not production token binding", "390/320 are real CSS iframe viewports, not physical devices", "Native 200% text zoom, forced-colors, physical touch and screen reader not executed", "No production E2E, no RPC, no app build in this round", "Bounded Impeccable review cycle completed"],
+  "next_owner": "kiwi",
+  "next_round": "maguey-horneado/r04"
+}

@@ -1,0 +1,10 @@
+{
+  "tag": "qa-race-b41e9ba9",
+  "org": "7cfec3cf-33de-4f4f-9c8a-ed26b0ee35f9",
+  "user": "bbfad14f-0986-4e87-ab05-4f827e386420",
+  "estado": "FAIL",
+  "sesiones": [],
+  "observaciones": [],
+  "limpieza": true,
+  "error": "No se observó la primera sesión reteniendo locks; no certificar concurrencia"
+}

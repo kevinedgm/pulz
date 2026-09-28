@@ -1,0 +1,36 @@
+round: maguey-horneado/r02
+owner: lima
+operation: validate_f2
+status: rejected
+coco_authorized: false
+mora_eligible: false
+f2_owner: kiwi
+geometry_owner: kiwi
+artifact: design-hub/lab/maguey-horneado/r02/index.html
+decisions: design-hub/lab/maguey-horneado/r02/kiwi-decisions.yaml
+preserve: [dos_destinos, grupos_horneado, saldo_restante, agotados_plegados, continuidad_formulacion, rpcs_existentes]
+failed_rules_in_previous_evaluation: [MH-ACTION-01, MH-DATA-01, MH-SELECT-01, MH-MINIMAL-01, MH-HIERARCHY-01, MH-A11Y-01, MH-ADAPT-01]
+reuse: [origin-allocation, number-field, datetime-field, select, button, state-block, task-layer, app-shell]
+foundations:
+  - .fruti/foundations/approval.yaml
+  - .fruti/tokens.json
+dimensions:
+  technical: partial
+  structural: fail
+  visual: fail
+  accessibility: fail
+  design_system: pending_f3_validation
+  documentation: pass_traceability_only
+failed_rule_ids: [MH-MINIMAL-02, MH-STATE-02, MH-DATA-02, MH-ADAPT-02, MH-ERROR-02, MH-A11Y-02, MH-UNIT-02]
+return_to: kiwi
+reconsider:
+  - "MH-MINIMAL-02: quitar valores opcionales precargados y ocultos de recepción"
+  - "MH-STATE-02: conservar selección y cantidades al volver de la revisión"
+  - "MH-DATA-02: cierre no puede preceder a inicio de HOR-003"
+  - "MH-ADAPT-02: ancho de acciones expanded y etiquetas completas del rail medium"
+  - "MH-ERROR-02: sincronizar saldo, mensaje y aria-describedby tras editar"
+  - "MH-A11Y-02: foco inicial, contención y restauración en capas"
+  - "MH-UNIT-02: conservar kg en total reactivo"
+next_round: maguey-horneado/r03
+evidence: docs/plan/evidence/maguey-r02-20260928
+review_limit: "Dos pasadas del ciclo Impeccable; no modificar el F2 evaluado ni certificar F3"

@@ -1,0 +1,25 @@
+round: r05
+owner: lima
+overall: PARTIAL
+status: draft
+version: 0.2.1
+historical_approval_reused: false
+dimensions:
+  technical: PARTIAL
+  structural: PASS
+  visual: PASS
+  accessibility: PARTIAL
+  design_system: PASS
+  documentation: PASS
+scope: Local implementation and simulated Vue demo; only access tests use hosted service.
+closed_findings: [MH-F3-VIS-01, MH-AUTH-05, MH-INTENT-05, MH-ORIGIN-05, MH-CACHE-05, MH-TEST-05]
+candidate: NOT_ELIGIBLE
+stable: NOT_ELIGIBLE
+mora_eligible: true
+mora_scope: Synchronize factual draft documentation only.
+evidence: acceptance-matrix.md
+remaining:
+  - Authorized persistent isolated fixtures and real business flow tests.
+  - Physical touch and virtual keyboard.
+  - Native 200 percent text zoom, forced-colors, screen reader.
+  - Full accessibility matrix and formal refinement cycle before Candidate.

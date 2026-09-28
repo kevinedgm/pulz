@@ -1,0 +1,313 @@
+{
+  "compact": [
+    {
+      "frame": 320,
+      "nav": [
+        {
+          "rect": {
+            "bottom": 1032.5,
+            "height": 48,
+            "left": 4,
+            "right": 64.046875,
+            "top": 984.5,
+            "width": 60.046875,
+            "x": 4,
+            "y": 984.5
+          },
+          "text": "Inicio"
+        },
+        {
+          "rect": {
+            "bottom": 1032.5,
+            "height": 48,
+            "left": 64.046875,
+            "right": 135.828125,
+            "top": 984.5,
+            "width": 71.78125,
+            "x": 64.046875,
+            "y": 984.5
+          },
+          "text": "Fermentación"
+        },
+        {
+          "rect": {
+            "bottom": 1032.5,
+            "height": 48,
+            "left": 135.828125,
+            "right": 195.890625,
+            "top": 984.5,
+            "width": 60.0625,
+            "x": 135.828125,
+            "y": 984.5
+          },
+          "text": "Destilación"
+        },
+        {
+          "rect": {
+            "bottom": 1032.5,
+            "height": 48,
+            "left": 195.890625,
+            "right": 255.9375,
+            "top": 984.5,
+            "width": 60.046875,
+            "x": 195.890625,
+            "y": 984.5
+          },
+          "text": "Granel"
+        },
+        {
+          "rect": {
+            "bottom": 1032.5,
+            "height": 48,
+            "left": 255.9375,
+            "right": 316,
+            "top": 984.5,
+            "width": 60.0625,
+            "x": 255.9375,
+            "y": 984.5
+          },
+          "text": "Más"
+        }
+      ],
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "frame": 390,
+      "nav": [
+        {
+          "rect": {
+            "bottom": 1012.5,
+            "height": 48,
+            "left": 4,
+            "right": 80.390625,
+            "top": 964.5,
+            "width": 76.390625,
+            "x": 4,
+            "y": 964.5
+          },
+          "text": "Inicio"
+        },
+        {
+          "rect": {
+            "bottom": 1012.5,
+            "height": 48,
+            "left": 80.390625,
+            "right": 156.796875,
+            "top": 964.5,
+            "width": 76.40625,
+            "x": 80.390625,
+            "y": 964.5
+          },
+          "text": "Fermentación"
+        },
+        {
+          "rect": {
+            "bottom": 1012.5,
+            "height": 48,
+            "left": 156.796875,
+            "right": 233.1875,
+            "top": 964.5,
+            "width": 76.390625,
+            "x": 156.796875,
+            "y": 964.5
+          },
+          "text": "Destilación"
+        },
+        {
+          "rect": {
+            "bottom": 1012.5,
+            "height": 48,
+            "left": 233.1875,
+            "right": 309.59375,
+            "top": 964.5,
+            "width": 76.40625,
+            "x": 233.1875,
+            "y": 964.5
+          },
+          "text": "Granel"
+        },
+        {
+          "rect": {
+            "bottom": 1012.5,
+            "height": 48,
+            "left": 309.59375,
+            "right": 386,
+            "top": 964.5,
+            "width": 76.40625,
+            "x": 309.59375,
+            "y": 964.5
+          },
+          "text": "Más"
+        }
+      ],
+      "scrollWidth": 390,
+      "width": 390
+    }
+  ],
+  "keyboard": {
+    "initial": "kc",
+    "reverse": {
+      "inside": true,
+      "text": "Cancelar"
+    },
+    "forward": {
+      "id": "kc",
+      "inside": true
+    },
+    "return": {
+      "open": false,
+      "text": "Cerrar horneada"
+    },
+    "submit": "HOR-003 cerrada (simulación)\n\nAC-003 · 4,321 kg cocidos.\n\nLlenar tinas\nVolver a Horneado"
+  },
+  "wide": [
+    {
+      "buttons": [
+        {
+          "client": 144,
+          "height": 48,
+          "scroll": 144,
+          "text": "Cerrar horneada",
+          "width": 146.21875
+        },
+        {
+          "client": 61,
+          "height": 48,
+          "scroll": 61,
+          "text": "Más",
+          "width": 62.546875
+        },
+        {
+          "client": 111,
+          "height": 48,
+          "scroll": 111,
+          "text": "Llenar tinas",
+          "width": 112.59375
+        },
+        {
+          "client": 54,
+          "height": 48,
+          "scroll": 54,
+          "text": "Ver",
+          "width": 56.203125
+        }
+      ],
+      "frame": 1440,
+      "rows": [
+        {
+          "width": 311,
+          "x": 608
+        },
+        {
+          "width": 311,
+          "x": 608
+        },
+        {
+          "width": 311,
+          "x": 608
+        }
+      ],
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "buttons": [
+        {
+          "client": 144,
+          "height": 48,
+          "scroll": 144,
+          "text": "Cerrar horneada",
+          "width": 146.21875
+        },
+        {
+          "client": 61,
+          "height": 48,
+          "scroll": 61,
+          "text": "Más",
+          "width": 62.546875
+        },
+        {
+          "client": 111,
+          "height": 48,
+          "scroll": 111,
+          "text": "Llenar tinas",
+          "width": 112.59375
+        },
+        {
+          "client": 54,
+          "height": 48,
+          "scroll": 54,
+          "text": "Ver",
+          "width": 56.203125
+        }
+      ],
+      "frame": 1024,
+      "rows": [
+        {
+          "width": 702,
+          "x": 281
+        },
+        {
+          "width": 702,
+          "x": 281
+        },
+        {
+          "width": 702,
+          "x": 281
+        }
+      ],
+      "scroll": 1024,
+      "width": 1024
+    },
+    {
+      "buttons": [
+        {
+          "client": 144,
+          "height": 48,
+          "scroll": 144,
+          "text": "Cerrar horneada",
+          "width": 146.21875
+        },
+        {
+          "client": 61,
+          "height": 48,
+          "scroll": 61,
+          "text": "Más",
+          "width": 62.546875
+        },
+        {
+          "client": 111,
+          "height": 48,
+          "scroll": 111,
+          "text": "Llenar tinas",
+          "width": 112.59375
+        },
+        {
+          "client": 54,
+          "height": 48,
+          "scroll": 54,
+          "text": "Ver",
+          "width": 56.203125
+        }
+      ],
+      "frame": 768,
+      "rows": [
+        {
+          "width": 526,
+          "x": 201
+        },
+        {
+          "width": 526,
+          "x": 201
+        },
+        {
+          "width": 526,
+          "x": 201
+        }
+      ],
+      "scroll": 768,
+      "width": 768
+    }
+  ]
+}

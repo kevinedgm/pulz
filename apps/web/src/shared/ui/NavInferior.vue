@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
 import Icono from "./Icono.vue"
+import { etiquetaNav } from "./etiquetaNav"
 import type { ItemNav } from "./tipos"
 
 // Contrato: registry "bottom-nav". Solo compact (<600). Hasta 4 destinos
@@ -19,10 +20,11 @@ const emit = defineEmits<{ mas: [] }>()
       :key="it.id"
       class="inf__item"
       :to="it.to"
+      :aria-label="it.etiqueta"
       :aria-current="it.id === actual ? 'page' : undefined"
     >
-      <Icono :nombre="it.icono" :size="22" />
-      <span>{{ it.etiqueta }}</span>
+      <Icono :nombre="it.icono" :size="24" />
+      <span>{{ etiquetaNav(it.etiqueta) }}</span>
     </RouterLink>
     <button
       type="button"
@@ -31,7 +33,7 @@ const emit = defineEmits<{ mas: [] }>()
       :aria-expanded="masAbierto ? 'true' : 'false'"
       @click="emit('mas')"
     >
-      <Icono nombre="i-menu" :size="22" />
+      <Icono nombre="i-menu" :size="24" />
       <span>Más</span>
     </button>
   </nav>
@@ -44,7 +46,8 @@ const emit = defineEmits<{ mas: [] }>()
   z-index: 20;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+  padding: var(--space-1) var(--space-2) calc(var(--space-1) + env(safe-area-inset-bottom));
+  column-gap: var(--space-2);
   border-top: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);

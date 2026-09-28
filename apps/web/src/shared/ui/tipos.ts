@@ -8,7 +8,7 @@ export type ChipVariante = "on" | "draft" | "off" | "partial" | "pending" | "fai
 export type AvisoVariante = "offline" | "readonly" | "cola"
 export type BloqueEstadoVariante = "empty" | "error" | "denied"
 
-// Símbolos reales del sprite apps/web/src/shared/ui/iconos.svg (un solo set)
+// Nombres semánticos conservados; Icono.vue los enlaza a Lucide (marca aparte).
 export type IconoNombre =
   | "i-maguey"
   | "i-horno"

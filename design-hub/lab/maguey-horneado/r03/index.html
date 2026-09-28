@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Maguey y Horneado: recepción y horneadas · r03</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+.mh-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.mh-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.mh-side ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.mh-side li{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:6px;border:2px solid transparent}
+.mh-side li[aria-current]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.mh-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:56px;padding:4px var(--wf-s4) 0;border-bottom:1px solid var(--wf-g3)}
+.mh-top h1{font-size:18px;margin:0 0 0 auto}
+.mh-top .wf-btn{margin-left:var(--wf-s2)}
+.mh-body{padding:var(--wf-s5);min-width:0;max-width:960px}
+.mh-resumen{font-size:13px;color:var(--wf-g6);margin:0 0 var(--wf-s4)}
+.mh-grupo h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-g6);margin:var(--wf-s5) 0 var(--wf-s2)}
+.mh-lista{list-style:none;margin:0;padding:0}
+.mh-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.5fr) auto auto;gap:var(--wf-s3);align-items:center;min-height:64px;padding:var(--wf-s3) var(--wf-s4);border:1px solid var(--wf-g3);border-top:0}
+.mh-row:first-child{border-top:1px solid var(--wf-g3);border-radius:var(--wf-r) var(--wf-r) 0 0}
+.mh-row:last-child{border-radius:0 0 var(--wf-r) var(--wf-r)}
+.mh-row h3{margin:0;font-size:16px}
+.mh-row .sub,.mh-datos{font-size:13px;color:var(--wf-g6)}
+.mh-row .wf-actions{justify-content:flex-end;flex-wrap:nowrap}
+.mh-fab{display:none}
+.mh-form{display:grid;gap:var(--wf-s4);max-width:720px}
+.mh-form fieldset{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);display:grid;gap:var(--wf-s3);min-width:0}
+.mh-form legend{font-weight:700;padding:0 4px}
+.mh-fila{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s3)}
+.mh-asig{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--wf-s3);align-items:end}
+.mh-asig .sub{font-size:12px;color:var(--wf-g6)}
+.mh-total{font-size:14px;padding:var(--wf-s2) var(--wf-s3);border:1px dashed var(--wf-g6);border-radius:var(--wf-r)}
+.mh-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-weight:600;font-size:14px}
+.mh-warn{border:1px dashed var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s2) var(--wf-s3);font-size:13px}
+.mh-drawer{position:absolute;top:0;bottom:0;right:0;width:min(440px,92%);background:var(--wf-g0);border-left:1px solid var(--wf-g3);z-index:21;padding:var(--wf-s5);overflow:auto;display:grid;gap:var(--wf-s4);align-content:start}
+.mh-bottom{display:none}
+details.mh-plegado summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-size:14px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+@container wf (max-width: 1023px){
+  .mh-shell{grid-template-columns:200px 1fr}
+  .mh-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"a s" "b b" "c c"}
+  .mh-row>div:first-child{grid-area:a}.mh-row>.mh-datos{grid-area:b}.mh-row>.wf-status{grid-area:s}.mh-row>.wf-actions{grid-area:c;justify-content:flex-start}
+}
+@container wf (max-width: 599px){
+  .mh-shell{grid-template-columns:1fr}.mh-shell>.mh-side{display:none}
+  .mh-body{padding:var(--wf-s4) var(--wf-s4) 140px}
+  .mh-top .wf-btn--primary{display:none}
+  .mh-fab{display:inline-flex;position:absolute;right:16px;bottom:88px;min-width:56px;min-height:56px;border-radius:999px;padding:0 20px;font-size:16px;z-index:15;box-shadow:0 0 0 1px var(--wf-g4)}
+  .mh-row .wf-actions .wf-btn{flex:0 1 auto}
+  .mh-fila,.mh-asig{grid-template-columns:1fr}
+  .mh-form [data-wf-persist]{display:none}
+  .mh-drawer{top:auto;left:0;right:0;width:100%;max-height:92%;border-left:0;border-top:1px solid var(--wf-g3);border-radius:12px 12px 0 0}
+  .mh-bottom{display:grid;grid-template-columns:repeat(5,1fr);position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:6px 4px 18px;font-size:11px;text-align:center}
+  .mh-bottom span{min-height:48px;display:grid;place-items:center}
+  .mh-barra{position:absolute;left:0;right:0;bottom:78px;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:flex;gap:var(--wf-s2);z-index:14}
+  .mh-barra .wf-btn--primary{flex:1}
+}
+@container wf (min-width: 600px){.mh-barra{display:none}}
+</style>
+<style>
+/* r03 · Kiwi: geometría revisada, no tokens de F3. */
+.wf-stage{padding:0;overflow:visible}
+.wf-frame,.wf-frame-label{max-width:100%;border:0;border-radius:0}
+.wf-ctl{position:static}.wf-ctl label{min-width:0}.wf-ctl select{max-width:100%;min-width:0}
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.mh-row{grid-template-columns:minmax(0,1fr) minmax(12rem,1fr) 6rem 12rem}
+.mh-row>*{min-width:0;overflow-wrap:anywhere}
+.mh-row .mh-datos>b{display:block;font-size:1.25rem;line-height:1.5;font-variant-numeric:tabular-nums}
+.mh-row h3{font-size:1rem}
+.mh-top{flex-wrap:wrap}.mh-top h1{margin-inline-start:0}
+.mh-main{min-width:0}
+.mh-form details{display:grid;gap:var(--wf-s3)}
+.mh-form input,.mh-form select,.wf-btn{min-height:48px}
+.mh-form details>summary{min-height:48px}
+@container wf (min-width:600px) and (max-width:1023px){
+  .mh-shell{grid-template-columns:96px minmax(0,1fr)}
+  .mh-side{padding:var(--wf-s2)}
+  .mh-side li{padding:var(--wf-s1);font-size:.75rem;overflow-wrap:anywhere}
+  .mh-side>strong{font-size:.75rem}
+  .mh-row{grid-template-columns:minmax(0,1fr) auto}
+}
+@container wf (max-width:599px){
+  .mh-shell{grid-template-columns:minmax(0,1fr)}
+  .mh-row{grid-template-columns:minmax(0,1fr) auto}
+  .mh-fab{position:sticky;bottom:88px;margin:var(--wf-s4);float:right}
+  .mh-barra{position:sticky;bottom:0}
+  .mh-body{padding-bottom:var(--wf-s5)}
+  .mh-top>span{flex-basis:100%}
+  .mh-drawer{position:fixed;max-height:90dvh;bottom:0}
+}
+</style>
+
+<style>
+/* r03 · Kiwi geometry. Neutral F2 reference values, not production tokens. */
+.mh-row{grid-template-columns:minmax(0,1fr) minmax(10rem,1fr) 14rem;grid-template-areas:"a b s" "a b c";gap:8px 16px}
+.mh-row>div:first-child{grid-area:a}.mh-row>.mh-datos{grid-area:b}.mh-row>.wf-status{grid-area:s;justify-self:end}
+.mh-row>.wf-actions{grid-area:c;justify-content:flex-end;flex-wrap:wrap}
+.mh-row .wf-btn{white-space:normal;word-break:normal;overflow-wrap:normal}
+.mh-side li{padding:0;overflow-wrap:normal;word-break:normal}
+.mh-side .mh-destination{display:flex;align-items:center;min-height:48px;width:100%;padding:8px;border:0;background:none;font:inherit;text-align:start;text-decoration:none}
+.mh-side li:not([aria-current]) .mh-destination[aria-disabled]{color:var(--wf-g6)}
+.mh-top .wf-btn{margin-inline-start:auto}
+.mh-form details:not([open])>:not(summary){display:none}
+.mh-form .wf-actions{align-items:stretch}
+.mh-form .wf-actions>.wf-btn{white-space:normal}
+.mh-asig .mh-error{grid-column:1/-1;margin:0;color:var(--wf-g9);font-weight:600}
+.mh-error[hidden]{display:none}.wf-input[aria-invalid="true"]{border:2px dashed var(--wf-g9)}
+.mh-drawer{position:fixed;inset:0 0 0 auto;margin:0;min-width:0;width:min(440px,100%);height:100dvh;max-height:100dvh;max-width:100%;border:0;border-inline-start:1px solid var(--wf-g3)}
+.mh-drawer:not([open]){display:none}.mh-drawer::backdrop{background:rgba(0,0,0,.4)}
+.mh-drawer input{min-width:0;max-width:100%}
+.mh-menu{width:min(360px,100%);height:auto;inset:10dvh 16px auto auto;border:1px solid var(--wf-g3)}
+.mh-review{max-width:640px}.mh-review h2{margin-top:0}.mh-review li{margin-bottom:12px}
+.mh-review .wf-actions{margin-top:24px}.mh-review .wf-actions .wf-btn{flex:1 1 240px}
+@container wf (min-width:600px) and (max-width:1023px){
+ .mh-shell{grid-template-columns:160px minmax(0,1fr)}
+ .mh-side{padding:8px}.mh-side li{font-size:14px;overflow-wrap:normal}
+ .mh-side>strong{font-size:13px;display:block;padding:8px}
+ .mh-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"a s" "b b" "c c"}
+ .mh-row>.wf-actions{justify-content:flex-start}
+}
+@container wf (min-width:1024px) and (max-width:1199px){
+ .mh-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"a s" "b b" "c c"}
+ .mh-row>.wf-actions{justify-content:flex-start}
+}
+@container wf (max-width:599px){
+ .mh-row{grid-template-columns:minmax(0,1fr);grid-template-areas:"a" "b" "s" "c"}
+ .mh-row>.wf-status{justify-self:start}
+ .mh-top>.wf-btn--primary{display:flex;width:100%;margin:8px 0 0}
+ #wf-fab{display:none}
+ .mh-row>.wf-actions{justify-content:flex-start}.mh-top h1{font-size:20px}
+ .mh-body{padding-bottom:24px}.mh-review .wf-actions .wf-btn{flex:1 1 100%}
+ .mh-bottom .wf-btn{padding:0 4px;font-size:11px;min-width:44px}
+}
+@media(max-width:599px){
+ .mh-drawer{inset:auto 0 0;margin:0;width:100%;height:auto;max-height:90dvh;border-inline:0;border-top:1px solid var(--wf-g3);border-radius:12px 12px 0 0;padding:20px 16px max(20px,env(safe-area-inset-bottom))}
+ .mh-drawer .mh-fila{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="wf wf-no-notes">
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>MAGUEY · HORNEADO · r03 · F2</strong>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="1024" aria-pressed="false">expanded 1024</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="m-default">Maguey · default (lotes con saldo + agotados)</option>
+      <option value="m-loading">Maguey · carga</option>
+      <option value="m-empty">Maguey · vacío (sin lotes)</option>
+      <option value="m-offline">Maguey · sin conexión</option>
+      <option value="m-readonly">Maguey · solo lectura</option>
+      <option value="m-operador">Maguey · operador (ve, no registra)</option>
+      <option value="m-long">Maguey · contenido largo</option>
+      <option value="m-recepcion">Maguey · recepción (formulario)</option>
+      <option value="m-sincat">Maguey · recepción sin catálogos (solo kilos)</option>
+      <option value="m-error">Maguey · recepción con error del servidor</option>
+      <option value="h-default">Horneado · default (1 abierta + cocido + últimas)</option>
+      <option value="h-empty">Horneado · vacío (sin horneadas ni cocido)</option>
+      <option value="h-sinhornos">Horneado · sin hornos</option>
+      <option value="h-offline">Horneado · sin conexión</option>
+      <option value="h-abrir">Horneado · abrir (kg por lote)</option>
+      <option value="h-abrir-saldo">Horneado · abrir con kg por encima del saldo (bloquea)</option>
+      <option value="h-abrir-sin">Horneado · abrir sin maguey con saldo</option>
+      <option value="h-success">Horneado · cierre registrado</option><option value="h-conflict">Horneado · ya cerrada por otra persona</option><option value="m-success">Maguey · recepción registrada</option><option value="h-operador">Horneado · operador</option><option value="h-loading">Horneado · carga</option><option value="h-error">Horneado · error recuperable</option><option value="h-cerrar">Horneado · cerrar (capa)</option>
+      <option value="h-cocido">Horneado · cocido que ya tenía (capa)</option>
+      <option value="h-review">Horneado · revisión de apertura</option><option value="h-open-success">Horneado · apertura registrada</option><option value="h-cooked-success">Horneado · entrada directa registrada</option><option value="h-readonly">Horneado · solo lectura</option><option value="h-menu">Horneado · menú de una horneada</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes"> Notas</label>
+</div>
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="mh-shell" id="mh-background">
+      <nav class="mh-side" aria-label="Navegación principal (shell/r03)" id="wf-side"></nav>
+      <div style="min-width:0;display:flex;flex-direction:column;position:relative">
+        <header class="mh-top" id="wf-top"></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main mh-body" id="wf-view" tabindex="-1"></main>
+        <div id="wf-fab"></div>
+        <nav class="mh-bottom" aria-label="Navegación principal (compact)"><span>Inicio</span><span>Fermentación</span><span>Destilación</span><span>Granel</span><button class="wf-btn wf-btn--quiet" data-action="destinos" aria-haspopup="dialog">Más</button></nav>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+<script>
+// Ejemplo: Cuatro Vientos (semilla: MAG-001 agotado en HOR-001; AC-001 agotado en F-001) + ejemplos rotulados
+const side = (actual) => `<strong>Mezcal Cuatro Vientos</strong><ul>${['Inicio','Maguey','Horneado','Fermentación','Destilación','Granel','Trazabilidad','Configuración'].map(d => `<li ${d === actual ? 'aria-current="page"' : ''}>${d}</li>`).join('')}</ul>`;
+const topLista = (h1, prim, o = {}) => `<span class="wf-small wf-muted">CV · Mezcal Cuatro Vientos · ${o.operador ? 'Tomás · operador' : 'Aurelia · productora'}</span><h1>${h1}</h1>${o.operador || o.sinPrim ? '' : `<a class="wf-btn wf-btn--primary" href="#" ${o.dis ? 'aria-disabled="true"' : ''}>${prim}</a>`}`;
+const fab = (prim, o = {}) => o.operador || o.sinPrim ? '' : `<a class="wf-btn wf-btn--primary mh-fab" href="#" ${o.dis ? 'aria-disabled="true"' : ''}>${prim}</a>`;
+const topSub = (h1, atras) => `<a class="wf-btn wf-btn--quiet" href="#">‹ ${atras}</a><h1>${h1}</h1>`;
+// ── Maguey ──
+const loteM = (l, o = {}) => `<li class="mh-row"><div><h3>${l.f}${l.ej ? ' <span class="wf-tag">ejemplo</span>' : ''}</h3><span class="sub">${l.esp} · ${l.de} · ${l.cuando} · ${l.quien}</span></div><div class="mh-datos"><b>${l.rest.toLocaleString('es-MX')} kg</b> restantes de ${l.kg.toLocaleString('es-MX')}${l.pinas ? ` · ${l.pinas} piñas` : ''}${l.nota ? ` · ${l.nota}` : ''}</div><span class="wf-status ${l.rest > 0 ? 'wf-status--on' : 'wf-status--off'}">${l.rest > 0 ? 'con saldo' : 'agotado'}</span><div class="wf-actions"><a class="wf-btn wf-btn--quiet" href="#">Ver</a></div></li>`;
+const M = [
+  { f: 'MAG-003', ej: true, esp: 'Tobalá', de: 'Loma del Toro · Magueyes Don Pedro', cuando: 'hoy 07:30', quien: 'Aurelia', kg: 2000, rest: 2000, pinas: 60 },
+  { f: 'MAG-002', ej: true, esp: 'Espadín', de: 'Loma del Toro', cuando: '25 sep', quien: 'Aurelia', kg: 4500, rest: 1300, pinas: 110, nota: 'maduro, sin daño' },
+];
+const agotados = () => `<details class="mh-plegado"><summary>Agotados (últimos 10)</summary><ul class="mh-lista" style="margin-top:8px">${loteM({ f: 'MAG-001', esp: 'Espadín', de: 'Loma del Toro · Magueyes Don Pedro', cuando: '2 sep', quien: 'Aurelia', kg: 8000, rest: 0, pinas: 180 })}</ul></details>`;
+const magueyLista = (o = {}) => `<p class="mh-resumen" role="status">2 lotes con saldo · <b>3,300 kg de maguey</b></p><ul class="mh-lista">${M.map(l => loteM(l, o)).join('')}</ul>${agotados()}`;
+const recepcion = (o = {}) => `<form class="mh-form">
+  <fieldset><legend>Lo que llegó</legend><div class="mh-fila"><div class="wf-field"><label for="kg">Kilos (obligatorio)</label><input class="wf-input" id="kg" inputmode="decimal" type="number" min="0.001" step="0.001" required placeholder="Ej. 2,000"></div></div><details class="mh-plegado"><summary>Detalles opcionales</summary><div class="mh-fila"><div class="wf-field"><label for="pi">Piñas (opcional)</label><input class="wf-input" id="pi" inputmode="numeric" type="number" min="0" step="1"></div></div>
+    ${o.sincat ? '<p class="mh-warn">Sin especies, predios ni proveedores en el catálogo: puedes registrar solo con kilos. <a class="wf-btn wf-btn--quiet" href="#">Agregar en Catálogos</a>.</p>' : `<div class="mh-fila"><div class="wf-field"><label for="especie">Especie (opcional)</label><select id="especie" class="wf-input"><option value="">Sin especificar</option><option>Tobalá</option><option>Espadín</option></select></div><div class="wf-field"><label for="predio">Predio (opcional)</label><select id="predio" class="wf-input"><option value="">Sin especificar</option><option>Loma del Toro · Santiago Matatlán</option></select></div></div><div class="wf-field"><label for="proveedor">Proveedor (opcional)</label><select id="proveedor" class="wf-input"><option value="">Sin especificar</option><option>Magueyes Don Pedro</option></select></div>`}
+    <div class="wf-field"><label for="no">Nota de calidad (opcional)</label><input class="wf-input" id="no" placeholder="Ej. maduro, sin daño"></div></details></fieldset>
+  <fieldset><legend>Cuándo y folio</legend><div class="mh-fila"><div class="wf-field"><label for="cu">¿Cuándo pasó?</label><input class="wf-input" id="cu" type="datetime-local" value="2026-09-28T07:30"></div><div class="wf-field"><label for="fo">Folio (opcional)</label><input class="wf-input" id="fo" placeholder="MAG-… automático"></div></div></fieldset>
+  ${o.error ? '<div class="mh-alert" role="alert">No pudimos conectar. Revisa tu señal. Lo que escribiste se conserva.</div>' : ''}
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Registrar recepción</button><a class="wf-btn" href="#">Cancelar</a></div><div class="mh-barra"><button class="wf-btn wf-btn--primary" type="submit">Registrar recepción</button></div>
+  <span class="wf-note">Solo los kilos son obligatorios (0015). El lote nace con historia «completa» (viene del maguey). Admin y productor; requiere señal.</span></form>`;
+// ── Horneado ──
+const horneadaAbierta = (o = {}) => `<li class="mh-row"><div><h3>HOR-003 <span class="wf-tag">ejemplo</span></h3><span class="sub">Horno 1 · empezó hoy 09:00 · Aurelia</span></div><div class="mh-datos"><b>Cargó 5,200 kg</b> · MAG-004 3,200 · MAG-005 2,000</div><span class="wf-status wf-status--partial">abierta</span><div class="wf-actions"><button class="wf-btn" ${o.dis ? 'disabled aria-disabled="true"' : ''}>Cerrar horneada</button><button class="wf-btn wf-btn--quiet" aria-haspopup="dialog" ${o.dis ? 'disabled aria-disabled="true"' : ''}>Más</button></div></li>`;
+const cocido = (o = {}) => `<section class="mh-grupo"><h2>Agave cocido con saldo</h2><ul class="mh-lista"><li class="mh-row"><div><h3>AC-002 <span class="wf-tag">ejemplo</span></h3><span class="sub">de HOR-002 · cerrada hoy 08:00 · Aurelia</span></div><div class="mh-datos"><b>4,900 kg</b> restantes de 4,900 · leña de encino</div><span class="wf-status wf-status--on">con saldo</span><div class="wf-actions">${o.operador ? '<span class="wf-small wf-muted">lo formula el productor</span>' : '<a class="wf-btn" href="#">Llenar tinas</a>'}</div></li></ul></section>`;
+const ultimasH = () => `<section class="mh-grupo"><h2>Últimas horneadas</h2><ul class="mh-lista"><li class="mh-row"><div><h3>HOR-001</h3><span class="sub">Horno 1 · 2 sep → 6 sep · Aurelia</span></div><div class="mh-datos">8,000 kg (MAG-001) → <b>6,200 kg cocidos</b> (AC-001, agotado en F-001) · leña</div><span class="wf-status wf-status--off">cerrada</span><div class="wf-actions"><a class="wf-btn wf-btn--quiet" href="#">Ver</a></div></li></ul></section>`;
+const horneadoLista = (o = {}) => `<p class="mh-resumen" role="status">1 horneada abierta · <b>4,900 kg de cocido con saldo</b></p><section class="mh-grupo"><h2>Horneadas abiertas</h2><ul class="mh-lista">${horneadaAbierta(o)}</ul></section>${cocido(o)}${ultimasH()}${o.operador ? '' : `<div class="wf-actions" style="margin-top:24px"><button class="wf-btn" ${o.dis ? 'disabled aria-disabled="true"' : ''}>Cocido que ya tenía</button></div>`}`;
+const abrir = (o = {}) => `<form class="mh-form">
+  <fieldset><legend>Horno</legend><div class="wf-field"><label for="horno">Horno</label><select id="horno" class="wf-input"><option>Horno 1 · 10,000 kg · libre</option></select></div></fieldset>
+  <fieldset><legend>Maguey que entra (con kilos)</legend><p>Indica kilos solo en los lotes que usarás. Vacío o cero deja el lote fuera.</p>
+    ${o.sin ? '<p class="wf-muted" style="margin:0">No hay maguey con saldo. Registra una recepción en Maguey.</p><a class="wf-btn" href="#">Ir a Maguey</a>' : `
+    <div class="mh-asig"><div><b>MAG-003</b><span class="sub"> · Tobalá · quedan 2,000 kg</span></div><div class="wf-field"><label for="k1">Kilos</label><input class="wf-input" id="k1" aria-label="Kilos de MAG-003" type="number" min="0" max="2000" step="0.001" data-saldo="2000" value="${o.saldo ? '2000' : ''}"></div></div>
+    <div class="mh-asig"><div><b>MAG-002</b><span class="sub"> · Espadín · quedan 1,300 kg</span></div><div class="wf-field"><label for="k2">Kilos</label><input class="wf-input" id="k2" aria-label="Kilos de MAG-002" type="number" min="0" max="1300" step="0.001" data-saldo="1300" aria-describedby="k2-error" aria-invalid="${o.saldo ? 'true' : 'false'}" value="${o.saldo ? '1500' : ''}"></div>${o.saldo ? '<p id="k2-error" class="wf-small" style="margin:0;font-weight:600">Solo hay 1,300 kg.</p>' : ''}</div>
+    <p class="mh-total" aria-live="polite">Total <b id="kg-total">${o.saldo ? '3,500' : '0'} kg</b> de 10,000 kg (Horno 1)</p>`}
+    <span class="wf-note">origin-allocation en kg: lotes de maguey con saldo (solid_lot_balances); kilos por encima del saldo → error en la fila antes de enviar (SALDO_INSUFICIENTE en el servidor si la instantánea estaba vieja). Capacidad del horno: informativa (política libre).</span></fieldset>
+  <fieldset><legend>Cuándo y folio</legend><div class="mh-fila"><div class="wf-field"><label for="ce">¿Cuándo empezó?</label><input class="wf-input" id="ce" type="datetime-local" value="2026-09-28T12:00"></div><div class="wf-field"><label for="fh">Folio (opcional)</label><input class="wf-input" id="fh" placeholder="HOR-… automático"></div></div></fieldset>
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist disabled aria-disabled="true">Revisar Horno 1 con ${o.saldo ? '3,500' : '0'} kg</button><a class="wf-btn" href="#">Cancelar</a></div><div class="mh-barra"><button class="wf-btn wf-btn--primary" type="submit" disabled aria-disabled="true">Revisar Horno 1 con ${o.saldo ? '3,500' : '0'} kg</button></div>
+  <span class="wf-note">Abrir consume el saldo de maguey (irreversible; se corrige en Fase 6). Requiere señal; admin y productor.</span></form>`;
+const V = {
+  'm-default': () => magueyLista() + '<span class="wf-note">Lotes con saldo arriba; agotados plegados (últimos 10). Cada lote: especie, predio o proveedor, kg restantes de recibidos, piñas, cuándo y quién. Una primaria: Registrar recepción (FAB en compact).</span>',
+  'm-loading': () => `<p class="mh-resumen">…</p><div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:64px;border-radius:6px"></div>'.repeat(3)}</div>`,
+  'm-empty': () => `<div class="wf-state"><h2>Aún no has registrado maguey</h2><p class="wf-muted">Cuando llegue, registra los kilos; lo demás es opcional.</p><a class="wf-btn wf-btn--primary" href="#" >Registrar recepción</a></div>`,
+  'm-offline': () => `<p class="mh-warn">Datos de <b>hace 8 min</b>. Registrar una recepción necesita señal.</p>${magueyLista({ dis: true })}`,
+  'm-readonly': () => magueyLista({ dis: true }),
+  'm-operador': () => magueyLista({ operador: true }) + '<span class="wf-note">Operador: ve los lotes; no registra (§18 #4, supuesto vigente; rpc_guard 0015). Sin primaria.</span>',
+  'm-long': () => `<p class="mh-resumen" role="status">1 lote con saldo · <b>12,500 kg</b></p><ul class="mh-lista">${loteM({ f: 'MAG-2026-09-27-TOBALA-LOMA-DEL-TORO-0001', esp: 'Tobalá silvestre de la ladera norte', de: 'Predio Loma del Toro parcela catorce · Magueyes Don Pedro y Familia', cuando: '27 sep', quien: 'Aurelia Santiago', kg: 12500, rest: 12500, pinas: 340, nota: 'llegó en dos viajes; piñas grandes, algunas con quiote' })}</ul>`,
+  'm-recepcion': () => recepcion(), 'm-sincat': () => recepcion({ sincat: true }), 'm-error': () => recepcion({ error: true }),
+  'h-default': () => horneadoLista() + '<span class="wf-note">Horneadas abiertas con Cerrar; cocido con saldo (lotes AC) con «Llenar tinas» → Fermentación/formular; últimas horneadas con cargado → cocido. Una primaria: Abrir horneada (FAB en compact); «Cocido que ya tenía» secundaria.</span>',
+  'h-empty': () => `<div class="wf-state"><h2>Aún no hay horneadas ni agave cocido</h2><p class="wf-muted">Abre una horneada con el maguey que tengas, o registra cocido que ya tenías.</p><a class="wf-btn wf-btn--primary" href="#" >Abrir horneada</a><p style="margin-top:12px"><button class="wf-btn wf-btn--quiet">Cocido que ya tenía</button></p></div>`,
+  'h-sinhornos': () => `<div class="wf-state"><h2>Tu palenque aún no tiene hornos</h2><p class="wf-muted">Agrégalos en Configuración → Recursos y después abre tu primera horneada.</p><a class="wf-btn" href="#">Ir a Recursos</a></div>`,
+  'h-offline': () => `<p class="mh-warn">Datos de <b>hace 8 min</b>. Abrir y cerrar horneadas necesita señal.</p>${horneadoLista({ dis: true })}`,
+  'h-abrir': () => abrir(), 'h-abrir-saldo': () => abrir({ saldo: true }), 'h-abrir-sin': () => abrir({ sin: true }),
+  'h-cerrar': () => horneadoLista(), 'h-cocido': () => horneadoLista(), 'h-menu': () => horneadoLista({ menu: true }),
+};
+const OV = {
+  'h-cerrar': () => `<dialog class="mh-drawer" aria-modal="true" aria-labelledby="ce-t"><h2 id="ce-t" style="margin:0">Cerrar HOR-003</h2><p class="wf-small wf-muted" style="margin:0">Cargó <b>5,200 kg</b> de maguey (MAG-004 3,200 · MAG-005 2,000). Se registra el agave cocido y sus lotes de origen. No se reabre.</p><div class="wf-field"><label for="kc">Kilos cocidos</label><input class="wf-input" id="kc" inputmode="decimal" type="number" min="0.001" step="0.001" required value="4900"></div><p class="mh-warn">Merma: 300 kg (5,200 → 4,900). Diferencia entre lo cargado y lo obtenido.</p><div class="wf-field"><label for="cb">Combustible (opcional)</label><input class="wf-input" id="cb" placeholder="Ej. leña de encino"></div><div class="mh-fila"><div class="wf-field"><label for="ct">¿Cuándo terminó?</label><input class="wf-input" id="ct" type="datetime-local" value="2026-09-28T12:00" aria-describedby="ct-hint"></div><div class="wf-field"><label for="fc">Folio del cocido (opcional)</label><input class="wf-input" id="fc" placeholder="AC-… automático"></div></div><p id="ct-hint" class="wf-small" role="status">Inicio: 28 sep 2026, 09:00. Revisa la fecha real del cierre.</p><div class="wf-field"><label for="cn">Nota (opcional)</label><input class="wf-input" id="cn"></div><div class="wf-actions"><button class="wf-btn wf-btn--primary">Cerrar con 4,900 kg cocidos</button><button class="wf-btn">Cancelar</button></div><span class="wf-note">task-layer (drawer / hoja). cerrar_horneado → lote AC con linaje (0016). Irreversible: el botón dice los kilos.</span></dialog>`,
+  'h-cocido': () => `<dialog class="mh-drawer" aria-modal="true" aria-labelledby="co-t"><h2 id="co-t" style="margin:0">Cocido que ya tenía</h2><p class="wf-small wf-muted" style="margin:0">Agave cocido de antes de usar PULZ: nace un lote sin historia.</p><div class="wf-field"><label for="ck">Kilos</label><input class="wf-input" id="ck" inputmode="decimal" type="number" min="0.001" step="0.001" required></div><div class="wf-field"><label for="cc">¿Cuándo pasó?</label><input class="wf-input" id="cc" type="datetime-local" value="2026-09-28T10:00"></div><div class="wf-field"><label for="cn2">Nota (opcional)</label><input class="wf-input" id="cn2"></div><div class="wf-actions"><button class="wf-btn wf-btn--primary">Registrar 1,500 kg de cocido</button><button class="wf-btn">Cancelar</button></div><span class="wf-note">registrar_entrada('agave_cocido', sin recurso, kg) — carga inicial (0015). Mismo camino que el arranque.</span></dialog>`,
+  'h-menu': () => `<div style="position:absolute;right:24px;top:180px;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:6px;z-index:21;min-width:240px;padding:4px" role="menu"><button role="menuitem" style="display:block;width:100%;text-align:left;min-height:44px;border:0;background:none;padding:0 12px;font:inherit">Ver horneada</button><button role="menuitem" style="display:block;width:100%;text-align:left;min-height:44px;border:0;background:none;padding:0 12px;font:inherit">Cerrar horneada…</button></div>`,
+};
+</script>
+<script src="prototype.js"></script>
+</body>
+</html>

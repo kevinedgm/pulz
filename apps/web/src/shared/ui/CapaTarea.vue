@@ -7,7 +7,13 @@ import { nextTick, onBeforeUnmount, ref, useId, watch } from "vue"
 // role=dialog aria-modal; el foco entra, queda contenido y vuelve al
 // disparador; Esc y atrás cierran. Cerrar ≠ Cancelar: el consumidor decide.
 const props = withDefaults(
-  defineProps<{ abierta: boolean; titulo: string; etiquetaCerrar?: string }>(),
+  defineProps<{
+    abierta: boolean
+    titulo: string
+    etiquetaCerrar?: string
+    focoInicial?: string
+    ancho?: number
+  }>(),
   {
     etiquetaCerrar: "Cerrar",
   },
@@ -17,6 +23,13 @@ const emit = defineEmits<{ cerrar: [] }>()
 const id = useId()
 const capa = ref<HTMLElement | null>(null)
 let disparador: HTMLElement | null = null
+const fondos = new Map<HTMLElement, boolean>()
+function liberarFondo() {
+  fondos.forEach((inert, el) => {
+    el.inert = inert
+  })
+  fondos.clear()
+}
 
 function focusables(): HTMLElement[] {
   return Array.from(
@@ -56,8 +69,20 @@ watch(
       history.pushState({ capa: id }, "")
       window.addEventListener("popstate", onPopstate)
       await nextTick()
-      ;(focusables()[0] ?? capa.value)?.focus()
+      if (!props.abierta) return
+      for (const el of Array.from(document.body.children)) {
+        if (el instanceof HTMLElement && !el.contains(capa.value)) {
+          fondos.set(el, el.inert)
+          el.inert = true
+        }
+      }
+      ;(props.focoInicial
+        ? capa.value?.querySelector<HTMLElement>(props.focoInicial)
+        : null
+      )?.focus()
+      if (!capa.value?.contains(document.activeElement)) (focusables()[0] ?? capa.value)?.focus()
     } else {
+      liberarFondo()
       window.removeEventListener("popstate", onPopstate)
       if (history.state?.capa === id) history.back()
       disparador?.focus()
@@ -66,7 +91,10 @@ watch(
   },
   { immediate: true }, // si nace abierta, el foco también entra
 )
-onBeforeUnmount(() => window.removeEventListener("popstate", onPopstate))
+onBeforeUnmount(() => {
+  window.removeEventListener("popstate", onPopstate)
+  liberarFondo()
+})
 </script>
 
 <template>
@@ -76,6 +104,15 @@ onBeforeUnmount(() => window.removeEventListener("popstate", onPopstate))
       <section
         ref="capa"
         class="capa__panel"
+        :style="
+          ancho
+            ? {
+                width: `min(${ancho}px, 100vw)`,
+                '--capa-alto': '90dvh',
+                '--capa-radio': 'var(--radius-surface)',
+              }
+            : undefined
+        "
         role="dialog"
         aria-modal="true"
         :aria-labelledby="`${id}-titulo`"
@@ -105,7 +142,7 @@ onBeforeUnmount(() => window.removeEventListener("popstate", onPopstate))
 .capa__fondo {
   position: absolute;
   inset: 0;
-  background: rgb(23 36 58 / 40%);
+  background: color-mix(in srgb, var(--color-ink) 40%, transparent);
 }
 .capa__panel {
   position: relative;
@@ -149,6 +186,7 @@ onBeforeUnmount(() => window.removeEventListener("popstate", onPopstate))
   flex: 1 1 auto;
   overflow: auto;
   padding: var(--sp-5);
+  padding-bottom: calc(var(--sp-5) + env(safe-area-inset-bottom));
 }
 .capa__acciones {
   display: flex;
@@ -167,10 +205,10 @@ onBeforeUnmount(() => window.removeEventListener("popstate", onPopstate))
   .capa__panel {
     width: 100%;
     height: auto;
-    max-height: 92%;
+    max-height: var(--capa-alto, 92%);
     border-left: 0;
     border-top: 1px solid var(--border);
-    border-radius: var(--r-2xl) var(--r-2xl) 0 0;
+    border-radius: var(--capa-radio, var(--r-2xl)) var(--capa-radio, var(--r-2xl)) 0 0;
   }
 }
 </style>

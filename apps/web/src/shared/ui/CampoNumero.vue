@@ -119,7 +119,7 @@ function onInput(e: Event) {
   color: var(--muted);
 }
 .campo__error {
-  color: var(--late);
+  color: var(--color-danger-text);
   font-weight: 600;
 }
 </style>

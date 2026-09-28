@@ -1,0 +1,35 @@
+round: maguey-horneado/r04
+owner: lima
+operation: evaluate_f3
+status: partial_verified_draft
+evaluated: 2026-09-28
+f2_contract: lima-contract.yaml
+geometry_owner: kiwi
+candidate_approved: false
+stable_approved: false
+production_release_authorized: false
+mora_eligible: true
+mora_scope: 'M2/M3: documentar hechos verificados y preview draft con limitaciones; no publicación como resultado aceptado ni promoción'
+reason: 'Código local y demo reales verificables; la documentación debe declarar las dimensiones parciales y la falta de E2E remoto'
+dimensions:
+  technical: partial
+  structural: pass_local
+  visual: partial
+  accessibility: partial
+  design_system: pass_local
+  documentation: pass_draft_only
+local_tests: '168/168; 28 del módulo; se excluyen explícitamente las 5 pruebas de acceso alojado que fallaron por RED'
+resolved:
+  - MH-F3-IDEM-01: 'Toda respuesta incierta conserva intención; sólo rechazo transaccional tipado permite editar'
+  - MH-F3-IDEM-02: 'Intención persistida antes del envío, particionada por empresa/persona/destino, recuperable tras remontaje'
+  - MH-F3-TIME-01: 'Ahora se fija una vez al primer envío; reintento conserva fecha'
+  - MH-F3-OFFLINE-01: 'Recargar al recuperar conexión y acción explícita de actualizar instantánea'
+  - MH-F3-GEOMETRY-01: 'Insets16/24, rail160/240 y un h1; reglas compartidas entre app/demo'
+  - MH-F3-A11Y-01: 'Foco al cambiar formulario, volver de revisión y mostrar resultado'
+  - MH-F3-CONTRAST-01: 'Errores usan danger-text canónico, no danger base para texto pequeño'
+warnings:
+  - MH-F3-VIS-01: 'A 768px Fermentación queda completa pero corta antes de la n final; no clipping ni colisión, pulido pendiente'
+  - 'Demo comparte superficie y formularios, pero no prueba sesión, RPC ni shell autenticado end-to-end'
+  - 'Texto 200% del arnés es aproximación, no zoom nativo ni certificación WCAG'
+pending: [hosted_auth_and_rpc_e2e, physical_touch, native_text_zoom_200, forced_colors, screen_reader, medium_label_wrap]
+overall: partial

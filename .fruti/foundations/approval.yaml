@@ -1,0 +1,17 @@
+artifact: pulz-foundations
+operation: foundations_new
+status: approved-and-materialized
+approved_by: user
+approved_at: "2026-09-28"
+proposal: .fruti/foundations/proposal.yaml
+canonical_tokens: .fruti/tokens.json
+production_css: apps/web/src/shared/ui/tokens.css
+design_system: PULZ Foundations
+base_values_locked: true
+constraints:
+  components_designed: false
+  fila_uso_modified: false
+  kiwi_executed: false
+  coco_executed: false
+  mora_executed: false
+  tina_test_executed: false

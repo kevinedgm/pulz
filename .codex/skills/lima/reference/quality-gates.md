@@ -42,3 +42,25 @@ persist result (registry.md: status + qa flag)
 ```
 
 A gate item that genuinely does not apply to the artifact type (e.g. loading on a token) is marked N/A with a one-line reason, not silently dropped.
+
+
+## Multi-dimensional test verdict
+
+For `fruti test`, never collapse successful build/runtime checks into design approval. Report these dimensions independently:
+
+- **technical** — build, types, runtime, tests, overflow mechanics;
+- **structural** — information hierarchy, geometry contract, grouping rationale, responsive transformation, action placement;
+- **visual** — collision/crowding, alignment, hierarchy clarity, density, action dominance, design-direction/system adherence;
+- **accessibility** — applicable verified a11y checks; unexecuted physical/zoom/forced-colors checks are PARTIAL, not PASS;
+- **design_system** — required foundations/tokens/type/icon/motion laws exist and were actually consumed;
+- **documentation** — canonical page and verified preview evidence.
+
+Overall PASS requires every mandatory dimension to PASS. A technical PASS cannot compensate for structural or visual failure.
+
+### NEW design-system guard
+
+If the active profile says `design_system: NEW` and the minimum foundations required by F3 are absent (truth sources/tokens plus the applicable color/type/icon/geometry laws), Lima MUST NOT approve a final visual-quality PASS. Either:
+1. route through foundation initialization/approval first, or
+2. keep the test at neutral F2 and report `design_system: BLOCKED`.
+
+Do not let Coco improvise missing visual law and then promote that improvisation as canonical.

@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { computed, useId } from "vue"
-import {
-  Boton,
-  ChipEstado,
-  Icono,
-  MenuFila,
-  type AccionFila,
-  type ChipVariante,
-} from "../../../shared/ui"
+import { Boton, ChipEstado, MenuFila, type AccionFila, type ChipVariante } from "../../../shared/ui"
 import type { UsoTina } from "../api"
 import { ETIQUETAS_ACTIVIDAD, litros } from "../dominio"
 
@@ -24,6 +17,7 @@ const props = defineProps<{
   puedeMedir: boolean
   puedeGestionar: boolean
   ahoraMs?: number
+  registrando?: boolean
 }>()
 const emit = defineEmits<{ ver: []; lista: []; cerrar: []; corregir: [] }>()
 const tituloId = useId()
@@ -77,33 +71,38 @@ const medible = computed(() => props.uso.status === "fermentando" || props.uso.s
 </script>
 
 <template>
-  <li class="fila" :class="{ 'fila--atrasada': medicionAtrasada }" :aria-labelledby="tituloId">
-    <div class="fila__layout">
-      <header class="fila__cabecera">
-        <div class="fila__nombre">
-          <h3 :id="tituloId" class="fila__tina">{{ uso.tina }}</h3>
-          <span class="fila__sub">
-            {{ uso.folio }} · {{ litros(uso.litros) }} · <b>día {{ dia }}</b
-            ><template v-if="uso.status === 'fermentando'"> de ~{{ esperados }}</template
-            ><template v-if="!uso.formulation_id"> · sin formulación</template>
-          </span>
-        </div>
-        <ChipEstado class="fila__estado" :variante="chip.v">{{ chip.t }}</ChipEstado>
-      </header>
+  <li
+    class="tina-fermentacion"
+    :class="{ 'tina-fermentacion--atrasada': medicionAtrasada }"
+    :aria-labelledby="tituloId"
+  >
+    <div class="fila__cuerpo">
+      <section class="fila__contexto" aria-label="Identidad y antigüedad de la tina">
+        <header class="fila__cabecera">
+          <div class="fila__nombre">
+            <h3 :id="tituloId" class="fila__tina">{{ uso.tina }}</h3>
+            <span class="fila__sub">
+              {{ uso.folio }} · {{ litros(uso.litros) }} · <b>día {{ dia }}</b
+              ><template v-if="uso.status === 'fermentando'"> de ~{{ esperados }}</template
+              ><template v-if="!uso.formulation_id"> · sin formulación</template>
+            </span>
+          </div>
+          <ChipEstado class="fila__estado" :variante="chip.v">{{ chip.t }}</ChipEstado>
+        </header>
 
-      <p class="fila__antiguedad" :role="medicionAtrasada ? 'status' : undefined">
-        <Icono nombre="i-clock" :size="20" />
-        <span><b>Última medición:</b> {{ haceCuanto }}</span>
-        <strong v-if="medicionAtrasada" class="fila__alerta">
-          {{ uso.ultima_medicion_at ? "Medición atrasada" : "Registra la primera medición" }}
-        </strong>
-        <ChipEstado v-if="pendiente" variante="pending">pendiente de enviar</ChipEstado>
-        <template v-if="fallo">
-          <ChipEstado variante="failed">falló</ChipEstado>
-          <span class="fila__fallo">{{ fallo }}</span>
-          <Boton intent="quiet" @click="emit('corregir')">Corregir</Boton>
-        </template>
-      </p>
+        <p class="fila__antiguedad" :role="medicionAtrasada ? 'status' : undefined">
+          <span><b>Última medición:</b> {{ haceCuanto }}</span>
+          <strong v-if="medicionAtrasada" class="fila__alerta">
+            {{ uso.ultima_medicion_at ? "Medición atrasada" : "Registra la primera medición" }}
+          </strong>
+          <ChipEstado v-if="pendiente" variante="pending">pendiente de enviar</ChipEstado>
+          <template v-if="fallo">
+            <ChipEstado variante="failed">falló</ChipEstado>
+            <span class="fila__fallo">{{ fallo }}</span>
+            <Boton intent="quiet" @click="emit('corregir')">Corregir</Boton>
+          </template>
+        </p>
+      </section>
 
       <dl class="fila__metricas" aria-label="Valores de la última medición">
         <div class="fila__metrica">
@@ -123,10 +122,15 @@ const medible = computed(() => props.uso.status === "fermentando" || props.uso.s
       <div class="fila__acciones">
         <Boton
           v-if="medible && puedeMedir"
-          intent="secondary"
+          class="fila__cta"
+          intent="primary"
           :to="`/e/${slug}/fermentacion/${uso.cycle_id}/medir`"
-          :aria-label="`Medir ${uso.tina}`"
+          :loading="registrando"
+          :aria-label="`Registrar medición en ${uso.tina}`"
           >Registrar medición</Boton
+        >
+        <span v-else-if="medible" class="fila__permiso"
+          >No tienes permiso para registrar mediciones.</span
         >
         <MenuFila :nombre="uso.tina" :acciones="acciones" @seleccionar="accion" />
       </div>
@@ -135,28 +139,35 @@ const medible = computed(() => props.uso.status === "fermentando" || props.uso.s
 </template>
 
 <style scoped>
-.fila {
+.tina-fermentacion {
   container: tina / inline-size;
-  padding: var(--sp-4);
-  border: 1px solid var(--border);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
   border-top: 0;
-  background: var(--surface);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-primary);
 }
-.fila__layout {
+.fila__cuerpo {
   display: grid;
-  gap: var(--sp-3);
+  gap: var(--space-3);
 }
-.fila:first-child {
-  border-top: 1px solid var(--border);
-  border-radius: var(--r-lg) var(--r-lg) 0 0;
+.fila__contexto {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-3);
 }
-.fila:last-child {
-  border-radius: 0 0 var(--r-lg) var(--r-lg);
+.tina-fermentacion:first-child {
+  border-top: 1px solid var(--color-border);
+  border-radius: var(--radius-surface) var(--radius-surface) 0 0;
+}
+.tina-fermentacion:last-child {
+  border-radius: 0 0 var(--radius-surface) var(--radius-surface);
 }
 .fila__cabecera {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--sp-2) var(--sp-4);
+  gap: var(--space-2) var(--space-4);
   align-items: start;
 }
 .fila__nombre {
@@ -164,34 +175,37 @@ const medible = computed(() => props.uso.status === "fermentando" || props.uso.s
 }
 .fila__tina {
   margin: 0;
-  font: 700 1.0625rem/1.3 var(--font);
+  font: 700 var(--font-size-lg) / var(--line-height-heading) var(--font-primary);
   overflow-wrap: anywhere;
 }
 .fila__sub {
-  font-size: 0.875rem;
-  color: var(--muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
   overflow-wrap: anywhere;
 }
 .fila__antiguedad {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-1) var(--sp-2);
-  min-height: var(--sp-8);
+  gap: var(--space-1) var(--space-2);
+  min-height: var(--space-8);
   margin: 0;
-  color: var(--muted);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
   overflow-wrap: anywhere;
 }
-.fila--atrasada .fila__antiguedad {
-  padding-inline-start: var(--sp-3);
-  border-inline-start: 4px solid var(--late);
-  color: var(--text);
+.tina-fermentacion--atrasada .fila__antiguedad {
+  padding-inline-start: var(--space-3);
+  border-inline-start: 1px solid var(--color-danger);
+  color: var(--color-text);
 }
 .fila__alerta {
-  color: var(--late);
+  color: var(--color-danger-text);
 }
 .fila__fallo {
-  color: var(--text);
+  color: var(--color-text);
 }
 .fila__estado {
   justify-self: end;
@@ -200,22 +214,23 @@ const medible = computed(() => props.uso.status === "fermentando" || props.uso.s
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
-  border-block: 1px solid var(--border);
+  border-block: 1px solid var(--color-border);
 }
 .fila__metrica {
   min-width: 0;
-  padding: var(--sp-3) var(--sp-4);
+  padding: var(--space-3) var(--space-4);
 }
 .fila__metrica + .fila__metrica {
-  border-inline-start: 1px solid var(--border);
+  border-inline-start: 1px solid var(--color-border);
 }
 .fila__metrica dt {
-  color: var(--muted);
-  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-body);
 }
 .fila__metrica dd {
-  margin: var(--sp-1) 0 0;
-  font: 700 1.25rem/1.25 var(--font);
+  margin: var(--space-1) 0 0;
+  font: 700 var(--font-size-xl) / var(--line-height-heading) var(--font-primary);
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;
 }
@@ -223,7 +238,20 @@ const medible = computed(() => props.uso.status === "fermentando" || props.uso.s
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: var(--sp-2);
+  gap: var(--space-2);
+  min-width: 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+.fila__acciones :deep(.fila__cta) {
+  border-radius: var(--radius-control);
+  min-height: var(--size-control-height);
+}
+.fila__permiso {
+  margin-inline-end: auto;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
 }
 @container tina (max-width: 599px) {
   .fila__cabecera {
@@ -239,32 +267,41 @@ const medible = computed(() => props.uso.status === "fermentando" || props.uso.s
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: baseline;
-    gap: var(--sp-3);
-    padding: var(--sp-3) 0;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
   }
   .fila__metrica + .fila__metrica {
     border-inline-start: 0;
-    border-block-start: 1px solid var(--border);
+    border-block-start: 1px solid var(--color-border);
   }
   .fila__metrica dd {
     text-align: end;
   }
   .fila__acciones {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
   }
-  .fila__acciones > :first-child {
-    flex: 1;
+  .fila__acciones :deep(.fila__cta) {
+    width: 100%;
+  }
+  .fila__acciones :deep(.menu) {
+    justify-self: end;
   }
 }
-@container tina (min-width: 900px) {
-  .fila__layout {
-    grid-template-columns: minmax(220px, 1.15fr) minmax(220px, 1fr) minmax(360px, 1.45fr) auto;
-    align-items: center;
+@container tina (min-width: 1024px) {
+  .fila__cuerpo {
+    grid-template-columns: minmax(280px, 1fr) minmax(480px, 1.7fr);
+    column-gap: var(--space-6);
+    align-items: start;
   }
-  .fila__antiguedad,
+  .fila__contexto,
   .fila__metricas,
   .fila__acciones {
     min-width: 0;
+  }
+  .fila__acciones {
+    grid-column: 1 / -1;
   }
 }
 </style>

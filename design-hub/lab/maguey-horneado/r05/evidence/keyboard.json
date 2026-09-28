@@ -1,0 +1,40 @@
+[
+  {
+    "step": "recepcion-heading",
+    "active": "Registrar recepción"
+  },
+  {
+    "step": "recepcion-result",
+    "text": "Recepción registrada · 123.456 kg (simulación; no se guardó en la base)",
+    "active": "Recepción registrada · 123.456 kg (simulación; no se guardó en la base) "
+  },
+  {
+    "step": "mas-return",
+    "active": "Más"
+  },
+  {
+    "step": "review-return",
+    "active": "v-128",
+    "kg": "120.5"
+  },
+  {
+    "step": "apertura-result",
+    "text": "Horneada abierta · 120.5 kg (simulación; no se guardó en la base)"
+  },
+  {
+    "step": "dialog-tab-wrap",
+    "active": "Cerrar"
+  },
+  {
+    "step": "cierre-result",
+    "text": "Horneada cerrada · 100.25 kg (simulación; no se guardó en la base) Llenar tinas"
+  },
+  {
+    "step": "cocido-result",
+    "text": "Cocido registrado · 9.75 kg (simulación; no se guardó en la base) Llenar tinas"
+  },
+  {
+    "step": "detail-return",
+    "active": "Ver detalle"
+  }
+]

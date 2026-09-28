@@ -1,0 +1,141 @@
+{
+  "fonts": [
+    {
+      "id": "98a6ddb945d38dc9",
+      "kind": "font",
+      "name": "manrope-latin-700-normal-BZp_XxE4.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-700-normal-BZp_XxE4.woff2"
+    },
+    {
+      "id": "c71a039cd00b5464",
+      "kind": "font",
+      "name": "manrope-latin-400-normal-PaqtzbVb.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-400-normal-PaqtzbVb.woff2"
+    },
+    {
+      "id": "985a046a9ef5974e",
+      "kind": "font",
+      "name": "manrope-latin-500-normal-BYYD-dBL.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-500-normal-BYYD-dBL.woff2"
+    },
+    {
+      "id": "13d301bca576edde",
+      "kind": "font",
+      "name": "manrope-latin-600-normal-4f0koTD-.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-600-normal-4f0koTD-.woff2"
+    },
+    {
+      "id": "83df210ba04f9326",
+      "kind": "font",
+      "name": "instrument-serif-latin-400-normal-DnYpCC2O.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/instrument-serif-latin-400-normal-DnYpCC2O.woff2"
+    }
+  ],
+  "styles": [
+    {
+      "family": "Manrope, system-ui, sans-serif",
+      "text": "Manrope 400 · Operación, piñas y medición 0123456789",
+      "weight": "400"
+    },
+    {
+      "family": "Manrope, system-ui, sans-serif",
+      "text": "Manrope 500 · Operación, piñas y medición 0123456789",
+      "weight": "500"
+    },
+    {
+      "family": "Manrope, system-ui, sans-serif",
+      "text": "Manrope 600 · Operación, piñas y medición 0123456789",
+      "weight": "600"
+    },
+    {
+      "family": "Manrope, system-ui, sans-serif",
+      "text": "Manrope 700 · Operación, piñas y medición 0123456789",
+      "weight": "700"
+    },
+    {
+      "family": "\"Instrument Serif\", Georgia, serif",
+      "text": "Instrument Serif 400 · Expresión editorial 0123456789",
+      "weight": "400"
+    }
+  ],
+  "demoFontAssets": [
+    {
+      "id": "13d301bca576edde",
+      "kind": "font",
+      "name": "manrope-latin-600-normal-4f0koTD-.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-600-normal-4f0koTD-.woff2"
+    },
+    {
+      "id": "985a046a9ef5974e",
+      "kind": "font",
+      "name": "manrope-latin-500-normal-BYYD-dBL.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-500-normal-BYYD-dBL.woff2"
+    },
+    {
+      "id": "98a6ddb945d38dc9",
+      "kind": "font",
+      "name": "manrope-latin-700-normal-BZp_XxE4.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-700-normal-BZp_XxE4.woff2"
+    },
+    {
+      "id": "c71a039cd00b5464",
+      "kind": "font",
+      "name": "manrope-latin-400-normal-PaqtzbVb.woff2",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://localhost:4321/design-hub/Components/demo/assets/manrope-latin-400-normal-PaqtzbVb.woff2"
+    }
+  ]
+}
