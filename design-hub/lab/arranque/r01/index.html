@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Primer arranque «¿Qué tienes hoy?» · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+.ar-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.ar-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.ar-side ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.ar-side li{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:6px;border:2px solid transparent}
+.ar-side li[aria-current]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.ar-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:56px;padding:4px var(--wf-s4) 0;border-bottom:1px solid var(--wf-g3)}
+.ar-top h1{font-size:18px;margin:0 0 0 auto}
+.ar-body{padding:var(--wf-s5);min-width:0;max-width:960px}
+.ar-intro{margin:0 0 var(--wf-s4)}
+.ar-prog{font-size:13px;color:var(--wf-g6);margin:0 0 var(--wf-s4)}
+.ar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--wf-s3)}
+.ar-tarj{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);display:grid;gap:var(--wf-s3);min-width:0}
+.ar-tarj--ok{border-style:solid;border-width:2px}
+.ar-tarj--vacia{color:var(--wf-g6)}
+.ar-tarj h3{margin:0;font-size:16px}
+.ar-tarj .sub{font-size:13px;color:var(--wf-g6)}
+.ar-seg{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s2)}
+.ar-seg .wf-btn[aria-pressed="true"]{background:var(--wf-g2);border-width:2px}
+.ar-fila{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s3)}
+.ar-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-weight:600;font-size:14px}
+.ar-warn{border:1px dashed var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s2) var(--wf-s3);font-size:13px}
+.ar-pie{display:flex;flex-wrap:wrap;gap:var(--wf-s2);margin-top:var(--wf-s5);align-items:center}
+.ar-drawer{position:absolute;top:0;bottom:0;right:0;width:min(440px,92%);background:var(--wf-g0);border-left:1px solid var(--wf-g3);z-index:21;padding:var(--wf-s5);overflow:auto}
+.ar-bottom{display:none}
+@container wf (max-width: 1023px){.ar-shell{grid-template-columns:200px 1fr}.ar-grid{grid-template-columns:1fr}}
+@container wf (max-width: 599px){
+  .ar-shell{grid-template-columns:1fr}.ar-shell>.ar-side{display:none}
+  .ar-body{padding:var(--wf-s4) var(--wf-s4) 120px}
+  .ar-fila{grid-template-columns:1fr}
+  .ar-tarj .wf-btn--primary{width:100%}
+  .ar-drawer{top:auto;left:0;right:0;width:100%;max-height:92%;border-left:0;border-top:1px solid var(--wf-g3);border-radius:12px 12px 0 0}
+  .ar-bottom{display:grid;grid-template-columns:repeat(5,1fr);position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:6px 4px 18px;font-size:11px;text-align:center}
+  .ar-bottom span{min-height:48px;display:grid;place-items:center}
+}
+</style>
+</head>
+<body class="wf">
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>ARRANQUE · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Default (a medias: 2 de 6 decididos)</option>
+      <option value="loading">Carga</option>
+      <option value="empty">Vacío (sin recipientes)</option>
+      <option value="error">Error (capacidad / ciclo abierto / red)</option>
+      <option value="denied">Sin permiso (operador)</option>
+      <option value="offline">Sin conexión</option>
+      <option value="readonly">Solo lectura (vencida)</option>
+      <option value="long">Contenido largo</option>
+      <option value="todo">Todos decididos → Listo</option>
+      <option value="agregar">Agregar recipiente (capa de Recursos)</option>
+      <option value="ya">Ya arrancó (tiene lotes)</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="ar-shell">
+      <nav class="ar-side" aria-label="Navegación principal (shell/r01)"><strong>Palenque Prueba B</strong>
+        <ul><li aria-current="page">Inicio</li><li>Maguey</li><li>Horneado</li><li>Fermentación</li><li>Destilación</li><li>Granel</li><li>Trazabilidad</li><li>Configuración</li></ul></nav>
+      <div style="min-width:0;display:flex;flex-direction:column">
+        <header class="ar-top"><span class="wf-small wf-muted">PB · Palenque Prueba B · titular · admin</span><h1>¿Qué tienes hoy?</h1></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main ar-body" id="wf-view" tabindex="-1"></main>
+        <nav class="ar-bottom" aria-label="Navegación principal (compact)"><span>Inicio</span><span>Fermentación</span><span>Destilación</span><span>Granel</span><span>Más</span></nav>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+<script>
+// Ejemplo: Palenque Prueba B (semilla: solo Tina B1) + recipientes de ejemplo rotulados
+const R = [
+  { c: 'Tanque B1', k: 'tanque', t: 'acero inoxidable · 1,000 L', est: 'ok', l: 300, a: 47 },
+  { c: 'Tina B1', k: 'tina', t: 'sabino · 1,000 L', est: 'vacio' },
+  { c: 'Tanque B2', k: 'tanque', t: 'plástico grado alimenticio · 500 L', est: 'datos', l: 120, a: 45 },
+  { c: 'Tina B2', k: 'tina', t: 'pino · 1,500 L', est: 'pend' },
+  { c: 'Colector mezcal', k: 'colector', t: 'garrafa · 60 L · clase mezcal', est: 'pend' },
+  { c: 'Colector ordinario', k: 'colector', t: 'tambo · 200 L · clase ordinario', est: 'pend' },
+];
+const intro = (ya = false) => `<p class="ar-intro">Di qué hay en cada uno. Lo que no tenga nada, márcalo <b>vacío</b>. Puedes dejarlo a medias y volver.</p>
+  ${ya ? '<p class="ar-warn">Ya tienes registros. Esto solo agrega cargas iniciales a recipientes que sigan vacíos.</p>' : ''}`;
+const prog = (n, t) => `<p class="ar-prog" role="status">${n} de ${t} recipientes decididos</p>`;
+const tarj = (r, opts = {}) => {
+  const liq = r.k !== 'tina';
+  if (r.est === 'ok') return `<article class="ar-tarj ar-tarj--ok"><h3>${r.c}</h3><span class="sub">${r.k} · ${r.t}</span><p style="margin:0"><span class="wf-status wf-status--on">guardado</span> ${r.l.toLocaleString('es-MX')} L${liq && r.a ? ` · ${r.a} % Alc.` : ''}${r.k === 'tina' ? ' · ciclo abierto' : ''}</p><span class="wf-note">Irreversible aquí: se corrige en Granel (Fase 5) con un ajuste. La tarjeta se colapsa y muestra lo guardado.</span></article>`;
+  if (r.est === 'vacio') return `<article class="ar-tarj ar-tarj--vacia"><h3>${r.c}</h3><span class="sub">${r.k} · ${r.t}</span><p style="margin:0"><span class="wf-status wf-status--off">vacío</span> <button class="wf-btn wf-btn--quiet">Cambiar</button></p><span class="wf-note">Vacío no crea nada en la base: se guarda en este navegador (localStorage) por empresa.</span></article>`;
+  const datos = r.est === 'datos';
+  return `<article class="ar-tarj"><h3>${r.c}</h3><span class="sub">${r.k} · ${r.t}</span>
+    <div class="ar-seg" role="radiogroup" aria-label="¿Tiene algo?"><button class="wf-btn" role="radio" aria-pressed="${!datos && r.est === 'vacio-sel'}" aria-checked="false">Vacío</button><button class="wf-btn" role="radio" aria-pressed="${datos}" aria-checked="${datos}">Tiene algo</button></div>
+    ${datos ? `<div class="ar-fila"><div class="wf-field"><label>Litros</label><input class="wf-input" inputmode="decimal" value="${r.l}"></div>${liq ? `<div class="wf-field"><label>% Alc.${r.k === 'colector' ? '' : ''}</label><input class="wf-input" inputmode="decimal" value="${r.a ?? ''}"></div>` : ''}</div>
+      ${r.k === 'tina' ? '<span class="wf-note">Tina: solo litros. Entra como fermentado y abre un ciclo sin formulación (DUDAS #7). Si la tina ya tiene ciclo abierto, la base lo rechaza.</span>' : r.k === 'colector' ? '<span class="wf-note">Colector: la clase de líquido la da el recurso (se muestra arriba, no se pide).</span>' : ''}
+      ${opts.err ? `<div class="ar-alert" role="alert">${opts.err}</div>` : ''}
+      ${opts.warn ? `<div class="ar-warn">Son más litros que la capacidad (500 L). Con política flexible se guarda y avisa; con estricta no deja.</div>` : ''}
+      <button class="wf-btn wf-btn--primary" ${opts.dis ? 'disabled aria-disabled="true"' : ''}>Guardar ${r.l} L en ${r.c}</button>` : ''}
+  </article>`;
+};
+const lista = (rs, o = {}) => `<div class="ar-grid">${rs.map(r => tarj(r, o)).join('')}</div>`;
+const pie = (todos = false, dis = false) => `<div class="ar-pie"><button class="wf-btn" ${dis ? 'disabled aria-disabled="true"' : ''}>Agregar recipiente</button>${todos ? '<button class="wf-btn wf-btn--primary" data-wf-persist>Listo, ir a Inicio</button>' : '<span class="wf-small wf-muted">Cuando todos estén decididos aparece «Listo».</span>'}</div>`;
+const V = {
+  default: () => `${intro()}${prog(2, 6)}${lista(R)}${pie()}<span class="wf-note">Una lista, no un asistente: cada tarjeta decide su recipiente y guarda sola (una primaria por tarjeta con datos). Hornos, molinos y alambiques no aparecen (no guardan líquido). Idempotencia por tarjeta: reintentar no duplica.</span>`,
+  loading: () => `${intro()}<div class="wf-skel" aria-busy="true"><div class="ar-grid">${'<div class="wf-line" style="height:120px;border-radius:6px"></div>'.repeat(4)}</div></div>`,
+  empty: () => `${intro()}<div class="wf-state"><h2>Aún no tienes recipientes</h2><p class="wf-muted">Agrega tus tanques, tinas y colectores; después dices qué hay en cada uno.</p><button class="wf-btn wf-btn--primary" data-wf-persist>Agregar recipiente</button></div><span class="wf-note">Empresa recién creada: catálogos sembrados, recursos no. La misma capa de alta de Recursos (configuracion/r01), reutilizada.</span>`,
+  error: () => `${intro()}${prog(2, 6)}${lista([R[2]], { err: 'No cabe: Tanque B2 tiene política estricta y 500 L. Baja los litros o cambia la política en Recursos.' })}<h2>Otras variantes</h2>${lista([{ ...R[3], est: 'datos', l: 900 }], { err: 'Esta tina ya tiene contenido registrado (un ciclo abierto). Revísala en Fermentación.' })}${lista([{ ...R[4], est: 'datos', l: 40, a: 52 }], { err: 'No pudimos conectar. Lo que escribiste se conserva; reintenta con señal.' })}<span class="wf-note">Errores de la base traducidos: CAPACIDAD: (estricta), NO_PERMITIDO: ciclo abierto, red. Cada uno bajo su tarjeta; las demás siguen editables.</span>`,
+  denied: () => `<div class="wf-state"><h2>Solo el administrador o un productor pueden registrar cargas iniciales</h2><p class="wf-muted">Pídeselo a quien administra Palenque Prueba B.</p><a class="wf-btn" href="#">Volver a Inicio</a></div>`,
+  offline: () => `${intro()}${prog(2, 6)}${lista(R, { dis: true })}${pie(false, true)}<span class="wf-note">Sin señal: se puede escribir (queda en el navegador); Guardar deshabilitado con motivo; nada se pierde.</span>`,
+  readonly: () => `${intro()}${prog(2, 6)}${lista(R.map(r => r.est === 'datos' || r.est === 'pend' ? { ...r, est: 'pend' } : r), { dis: true })}${pie(false, true)}<span class="wf-note">Vencida: se ve lo guardado; no se registra.</span>`,
+  long: () => `${intro()}${prog(0, 2)}${lista([{ c: 'Tanque de acero inoxidable grande del cuarto de atrás (2019)', k: 'tanque', t: 'acero inoxidable con tapa hermética y válvula inferior · 12,500 L', est: 'datos', l: 12000, a: 48.5 }, { c: 'Tina de sabino número catorce de la fila del fondo', k: 'tina', t: 'sabino · 1,500 L', est: 'pend' }], { warn: false })}`,
+  todo: () => `${intro()}${prog(6, 6)}${lista(R.map((r, i) => i < 2 ? r : i % 2 ? { ...r, est: 'vacio' } : { ...r, est: 'ok', l: r.l ?? 40, a: r.a ?? 50 }))}${pie(true)}<span class="wf-note">Todos decididos: aparece la única primaria de la vista, «Listo, ir a Inicio» (en compact baja a la barra). Inicio ya no ofrece «¿Qué tienes hoy?» porque hay lotes.</span>`,
+  agregar: () => `${intro()}${prog(2, 6)}${lista(R)}${pie()}`,
+  ya: () => `${intro(true)}${prog(4, 6)}${lista(R.map((r, i) => i < 4 ? { ...r, est: i % 2 ? 'vacio' : 'ok', l: r.l ?? 200, a: r.a ?? 46 } : r))}${pie()}`,
+};
+const OV = { agregar: () => `<div class="wf-scrim"></div><aside class="ar-drawer" role="dialog" aria-modal="true" aria-labelledby="ag-t"><h2 id="ag-t" style="margin-top:0">Agregar recurso</h2><form class="cf-form" style="display:grid;gap:16px"><div class="wf-field"><label>Tipo de recurso</label><select class="wf-input"><option>Tanque</option><option>Tina</option><option>Colector</option></select></div><div class="wf-field"><label for="c1">Código (como le dicen)</label><input class="wf-input" id="c1" value="Tanque B3"></div><div class="wf-field"><label>Tipo (catálogo)</label><select class="wf-input"><option>Tanque de acero inoxidable</option></select></div><div class="ar-fila"><div class="wf-field"><label for="c2">Capacidad</label><input class="wf-input" id="c2" inputmode="decimal" value="800"></div><div class="wf-field"><label>Unidad</label><select class="wf-input"><option>L</option></select></div></div><span class="wf-note">La misma capa de Recursos (configuracion/r01), extraída como componente compartido RecursoCapa. Solo tanque/tina/colector aquí.</span><div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit">Guardar recurso</button><button class="wf-btn" type="button">Cancelar</button></div></form></aside>` };
+let S = { w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  const st = S.state;
+  document.getElementById('wf-view').innerHTML = V[st]();
+  document.getElementById('wf-overlay').innerHTML = OV[st] ? OV[st]() : '';
+  const banners = { offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puedes escribir; para guardar necesitas señal.</p>', readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar, no registrar.</p>' };
+  document.getElementById('wf-banner').innerHTML = banners[st] || '';
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>
