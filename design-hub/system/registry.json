@@ -2624,5 +2624,114 @@
       "../../apps/web/src/shared/offline/instantanea.ts",
       "../../apps/web/src/shared/offline/fotos.ts"
     ]
+  },
+  "origin-allocation": {
+    "kind": "pattern",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/destilacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/shared/ui/AsignacionOrigenes.vue",
+    "behavior": "../../apps/web/src/shared/ui/AsignacionOrigenes.vue",
+    "dependencies": [
+      "number-field"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "lista de orígenes (título, subtítulo con lote y saldo, unidad) con un number-field de cantidad por fila; total en vivo; opcional capacidad y política del destino → «Total N de C» y aviso local",
+      "states": [
+        "default",
+        "fila con cantidad > saldo (error)",
+        "total > capacidad estricta (bloquea)",
+        "total > capacidad flexible (aviso excede_capacidad para soft-warning-note)",
+        "disabled"
+      ],
+      "rules": "modelValue Record<id, number|null>. Sin dominio: la página decide qué orígenes y qué destino. Extraída de FormularPage (fermentación) y reutilizada en abrir corrida y horneado."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/AsignacionOrigenes.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "destilacion": {
+    "kind": "product-application",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/destilacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/modules/destilacion/pages/DestilacionPage.vue",
+    "behavior": "../../apps/web/src/modules/destilacion/pages/DestilacionPage.vue",
+    "dependencies": [
+      "app-shell",
+      "page-header",
+      "fab",
+      "list-stack",
+      "row-menu",
+      "state-block",
+      "task-layer",
+      "button",
+      "step-flow",
+      "big-number-field",
+      "datetime-field",
+      "soft-warning-note",
+      "origin-allocation",
+      "segmented-choice",
+      "status-chip",
+      "banner",
+      "select",
+      "number-field",
+      "text-field",
+      "file-picker"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "screens": [
+        "corridas (abiertas / colectores con contenido / últimas) + FAB Abrir corrida",
+        "abrir corrida (alambique, pasada, orígenes con litros, avisos conocidos antes, cuándo, folio)",
+        "corrida (KPIs, orígenes, cortes, registrar corte, cerrar)",
+        "corte por pasos (clase → litros → % Alc. → revisar) → cola"
+      ],
+      "rules": "El corte solo va a un colector de su clase: se elige solo por la clase (select si hay varios; bloqueo con enlace a Recursos si no hay). Puntas solo con record_puntas. Abrir y cerrar requieren señal; los cortes entran por la cola. «Pasar a granel» es transferir (ronda granel; admin/productor). Cerrar corrida: diálogo destructivo con Cancelar como primaria. Un corte no se anula (ajuste en Granel)."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/modules/destilacion/pages/DestilacionPage.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
   }
 }

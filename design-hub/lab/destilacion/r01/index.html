@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Destilación: corridas y cortes · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+.de-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.de-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.de-side ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.de-side li{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:6px;border:2px solid transparent}
+.de-side li[aria-current]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.de-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:56px;padding:4px var(--wf-s4) 0;border-bottom:1px solid var(--wf-g3)}
+.de-top h1{font-size:18px;margin:0 0 0 auto}
+.de-top .wf-btn{margin-left:var(--wf-s2)}
+.de-body{padding:var(--wf-s5);min-width:0;max-width:960px}
+.de-resumen{font-size:13px;color:var(--wf-g6);margin:0 0 var(--wf-s4)}
+.de-grupo h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-g6);margin:var(--wf-s5) 0 var(--wf-s2)}
+.de-lista{list-style:none;margin:0;padding:0}
+.de-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.5fr) auto auto;gap:var(--wf-s3);align-items:center;min-height:64px;padding:var(--wf-s3) var(--wf-s4);border:1px solid var(--wf-g3);border-top:0}
+.de-row:first-child{border-top:1px solid var(--wf-g3);border-radius:var(--wf-r) var(--wf-r) 0 0}
+.de-row:last-child{border-radius:0 0 var(--wf-r) var(--wf-r)}
+.de-row h3{margin:0;font-size:16px}
+.de-row .sub,.de-datos{font-size:13px;color:var(--wf-g6)}
+.de-row .wf-actions{justify-content:flex-end;flex-wrap:nowrap}
+.de-fab{display:none}
+.de-kpi{display:flex;flex-wrap:wrap;gap:var(--wf-s2) var(--wf-s5);margin:0 0 var(--wf-s3)}
+.de-kpi b{font-size:22px;display:block;font-variant-numeric:tabular-nums}
+.de-kpi span{font-size:12px;color:var(--wf-g6)}
+.de-det{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--wf-s5)}
+.de-form{display:grid;gap:var(--wf-s4);max-width:720px}
+.de-form fieldset{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);display:grid;gap:var(--wf-s3);min-width:0}
+.de-form legend{font-weight:700;padding:0 4px}
+.de-asig{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--wf-s3);align-items:end}
+.de-asig .sub{font-size:12px;color:var(--wf-g6)}
+.de-fila{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s3)}
+.de-total{font-size:14px;padding:var(--wf-s2) var(--wf-s3);border:1px dashed var(--wf-g6);border-radius:var(--wf-r)}
+.de-aviso{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-size:14px}
+.de-aviso b{display:block}
+.de-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-weight:600;font-size:14px}
+.de-warn{border:1px dashed var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s2) var(--wf-s3);font-size:13px}
+.de-hecho{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s4);display:grid;gap:var(--wf-s2)}
+/* corte: un concepto por pantalla */
+.de-medir{max-width:520px;margin:0 auto;display:grid;gap:var(--wf-s4)}
+.de-cab{display:flex;flex-wrap:wrap;gap:var(--wf-s2) var(--wf-s4);align-items:baseline;border-bottom:1px solid var(--wf-g3);padding-bottom:var(--wf-s3)}
+.de-cab h2{margin:0;font-size:20px}
+.de-paso{font-size:13px;color:var(--wf-g6);margin-left:auto}
+.de-big{display:grid;gap:6px}
+.de-big label{font-size:16px;font-weight:600}
+.de-big .wf-input{font-size:2.75rem;min-height:4.5rem;text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+.de-big .u{font-size:14px;color:var(--wf-g6);text-align:center}
+.de-clases{display:grid;gap:var(--wf-s2)}
+.de-clases .wf-btn{min-height:56px;justify-content:flex-start;font-size:16px}
+.de-clases .wf-btn[aria-checked="true"]{background:var(--wf-g2);border-width:3px}
+.de-clases .sub{font-weight:400;font-size:13px;color:var(--wf-g6);margin-left:auto}
+.de-nav{display:flex;gap:var(--wf-s2);align-items:center}
+.de-nav .wf-btn--primary{flex:1}
+.de-res{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.de-res li{display:flex;justify-content:space-between;gap:var(--wf-s3);padding:var(--wf-s2) var(--wf-s4);min-height:44px;align-items:center}
+.de-res li+li{border-top:1px solid var(--wf-g3)}
+.de-dlg{position:absolute;left:50%;top:15%;transform:translateX(-50%);width:min(440px,92%);background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:12px;padding:var(--wf-s5);z-index:21;display:grid;gap:var(--wf-s3)}
+.de-menu{position:absolute;right:var(--wf-s5);top:180px;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:var(--wf-r);z-index:21;min-width:240px;padding:4px}
+.de-menu button{display:block;width:100%;text-align:left;min-height:44px;border:0;background:none;padding:0 var(--wf-s3);font:inherit}
+.de-bottom{display:none}
+@container wf (max-width: 1023px){
+  .de-shell{grid-template-columns:200px 1fr}
+  .de-det{grid-template-columns:1fr}
+  .de-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"a s" "b b" "c c"}
+  .de-row>div:first-child{grid-area:a}.de-row>.de-datos{grid-area:b}.de-row>.wf-status{grid-area:s}.de-row>.wf-actions{grid-area:c;justify-content:flex-start}
+}
+@container wf (max-width: 599px){
+  .de-shell{grid-template-columns:1fr}.de-shell>.de-side{display:none}
+  .de-body{padding:var(--wf-s4) var(--wf-s4) 140px}
+  .de-top .wf-btn--primary{display:none}
+  .de-fab{display:inline-flex;position:absolute;right:16px;bottom:88px;min-width:56px;min-height:56px;border-radius:999px;padding:0 20px;font-size:16px;z-index:15;box-shadow:0 0 0 1px var(--wf-g4)}
+  .de-row .wf-actions .wf-btn{flex:0 1 auto}
+  .de-fila,.de-asig{grid-template-columns:1fr}
+  .de-medir [data-wf-persist],.de-form [data-wf-persist],.de-det [data-wf-persist]{display:none}
+  .de-nav{display:none}
+  .de-dlg{top:auto;bottom:0;left:0;right:0;transform:none;width:100%;border-radius:12px 12px 0 0}
+  .de-bottom{display:grid;grid-template-columns:repeat(5,1fr);position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:6px 4px 18px;font-size:11px;text-align:center}
+  .de-bottom span{min-height:48px;display:grid;place-items:center}
+  .de-barra{position:absolute;left:0;right:0;bottom:78px;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:flex;gap:var(--wf-s2);z-index:14}
+  .de-barra .wf-btn--primary{flex:1}
+}
+@container wf (min-width: 600px){.de-barra{display:none}}
+</style>
+</head>
+<body class="wf">
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>DESTILACIÓN · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Corridas · default (1 abierta)</option>
+      <option value="loading">Corridas · carga</option>
+      <option value="empty">Corridas · vacío (ninguna abierta)</option>
+      <option value="sinalambiques">Corridas · la empresa no tiene alambiques</option>
+      <option value="offline">Corridas · sin conexión (instantánea, cortes pendientes)</option>
+      <option value="cola">Corridas · error: corte con fallo (corrida cerrada)</option>
+      <option value="readonly">Corridas · solo lectura</option>
+      <option value="operador">Corridas · operador (sin «Pasar a granel»)</option>
+      <option value="menu">Corridas · menú de una corrida</option>
+      <option value="long">Corridas · contenido largo</option>
+      <option value="abrir">Abrir corrida · formulario</option>
+      <option value="abrir-aviso">Abrir corrida · 2ª con ordinario y colas (aviso) y capacidad</option>
+      <option value="abrir-vacio">Abrir corrida · sin orígenes con líquido</option>
+      <option value="corrida">Corrida · abierta con cortes</option>
+      <option value="corrida0">Corrida · abierta sin cortes</option>
+      <option value="cerrada">Corrida · cerrada</option>
+      <option value="cerrar">Corrida · cerrar (confirmar)</option>
+      <option value="corte1">Corte · paso 1 clase</option>
+      <option value="corte2">Corte · paso 2 litros</option>
+      <option value="corte-rev">Corte · revisar con aviso de capacidad</option>
+      <option value="corte-ok">Corte · guardado pendiente de enviar</option>
+      <option value="corte-sin">Corte · sin colector de esa clase</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="de-shell">
+      <nav class="de-side" aria-label="Navegación principal (shell/r01)"><strong>Mezcal Cuatro Vientos</strong>
+        <ul><li>Inicio</li><li>Maguey</li><li>Horneado</li><li>Fermentación</li><li aria-current="page">Destilación</li><li>Granel</li><li>Trazabilidad</li><li>Configuración</li></ul></nav>
+      <div style="min-width:0;display:flex;flex-direction:column;position:relative">
+        <header class="de-top" id="wf-top"></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main de-body" id="wf-view" tabindex="-1"></main>
+        <div id="wf-fab"></div>
+        <nav class="de-bottom" aria-label="Navegación principal (compact)"><span>Inicio</span><span>Fermentación</span><span aria-current="page">Destilación</span><span>Granel</span><span>Más</span></nav>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+<script>
+// Ejemplo: Cuatro Vientos hoy (semilla + una corrida abierta de ejemplo rotulada)
+const corridaAbierta = (o = {}) => `<li class="de-row">
+  <div><h3>DES-004 <span class="wf-tag">ejemplo</span></h3><span class="sub">Alambique 1 · 1ª pasada · abierta hoy 06:00 · Tomás</span></div>
+  <div class="de-datos"><b>Cargó 290 L</b> · Tina 1 FER-T1-001<br><b>Cortó ${o.cortado ?? '48 L'}</b> · mezcal 8 · ordinario 40${o.pend ? ' · <span class="wf-status wf-status--draft">1 corte pendiente</span>' : ''}${o.fallo ? ' · <span class="wf-status wf-status--off">corte falló: la corrida ya estaba cerrada</span> <button class="wf-btn wf-btn--quiet">Descartar</button>' : ''}</div>
+  <span class="wf-status wf-status--partial">abierta</span>
+  <div class="wf-actions"><a class="wf-btn" href="#corte" ${o.dis ? 'aria-disabled="true"' : ''}>Registrar corte</a><button class="wf-btn wf-btn--quiet" aria-haspopup="menu" aria-expanded="${o.menu ? 'true' : 'false'}">Más</button></div>
+</li>`;
+const colectores = (o = {}) => `<section class="de-grupo"><h2>Colectores con contenido</h2><ul class="de-lista">
+  <li class="de-row"><div><h3>Colector colas</h3><span class="sub">clase colas · COL-002 · 200 L de capacidad</span></div><div class="de-datos"><b>16 L</b> · 10 % Alc. declarado (Tomás, 15 sep)</div><span class="wf-status wf-status--on">con saldo</span><div class="wf-actions">${o.operador ? '<span class="wf-small wf-muted">a granel lo pasa el productor</span>' : '<a class="wf-btn" href="#granel">Pasar a granel</a>'}</div></li>
+  <li class="de-row"><div><h3>Colector ordinario</h3><span class="sub">clase ordinario · ORD-002 · 200 L</span></div><div class="de-datos"><b>40 L</b> · 24 % Alc. (hoy, corte de DES-004)</div><span class="wf-status wf-status--on">con saldo</span><div class="wf-actions"><span class="wf-small wf-muted">se redestila en 2ª</span></div></li>
+</ul></section>`;
+const ultimas = () => `<section class="de-grupo"><h2>Últimas corridas</h2><ul class="de-lista">
+  <li class="de-row"><div><h3>DES-003</h3><span class="sub">Alambique 1 · 2ª pasada · 15 sep · Tomás</span></div><div class="de-datos">96 L cargados (ordinario 74 + colas 22) → <b>42 L</b> (mezcal 26 · colas 16)</div><span class="wf-status wf-status--off">cerrada</span><div class="wf-actions"><a class="wf-btn wf-btn--quiet" href="#">Ver</a></div></li>
+  <li class="de-row"><div><h3>DES-002</h3><span class="sub">Alambique 2 · 1ª pasada · 13 sep · Tomás</span></div><div class="de-datos">250 L (Tina 1) → <b>50 L</b> (mezcal 6 · ordinario 34 · colas 10)</div><span class="wf-status wf-status--off">cerrada</span><div class="wf-actions"><a class="wf-btn wf-btn--quiet" href="#">Ver</a></div></li>
+  <li class="de-row"><div><h3>DES-001</h3><span class="sub">Alambique 1 · 1ª pasada · 13 sep · Tomás</span></div><div class="de-datos">290 L (Tina 1) → <b>60 L</b> (mezcal 8 · ordinario 40 · colas 12)</div><span class="wf-status wf-status--off">cerrada</span><div class="wf-actions"><a class="wf-btn wf-btn--quiet" href="#">Ver</a></div></li>
+</ul></section>`;
+const resumen = (n) => `<p class="de-resumen" role="status">${n} corrida${n === 1 ? '' : 's'} abierta${n === 1 ? '' : 's'} · 2 colectores con contenido</p>`;
+const topLista = (o = {}) => `<span class="wf-small wf-muted">CV · Mezcal Cuatro Vientos · ${o.operador ? 'Tomás · operador' : 'Aurelia · productora'}</span><h1>Destilación</h1>${o.sinPrim ? '' : `<a class="wf-btn wf-btn--primary" href="#abrir" ${o.dis ? 'aria-disabled="true"' : ''}>Abrir corrida</a>`}`;
+const fab = (o = {}) => o.sinPrim ? '' : `<a class="wf-btn wf-btn--primary de-fab" href="#abrir" ${o.dis ? 'aria-disabled="true"' : ''}>Abrir corrida</a>`;
+const topSub = (h1, atras = 'Destilación') => `<a class="wf-btn wf-btn--quiet" href="#">‹ ${atras}</a><h1>${h1}</h1>`;
+const listaStd = (o = {}) => `${resumen(1)}<section class="de-grupo"><h2>Corridas abiertas</h2><ul class="de-lista">${corridaAbierta(o)}</ul></section>${colectores(o)}${ultimas()}`;
+const cortesTabla = (o = {}) => `<table class="wf-table wf-table--stack"><thead><tr><th>Hora</th><th>Clase</th><th>Litros</th><th>% Alc.</th><th>Colector · lote</th><th>Quién</th></tr></thead><tbody>
+  ${o.pend ? '<tr><td data-l="Hora">10:20</td><td data-l="Clase">colas</td><td data-l="Litros">12</td><td data-l="% Alc.">9</td><td data-l="Colector · lote">Colector colas · <span class="wf-status wf-status--draft">pendiente de enviar</span></td><td data-l="Quién">Tomás</td></tr>' : ''}
+  <tr><td data-l="Hora">09:00</td><td data-l="Clase">ordinario</td><td data-l="Litros">40</td><td data-l="% Alc.">24</td><td data-l="Colector · lote">Colector ordinario · ORD-002</td><td data-l="Quién">Tomás</td></tr>
+  <tr><td data-l="Hora">08:00</td><td data-l="Clase">mezcal</td><td data-l="Litros">8</td><td data-l="% Alc.">51</td><td data-l="Colector · lote">Colector mezcal · MEZ-002</td><td data-l="Quién">Tomás</td></tr>
+</tbody></table>`;
+const corrida = (o = {}) => `<div class="de-det"><div>
+  <div class="de-kpi"><div><b>290 L</b><span>cargados</span></div><div><b>${o.sinCortes ? '0 L' : o.cerrada ? '60 L' : '48 L'}</b><span>cortados</span></div><div><b>${o.sinCortes ? '—' : o.cerrada ? '8 · 40 · 12' : '8 · 40'}</b><span>mezcal · ordinario${o.cerrada ? ' · colas' : ''}</span></div></div>
+  <p class="wf-small wf-muted">Alambique 1 (300 L, estricta) · 1ª pasada · ${o.cerrada ? 'abierta 13 sep 06:00 · cerrada 13 sep 14:00 · Tomás' : 'abierta hoy 06:00 · Tomás'} · ${o.cerrada ? '<span class="wf-status wf-status--off">cerrada</span>' : '<span class="wf-status wf-status--partial">abierta</span>'}</p>
+  <h3>Orígenes</h3><ul class="de-res"><li><span>Tina 1 · FER-T1-001</span><b>290 L</b></li></ul>
+  <h3>Cortes</h3>${o.sinCortes ? '<div class="wf-state" style="margin:0"><h2>Aún sin cortes</h2><p class="wf-muted">Registra cada corte al salir del alambique.</p></div>' : cortesTabla(o)}
+  <span class="wf-note">Un corte no se anula (no hay RPC): se corrige con un ajuste en Granel (Fase 6). La diferencia entre cargado y cortado (vinazas, pérdida) no se registra como lote; se ve aquí.</span>
+</div><aside>
+  ${o.cerrada ? '<p class="de-warn">Cerrada: solo lectura. Para mover lo cortado usa Granel.</p>' : `<a class="wf-btn wf-btn--primary" href="#corte" data-wf-persist style="width:100%">Registrar corte</a><h3>Acciones</h3><div class="wf-actions" style="display:grid"><button class="wf-btn wf-btn--danger">Cerrar corrida</button></div><span class="wf-note">Cerrar es irreversible (no se reabre): forma distinta y diálogo con Cancelar como primaria.</span>`}
+</aside></div>${o.cerrada ? '' : '<div class="de-barra"><a class="wf-btn wf-btn--primary" href="#corte">Registrar corte</a></div>'}`;
+const abrir = (o = {}) => `<form class="de-form">
+  <fieldset><legend>Alambique y pasada</legend><div class="de-fila"><div class="wf-field"><label>Alambique</label><select class="wf-input"><option>Alambique 1 · 300 L · estricta</option><option>Alambique 2 · 250 L · estricta</option></select></div><div class="wf-field"><label>Pasada</label><div role="radiogroup" style="display:flex;gap:8px"><button type="button" class="wf-btn" role="radio" aria-checked="${!o.segunda}" style="flex:1">1ª pasada</button><button type="button" class="wf-btn" role="radio" aria-checked="${!!o.segunda}" style="flex:1">2ª pasada</button></div></div></div></fieldset>
+  <fieldset><legend>Orígenes (con litros)</legend>
+    ${o.vacio ? '<p class="wf-muted" style="margin:0">No hay tinas con contenido ni colectores con saldo. Llena una tina (Fermentación) o espera cortes de ordinario y colas.</p>' : o.segunda ? `
+    <div class="de-asig"><div><b>Colector ordinario</b><span class="sub"> · ORD-002 · 40 L · 24 %</span></div><div class="wf-field"><label for="o1">Litros</label><input class="wf-input" id="o1" inputmode="decimal" value="40"></div></div>
+    <div class="de-asig"><div><b>Colector colas</b><span class="sub"> · COL-002 · 16 L · 10 %</span></div><div class="wf-field"><label for="o2">Litros</label><input class="wf-input" id="o2" inputmode="decimal" value="16"></div></div>
+    <p class="de-total">Total <b>56 L</b> de 300 L (Alambique 1)</p>
+    <div class="de-aviso" role="alert"><b>Ordinario y colas juntos en la segunda pasada.</b> Se abre igual; escribe por qué.</div>
+    <div class="wf-field"><label for="n2">Nota (obligatoria por el aviso)</label><input class="wf-input" id="n2" placeholder="Ej. había olla libre y poca cola"></div>` : `
+    <div class="de-asig"><div><b>Tina 1</b><span class="sub"> · FER-T1-001 · 870 L · lista</span></div><div class="wf-field"><label for="t1">Litros</label><input class="wf-input" id="t1" inputmode="decimal" value="290"></div></div>
+    <div class="de-asig"><div><b>Tina 2</b><span class="sub"> · FER-T2-001 · 1,400 L · fermentando (día 21)</span></div><div class="wf-field"><label for="t2">Litros</label><input class="wf-input" id="t2" inputmode="decimal" placeholder="0"></div></div>
+    <div class="de-asig"><div><b>Colector ordinario</b><span class="sub"> · ORD-002 · 40 L · 24 %</span></div><div class="wf-field"><label for="c1">Litros</label><input class="wf-input" id="c1" inputmode="decimal" placeholder="0"></div></div>
+    <p class="de-total">Total <b>290 L</b> de 300 L (Alambique 1, estricta)</p>`}
+    <span class="wf-note">Listas primero; fermentando y en vaciado después (se puede cargar igual: §4.5 «con lo que haya»). Estricta: si el total pasa la capacidad, el botón se bloquea con el motivo. Flexible: aviso excede_capacidad conocido antes, con nota.</span>
+  </fieldset>
+  <fieldset><legend>Cuándo y folio</legend><div class="de-fila"><div class="wf-field"><label for="cu">¿Cuándo pasó?</label><input class="wf-input" id="cu" value="hoy 06:00"></div><div class="wf-field"><label for="fo">Folio (opcional)</label><input class="wf-input" id="fo" placeholder="DES-004 automático"></div></div></fieldset>
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist ${o.vacio ? 'disabled aria-disabled="true"' : ''}>${o.segunda ? 'Abrir corrida con 56 L' : 'Abrir corrida con 290 L'}</button><a class="wf-btn" href="#">Cancelar</a></div>
+  <div class="de-barra"><button class="wf-btn wf-btn--primary" type="submit" ${o.vacio ? 'disabled aria-disabled="true"' : ''}>${o.segunda ? 'Abrir con 56 L' : 'Abrir con 290 L'}</button></div>
+  <span class="wf-note">Página, no capa. Requiere señal: consume saldos que decide el servidor (§8.3). Admin, productor y operador (0018). La tina cargada pasa a «en vaciado».</span></form>`;
+const cab = (paso, de) => `<div class="de-cab"><h2>DES-004</h2><span class="wf-small wf-muted">Alambique 1 · 1ª</span><span class="de-paso" role="status">Paso ${paso} de ${de}</span></div>`;
+const nav = (sig = 'Siguiente', primero = false) => `<div class="de-nav" data-wf-persist>${primero ? '<a class="wf-btn wf-btn--quiet" href="#">Cancelar</a>' : '<button class="wf-btn wf-btn--quiet">Atrás</button>'}<button class="wf-btn wf-btn--primary">${sig}</button></div><div class="de-barra">${primero ? '<a class="wf-btn wf-btn--quiet" href="#">Cancelar</a>' : '<button class="wf-btn wf-btn--quiet">Atrás</button>'}<button class="wf-btn wf-btn--primary">${sig}</button></div>`;
+const V = {
+  default: () => listaStd() + '<span class="wf-note">Una primaria: Abrir corrida (FAB en compact; cabecera en ≥600). «Registrar corte» por corrida es secundaria (varias corridas abiertas = varios botones iguales, no primarias). Colectores con contenido: lo que hay para redestilar o pasar a granel; «Pasar a granel» abre la transferencia de la ronda de Granel.</span>',
+  loading: () => `${resumen('…')}<div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:64px;border-radius:6px"></div>'.repeat(3)}</div>`,
+  empty: () => `<div class="wf-state"><h2>No hay corridas abiertas</h2><p class="wf-muted">Cuando haya olla libre, abre una corrida con lo que haya en la tina o en los colectores.</p><button class="wf-btn wf-btn--primary" data-wf-persist>Abrir corrida</button></div>${colectores()}${ultimas()}`,
+  sinalambiques: () => `<div class="wf-state"><h2>Tu palenque aún no tiene alambiques</h2><p class="wf-muted">Agrégalos en Configuración → Recursos y después abre tu primera corrida.</p><a class="wf-btn" href="#">Ir a Recursos</a></div>`,
+  offline: () => `<p class="de-warn">Datos de <b>hace 12 min</b>. Puedes registrar cortes: se guardan en el teléfono y se envían al reconectar. Abrir y cerrar corridas necesitan señal.</p>${resumen(1)}<section class="de-grupo"><h2>Corridas abiertas</h2><ul class="de-lista">${corridaAbierta({ pend: true })}</ul></section>${colectores()}${ultimas()}`,
+  cola: () => `${resumen(0)}<section class="de-grupo"><h2>Corridas abiertas</h2><ul class="de-lista">${corridaAbierta({ fallo: true, dis: true })}</ul></section><span class="wf-note">La corrida se cerró desde otro teléfono mientras este tenía un corte en cola: fallo de dominio (NO_PERMITIDO) → «Descartar» (no hay nota que lo arregle). El corte perdido se registra a mano como ajuste en Granel.</span>${colectores()}${ultimas()}`,
+  readonly: () => listaStd({ dis: true }),
+  operador: () => listaStd({ operador: true }) + '<span class="wf-note">Operador: abre, corta y cierra (0018). «Pasar a granel» es transferir (admin/productor): no se muestra el botón, se dice quién lo hace.</span>',
+  menu: () => listaStd({ menu: true }),
+  long: () => `${resumen(2)}<section class="de-grupo"><h2>Corridas abiertas</h2><ul class="de-lista"><li class="de-row"><div><h3>DES-2026-09-27-ALAMBIQUE-GRANDE-DEL-FONDO-0001</h3><span class="sub">Alambique de cobre grande del fondo junto al horno viejo · 2ª pasada · abierta hoy 05:10 · Tomás Hernández Cruz</span></div><div class="de-datos"><b>Cargó 1,250 L</b> · Colector ordinario ORD-002 · Colector colas COL-002 · Tina de sabino número catorce FER-T14-000123<br><b>Cortó 612.5 L</b> · mezcal 480.25 · colas 132.25</div><span class="wf-status wf-status--partial">abierta</span><div class="wf-actions"><a class="wf-btn" href="#corte">Registrar corte</a><button class="wf-btn wf-btn--quiet" aria-haspopup="menu">Más</button></div></li></ul></section>`,
+  abrir: () => abrir(), 'abrir-aviso': () => abrir({ segunda: true }), 'abrir-vacio': () => abrir({ vacio: true }),
+  corrida: () => corrida(), corrida0: () => corrida({ sinCortes: true }), cerrada: () => corrida({ cerrada: true }), cerrar: () => corrida(),
+  corte1: () => `<div class="de-medir">${cab(1, 4)}<div class="de-clases" role="radiogroup" aria-label="Clase del corte"><button class="wf-btn" role="radio" aria-checked="true">Mezcal <span class="sub">→ Colector mezcal · 0 L de 60</span></button><button class="wf-btn" role="radio" aria-checked="false">Ordinario <span class="sub">→ Colector ordinario · 40 L de 200</span></button><button class="wf-btn" role="radio" aria-checked="false">Colas <span class="sub">→ Colector colas · 16 L de 200</span></button></div>${nav('Siguiente', true)}<span class="wf-note">El colector se elige solo por clase (la RPC exige la misma clase); si hay varios de la clase, aparece un select. Puntas no aparece: record_puntas apagado en los ajustes.</span></div>`,
+  corte2: () => `<div class="de-medir">${cab(2, 4)}<p class="wf-small wf-muted" style="margin:0">Mezcal → Colector mezcal</p><div class="de-big"><label for="l1">Litros</label><input class="wf-input" id="l1" inputmode="decimal" placeholder="8" autofocus><span class="u">L · el colector tiene 0 L de 60</span></div>${nav()}<span class="wf-note">Paso 3 es % Alc. con el mismo campo grande (entre 0 y 100). Un número por pantalla.</span></div>`,
+  'corte-rev': () => `<div class="de-medir">${cab(4, 4)}<h2 style="margin:0;font-size:16px">Revisar</h2><ul class="de-res"><li><span>Clase</span><b>Ordinario</b></li><li><span>Litros</span><b>180 L</b></li><li><span>% Alc.</span><b>24 %</b></li><li><span>Colector</span><b>Colector ordinario (40 L de 200)</b></li><li><span>Cuándo</span><b>hoy 10:20</b> <button class="wf-btn wf-btn--quiet" style="min-height:44px">cambiar</button></li></ul>
+    <div class="de-aviso" role="alert"><b>Se pasa de la capacidad del colector (política flexible).</b> 220 L en uno de 200. Se guarda igual; escribe por qué.</div>
+    <div class="wf-field"><label for="nc">Nota (obligatoria por el aviso)</label><input class="wf-input" id="nc" placeholder="Ej. colector con margen real"></div>
+    <div class="wf-field"><label for="ft">Foto (opcional)</label><input class="wf-input" id="ft" type="file" accept="image/*" capture="environment"></div>
+    ${nav('Guardar corte')}<span class="wf-note">excede_capacidad se conoce antes (saldo y capacidad del colector en la instantánea). Si el colector fuera estricto, no deja: mensaje con enlace a Recursos.</span></div>`,
+  'corte-ok': () => `<div class="de-medir"><div class="de-hecho" role="status"><b>Corte guardado · pendiente de enviar</b><span class="wf-small">DES-004 · mezcal 8 L a 51 % → Colector mezcal. Se envía solo cuando haya señal.</span></div><div class="wf-actions"><a class="wf-btn wf-btn--primary" href="#" data-wf-persist>Registrar otro corte</a><a class="wf-btn" href="#">Volver a la corrida</a></div><div class="de-barra"><a class="wf-btn wf-btn--primary" href="#">Registrar otro corte</a></div><span class="wf-note">Registrar otro corte vuelve al paso 1 con la misma corrida: los cortes van uno tras otro.</span></div>`,
+  'corte-sin': () => `<div class="de-medir">${cab(1, 4)}<div class="de-alert" role="alert">No hay un colector de clase <b>colas</b>. Agrégalo en Configuración → Recursos para registrar este corte.</div><div class="wf-actions"><a class="wf-btn" href="#">Ir a Recursos</a></div><span class="wf-note">La RPC rechaza un corte sin colector de su clase; la interfaz lo dice antes.</span></div>`,
+};
+const OV = {
+  menu: () => `<div class="de-menu" role="menu"><button role="menuitem">Ver corrida</button><button role="menuitem">Cerrar corrida…</button></div>`,
+  cerrar: () => `<div class="wf-scrim"></div><div class="de-dlg" role="dialog" aria-modal="true" aria-labelledby="ce-t"><h2 id="ce-t" style="margin:0">¿Cerrar la corrida DES-004?</h2><p style="margin:0">Cargó <b>290 L</b> y se cortaron <b>48 L</b>. La diferencia (vinazas, pérdida) no queda como lote. No se puede reabrir.</p><div class="wf-field"><label for="cn">Nota (opcional)</label><input class="wf-input" id="cn"></div><div class="wf-actions"><button class="wf-btn wf-btn--danger">Cerrar corrida</button><button class="wf-btn wf-btn--primary">Cancelar</button></div></div>`,
+};
+const TOP = { abrir: () => topSub('Abrir corrida'), 'abrir-aviso': () => topSub('Abrir corrida'), 'abrir-vacio': () => topSub('Abrir corrida'), corrida: () => topSub('DES-004'), corrida0: () => topSub('DES-004'), cerrada: () => topSub('DES-001'), cerrar: () => topSub('DES-004'), corte1: () => topSub('Corte', 'Cancelar'), corte2: () => topSub('Corte', 'Cancelar'), 'corte-rev': () => topSub('Corte', 'Cancelar'), 'corte-ok': () => topSub('Corte'), 'corte-sin': () => topSub('Corte', 'Cancelar') };
+let S = { w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  const st = S.state;
+  const o = st === 'readonly' ? { dis: true } : st === 'offline' ? { dis: true } : st === 'operador' ? { operador: true } : ['empty', 'sinalambiques', 'cola'].includes(st) ? { sinPrim: true } : {};
+  const esLista = ['default','loading','empty','sinalambiques','offline','cola','readonly','operador','menu','long'].includes(st);
+  document.getElementById('wf-top').innerHTML = esLista ? topLista(o) : TOP[st]();
+  document.getElementById('wf-view').innerHTML = V[st]();
+  document.getElementById('wf-fab').innerHTML = esLista ? fab(o) : '';
+  document.getElementById('wf-overlay').innerHTML = OV[st] ? OV[st]() : '';
+  const banners = { offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> 1 captura pendiente de enviar. Puedes registrar cortes; abrir y cerrar necesitan señal.</p>', readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar, no registrar.</p>', cola: '<p class="wf-banner" role="status"><b>1 captura falló.</b> <button class="wf-btn wf-btn--quiet" style="min-height:44px">Reintentar</button></p>' };
+  document.getElementById('wf-banner').innerHTML = banners[st] || '';
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>
