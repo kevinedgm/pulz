@@ -838,3 +838,14 @@ Regla completa, con el diagrama del flujo, en `CLAUDE.md`.
 - Reversibilidad: los cambios de código están acotados a navegación y garantías
   de lectura/sesión; no hay migración ni datos remotos que revertir. No revertir
   cambios ajenos en el árbol compartido. Evidencia: r05/result.md y checklist vivo.
+
+
+## 2026-09-28 · r06 Maguey/Horneado: las pruebas alojadas sí se corren
+
+Codex dejó el script `scripts/test-mh-hosted-r06.mjs` sin ejecutar por
+autoimponerse no escribir negocio en el proyecto alojado. `CLAUDE.md` §1
+dice lo contrario: el proyecto `ypgeiyorgktshgbzhgfh` es el ambiente de
+trabajo. Se corrió a pedido del dueño: 37/37 PASS, dos tenants desechables
+`qa-mh-r06-*` creados y borrados por el propio script, huella de los datos
+existentes idéntica antes y después. Regla: las pruebas alojadas con
+fixtures aislados y limpieza verificada no necesitan autorización aparte.

@@ -7,7 +7,7 @@ sin operaciones de negocio remotas. No modificar FilaUso ni rondas evaluadas.
 
 ## Hito actual: F3 implementada localmente → aceptación parcial
 
-Estado vigente: **r05 draft0.2.1 corregida; aceptación PARTIAL.**
+Estado vigente: **r05 draft0.2.1 corregida; aceptación PARTIAL.** r06 (2026-09-28): pruebas alojadas de negocio 37/37 PASS con tenants desechables y limpieza verificada (`r06/evidence/`); bloque 15 cerrado a nivel API salvo 15.12 y 15.13 (interfaz).
 183/183 locales,34 módulo incluidos,5/5 acceso alojado; builds/lint PASS.
 Matriz y límites: `design-hub/lab/maguey-horneado/r05/acceptance-matrix.md`.
 
@@ -131,25 +131,25 @@ no sustituye esa autorización específica ni permite tocar demos existentes.
   usuario inexistente, contraseña incorrecta, usuario de otra empresa y entrada
   válida del titular. Guardar resultado individual; RED no equivale a rechazo
   correcto. Los intentos de login requieren cuentas de prueba y evitar bloqueos.
-- [ ] **15.05 · Verificar permisos reales.** Admin y productor pueden las cuatro
+- [x] **15.05 · Verificar permisos reales.** Admin y productor pueden las cuatro
   operaciones; operador y modo lectura no pueden mutar, tanto en UI como ante
   la API. Comprobar aislamiento con un segundo tenant de prueba autorizado.
-- [ ] **15.06 · Probar recepción mínima.** Registrar sólo kilos y verificar lote,
+- [x] **15.06 · Probar recepción mínima.** Registrar sólo kilos y verificar lote,
   saldo, fecha, autor y opcionales vacíos; después probar una recepción con
   opcionales explícitos sin inventar valores.
-- [ ] **15.07 · Probar apertura con revisión.** Elegir horno y kilos de dos lotes;
+- [x] **15.07 · Probar apertura con revisión.** Elegir horno y kilos de dos lotes;
   volver y revisar sin perder datos; confirmar y contrastar consumos y saldos
   del servidor con la captura. Un exceso debe rechazarse sin consumo parcial.
-- [ ] **15.08 · Probar cierre.** Registrar kilos cocidos, comprobar estado cerrado,
+- [x] **15.08 · Probar cierre.** Registrar kilos cocidos, comprobar estado cerrado,
   lote resultante y linaje, y que la cantidad del resultado coincida con la
   persistida. Verificar el aviso temporal sin inventar una regla nueva.
-- [ ] **15.09 · Probar entrada de cocido existente.** Verificar carga inicial sin
+- [x] **15.09 · Probar entrada de cocido existente.** Verificar carga inicial sin
   historia supuesta, unidad kg y ausencia de una horneada ficticia.
-- [ ] **15.10 · Verificar continuidad a Formulación.** Desde cocido con saldo,
+- [x] **15.10 · Verificar continuidad a Formulación.** Desde cocido con saldo,
   abrir la ruta real y comprobar que el lote esté disponible. Si se prueba
   consumo, incluirlo antes en la autorización de fixtures. No rediseñar Tina
   ni modificar FilaUso.
-- [ ] **15.11 · Probar respuesta incierta con servidor real.** En entorno aislado,
+- [x] **15.11 · Probar respuesta incierta con servidor real.** En entorno aislado,
   simular pérdida de respuesta después del commit; reintentar y comprobar una
   sola operación. Mantener cantidad, fecha y clave, incluso tras navegar y
   recargar. No confundir dos llamadas con dos registros.
@@ -159,7 +159,7 @@ no sustituye esa autorización específica ni permite tocar demos existentes.
 - [ ] **15.13 · Revisar partición de intenciones.** Cambiar de empresa/persona
   sin mostrar ni reenviar la intención ajena; recuperar la original al volver.
   Verificar rechazo confirmado frente a resultado incierto.
-- [ ] **15.14 · Cerrar fixtures y evidencias.** Aplicar únicamente la limpieza
+- [x] **15.14 · Cerrar fixtures y evidencias.** Aplicar únicamente la limpieza
   autorizada y verificarla; guardar IDs de ejecución y resultados sanitizados,
   nunca contraseñas/tokens. Si quedan datos de prueba, identificarlos.
 - [x] **15.15 · Emitir resultado técnico alojado.** Consolidar PASS/FAIL/BLOCKED
@@ -270,6 +270,8 @@ Usar una fila por ítem que se trabaje; añadir la evidencia al marcarlo.
 | 15.02–15.03 | BLOCKED parcial | 2026-09-28 | r05/acceptance-matrix.md | Proyecto/cuentas identificados, faltan fixtures aislados autorizados |
 | 15.04 | DONE | 2026-09-28 | r05/evidence/hosted-access.json |5/5 PASS tras autorización explícita |
 | 15.05–15.14 | BLOCKED | 2026-09-28 | r05/acceptance-matrix.md | Sin operaciones de negocio remotas; mocks no sustituyen servidor |
+| 15.05–15.11, 15.14 | DONE (API) | 2026-09-28 | r06/evidence/hosted-api.json | `node scripts/test-mh-hosted-r06.mjs` contra `ypgeiyorgktshgbzhgfh` (CLAUDE.md §1): 37/37 PASS en dos tenants desechables `qa-mh-r06-*`: permisos admin/productor/operador/otro tenant/solo lectura, recepción mínima y con opcionales, exceso atómico, apertura con dos lotes, cierre con linaje, cocido sin horneada, formulación real, lote ajeno rechazado sin consumo, respuesta perdida post-commit con reintento; limpieza exacta `cleanup.json` = 0 restantes; huella de datos existentes idéntica antes/después. Nivel API autenticada, no navegador |
+| 15.12, 15.13 | ABIERTO | 2026-09-28 | — | Recuperación de señal desde instantánea y partición de intenciones por empresa/persona son de interfaz: no las cubre r06 (API); requieren Playwright con el shell autenticado |
 | 15.15 | DONE dictamen | 2026-09-28 | r05/acceptance-matrix.md | Resultado remoto PARTIAL, no bloque15 cerrado |
 | 16.01 | DONE | 2026-09-28 | r05/acceptance-matrix.md | Capacidades y ausencias identificadas |
 | 16.02 | PARTIAL | 2026-09-28 | r05/evidence/keyboard.json | Cuatro capturas demo, Más/detalle/revisión/foco; falta barrido completo |

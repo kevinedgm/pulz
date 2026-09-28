@@ -11,7 +11,7 @@
 
 ## Fase actual
 
-**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial.**
+**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado a nivel API; quedan 15.12 y 15.13 por interfaz, y el bloque 16 de accesibilidad).**
 R05 cierra el corte de navegación y corrige identidad concurrente, intención
 corrupta, origen de cocido y timestamp offline.183/183 locales (34 módulo),
 5/5 acceso alojado autorizado; tipos/build/demo/lint PASS. Siete anchos revisados.

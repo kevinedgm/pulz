@@ -1,0 +1,190 @@
+{
+  "project": "ypgeiyorgktshgbzhgfh",
+  "tag": "qa-mh-r06-07b86b6b",
+  "scope": "Authenticated HTTPS API integration; not browser E2E",
+  "tests": [
+    {
+      "name": "auth-admin-a",
+      "status": "PASS"
+    },
+    {
+      "name": "auth-productor-a",
+      "status": "PASS"
+    },
+    {
+      "name": "auth-operador-a",
+      "status": "PASS"
+    },
+    {
+      "name": "auth-admin-b",
+      "status": "PASS"
+    },
+    {
+      "name": "admin-recepcion-minima",
+      "status": "PASS",
+      "detail": {
+        "lot": "1d5e326e-1629-4656-86fd-dfd2ce82d3bb",
+        "kg": 100.125,
+        "author": "e59ea9a8-4d41-4a99-8e73-a64b357ad723",
+        "date": "2026-09-28T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "admin-recepcion-opcionales",
+      "status": "PASS"
+    },
+    {
+      "name": "admin-exceso-atomico",
+      "status": "PASS"
+    },
+    {
+      "name": "admin-apertura-dos-lotes",
+      "status": "PASS"
+    },
+    {
+      "name": "admin-cierre-linaje",
+      "status": "PASS"
+    },
+    {
+      "name": "admin-cocido-sin-horneada",
+      "status": "PASS"
+    },
+    {
+      "name": "admin-formulacion-real",
+      "status": "PASS",
+      "detail": {
+        "formulation": "4c3938f9-0794-4d5c-be2a-d0d5ad48b71f",
+        "cooked": "a4e5357c-14ef-406b-a47c-92672735444a",
+        "direct": "4faeeb50-4e68-44ac-9c8c-214cf8db8b58",
+        "tina": "d1b2de7e-a333-40a5-8c19-7747a26e2f78"
+      }
+    },
+    {
+      "name": "productor-recepcion-minima",
+      "status": "PASS",
+      "detail": {
+        "lot": "7b905328-19e8-48f5-abad-cd570a170276",
+        "kg": 100.125,
+        "author": "08ff0bc4-be32-455c-8514-ca7ac7327593",
+        "date": "2026-09-28T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "productor-recepcion-opcionales",
+      "status": "PASS"
+    },
+    {
+      "name": "productor-exceso-atomico",
+      "status": "PASS"
+    },
+    {
+      "name": "productor-apertura-dos-lotes",
+      "status": "PASS"
+    },
+    {
+      "name": "productor-cierre-linaje",
+      "status": "PASS"
+    },
+    {
+      "name": "productor-cocido-sin-horneada",
+      "status": "PASS"
+    },
+    {
+      "name": "productor-formulacion-real",
+      "status": "PASS",
+      "detail": {
+        "formulation": "b9d02cce-01e6-4e67-8069-12834ec954bf",
+        "cooked": "200aec49-101d-437c-a3c8-e18774f38f82",
+        "direct": "3f9a14e7-6bec-4476-9e5f-219615763f4b",
+        "tina": "a173bee7-61d7-4d92-9abd-c7c67f1aea6c"
+      }
+    },
+    {
+      "name": "operador-rechaza-registrar_recepcion_maguey",
+      "status": "PASS"
+    },
+    {
+      "name": "operador-rechaza-abrir_horneado",
+      "status": "PASS"
+    },
+    {
+      "name": "operador-rechaza-cerrar_horneado",
+      "status": "PASS"
+    },
+    {
+      "name": "operador-rechaza-registrar_entrada",
+      "status": "PASS"
+    },
+    {
+      "name": "operador-rechaza-registrar_formulacion",
+      "status": "PASS"
+    },
+    {
+      "name": "rls-segundo-tenant-lectura",
+      "status": "PASS"
+    },
+    {
+      "name": "otro-tenant-rechaza-registrar_recepcion_maguey",
+      "status": "PASS"
+    },
+    {
+      "name": "otro-tenant-rechaza-abrir_horneado",
+      "status": "PASS"
+    },
+    {
+      "name": "otro-tenant-rechaza-cerrar_horneado",
+      "status": "PASS"
+    },
+    {
+      "name": "otro-tenant-rechaza-registrar_entrada",
+      "status": "PASS"
+    },
+    {
+      "name": "otro-tenant-rechaza-registrar_formulacion",
+      "status": "PASS"
+    },
+    {
+      "name": "lote-ajeno-rechazado-sin-consumo",
+      "status": "PASS"
+    },
+    {
+      "name": "solo-lectura-rechaza-registrar_recepcion_maguey",
+      "status": "PASS"
+    },
+    {
+      "name": "solo-lectura-rechaza-abrir_horneado",
+      "status": "PASS"
+    },
+    {
+      "name": "solo-lectura-rechaza-cerrar_horneado",
+      "status": "PASS"
+    },
+    {
+      "name": "solo-lectura-rechaza-registrar_entrada",
+      "status": "PASS"
+    },
+    {
+      "name": "solo-lectura-rechaza-registrar_formulacion",
+      "status": "PASS"
+    },
+    {
+      "name": "solo-lectura-conserva-lectura",
+      "status": "PASS"
+    },
+    {
+      "name": "respuesta-perdida-postcommit-reintento-cliente-nuevo",
+      "status": "PASS",
+      "detail": {
+        "idempotencyKey": "4886dd2f-31e8-4f5c-84a2-14cb1b579791",
+        "operation": "c9476594-97aa-47a9-a443-c09e32046441",
+        "lot": "53eb7990-b0cb-4d12-9dac-2844c9f7a62e",
+        "kg": 7.125,
+        "date": "2026-09-28T12:00:00.000Z",
+        "limitation": "New API client, not browser reload/localStorage recovery"
+      }
+    }
+  ],
+  "cleanup": true,
+  "status": "PASS",
+  "existingPublicDataUnchanged": true
+}

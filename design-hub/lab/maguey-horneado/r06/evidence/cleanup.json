@@ -1,0 +1,74 @@
+[
+  {
+    "entity": "organizations",
+    "remaining": 0
+  },
+  {
+    "entity": "users",
+    "remaining": 0
+  },
+  {
+    "entity": "profiles",
+    "remaining": 0
+  },
+  {
+    "entity": "sessions",
+    "remaining": 0
+  },
+  {
+    "entity": "refresh_tokens",
+    "remaining": 0
+  },
+  {
+    "entity": "fermentation_cycles",
+    "remaining": 0
+  },
+  {
+    "entity": "formulation_supplies",
+    "remaining": 0
+  },
+  {
+    "entity": "formulation_inputs",
+    "remaining": 0
+  },
+  {
+    "entity": "formulations",
+    "remaining": 0
+  },
+  {
+    "entity": "roasting_run_inputs",
+    "remaining": 0
+  },
+  {
+    "entity": "roasting_runs",
+    "remaining": 0
+  },
+  {
+    "entity": "liquid_movements",
+    "remaining": 0
+  },
+  {
+    "entity": "lot_lineage",
+    "remaining": 0
+  },
+  {
+    "entity": "operation_warnings",
+    "remaining": 0
+  },
+  {
+    "entity": "maguey_receptions",
+    "remaining": 0
+  },
+  {
+    "entity": "lot_external_sources",
+    "remaining": 0
+  },
+  {
+    "entity": "lots",
+    "remaining": 0
+  },
+  {
+    "entity": "operations",
+    "remaining": 0
+  }
+]
