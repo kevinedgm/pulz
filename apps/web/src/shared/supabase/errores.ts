@@ -37,6 +37,71 @@ export function esErrorDeRed(e: unknown): boolean {
   return /fetch|network|Failed to fetch|NetworkError|timeout/i.test(msg)
 }
 
+// ---------------------------------------------------------------------
+// Errores de las RPC de dominio (§12.1): prefijos estables para el cliente.
+// Un solo traductor para todas las pantallas de captura y para la cola.
+// ---------------------------------------------------------------------
+export type CodigoRpc = "RED" | "SALDO" | "CAPACIDAD" | "PERMISO" | "PLAN" | "NOTA" | "SERVIDOR"
+
+export interface ErrorRpc {
+  codigo: CodigoRpc
+  mensaje: string
+  // REQUIERE_NOTA:<código>: el aviso blando que pide nota (o el dato que falta)
+  requiereNota?: string
+}
+
+// Texto para la persona por cada aviso blando (rpc_warn de 0014–0019). El
+// aviso no bloquea: con una nota, la misma captura pasa (§2.1).
+export const AVISOS: Record<string, string> = {
+  brix_fuera_rango:
+    "El Brix está fuera del rango habitual de la empresa. Agrega una nota y vuelve a guardar.",
+  abv_fuera_rango: "El % Alc. está fuera del rango habitual. Agrega una nota y vuelve a guardar.",
+  mezcla_clases_2a:
+    "Ordinario y colas juntos en la segunda pasada. Agrega una nota y vuelve a guardar.",
+  excede_capacidad:
+    "Se pasa de la capacidad del recurso (política flexible). Agrega una nota y vuelve a guardar.",
+  cierre_con_saldo:
+    "La corrida se cierra con líquido sin cortar. Agrega una nota y vuelve a guardar.",
+  diferencia_volumen:
+    "El volumen declarado no cuadra con lo que había; se registrará la diferencia. Agrega una nota y vuelve a guardar.",
+  contraparte: "Este movimiento pide con quién fue (cliente, laboratorio, proveedor).",
+  anular_medicion: "Para anular una medición hay que dar el motivo.",
+}
+
+const mensajeDe = (e: unknown) =>
+  e instanceof Error ? e.message : ((e as { message?: string })?.message ?? String(e ?? ""))
+
+export function traducirErrorRpc(e: unknown): ErrorRpc {
+  if (esErrorDeRed(e)) return { codigo: "RED", mensaje: MENSAJE_RED }
+  const msg = mensajeDe(e).trim()
+  const m =
+    /^(SALDO_INSUFICIENTE|CAPACIDAD_EXCEDIDA|NO_PERMITIDO|LIMITE_PLAN|REQUIERE_NOTA):\s*(.*)$/s.exec(
+      msg,
+    )
+  if (m) {
+    const resto = m[2].trim()
+    switch (m[1]) {
+      case "SALDO_INSUFICIENTE":
+        return { codigo: "SALDO", mensaje: `No alcanza: ${resto}` }
+      case "CAPACIDAD_EXCEDIDA":
+        return { codigo: "CAPACIDAD", mensaje: `No cabe: ${resto}` }
+      case "NO_PERMITIDO":
+        return { codigo: "PERMISO", mensaje: resto }
+      case "LIMITE_PLAN":
+        return { codigo: "PLAN", mensaje: resto }
+      case "REQUIERE_NOTA":
+        return {
+          codigo: "NOTA",
+          requiereNota: resto,
+          mensaje: AVISOS[resto] ?? "Esta captura necesita una nota para guardarse.",
+        }
+    }
+  }
+  if (/permission denied|row-level security/i.test(msg))
+    return { codigo: "PERMISO", mensaje: "No tienes permiso para registrar esto." }
+  return { codigo: "SERVIDOR", mensaje: msg || "Algo falló en el servidor." }
+}
+
 // Lee { error: { codigo, mensaje } } de una respuesta de Edge Function.
 export async function errorDeFuncion(res: Response): Promise<ErrorAcceso> {
   try {
