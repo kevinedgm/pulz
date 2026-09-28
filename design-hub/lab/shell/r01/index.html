@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Shell de la app (navegación, cuenta, tema) · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+/* expanded: la empresa y la cuenta viven en el menú lateral; la cabecera solo dice dónde estoy */
+@container wf (min-width: 1024px){
+  .sh-top .sh-emp{display:none}
+  .sh-titulo{margin-left:0 !important}
+}
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+/* Solo grises del kit. Reglas locales de esta ronda (estructura del shell, no apariencia). */
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+/* Cabecera: empresa como botón (abre Cuenta) + hueco de acento */
+.sh-top{display:flex;align-items:center;gap:var(--wf-s3);padding:0 var(--wf-s4);min-height:56px;border-bottom:1px solid var(--wf-g3);position:relative}
+.sh-top::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:repeating-linear-gradient(90deg,var(--wf-g4) 0 8px,var(--wf-g3) 8px 16px)}
+.sh-emp{display:flex;align-items:center;gap:var(--wf-s2);min-width:0;flex:1;background:none;border:0;padding:6px 8px;border-radius:var(--wf-r);text-align:left;min-height:44px}
+.sh-emp b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:16px}
+.sh-emp small{display:block;font-size:12px;color:var(--wf-g6)}
+.sh-ava{width:32px;height:32px;border-radius:50%;background:var(--wf-g3);flex:none;display:grid;place-items:center;font-size:12px;font-weight:700}
+.sh-titulo{font-size:16px;font-weight:700;margin:0}
+/* Menú lateral (medium 200 / expanded 240) */
+.sh-side{display:flex;flex-direction:column;gap:var(--wf-s3);height:100%}
+.sh-nav{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.sh-nav a{display:flex;align-items:center;gap:var(--wf-s2);min-height:44px;padding:0 var(--wf-s3);border-radius:var(--wf-r);text-decoration:none}
+.sh-nav a[aria-current="page"]{background:var(--wf-g0);border:2px solid var(--wf-g9);font-weight:700}
+.sh-ico{width:24px;height:24px;border:1.5px solid currentColor;border-radius:4px;flex:none;font-size:8px;display:grid;place-items:center;overflow:hidden;letter-spacing:-.02em}
+.sh-ico--txt{border-style:dashed}
+.sh-side .sh-cuenta{margin-top:auto;border-top:1px solid var(--wf-g3);padding-top:var(--wf-s3)}
+/* Navegación inferior (compact): 4 fijos + Más */
+.sh-bottom{display:none}
+.sh-fab{display:none}
+/* Cuerpo */
+.sh-body{padding:var(--wf-s5);min-width:0}
+.sh-hoy{display:grid;gap:var(--wf-s3)}
+.sh-tarj{border:1px dashed var(--wf-g4);border-radius:var(--wf-r);padding:var(--wf-s4);min-height:72px;color:var(--wf-g6);font-size:13px}
+.sh-hoja{position:absolute;left:0;right:0;bottom:0;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);max-height:90%;overflow:auto}
+.sh-pop{position:absolute;top:60px;right:16px;width:320px;background:var(--wf-g0);border:1px solid var(--wf-g3);border-radius:var(--wf-r);z-index:21;padding:var(--wf-s4)}
+.sh-lista{display:grid;gap:2px}
+.sh-lista .wf-btn,.sh-lista a.wf-btn{justify-content:flex-start;border-color:transparent;text-decoration:none}
+.sh-lista a[aria-current]{border-color:var(--wf-g9)}
+.sh-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--wf-s2)}
+.sh-seg .wf-btn[aria-pressed="true"]{background:var(--wf-g2);border-width:2px}
+.sh-kb{position:absolute;left:0;right:0;bottom:0;height:200px;background:repeating-linear-gradient(45deg,var(--wf-g3) 0 8px,var(--wf-g2) 8px 16px);z-index:30;display:grid;place-items:center;font-size:12px;color:var(--wf-g8)}
+/* expanded: la empresa y la cuenta viven en el menú lateral; la cabecera solo dice dónde estoy */
+@container wf (min-width: 1024px){
+  .sh-top .sh-emp{display:none}
+  .sh-titulo{margin-left:0 !important}
+}
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .sh-side .sh-cuenta{display:none}   /* en medium la cuenta vive en la cabecera */
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .sh-body{padding:var(--wf-s4) var(--wf-s4) 96px}
+  .sh-bottom{display:grid;grid-template-columns:repeat(5,1fr);position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:6px 4px calc(6px + 12px);z-index:10}
+  .sh-bottom a{display:grid;justify-items:center;gap:2px;min-height:48px;padding:4px 2px;font-size:11px;text-decoration:none;border-radius:var(--wf-r);line-height:1.1;text-align:center}
+  .sh-bottom a[aria-current="page"]{font-weight:700;border:2px solid var(--wf-g9)}
+  .sh-fab{display:inline-flex;position:absolute;right:16px;bottom:88px;min-width:56px;min-height:56px;border-radius:999px;align-items:center;justify-content:center;background:var(--wf-g9);color:var(--wf-g0);border:0;padding:0 20px;font-weight:700;z-index:11}
+  .sh-pop{position:static;width:auto;border:0;padding:0}
+}
+</style>
+</head>
+<body class="wf">
+
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>SHELL · r01 · F2</strong>
+  <fieldset><legend>Rol</legend>
+    <button data-r="admin" aria-pressed="true">Admin (Benito)</button>
+    <button data-r="productor" aria-pressed="false">Productora (Aurelia)</button>
+    <button data-r="operador" aria-pressed="false">Operador (Tomás)</button>
+  </fieldset>
+  <fieldset><legend>Destino</legend>
+    <button data-d="inicio" aria-pressed="true">Inicio</button>
+    <button data-d="fermentacion" aria-pressed="false">Fermentación</button>
+    <button data-d="configuracion" aria-pressed="false">Configuración</button>
+  </fieldset>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Default</option>
+      <option value="loading">Carga</option>
+      <option value="empty">Vacío (sin lotes → ¿Qué tienes hoy?)</option>
+      <option value="error">Error (membresías)</option>
+      <option value="denied">Sin permiso (Configuración por URL)</option>
+      <option value="offline">Sin conexión</option>
+      <option value="readonly">Solo lectura (vencida)</option>
+      <option value="long">Contenido largo (nombre de empresa)</option>
+      <option value="mas">Más (hoja de destinos)</option>
+      <option value="cuenta">Cuenta (empresa · tema · salir)</option>
+      <option value="multi">Cuenta · varias empresas</option>
+      <option value="teclado">Teclado virtual abierto (compact)</option>
+      <option value="zoom">Texto al 200 % (compact)</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="wf-shell" id="wf-shell">
+      <nav class="wf-side" aria-label="Navegación principal" id="wf-side"></nav>
+      <div style="min-width:0;display:flex;flex-direction:column;min-height:640px">
+        <header class="sh-top" id="wf-top"></header>
+        <div id="wf-banner"></div>
+        <main class="sh-body" id="wf-view" tabindex="-1"></main>
+        <nav class="sh-bottom" id="wf-bottom" aria-label="Navegación principal (compact)"></nav>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+
+<script>
+// ---------- contenido realista (ejemplos rotulados) ----------
+const EMP = { nombre: 'Mezcal Cuatro Vientos', slug: 'cuatro-vientos', ini: 'MC' };
+const EMP_LARGA = { nombre: 'Destilería Artesanal de los Cuatro Vientos del Valle de Tlacolula y Anexas, S. de R.L. de C.V.', slug: 'cuatro-vientos', ini: 'DA' };
+const OTRAS = [{ nombre: 'Palenque Prueba B', slug: 'prueba-b', ro: false }, { nombre: 'Mezcal La Ordeña (vencida)', slug: 'la-ordena', ro: true }];
+const PERSONA = { admin: { n: 'Benito Cruz', rol: 'admin', u: 'titular' }, productor: { n: 'Aurelia Santiago', rol: 'productor', u: 'aurelia' }, operador: { n: 'Tomás Hernández', rol: 'operador', u: 'tomas.h' } };
+// §13.1: el menú sigue al proceso. ico = símbolo del sprite real; txt = sin símbolo (texto hasta que el sprite lo tenga)
+const DEST = [
+  { id: 'inicio', t: 'Inicio', ico: 'i-home', fijo: true },
+  { id: 'maguey', t: 'Maguey', ico: 'i-maguey' },
+  { id: 'horneado', t: 'Horneado', ico: 'i-horno' },
+  { id: 'fermentacion', t: 'Fermentación', ico: 'i-tina', fijo: true },
+  { id: 'destilacion', t: 'Destilación', ico: 'i-destila', fijo: true },
+  { id: 'granel', t: 'Granel', ico: 'i-lote', fijo: true, prov: true },
+  { id: 'trazabilidad', t: 'Trazabilidad', txt: true },
+  { id: 'configuracion', t: 'Configuración', txt: true, admin: true },
+];
+const ico = (d) => d.txt ? `<span class="sh-ico sh-ico--txt" aria-hidden="true">txt</span>` : `<span class="sh-ico" aria-hidden="true" title="${d.ico}">${d.ico.replace('i-', '')}</span>`;
+const visibles = (rol) => DEST.filter(d => !d.admin || rol === 'admin');
+
+let S = { r: 'admin', d: 'inicio', w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+
+// ---------- piezas ----------
+const cuentaBloque = (multi = false, largo = false) => {
+  const p = PERSONA[S.r]; const e = largo ? EMP_LARGA : EMP;
+  return `<h2 style="margin:0 0 4px">${p.n}</h2><p class="wf-muted wf-small">${p.rol} · ${p.u} · ${e.nombre}</p>
+  ${multi ? `<h3>Tus empresas</h3><div class="sh-lista">
+      <a class="wf-btn" href="#" aria-current="true">${e.nombre} <span class="wf-tag" style="margin-left:auto">actual</span></a>
+      ${OTRAS.map(o => `<a class="wf-btn" href="#">${o.nombre}${o.ro ? ' <span class="wf-status wf-status--partial" style="margin-left:auto">solo lectura</span>' : ''}</a>`).join('')}</div>
+    <span class="wf-note">Solo aparecen las empresas de mis_membresias que no están canceladas; la vencida se puede abrir en solo lectura. Cambiar lleva a /e/&lt;slug&gt;/inicio de la otra; no hay confirmación (reversible).</span>` : ''}
+  <h3>Tema</h3><div class="sh-seg" role="radiogroup" aria-label="Tema"><button class="wf-btn" role="radio" aria-pressed="true" aria-checked="true">Sistema</button><button class="wf-btn" role="radio" aria-pressed="false" aria-checked="false">Claro</button><button class="wf-btn" role="radio" aria-pressed="false" aria-checked="false">Oscuro</button></div>
+  <span class="wf-note">Sigue al sistema por defecto; la elección manual se guarda en este navegador (localStorage). Sin señal también funciona.</span>
+  <div class="sh-lista" style="margin-top:12px">
+    ${S.r === 'admin' ? '<a class="wf-btn" href="#">Equipo</a>' : ''}
+    <button class="wf-btn">Cerrar sesión</button>
+  </div>
+  <span class="wf-note">Cerrar sesión y Equipo viven aquí, no en el menú del proceso (decisión de acceso/r01). Sin "Configuración" aquí: ya está en el menú del admin.</span>`;
+};
+const side = (largo = false) => {
+  const e = largo ? EMP_LARGA : EMP;
+  return `<div class="sh-side">
+    <div style="display:flex;gap:8px;align-items:center;min-width:0"><span class="sh-ava" aria-hidden="true">${e.ini}</span><b style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px" title="${e.nombre}">${e.nombre}</b></div>
+    <ul class="sh-nav">${visibles(S.r).map(d => `<li><a href="#" ${d.id === S.d ? 'aria-current="page"' : ''}>${ico(d)}${d.t}</a></li>`).join('')}</ul>
+    <span class="wf-note">Orden de §13.1. Configuración solo si role = admin (no se muestra "bloqueado"). Los símbolos con borde punteado no existen en el sprite: van con texto (traspaso).</span>
+    <div class="sh-cuenta"><button class="sh-emp" style="padding:0"><span class="sh-ava" aria-hidden="true">${PERSONA[S.r].n.split(' ').map(x => x[0]).join('')}</span><span style="min-width:0"><b style="font-size:14px">${PERSONA[S.r].n}</b><small>${PERSONA[S.r].rol} · cuenta</small></span></button></div>
+  </div>`;
+};
+const cabecera = (largo = false) => {
+  const e = largo ? EMP_LARGA : EMP; const d = DEST.find(x => x.id === S.d);
+  return `<button class="sh-emp" aria-haspopup="dialog" aria-expanded="false" title="${e.nombre}"><span class="sh-ava" aria-hidden="true">${e.ini}</span><span style="min-width:0"><b>${e.nombre}</b><small>${PERSONA[S.r].n} · ${PERSONA[S.r].rol}</small></span></button>
+  <h1 class="sh-titulo" style="margin-left:auto">${d.t}</h1>`;
+};
+const bottom = () => {
+  const fijos = visibles(S.r).filter(d => d.fijo);
+  return fijos.map(d => `<a href="#" ${d.id === S.d ? 'aria-current="page"' : ''}>${ico(d)}${d.t}</a>`).join('') + `<a href="#" aria-haspopup="dialog" aria-expanded="false"><span class="sh-ico sh-ico--txt" aria-hidden="true">txt</span>Más</a>`;
+};
+
+// ---------- cuerpo por destino y estado ----------
+const hoyDefault = () => `<h2 style="margin-top:0">Hoy</h2>
+  <div class="sh-hoy">
+    <div class="sh-tarj">Tinas que toca medir hoy — <b>Fase 5</b> (§13.2 #3). Aquí no se inventa contenido.</div>
+    <div class="sh-tarj">Corridas abiertas · colectores con contenido — <b>Fase 5</b>.</div>
+    <div class="sh-tarj">Capturas pendientes de enviar — <b>Fase 5</b> (cola offline §8.3).</div>
+  </div>
+  <span class="wf-note">Inicio es el destino del shell. Su contenido real llega en Fase 5; esta ronda fija dónde vive y qué lo rodea. El FAB de este destino (acción principal) se decide con ese contenido; por ahora el hueco queda vacío en Inicio.</span>`;
+const hoyEmpty = () => `<h2 style="margin-top:0">Hoy</h2>
+  <div class="wf-state" style="margin-top:8px"><h2>¿Qué tienes hoy?</h2><p class="wf-muted">Dinos qué hay en tus tanques y tinas para empezar a registrar desde el día uno.</p><button class="wf-btn wf-btn--primary" data-wf-persist>Empezar</button></div>
+  <span class="wf-note">Solo cuando la empresa no tiene lotes (primer arranque, §13.2 #2). "Empezar" abre la ronda arranque/r01. Una sola primaria; en compact baja a la barra… no: aquí NO baja a la barra inferior porque la barra ya es la navegación; la primaria vive en el bloque (el FAB queda libre).</span>`;
+const etapa = (d) => `<h2 style="margin-top:0">${d.t}</h2>
+  <div class="wf-state"><h2>Próximamente en tu palenque</h2><p class="wf-muted">Aquí vas a ${({ maguey: 'registrar recepciones de maguey', horneado: 'abrir y cerrar horneadas', fermentacion: 'ver las tinas en uso y medirlas', destilacion: 'llevar corridas y cortes', granel: 'ver tanques, saldos y movimientos', trazabilidad: 'seguir un lote hacia atrás' })[d.id] || 'trabajar'}.</p><a class="wf-btn" href="#">Volver a Inicio</a></div>
+  <span class="wf-note">Destino vacío hasta la Fase 5: explica qué habrá, no finge datos. El FAB de la etapa (p. ej. "Medir" en Fermentación) lo define la ronda de esa pantalla; aquí se muestra el hueco con su etiqueta como ejemplo.</span>`;
+const config = () => `<h2 style="margin-top:0">Configuración</h2>
+  <div class="sh-lista" style="max-width:520px">
+    ${['Recursos (hornos, molinos, tinas, alambiques, colectores, tanques)', 'Catálogos (tipos, conceptos, especies, predios, proveedores, insumos)', 'Ajustes', 'Portal y marca', 'Equipo'].map(t => `<a class="wf-btn" href="#" style="border-color:var(--wf-g3)">${t}</a>`).join('')}
+  </div>
+  <span class="wf-note">Índice de Configuración (§13.2 #8). Cada sección es la ronda configuracion/r01; Equipo ya existe y solo se enlaza.</span>`;
+const denied = () => `<h2 style="margin-top:0">Configuración</h2><div class="wf-state"><h2>Solo el administrador puede ver la configuración</h2><p class="wf-muted">Pídele a ${PERSONA.admin.n} lo que necesites cambiar.</p><a class="wf-btn" href="#">Volver a Inicio</a></div>
+  <span class="wf-note">Llegó por URL sin ser admin: el destino no está en su menú, pero la pantalla explica (mismo patrón que Equipo). La base rechaza igual.</span>`;
+const cuerpo = (st) => {
+  if (st === 'loading') return `<h2 style="margin-top:0">Hoy</h2><div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:72px;border-radius:6px"></div>'.repeat(3)}</div><span class="wf-note">Esqueleto con la misma huella que las tarjetas de Hoy. El shell (cabecera, menú) ya es usable.</span>`;
+  if (st === 'error') return `<h2 style="margin-top:0">Hoy</h2><div class="wf-state" role="alert"><h2>No pudimos cargar tu empresa</h2><p class="wf-muted">Revisa tu señal.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div><span class="wf-note">mis_membresias no respondió: el shell se queda (cabecera con lo último conocido), el cuerpo pide reintentar. Sin sesión válida el guardia ya mandó al portal.</span>`;
+  if (st === 'denied') return denied();
+  if (st === 'empty') return hoyEmpty();
+  if (S.d === 'inicio') return hoyDefault();
+  if (S.d === 'configuracion') return S.r === 'admin' ? config() : denied();
+  return etapa(DEST.find(x => x.id === S.d));
+};
+
+// ---------- render ----------
+function render(){
+  const largo = S.state === 'long';
+  const st = S.state;
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  if (st === 'denied') S.d = 'configuracion';
+  if (['empty', 'loading', 'error'].includes(st)) S.d = 'inicio';
+  document.getElementById('wf-side').innerHTML = side(largo);
+  document.getElementById('wf-top').innerHTML = cabecera(largo);
+  document.getElementById('wf-bottom').innerHTML = bottom();
+  document.getElementById('wf-view').innerHTML = cuerpo(st);
+  const banners = {
+    offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puedes ver lo último cargado. <span class="wf-tag">Fase 5: "3 capturas por enviar"</span></p>',
+    readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar y exportar, no registrar.</p>',
+  };
+  document.getElementById('wf-banner').innerHTML = banners[st] || '';
+  // overlays: Más (hoja en compact / no existe en medium+), Cuenta (hoja en compact, popover en medium, panel en expanded), teclado
+  let ov = '';
+  if (st === 'mas') ov = S.w < 600
+    ? `<div class="wf-scrim"></div><div class="sh-hoja" role="dialog" aria-modal="true" aria-label="Más destinos"><h2 style="margin-top:0">Más</h2><div class="sh-lista">${visibles(S.r).filter(d => !d.fijo).map(d => `<a class="wf-btn" href="#">${ico(d)}${d.t}</a>`).join('')}</div><span class="wf-note">Los destinos que no caben en la barra (targets 44px, máx. 5). Esc/atrás/scrim cierra y el foco vuelve a "Más". En medium/expanded no existe "Más": el menú lateral trae los 8.</span><div class="wf-actions" style="margin-top:12px"><button class="wf-btn">Cerrar</button></div></div>`
+    : `<span class="wf-note" style="position:absolute;left:260px;top:80px;max-width:360px">En medium/expanded no hay "Más": todos los destinos están en el menú lateral. Cambia a compact 390 para ver la hoja.</span>`;
+  if (st === 'cuenta' || st === 'multi') ov = `<div class="wf-scrim"></div><div class="${S.w < 600 ? 'sh-hoja' : 'sh-pop'}" role="dialog" aria-modal="true" aria-label="Tu cuenta">${cuentaBloque(st === 'multi', largo)}<div class="wf-actions" style="margin-top:12px"><button class="wf-btn">Cerrar</button></div></div>`;
+  if (st === 'teclado') ov = S.w < 600 ? `<div class="sh-kb" aria-hidden="true">teclado virtual (200 px) — la navegación inferior se oculta mientras hay un campo con foco (visualViewport); el campo enfocado queda visible</div>` : `<span class="wf-note" style="position:absolute;left:260px;top:80px;max-width:360px">Solo aplica a compact: cambia a 390.</span>`;
+  if (st === 'zoom') { f.style.fontSize = '200%'; } else { f.style.fontSize = ''; }
+  document.getElementById('wf-overlay').innerHTML = ov;
+  // FAB: hueco por destino (ejemplo rotulado). Inicio y Configuración no llevan FAB en esta ronda.
+  const fab = { fermentacion: 'Medir', destilacion: 'Corrida', granel: 'Movimiento', maguey: 'Recepción', horneado: 'Horneada' }[S.d];
+  const fabEl = document.getElementById('wf-fab'); if (fabEl) fabEl.remove();
+  if (fab && !ov && !['loading', 'error', 'denied', 'empty', 'readonly'].includes(st) && S.w < 600) {
+    const b = document.createElement('button'); b.id = 'wf-fab'; b.className = 'sh-fab'; b.textContent = fab + ' (ejemplo)'; b.setAttribute('aria-label', fab); f.appendChild(b);
+  }
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+  document.querySelectorAll('[data-r]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.r === S.r)));
+  document.querySelectorAll('[data-d]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.d === S.d)));
+}
+document.addEventListener('click', e => {
+  const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); return; }
+  const r = e.target.closest('[data-r]'); if (r) { S.r = r.dataset.r; if (S.d === 'configuracion' && S.r !== 'admin') S.state = 'denied'; render(); return; }
+  const d = e.target.closest('[data-d]'); if (d) { S.d = d.dataset.d; if (['empty', 'loading', 'error', 'denied'].includes(S.state)) S.state = 'default'; document.getElementById('wf-state').value = S.state; render(); }
+});
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>
