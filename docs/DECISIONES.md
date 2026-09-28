@@ -491,6 +491,25 @@ pedir una ronda `rNN+1` o cambiar la regla en `CLAUDE.md`.
    anota. Se prueba con archivos reales en coco.
 6. Reordenar catálogos (`sort_order`) no entra (Could).
 
+## 2026-09-27 · coco, configuracion/r01: lo que salió al construir
+
+- **Manejadores inline de una sola sentencia.** Prettier partió
+  `@update:model-value="a = ''; b = ''"` en dos líneas sin `;` y Vite dejó
+  de compilar la página (500) sin que `vue-tsc` ni ESLint lo vieran. Regla:
+  más de una sentencia → método. La evidencia de navegador real fue la que
+  lo encontró.
+- **Storage desde el navegador funciona con la RLS de 0024**: el logo se
+  recorta con `canvas` (cuadrado centrado, 512, png/webp), sube con `upsert`
+  a `branding/<org>/logo.<ext>` y el portal lo publica. Sin encuadre manual:
+  si el dueño lo quiere, es una ronda aparte.
+- **Cambio de enlace probado ida y vuelta** contra el proyecto alojado:
+  `cuatro-vientos → cuatro-vientos-qa → cuatro-vientos`; el trigger deja el
+  historial y el router se recoloca en el slug nuevo.
+- **`recurso_en_uso` cualquier miembro** (no solo admin): es información
+  operativa (litros dentro, ciclos abiertos) que Fase 5 también mostrará.
+- El smoke deja `Tanque QA` (inactivo) y `Especie QA` (oculta) en el
+  proyecto de desarrollo hasta el siguiente `db reset --linked`.
+
 ## 2026-09-27 · coco, shell/r01: lo que salió al construir
 
 - **Capas y navegación no se llevan sin cuidado.** `task-layer` deshace su

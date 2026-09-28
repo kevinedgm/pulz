@@ -151,6 +151,11 @@ compact, lateral 200/240), cabecera con empresa → Cuenta (empresas, tema,
 Equipo, salir), banners, hueco de FAB, Inicio con "¿Qué tienes hoy?",
 destinos "próximamente", 4 símbolos nuevos; 20 piezas `candidate` en el
 registry; Vitest 40/40; Playwright shell 8/8 (50 capturas) + acceso 8/8
-(104) + zoom 10/10. **Siguiente:** ronda `configuracion/r01` → luego
-`arranque/r01` → prueba de punta a punta (tarea 5) → ronda del Hub HTML
-(`lab/hub/r01`).
+(104) + zoom 10/10. **Configuración hecha (ronda `configuracion/r01`,
+ciclo completo):** recursos, catálogos (14), ajustes, portal y marca con
+logo real a Storage y cambio de enlace; `0025_recurso_en_uso.sql`; 6 piezas
+nuevas del sistema (select, number-field, switch, color-field, file-picker,
+brand-block); 27 piezas `candidate`; pgTAP 37/37; Vitest 47/47; Playwright
+8/8 con escrituras reales deshechas (67 capturas). **Siguiente:** ronda
+`arranque/r01` → prueba de punta a punta con empresa nueva (tarea 5) →
+ronda del Hub HTML (`lab/hub/r01`).

@@ -1460,13 +1460,13 @@
   },
   "select": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/configuracion/r01",
-    "documentation": null,
-    "demo": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/select.md",
+    "demo": "../Components/demo/index.html#select",
+    "source": "../../apps/web/src/shared/ui/Selector.vue",
+    "behavior": "../../apps/web/src/shared/ui/Selector.vue",
     "dependencies": [],
     "profileDependencies": [
       "design_system.tokens"
@@ -1482,34 +1482,60 @@
       "rules": "Para 4+ opciones (≤3 → segmented-choice). Opciones {valor, etiqueta}; vacío con placeholder deshabilitado. Mismo contrato de etiqueta/ayuda/error que text-field."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 %"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/Selector.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/configuracion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/configuracion/r01/coco-declaracion.md",
+          "../lab/configuracion/r01/lima-compuerta.md",
+          "../qa/evidence/configuracion-r01/"
+        ],
+        "findings": []
+      }
+    }
   },
   "number-field": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/configuracion/r01",
-    "documentation": null,
-    "demo": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/number-field.md",
+    "demo": "../Components/demo/index.html#number-field",
+    "source": "../../apps/web/src/shared/ui/CampoNumero.vue",
+    "behavior": "../../apps/web/src/shared/ui/CampoNumero.vue",
     "dependencies": [
       "text-field"
     ],
@@ -1527,34 +1553,60 @@
       "rules": "Valor numérico o null; valida al salir (blur): rango y 'min < max' lo hace el formulario. Sin spinners. Texto largo no aplica."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 %"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/CampoNumero.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/configuracion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/configuracion/r01/coco-declaracion.md",
+          "../lab/configuracion/r01/lima-compuerta.md",
+          "../qa/evidence/configuracion-r01/"
+        ],
+        "findings": []
+      }
+    }
   },
   "switch": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/configuracion/r01",
-    "documentation": null,
-    "demo": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/switch.md",
+    "demo": "../Components/demo/index.html#switch",
+    "source": "../../apps/web/src/shared/ui/Interruptor.vue",
+    "behavior": "../../apps/web/src/shared/ui/Interruptor.vue",
     "dependencies": [],
     "profileDependencies": [
       "design_system.tokens"
@@ -1570,34 +1622,60 @@
       "rules": "Para booleanos que se aplican al guardar (no inmediatos). Toda la fila es clicable (≥44px)."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 %"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/Interruptor.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/configuracion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/configuracion/r01/coco-declaracion.md",
+          "../lab/configuracion/r01/lima-compuerta.md",
+          "../qa/evidence/configuracion-r01/"
+        ],
+        "findings": []
+      }
+    }
   },
   "color-field": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/configuracion/r01",
-    "documentation": null,
-    "demo": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/color-field.md",
+    "demo": "../Components/demo/index.html#color-field",
+    "source": "../../apps/web/src/shared/ui/CampoColor.vue",
+    "behavior": "../../apps/web/src/shared/ui/CampoColor.vue",
     "dependencies": [
       "text-field"
     ],
@@ -1614,34 +1692,60 @@
       "rules": "Solo para el color de acento de la empresa; la interfaz nunca lo pone detrás de texto. Valida ^#[0-9A-Fa-f]{6}$ al salir."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 %"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/CampoColor.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/configuracion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/configuracion/r01/coco-declaracion.md",
+          "../lab/configuracion/r01/lima-compuerta.md",
+          "../qa/evidence/configuracion-r01/"
+        ],
+        "findings": []
+      }
+    }
   },
   "file-picker": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/configuracion/r01",
-    "documentation": null,
-    "demo": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/file-picker.md",
+    "demo": "../Components/demo/index.html#file-picker",
+    "source": "../../apps/web/src/shared/ui/SelectorArchivo.vue",
+    "behavior": "../../apps/web/src/shared/ui/SelectorArchivo.vue",
     "dependencies": [
       "button"
     ],
@@ -1659,34 +1763,62 @@
       "rules": "Valida tipo y tamaño en el navegador antes de subir con los mismos límites del bucket (2 MB, png/jpeg/webp). El recorte es del consumidor (capa local)."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 %"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/SelectorArchivo.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/configuracion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/configuracion/r01/coco-declaracion.md",
+          "../lab/configuracion/r01/lima-compuerta.md",
+          "../qa/evidence/configuracion-r01/"
+        ],
+        "findings": [
+          "EXIF/cámara no probados"
+        ]
+      }
+    }
   },
   "brand-block": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/configuracion/r01",
-    "documentation": null,
-    "demo": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/brand-block.md",
+    "demo": "../Components/demo/index.html#brand-block",
+    "source": "../../apps/web/src/shared/ui/BloqueMarca.vue",
+    "behavior": "../../apps/web/src/shared/ui/BloqueMarca.vue",
     "dependencies": [],
     "profileDependencies": [
       "design_system.tokens"
@@ -1702,34 +1834,62 @@
       "rules": "Sube al sistema desde modules/acceso (MarcaPortal): la misma pieza en el portal y en la vista previa de Configuración. Sin acciones."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 %"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/BloqueMarca.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "evidence": "../qa/evidence/configuracion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/configuracion/r01/coco-declaracion.md",
+          "../lab/configuracion/r01/lima-compuerta.md",
+          "../qa/evidence/configuracion-r01/"
+        ],
+        "findings": [
+          "sube desde modules/acceso/MarcaPortal (eliminado)"
+        ]
+      }
+    }
   },
   "configuracion": {
     "kind": "product-application",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/configuracion/r01",
-    "documentation": null,
+    "documentation": "../Screens/configuracion.md",
     "demo": null,
-    "source": null,
-    "behavior": null,
+    "source": "../../apps/web/src/modules/configuracion/pages/RecursosPage.vue",
+    "behavior": "../../apps/web/src/modules/configuracion/pages/RecursosPage.vue",
     "dependencies": [
       "app-shell",
       "list-stack",
@@ -1762,23 +1922,59 @@
       "rules": "Solo admin (destino soloAdmin; por URL → denied). Nunca borrar: active=false. Errores del esquema bajo el campo. Slug: trigger + historial; tras cambiarlo, router.replace al nuevo. Logo: branding/<org>/logo.<ext> con upsert."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 %"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "runtime-verified"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/modules/configuracion/pages/RecursosPage.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "files": [
+      "../../apps/web/src/modules/configuracion/pages/CatalogosPage.vue",
+      "../../apps/web/src/modules/configuracion/pages/AjustesPage.vue",
+      "../../apps/web/src/modules/configuracion/pages/PortalMarcaPage.vue",
+      "../../apps/web/src/modules/configuracion/pages/ConfiguracionIndicePage.vue",
+      "../../apps/web/src/modules/configuracion/components/SoloAdmin.vue",
+      "../../apps/web/src/modules/configuracion/api.ts",
+      "../../apps/web/src/modules/configuracion/routes.ts",
+      "../../supabase/migrations/20260927000025_recurso_en_uso.sql"
+    ],
+    "evidence": "../qa/evidence/configuracion-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/configuracion/r01/coco-declaracion.md",
+          "../lab/configuracion/r01/lima-compuerta.md",
+          "../qa/evidence/configuracion-r01/"
+        ],
+        "findings": [
+          "Prettier partió un manejador inline en dos sentencias y Vite dejó de compilar RecursosPage → método cambiarKind (coco, corregido)",
+          "vista previa del logo tras subir: capturada antes de cargar la imagen en la primera corrida (script corregido)"
+        ]
+      }
+    }
   }
 }

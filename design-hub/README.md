@@ -32,7 +32,8 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
 | stable | contrato aprobado explícitamente por el dueño | — (ninguna todavía) |
 
 Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
-[`lab/acceso/r01`](lab/acceso/r01/) y [`lab/shell/r01`](lab/shell/r01/).
+[`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/) y
+[`lab/configuracion/r01`](lab/configuracion/r01/).
 
 ## Foundations
 
@@ -53,6 +54,12 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
 | [Menú lateral](Components/side-nav.md) | `side-nav` | `NavLateral.vue` |
 | [Navegación inferior](Components/bottom-nav.md) | `bottom-nav` | `NavInferior.vue` |
 | [Botón flotante](Components/fab.md) | `fab` | `BotonFlotante.vue` |
+| [Select](Components/select.md) | `select` | `Selector.vue` |
+| [Campo numérico](Components/number-field.md) | `number-field` | `CampoNumero.vue` |
+| [Interruptor](Components/switch.md) | `switch` | `Interruptor.vue` |
+| [Campo de color](Components/color-field.md) | `color-field` | `CampoColor.vue` |
+| [Selector de archivo](Components/file-picker.md) | `file-picker` | `SelectorArchivo.vue` |
+| [Bloque de marca](Components/brand-block.md) | `brand-block` | `BloqueMarca.vue` |
 
 ## Patterns (sistema)
 
@@ -73,6 +80,7 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
 | [Bienvenida por enlace](Screens/acceso-bienvenida.md) | `acceso-bienvenida` | `/e/:slug/bienvenida#token` |
 | [Equipo](Screens/equipo.md) | `equipo` | `/e/:slug/equipo` |
 | [Inicio](Screens/inicio.md) | `inicio` | `/e/:slug/inicio` |
+| [Configuración](Screens/configuracion.md) | `configuracion` | `/e/:slug/configuracion/{recursos,catalogos,ajustes,portal}` |
 
 ## Lo que NO está hecho (no lo busques aquí como hecho)
 
