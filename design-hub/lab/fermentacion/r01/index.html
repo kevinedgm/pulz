@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Fermentación: usos de tinas y medición diaria · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+.fe-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.fe-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.fe-side ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.fe-side li{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:6px;border:2px solid transparent}
+.fe-side li[aria-current]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.fe-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:56px;padding:4px var(--wf-s4) 0;border-bottom:1px solid var(--wf-g3)}
+.fe-top h1{font-size:18px;margin:0 0 0 auto}
+.fe-top .wf-btn{margin-left:var(--wf-s2)}
+.fe-body{padding:var(--wf-s5);min-width:0;max-width:960px}
+.fe-resumen{font-size:13px;color:var(--wf-g6);margin:0 0 var(--wf-s4)}
+.fe-grupo h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-g6);margin:var(--wf-s5) 0 var(--wf-s2)}
+.fe-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.4fr) auto auto;gap:var(--wf-s3);align-items:center;min-height:64px;padding:var(--wf-s3) var(--wf-s4);border:1px solid var(--wf-g3);border-top:0}
+.fe-row:first-child{border-top:1px solid var(--wf-g3);border-radius:var(--wf-r) var(--wf-r) 0 0}
+.fe-row:last-child{border-radius:0 0 var(--wf-r) var(--wf-r)}
+.fe-row h3{margin:0;font-size:16px}
+.fe-row .sub,.fe-ult{font-size:13px;color:var(--wf-g6)}
+.fe-row .wf-actions{justify-content:flex-end;flex-wrap:nowrap}
+.fe-lista{list-style:none;margin:0;padding:0}
+.fe-pie{display:flex;flex-wrap:wrap;gap:var(--wf-s2);margin-top:var(--wf-s5)}
+.fe-fab{display:none}
+/* Medición: un concepto por pantalla */
+.fe-medir{max-width:520px;margin:0 auto;display:grid;gap:var(--wf-s4)}
+.fe-cab{display:flex;flex-wrap:wrap;gap:var(--wf-s2) var(--wf-s4);align-items:baseline;border-bottom:1px solid var(--wf-g3);padding-bottom:var(--wf-s3)}
+.fe-cab h2{margin:0;font-size:20px}
+.fe-paso{font-size:13px;color:var(--wf-g6)}
+.fe-big{display:grid;gap:6px}
+.fe-big label{font-size:16px;font-weight:600}
+.fe-big .wf-input{font-size:2.75rem;min-height:4.5rem;text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+.fe-big .u{font-size:14px;color:var(--wf-g6);text-align:center}
+.fe-lect{display:grid;gap:var(--wf-s2)}
+.fe-lect .wf-input{font-size:1.75rem;min-height:3.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.fe-prom{font-size:15px;text-align:center;padding:var(--wf-s2);border:1px dashed var(--wf-g6);border-radius:var(--wf-r)}
+.fe-escala{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--wf-s1)}
+.fe-escala .wf-btn{padding:0;min-height:52px;font-size:18px}
+.fe-escala .wf-btn[aria-checked="true"]{background:var(--wf-g2);border-width:3px}
+.fe-etq{font-size:14px;text-align:center;min-height:22px}
+.fe-nav{display:flex;gap:var(--wf-s2);align-items:center}
+.fe-nav .wf-btn--primary{flex:1}
+.fe-res{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.fe-res li{display:flex;justify-content:space-between;gap:var(--wf-s3);padding:var(--wf-s2) var(--wf-s4);min-height:44px;align-items:center}
+.fe-res li+li{border-top:1px solid var(--wf-g3)}
+.fe-aviso{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-size:14px}
+.fe-aviso b{display:block}
+.fe-warn{border:1px dashed var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s2) var(--wf-s3);font-size:13px}
+.fe-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-weight:600;font-size:14px}
+.fe-hecho{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s4);display:grid;gap:var(--wf-s2)}
+/* Detalle */
+.fe-det{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--wf-s5)}
+.fe-kpi{display:flex;flex-wrap:wrap;gap:var(--wf-s2) var(--wf-s5);margin:0 0 var(--wf-s3)}
+.fe-kpi b{font-size:22px;display:block;font-variant-numeric:tabular-nums}
+.fe-kpi span{font-size:12px;color:var(--wf-g6)}
+.fe-anulada td{text-decoration:line-through;color:var(--wf-g6)}
+/* Formulación */
+.fe-form{display:grid;gap:var(--wf-s4);max-width:720px}
+.fe-form fieldset{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);display:grid;gap:var(--wf-s3);min-width:0}
+.fe-form legend{font-weight:700;padding:0 4px}
+.fe-asig{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--wf-s3);align-items:end}
+.fe-asig .sub{font-size:12px;color:var(--wf-g6)}
+.fe-fila{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s3)}
+.fe-dlg{position:absolute;left:50%;top:15%;transform:translateX(-50%);width:min(440px,92%);background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:12px;padding:var(--wf-s5);z-index:21;display:grid;gap:var(--wf-s3)}
+.fe-drawer{position:absolute;top:0;bottom:0;right:0;width:min(440px,92%);background:var(--wf-g0);border-left:1px solid var(--wf-g3);z-index:21;padding:var(--wf-s5);overflow:auto;display:grid;gap:var(--wf-s4);align-content:start}
+.fe-menu{position:absolute;right:var(--wf-s5);top:180px;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:var(--wf-r);z-index:21;min-width:240px;padding:4px}
+.fe-menu button{display:block;width:100%;text-align:left;min-height:44px;border:0;background:none;padding:0 var(--wf-s3);font:inherit}
+.fe-bottom{display:none}
+@container wf (max-width: 1023px){
+  .fe-shell{grid-template-columns:200px 1fr}
+  .fe-det{grid-template-columns:1fr}
+  .fe-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"a s" "b b" "c c"}
+  .fe-row>div:first-child{grid-area:a}.fe-row>.fe-ult{grid-area:b}.fe-row>.wf-status{grid-area:s}.fe-row>.wf-actions{grid-area:c;justify-content:flex-start}
+}
+@container wf (max-width: 599px){
+  .fe-shell{grid-template-columns:1fr}.fe-shell>.fe-side{display:none}
+  .fe-body{padding:var(--wf-s4) var(--wf-s4) 140px}
+  .fe-top .wf-btn--primary{display:none}
+  .fe-fab{display:inline-flex;position:absolute;right:16px;bottom:88px;min-width:56px;min-height:56px;border-radius:999px;padding:0 20px;font-size:16px;z-index:15;box-shadow:0 0 0 1px var(--wf-g4)}
+  .fe-row .wf-actions .wf-btn{flex:0 1 auto}
+  .fe-pie .wf-btn{flex:1 1 100%}
+  .fe-fila,.fe-asig{grid-template-columns:1fr}
+  .fe-medir [data-wf-persist]{display:none}
+  .fe-nav{display:none}
+  .fe-drawer{top:auto;left:0;right:0;width:100%;max-height:92%;border-left:0;border-top:1px solid var(--wf-g3);border-radius:12px 12px 0 0}
+  .fe-dlg{top:auto;bottom:0;left:0;right:0;transform:none;width:100%;border-radius:12px 12px 0 0}
+  .fe-bottom{display:grid;grid-template-columns:repeat(5,1fr);position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:6px 4px 18px;font-size:11px;text-align:center}
+  .fe-bottom span{min-height:48px;display:grid;place-items:center}
+  .fe-barra{position:absolute;left:0;right:0;bottom:78px;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:flex;gap:var(--wf-s2);z-index:14}
+  .fe-barra .wf-btn--primary{flex:1}
+}
+@container wf (min-width: 600px){.fe-barra{display:none}}
+</style>
+</head>
+<body class="wf">
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>FERMENTACIÓN · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Lista · default (2 por medir hoy)</option>
+      <option value="loading">Lista · carga</option>
+      <option value="empty">Lista · vacío (sin tinas en uso)</option>
+      <option value="sintinas">Lista · la empresa no tiene tinas</option>
+      <option value="hecho">Lista · todas medidas hoy</option>
+      <option value="offline">Lista · sin conexión (instantánea)</option>
+      <option value="cola">Lista · capturas en cola (pendiente + fallo)</option>
+      <option value="readonly">Lista · solo lectura (vencida)</option>
+      <option value="operador">Lista · operador (sin formular ni cerrar)</option>
+      <option value="menu">Lista · menú «Más» de una fila</option>
+      <option value="long">Lista · contenido largo</option>
+      <option value="detalle">Detalle · uso de tina con mediciones</option>
+      <option value="detalle0">Detalle · sin mediciones aún</option>
+      <option value="anular">Detalle · anular medición (motivo)</option>
+      <option value="cerrar">Detalle · cerrar ciclo (confirmar)</option>
+      <option value="medir">Medir · paso 1 temperatura (mínimo)</option>
+      <option value="medir3">Medir · paso 3 actividad (escala 1–6)</option>
+      <option value="completo">Medir · temperatura superficie (completo, 3 lecturas)</option>
+      <option value="revisar">Medir · revisar con aviso de Brix (nota)</option>
+      <option value="guardada">Medir · guardada pendiente de enviar</option>
+      <option value="cerrado">Medir · error: el ciclo ya no está abierto</option>
+      <option value="formular">Formulación · llenar tinas</option>
+      <option value="fermentaba">Tina que ya fermentaba (capa)</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="fe-shell">
+      <nav class="fe-side" aria-label="Navegación principal (shell/r01)"><strong>Mezcal Cuatro Vientos</strong>
+        <ul><li>Inicio</li><li>Maguey</li><li>Horneado</li><li aria-current="page">Fermentación</li><li>Destilación</li><li>Granel</li><li>Trazabilidad</li><li>Configuración</li></ul></nav>
+      <div style="min-width:0;display:flex;flex-direction:column;position:relative">
+        <header class="fe-top" id="wf-top"></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main fe-body" id="wf-view" tabindex="-1"></main>
+        <div id="wf-fab"></div>
+        <nav class="fe-bottom" aria-label="Navegación principal (compact)"><span>Inicio</span><span aria-current="page">Fermentación</span><span>Destilación</span><span>Granel</span><span>Más</span></nav>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+<script>
+// Ejemplo: Mezcal Cuatro Vientos, hoy 2026-09-27 (semilla + una tina de ejemplo rotulada)
+const T = [
+  { t: 'Tina 2', f: 'FER-T2-001', l: 1400, d: 3, e: 'fermentando', ult: 'ayer 08:30 · 27.5 °C · 12.4 Brix · actividad 6', hoy: false },
+  { t: 'Tina 3', f: 'FER-T3-INI', l: 1300, d: 27, e: 'fermentando', ult: 'nunca medida', hoy: false, sinForm: true },
+  { t: 'Tina 4 (ejemplo)', f: 'FER-T4-002', l: 900, d: 2, e: 'fermentando', ult: 'hoy 07:10 · 26 °C · 13.1 Brix · actividad 3', hoy: true },
+  { t: 'Tina 1', f: 'FER-T1-001', l: 870, d: 21, e: 'en vaciado', ult: '12 sep · 25 °C · 8.2 Brix · actividad 3', hoy: false, lista: true },
+];
+const chip = (e) => e === 'fermentando' ? '<span class="wf-status wf-status--partial">fermentando</span>' : e === 'lista' ? '<span class="wf-status wf-status--on">lista</span>' : '<span class="wf-status wf-status--draft">en vaciado</span>';
+const fila = (r, o = {}) => `<li class="fe-row">
+  <div><h3>${r.t}</h3><span class="sub">${r.f} · ${r.l.toLocaleString('es-MX')} L · <b>día ${r.d}</b>${r.e === 'fermentando' ? ' de ~7' : ''}${r.sinForm ? ' · sin formulación' : ''}</span></div>
+  <div class="fe-ult">Última: ${r.ult}${o.pend ? ' · <span class="wf-status wf-status--draft">pendiente de enviar</span>' : ''}${o.fallo ? ' · <span class="wf-status wf-status--off">falló: pide nota</span> <button class="wf-btn wf-btn--quiet">Corregir</button>' : ''}</div>
+  ${chip(r.e)}
+  <div class="wf-actions"><a class="wf-btn" href="#medir" ${o.dis ? 'aria-disabled="true"' : ''}>Medir</a><button class="wf-btn wf-btn--quiet" aria-haspopup="menu" aria-expanded="${o.menu ? 'true' : 'false'}">Más</button></div>
+</li>`;
+const grupo = (tit, rs, o) => rs.length ? `<section class="fe-grupo"><h2>${tit}</h2><ul class="fe-lista">${rs.map(r => fila(r, o)).join('')}</ul></section>` : '';
+const resumen = (n, m) => `<p class="fe-resumen" role="status">${n} tinas en uso · <b>${m} por medir hoy</b></p>`;
+const pie = (o = {}) => o.operador ? '' : `<div class="fe-pie"><button class="wf-btn" ${o.dis ? 'disabled aria-disabled="true"' : ''}>Llenar tinas (formulación)</button><button class="wf-btn" ${o.dis ? 'disabled aria-disabled="true"' : ''}>Tina que ya fermentaba</button></div>`;
+const listaStd = (o = {}) => `${resumen(4, 2)}${grupo('Toca medir hoy', [T[0], T[1]], o)}${grupo('Ya medidas hoy', [T[2]], o)}${grupo('Listas o en vaciado', [T[3]], o)}${pie(o)}`;
+const topLista = (o = {}) => `<span class="wf-small wf-muted">CV · Mezcal Cuatro Vientos · ${o.operador ? 'Tomás · operador' : 'Aurelia · productora'}</span><h1>Fermentación</h1>${o.sinPrim ? '' : `<a class="wf-btn wf-btn--primary" href="#medir" ${o.dis ? 'aria-disabled="true"' : ''}>Medir</a>`}`;
+const fab = (o = {}) => o.sinPrim ? '' : `<a class="wf-btn wf-btn--primary fe-fab" href="#medir" ${o.dis ? 'aria-disabled="true"' : ''}>Medir</a>`;
+const topSub = (h1, atras = 'Fermentación') => `<a class="wf-btn wf-btn--quiet" href="#">‹ ${atras}</a><h1>${h1}</h1>`;
+const cab = (paso, de, tina = 'Tina 2', dia = 3) => `<div class="fe-cab"><h2>${tina}</h2><span class="wf-small">día <b>${dia}</b> <button class="wf-btn wf-btn--quiet" style="min-height:44px">cambiar</button></span><span class="wf-small wf-muted">¿Cuándo pasó? <b>ahora</b> <button class="wf-btn wf-btn--quiet" style="min-height:44px">cambiar</button></span><span class="fe-paso" role="status">Paso ${paso} de ${de}</span></div>`;
+const nav = (sig = 'Siguiente', primero = false) => `<div class="fe-nav" data-wf-persist>${primero ? '<a class="wf-btn wf-btn--quiet" href="#">Cancelar</a>' : '<button class="wf-btn wf-btn--quiet">Atrás</button>'}<button class="wf-btn wf-btn--primary">${sig}</button></div><div class="fe-barra">${primero ? '<a class="wf-btn wf-btn--quiet" href="#">Cancelar</a>' : '<button class="wf-btn wf-btn--quiet">Atrás</button>'}<button class="wf-btn wf-btn--primary">${sig}</button></div>`;
+const escala = (v, etqs) => `<div class="fe-escala" role="radiogroup" aria-label="Escala 1 a 6">${[1,2,3,4,5,6].map(n => `<button class="wf-btn" role="radio" aria-checked="${n === v}">${n}</button>`).join('')}</div><p class="fe-etq" aria-live="polite">${v} · ${etqs[v - 1]}</p>`;
+const ACT = ['quieta', 'apenas', 'poca', 'media', 'mucha', 'muy activa'];
+const medTabla = (anulada = false) => `<table class="wf-table wf-table--stack"><thead><tr><th>Día</th><th>Cuándo</th><th>°C</th><th>Brix</th><th>Act.</th><th>Quién</th><th></th></tr></thead><tbody>
+  ${anulada ? '<tr class="fe-anulada"><td data-l="Día">3</td><td data-l="Cuándo">hoy 08:30</td><td data-l="°C">72</td><td data-l="Brix">12.4</td><td data-l="Act.">6</td><td data-l="Quién">Tomás</td><td><span class="wf-status wf-status--off">anulada</span> <span class="wf-small">dedo en el 7</span></td></tr>' : ''}
+  <tr><td data-l="Día">3</td><td data-l="Cuándo">ayer 08:30</td><td data-l="°C">27.5</td><td data-l="Brix">12.4</td><td data-l="Act.">6</td><td data-l="Quién">Tomás</td><td><button class="wf-btn wf-btn--quiet" aria-haspopup="menu">Más</button></td></tr>
+  <tr><td data-l="Día">2</td><td data-l="Cuándo">25 sep 08:30</td><td data-l="°C">27</td><td data-l="Brix">13.2</td><td data-l="Act.">6</td><td data-l="Quién">Aurelia</td><td><button class="wf-btn wf-btn--quiet" aria-haspopup="menu">Más</button></td></tr>
+  <tr><td data-l="Día">1</td><td data-l="Cuándo">24 sep 08:30</td><td data-l="°C">26</td><td data-l="Brix">14</td><td data-l="Act.">3</td><td data-l="Quién">Aurelia</td><td><button class="wf-btn wf-btn--quiet" aria-haspopup="menu">Más</button></td></tr>
+</tbody></table>`;
+const detalle = (o = {}) => `<div class="fe-det"><div>
+  <div class="fe-kpi"><div><b>día 3</b><span>de ~7 esperados</span></div><div><b>1,400 L</b><span>dentro</span></div><div><b>12.4</b><span>Brix ayer</span></div><div><b>27.5 °C</b><span>ayer</span></div></div>
+  <p class="wf-small wf-muted">FER-T2-001 · desde el 24 sep (Aurelia) · formulación F-001 · ${chip('fermentando')}</p>
+  ${o.vacia ? '<div class="wf-state" style="margin:16px 0"><h2>Aún sin mediciones</h2><p class="wf-muted">Se mide todos los días. La primera es hoy.</p></div>' : `<h2 style="margin-top:8px">Mediciones</h2>${medTabla(o.anulada)}`}
+  <span class="wf-note">La más reciente arriba. Anular no borra: la fila queda tachada con el motivo (0017). Promedios calculados al vuelo por la vista mediciones_del_ciclo.</span>
+</div><aside>
+  <a class="wf-btn wf-btn--primary" href="#medir" data-wf-persist style="width:100%">Medir hoy</a>
+  <h3>Acciones</h3><div class="wf-actions" style="display:grid"><button class="wf-btn">Declarar lista</button><button class="wf-btn wf-btn--danger">Cerrar ciclo (tina vaciada)</button></div>
+  <span class="wf-note">Declarar lista: se puede seguir midiendo. Cerrar ciclo: irreversible, libera la tina; forma distinta y aparte (§ riesgo). El operador no ve estas dos.</span>
+</aside></div><div class="fe-barra"><a class="wf-btn wf-btn--primary" href="#medir">Medir hoy</a></div>`;
+const V = {
+  default: () => listaStd() + '<span class="wf-note">Se listan usos (ciclos abiertos), no tinas (§13.1). Orden por lo que hay que hacer hoy. «Día N» lo calcula el navegador desde started_at. Una primaria: Medir (FAB en compact, botón en cabecera en medium/expanded) → abre la primera de «toca medir hoy» con la tina cambiable en la cabecera.</span>',
+  loading: () => `${resumen('…', '…')}<div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:64px;border-radius:6px"></div>'.repeat(4)}</div>`,
+  empty: () => `<div class="wf-state"><h2>No hay tinas en uso</h2><p class="wf-muted">Cuando llenes una tina, aquí verás qué toca medir cada día.</p><button class="wf-btn wf-btn--primary" data-wf-persist>Llenar tinas (formulación)</button><p style="margin-top:12px"><button class="wf-btn wf-btn--quiet">Tina que ya fermentaba</button></p></div>`,
+  sintinas: () => `<div class="wf-state"><h2>Tu palenque aún no tiene tinas</h2><p class="wf-muted">Agrégalas en Configuración → Recursos y después llénalas desde aquí.</p><a class="wf-btn" href="#">Ir a Recursos</a></div><span class="wf-note">Sin tinas no hay nada que listar; el enlace es navegación (secundario), no la primaria de esta vista.</span>`,
+  hecho: () => `${resumen(4, 0)}<div class="fe-hecho"><b>Hoy ya mediste todas.</b><span class="wf-small wf-muted">Mañana vuelven a aparecer aquí.</span></div>${grupo('Ya medidas hoy', [T[0], T[1], T[2]].map(r => ({ ...r, ult: 'hoy 08:30 · 27 °C · 12 Brix · actividad 5' })))}${grupo('Listas o en vaciado', [T[3]])}${pie()}`,
+  offline: () => `<p class="fe-warn">Datos de <b>hace 15 min</b> (última vez con señal). Puedes medir: se guarda en el teléfono y se envía al reconectar.</p>${resumen(4, 2)}${grupo('Toca medir hoy', [T[0], T[1]])}${grupo('Ya medidas hoy', [T[2]])}${grupo('Listas o en vaciado', [T[3]])}${pie({ dis: true })}<span class="wf-note">Instantánea (shared/offline/instantanea.ts). Medir sigue habilitado (cola §8.3); formular, declarar lista y cerrar necesitan señal: deshabilitados con motivo en el banner.</span>`,
+  cola: () => `<p class="fe-warn"><b>Medición guardada · pendiente de enviar.</b> Se envía sola al volver la señal.</p>${resumen(4, 1)}${grupo('Toca medir hoy', [T[1]])}${grupo('Ya medidas hoy', [{ ...T[0], ult: 'hoy 08:40 · 28 °C · 11.9 Brix · actividad 6' }], { pend: true })}${grupo('Con fallo', [{ ...T[2], ult: 'hoy 07:10 · 26 °C · 19 Brix · actividad 3' }], { fallo: true })}${grupo('Listas o en vaciado', [T[3]])}${pie()}<span class="wf-note">El shell muestra «2 capturas pendientes · 1 falló» en el banner (useCola). Un fallo de dominio (aviso que pedía nota) no bloquea a las demás; «Corregir» abre la nota y reencola con la misma clave. Descartar solo en fallos.</span>`,
+  readonly: () => listaStd({ dis: true }),
+  operador: () => listaStd({ operador: true }) + '<span class="wf-note">Operador: mide y ve todo; no ve «Llenar tinas», «Tina que ya fermentaba», ni declarar lista / cerrar en el menú (rpc_guard 0017).</span>',
+  menu: () => `${resumen(4, 2)}${grupo('Toca medir hoy', [T[0]], { menu: true })}${grupo('', [T[1]])}${grupo('Ya medidas hoy', [T[2]])}${grupo('Listas o en vaciado', [T[3]])}${pie()}`,
+  long: () => `${resumen(2, 1)}${grupo('Toca medir hoy', [{ t: 'Tina de sabino número catorce de la fila del fondo junto al horno viejo', f: 'FER-T14-000123', l: 12500, d: 118, e: 'fermentando', ult: '3 sep 06:05 · 27.5 °C · 12.4 Brix · actividad 6' }])}${grupo('Listas o en vaciado', [{ t: 'Tina 1', f: 'FER-T1-001', l: 870, d: 21, e: 'lista', ult: '12 sep · 25 °C · 8.2 Brix · actividad 3' }])}${pie()}`,
+  detalle: () => detalle(),
+  detalle0: () => detalle({ vacia: true }),
+  anular: () => detalle({ anulada: true }),
+  cerrar: () => detalle(),
+  medir: () => `<div class="fe-medir">${cab(1, 3)}<div class="fe-big"><label for="t1">Temperatura</label><input class="wf-input" id="t1" inputmode="decimal" placeholder="27.5" autofocus><span class="u">°C · entre 0 y 100</span></div>${nav('Siguiente', true)}<span class="wf-note">Modo mínimo (ajuste de la empresa): Temperatura → Brix → Actividad → Revisar. Un número por pantalla, teclado numérico del teléfono, Siguiente en la barra del pulgar (compact). Atrás conserva lo escrito.</span></div>`,
+  medir3: () => `<div class="fe-medir">${cab(3, 3)}<div class="fe-big"><label>Actividad</label>${escala(4, ACT)}</div>${nav('Revisar')}<span class="wf-note">Escala 1–6 con etiqueta (§18 #1, CHECK del esquema). Seis botones de ≥44 px; la etiqueta del valor elegido se lee abajo (no solo el número). Dulzor y acidez usan la misma escala en modo completo.</span></div>`,
+  completo: () => `<div class="fe-medir">${cab(1, 5)}<div class="fe-big"><label>Temperatura · superficie</label><div class="fe-lect"><input class="wf-input" inputmode="decimal" value="27.5" aria-label="Lectura 1"><input class="wf-input" inputmode="decimal" value="27.8" aria-label="Lectura 2"><input class="wf-input" inputmode="decimal" placeholder="Lectura 3" aria-label="Lectura 3"></div><p class="fe-prom" aria-live="polite">Promedio: <b>27.7 °C</b> (2 de 3)</p></div>${nav('Siguiente', true)}<span class="wf-note">Modo completo: 5 pasos, un concepto cada uno — T. superficie (3) → T. fondo (3) → Brix superficie (3) → Brix fondo (3) → Actividad · Dulzor · Acidez. Promedio en vivo; el promedio nunca se guarda (cada lectura es una fila).</span></div>`,
+  revisar: () => `<div class="fe-medir">${cab(4, 4)}<h2 style="margin:0;font-size:16px">Revisar</h2><ul class="fe-res"><li><span>Temperatura</span><b>27.5 °C</b></li><li><span>Brix</span><b>19.0</b></li><li><span>Actividad</span><b>6 · muy activa</b></li><li><span>Cuándo</span><b>hoy 08:40</b></li></ul>
+    <div class="fe-aviso" role="alert"><b>Brix fuera del rango habitual (12–14).</b> Se guarda igual; escribe por qué.</div>
+    <div class="wf-field"><label for="nota">Nota (obligatoria por el aviso)</label><input class="wf-input" id="nota" placeholder="Ej. calor de mediodía, tina al sol"></div>
+    <div class="wf-field"><label for="foto">Foto (opcional)</label><input class="wf-input" id="foto" type="file" accept="image/*" capture="environment"></div>
+    ${nav('Guardar medición')}<span class="wf-note">El aviso se conoce ANTES de enviar (rangos de organization_settings en la instantánea): la nota se pide aquí y la RPC ya no falla con REQUIERE_NOTA. Si aun así falla (rangos cambiados), la cola marca «falló: pide nota» y Corregir vuelve aquí. Foto: reducida a 1600 px, viaja en la cola.</span></div>`,
+  guardada: () => `<div class="fe-medir"><div class="fe-hecho" role="status"><b>Medición guardada · pendiente de enviar</b><span class="wf-small">Tina 2 · día 3 · 08:40. Se envía sola cuando haya señal; la ves en la lista como «pendiente».</span></div><div class="wf-actions"><a class="wf-btn wf-btn--primary" href="#" data-wf-persist>Medir la siguiente (Tina 3)</a><a class="wf-btn" href="#">Volver a Fermentación</a></div><div class="fe-barra"><a class="wf-btn wf-btn--primary" href="#">Medir la siguiente (Tina 3)</a></div><span class="wf-note">Con señal el texto es «Guardada · enviada». La captura entra SIEMPRE por la cola (una sola ruta de escritura); el envío corre atrás. Seguir con la siguiente tina es la acción natural cuando quedan por medir.</span></div>`,
+  cerrado: () => `<div class="fe-medir">${cab(4, 4)}<div class="fe-alert" role="alert">Esta tina ya no está fermentando (el ciclo se cerró desde otro teléfono). No se guardó.</div><ul class="fe-res"><li><span>Temperatura</span><b>27.5 °C</b></li><li><span>Brix</span><b>12.2</b></li><li><span>Actividad</span><b>6</b></li></ul><div class="wf-actions"><a class="wf-btn wf-btn--primary" href="#" data-wf-persist>Volver a Fermentación</a></div><div class="fe-barra"><a class="wf-btn wf-btn--primary" href="#">Volver a Fermentación</a></div><span class="wf-note">NO_PERMITIDO del servidor traducido (traducirErrorRpc). Si pasó desde la cola, la fila queda en fallo con «Descartar».</span></div>`,
+  formular: () => `<form class="fe-form">
+    <fieldset><legend>Agave cocido</legend><div class="fe-asig"><div><b>AC-001</b><span class="sub"> · quedan 6,200 kg · horneada HOR-001</span></div><div class="wf-field"><label for="k1">Kilos</label><input class="wf-input" id="k1" inputmode="decimal" value="6200"></div></div><button class="wf-btn wf-btn--quiet" type="button">Agregar otro lote</button><div class="wf-field"><label>Molino</label><select class="wf-input"><option>Tahona</option></select></div></fieldset>
+    <fieldset><legend>Agua e insumos</legend><div class="fe-fila"><div class="wf-field"><label for="ag">Agua (L)</label><input class="wf-input" id="ag" inputmode="decimal" value="1900"></div><div class="wf-field"><label>Insumo (opcional)</label><select class="wf-input"><option>Pulque como inóculo · 20 L</option></select></div></div></fieldset>
+    <fieldset><legend>Reparto a tinas libres</legend><div class="fe-asig"><div><b>Tina 1</b><span class="sub"> · sabino · 1,500 L · libre</span></div><div class="wf-field"><label for="l1">Litros</label><input class="wf-input" id="l1" inputmode="decimal" value="1400"></div></div><div class="fe-asig"><div><b>Tina 2</b><span class="sub"> · sabino · 1,500 L · libre</span></div><div class="wf-field"><label for="l2">Litros</label><input class="wf-input" id="l2" inputmode="decimal" value="1400"></div></div><p class="wf-small wf-muted">Total 2,800 L · folios automáticos (FER-…) o propios</p></fieldset>
+    <fieldset><legend>Cuándo y cómo</legend><div class="fe-fila"><div class="wf-field"><label for="cu">¿Cuándo pasó?</label><input class="wf-input" id="cu" value="hoy 09:00"></div><div class="wf-field"><label for="me">Método / nota</label><input class="wf-input" id="me" value="Tahona con mula"></div></div></fieldset>
+    <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Registrar formulación</button><a class="wf-btn" href="#">Cancelar</a></div>
+    <div class="fe-barra"><button class="wf-btn wf-btn--primary" type="submit">Registrar formulación</button></div>
+    <span class="wf-note">Página, no hoja: es largo. Solo tinas SIN ciclo abierto (una por tina, regla dura). Errores: SALDO_INSUFICIENTE (kg), excede_capacidad (nota), sin señal (deshabilitado). Admin y productor.</span></form>`,
+  fermentaba: () => listaStd(),
+};
+const OV = {
+  menu: () => `<div class="fe-menu" role="menu"><button role="menuitem">Ver mediciones</button><button role="menuitem">Declarar lista</button><button role="menuitem">Cerrar ciclo (tina vaciada)</button></div>`,
+  anular: () => `<div class="wf-scrim"></div><div class="fe-dlg" role="dialog" aria-modal="true" aria-labelledby="an-t"><h2 id="an-t" style="margin:0">Anular la medición del día 3</h2><p class="wf-small wf-muted" style="margin:0">Queda tachada con tu nombre; no se borra.</p><div class="wf-field"><label for="mot">Motivo</label><input class="wf-input" id="mot" placeholder="Ej. dedo en el 7, era 27"></div><div class="wf-actions"><button class="wf-btn wf-btn--primary">Anular medición</button><button class="wf-btn">Cancelar</button></div></div>`,
+  cerrar: () => `<div class="wf-scrim"></div><div class="fe-dlg" role="dialog" aria-modal="true" aria-labelledby="ce-t"><h2 id="ce-t" style="margin:0">¿Cerrar el ciclo de la Tina 2?</h2><p style="margin:0">La Tina 2 queda <b>libre</b> y el lote FER-T2-001 termina con lo que quede (1,400 L). No se puede deshacer.</p><div class="wf-field"><label for="cn">Nota (opcional)</label><input class="wf-input" id="cn"></div><div class="wf-actions"><button class="wf-btn wf-btn--danger">Cerrar ciclo</button><button class="wf-btn wf-btn--primary">Cancelar</button></div><span class="wf-note">Irreversible: la destructiva va con forma distinta y la primaria es Cancelar.</span></div>`,
+  fermentaba: () => `<div class="wf-scrim"></div><aside class="fe-drawer" role="dialog" aria-modal="true" aria-labelledby="fb-t"><h2 id="fb-t" style="margin:0">Tina que ya fermentaba</h2><p class="wf-small wf-muted" style="margin:0">Para una tina llena antes de usar PULZ: abre un ciclo sin formulación.</p><div class="wf-field"><label>Tina (libre)</label><select class="wf-input"><option>Tina 3 · 1,500 L</option></select></div><div class="wf-field"><label for="fl">Litros</label><input class="wf-input" id="fl" inputmode="decimal" value="1300"></div><div class="wf-field"><label for="fc">¿Cuándo pasó?</label><input class="wf-input" id="fc" value="hoy 10:40"></div><div class="wf-actions"><button class="wf-btn wf-btn--primary">Registrar 1,300 L en Tina 3</button><button class="wf-btn">Cancelar</button></div><span class="wf-note">registrar_entrada('fermentado', tina) — mismo camino que el arranque (DUDAS #7). Requiere señal.</span></aside>`,
+};
+const TOP = {
+  detalle: () => topSub('Tina 2'), detalle0: () => topSub('Tina 2'), anular: () => topSub('Tina 2'), cerrar: () => topSub('Tina 2'),
+  medir: () => topSub('Medir', 'Cancelar'), medir3: () => topSub('Medir', 'Cancelar'), completo: () => topSub('Medir', 'Cancelar'), revisar: () => topSub('Medir', 'Cancelar'), guardada: () => topSub('Medir'), cerrado: () => topSub('Medir'),
+  formular: () => topSub('Llenar tinas'),
+};
+let S = { w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  const st = S.state;
+  const o = st === 'readonly' ? { dis: true, sinPrim: false } : st === 'operador' ? { operador: true } : st === 'sintinas' || st === 'empty' ? { sinPrim: true } : st === 'hecho' ? { sinPrim: true } : {};
+  const esLista = ['default','loading','empty','sintinas','hecho','offline','cola','readonly','operador','menu','long','fermentaba'].includes(st);
+  document.getElementById('wf-top').innerHTML = esLista ? topLista(o) : TOP[st]();
+  document.getElementById('wf-view').innerHTML = V[st]();
+  document.getElementById('wf-fab').innerHTML = esLista ? fab(o) : '';
+  document.getElementById('wf-overlay').innerHTML = OV[st] ? OV[st]() : '';
+  const banners = { offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puedes medir; lo demás necesita señal.</p>', readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar, no registrar.</p>', cola: '<p class="wf-banner" role="status"><b>2 capturas pendientes de enviar · 1 falló.</b> <button class="wf-btn wf-btn--quiet" style="min-height:44px">Reintentar</button></p>' };
+  document.getElementById('wf-banner').innerHTML = banners[st] || '';
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>

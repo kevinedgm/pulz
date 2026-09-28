@@ -320,10 +320,12 @@
         "on",
         "draft",
         "off",
-        "partial"
+        "partial",
+        "pending",
+        "failed"
       ],
       "anatomy": "punto de forma (relleno / contorno / discontinuo / tachado) + texto; semánticos --ok/--pend/--late/--info solo como refuerzo, nunca únicos",
-      "rules": "Usos aprobados: estado de miembro (activo=on, invitado=draft, suspendido=off). Nunca color solo (uso bajo el sol)."
+      "rules": "Usos aprobados: estado de miembro (activo=on, invitado=draft, suspendido=off). Nunca color solo (uso bajo el sol). fermentacion/r01: pending (pendiente de enviar: discontinuo + texto) y failed (falló: borde doble + texto) para la cola offline."
     },
     "qa": {
       "candidate": true,
@@ -455,9 +457,10 @@
       "anatomy": "franja arriba del contenido, role=status, título en negrita + una frase; persistente mientras dure la condición; sin cerrar",
       "variants": [
         "offline",
-        "readonly"
+        "readonly",
+        "cola"
       ],
-      "rules": "Fondo --pend-bg/--info-bg + texto --text (contraste alto); nunca solo color. No se apila con más de un banner."
+      "rules": "Fondo --pend-bg/--info-bg + texto --text (contraste alto); nunca solo color. No se apila con más de un banner. fermentacion/r01: variante cola («N pendientes · M fallaron») con slot de acción (Reintentar), única excepción a «sin botón». Prioridad: offline > cola > readonly."
     },
     "qa": {
       "candidate": true,
@@ -1044,7 +1047,7 @@
         "teclado-virtual",
         "zoom200"
       ],
-      "rules": "Una sola lista de destinos (Destino[]) con dos presentaciones; la ruta y el foco del contenido se conservan al cambiar de modo. Configuración solo con role=admin (no se muestra deshabilitada); por URL sin admin → state-block denied. Sin shell en las pantallas de acceso. brand_color solo como línea de acento de 4px en la cabecera. Tema: data-theme (sistema/claro/oscuro) persistido en localStorage; por defecto prefers-color-scheme. Teclado virtual en compact: bottom-nav oculta mientras un campo tiene foco (visualViewport). reduced-motion: capas sin deslizamiento."
+      "rules": "Una sola lista de destinos (Destino[]) con dos presentaciones; la ruta y el foco del contenido se conservan al cambiar de modo. Configuración solo con role=admin (no se muestra deshabilitada); por URL sin admin → state-block denied. Sin shell en las pantallas de acceso. brand_color solo como línea de acento de 4px en la cabecera. Tema: data-theme (sistema/claro/oscuro) persistido en localStorage; por defecto prefers-color-scheme. Teclado virtual en compact: bottom-nav oculta mientras un campo tiene foco (visualViewport). reduced-motion: capas sin deslizamiento. fermentacion/r01: banner de cola (useCola) y FAB con acción de la página (app/fab.ts)."
     },
     "qa": {
       "candidate": true,
@@ -2141,5 +2144,290 @@
         ]
       }
     }
+  },
+  "big-number-field": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/fermentacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/shared/ui/CampoGrande.vue",
+    "behavior": "../../apps/web/src/shared/ui/CampoGrande.vue",
+    "dependencies": [
+      "number-field"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "number-field en grande: etiqueta, control 2.75rem centrado tabular, unidad y rango como texto debajo",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "rules": "Valor number|null; inputmode decimal|numeric; sin spinners; valida al salir (min/max → error). Para capturar UN número por pantalla con una mano (§13.2 #4). Hereda number-field."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/CampoGrande.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "scale-choice": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/fermentacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/shared/ui/EscalaOpciones.vue",
+    "behavior": "../../apps/web/src/shared/ui/EscalaOpciones.vue",
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "radiogroup de valores enteros consecutivos (min..max) con etiqueta por valor; botones iguales ≥44px en una fila; etiqueta del valor elegido en aria-live",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "sin valor"
+      ],
+      "rules": "modelValue number|null. Flechas mueven la selección. Selección por forma (borde 3px + fondo), nunca solo color. Escala 1–6 de actividad/dulzor/acidez (§18 #1, CHECK del esquema)."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/EscalaOpciones.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "datetime-field": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/fermentacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/shared/ui/CampoCuando.vue",
+    "behavior": "../../apps/web/src/shared/ui/CampoCuando.vue",
+    "dependencies": [
+      "text-field"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "«¿Cuándo pasó?» con estado ahora (por defecto) o fecha y hora elegidas (datetime-local nativo) y botón cambiar/ahora",
+      "states": [
+        "ahora",
+        "elegida",
+        "error (futuro)",
+        "disabled"
+      ],
+      "rules": "modelValue string|null (ISO local; null = ahora al guardar). Nunca futuro: error al salir. Toda captura del proceso lo lleva (§3 operación: cuándo pasó ≠ cuándo se registró)."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/CampoCuando.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "step-flow": {
+    "kind": "pattern",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/fermentacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/shared/ui/FlujoPasos.vue",
+    "behavior": "../../apps/web/src/shared/ui/FlujoPasos.vue",
+    "dependencies": [
+      "button"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "cabecera fija (contexto por slot + «Paso n de N» role=status) · un paso visible (slot) · barra Atrás/Siguiente",
+      "adaptive": "compact: barra fija sobre la navegación inferior (zona del pulgar); medium/expanded: bajo el contenido, centrado a 520px. Misma instancia.",
+      "states": [
+        "primer paso (Cancelar)",
+        "intermedio",
+        "último (primaria con verbo)",
+        "ocupado"
+      ],
+      "rules": "Una sola primaria. Atrás conserva valores (el consumidor guarda el estado). El foco va al primer control del paso al cambiar. Un concepto por paso."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/FlujoPasos.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "soft-warning-note": {
+    "kind": "pattern",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/fermentacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/shared/ui/AvisoNota.vue",
+    "behavior": "../../apps/web/src/shared/ui/AvisoNota.vue",
+    "dependencies": [
+      "text-field"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "aviso blando (título en negrita + frase, borde 2px, role=alert al aparecer) + campo de nota obligatoria mientras aplique",
+      "states": [
+        "oculto",
+        "aviso sin nota (primaria bloqueada)",
+        "aviso con nota"
+      ],
+      "rules": "Textos por código en AVISOS (errores.ts). Se conoce ANTES de enviar cuando la interfaz tiene los rangos; si el servidor responde REQUIERE_NOTA:<código>, la misma pieza aparece con ese código (rama Corregir de la cola). La nota viaja como p_nota."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/AvisoNota.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "fermentacion": {
+    "kind": "product-application",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/fermentacion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/modules/fermentacion/pages/FermentacionPage.vue",
+    "behavior": "../../apps/web/src/modules/fermentacion/pages/FermentacionPage.vue",
+    "dependencies": [
+      "app-shell",
+      "page-header",
+      "fab",
+      "list-stack",
+      "row-menu",
+      "state-block",
+      "task-layer",
+      "button",
+      "big-number-field",
+      "scale-choice",
+      "datetime-field",
+      "step-flow",
+      "soft-warning-note",
+      "status-chip",
+      "banner",
+      "number-field",
+      "select",
+      "text-field"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "screens": [
+        "usos de tinas (toca medir hoy / ya medidas / listas o en vaciado) + FAB Medir",
+        "uso de tina (KPIs, mediciones, anular, declarar lista, cerrar ciclo)",
+        "medición por pasos (mínimo 3, completo 5) + revisar (aviso Brix, nota, foto) → cola",
+        "formulación (llenar tinas)",
+        "tina que ya fermentaba (capa)"
+      ],
+      "rules": "Toda medición entra por la cola (una sola ruta de escritura) con idempotency_key y occurred_at; sin señal la lista viene de la instantánea. Día del ciclo y «hoy» se calculan en el navegador. Operador: mide y ve; no anula, declara, cierra ni formula (rpc_guard 0017/0016). Cerrar ciclo: diálogo destructivo con Cancelar como primaria."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/modules/fermentacion/pages/FermentacionPage.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
   }
 }
