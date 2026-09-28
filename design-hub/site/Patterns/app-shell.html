@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shell de la app · Design Hub PULZ</title>
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../assets/hub-shell.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="hub">
+  <nav class="hub-side" aria-label="Design Hub"><a class="hub-side__marca" href="../index.html">Design Hub · PULZ</a><h2>Foundations</h2><ul><li><a href="../Foundations/Icons.html">Iconos</a></li><li><a href="../Foundations/Tokens.html">Tokens</a></li></ul><h2>Components</h2><ul><li><a href="../Components/bottom-nav.html">Navegación inferior<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/brand-block.html">Bloque de marca<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/button.html">Botón<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/color-field.html">Campo de color<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/fab.html">Botón flotante<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/file-picker.html">Selector de archivo<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/number-field.html">Campo numérico<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/page-header.html">Cabecera de página<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/password-field.html">Campo de contraseña<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/row-menu.html">Menú de fila<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/segmented-choice.html">Segmento de opciones<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/select.html">Select<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/side-nav.html">Menú lateral<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/status-chip.html">Chip de estado<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/switch.html">Interruptor<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/text-field.html">Campo de texto<span class="hub-mad hub-mad--candidate">candidate</span></a></li></ul><h2>Patterns</h2><ul><li><a href="../Patterns/app-shell.html" aria-current="page">Shell de la app<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/banner.html">Aviso<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/list-stack.html">Lista apilada<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/state-block.html">Bloque de estado<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/task-layer.html">Capa de tarea<span class="hub-mad hub-mad--candidate">candidate</span></a></li></ul><h2>Screens</h2><ul><li><a href="../Screens/acceso-bienvenida.html">Bienvenida por enlace<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/acceso-cambio-contrasena.html">Cambio obligatorio de contraseña<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/acceso-portal.html">Portal e inicio de sesión (+ 404)<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/arranque.html">Primer arranque «¿Qué tienes hoy?»<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/configuracion.html">Configuración<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/equipo.html">Equipo<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/inicio.html">Inicio<span class="hub-mad hub-mad--candidate">candidate</span></a></li></ul><h2>QA</h2><ul><li><a href="../qa.html">Evidencia y facetas</a></li></ul></nav>
+  <div class="hub-col">
+    <header class="hub-top">
+      <button class="hub-menu" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="hub-drawer">Menú</button>
+      <nav class="hub-crumb" aria-label="Ruta"><a href="../index.html">Inicio</a> / Patterns / <b>Shell de la app</b></nav>
+    </header>
+    <main class="hub-body" id="contenido" tabindex="-1">
+      <article class="hub-main"><h1>Shell de la app <code>app-shell</code></h1><p class="hub-meta"><span>Tipo <b>pattern</b></span><span>Estado <span class="hub-mad hub-mad--candidate">candidate</span></span><span>Versión <b>0.2.0</b></span><span>Owner <b>lima</b></span><span>Ronda <b>lab/shell/r01</b></span><span>Actualizado <b>2026-09-27</b></span></p><table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valor (fuente)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tipo · Estado · Versión</td>
+<td>pattern · <strong>candidate 0.2.0</strong> · owner lima (registry)</td>
+</tr>
+<tr>
+<td>Ronda de origen</td>
+<td><code>lab/shell/r01</code></td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>apps/web/src/app/AppShell.vue</code> (+ <code>CapaMas.vue</code>, <code>CapaCuenta.vue</code>, <code>destinos.ts</code>, <code>tema.ts</code>, <code>App.vue</code>)</td>
+</tr>
+<tr>
+<td>Demo real</td>
+<td>las pantallas reales (dev server) — el Hub muestra sus piezas: <code>#page-header</code>, <code>#side-nav</code>, <code>#bottom-nav</code>, <code>#fab</code></td>
+</tr>
+<tr>
+<td>Pruebas</td>
+<td><code>shared/ui/__tests__/shell.test.ts</code> (piezas y tema) · <code>qa/evidencia-shell.mjs</code></td>
+</tr>
+<tr>
+<td>Evidencia</td>
+<td><code>qa/evidence/shell-r01/*</code> (inicio, mas, configuración, fermentación, cuenta, equipo, sin permiso × 4 anchos × 2 temas)</td>
+</tr>
+</tbody></table>
+<h2 id="para-que">Para qué</h2>
+<p>Que cualquier persona llegue a la etapa que le toca en ≤2 toques y sepa
+siempre en qué empresa y con qué permisos está. El menú sigue al proceso
+(§13.1): Inicio · Maguey · Horneado · Fermentación · Destilación · Granel ·
+Trazabilidad · Configuración (solo admin).</p>
+<h2 id="anatomia">Anatomía</h2>
+<p><code>CabeceraPagina</code> (línea de acento de la empresa + botón de empresa → Cuenta +
+título del destino) · <code>Aviso</code> (sin conexión / solo lectura) · <code>main</code> con
+<code>router-view</code> · navegación: <code>NavLateral</code> (≥600) o <code>NavInferior</code> (&lt;600) ·
+hueco de <code>BotonFlotante</code> por destino · capas <code>Más</code> y <code>Tu cuenta</code> (<code>CapaTarea</code>).</p>
+<h2 id="modos">Modos</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>compact (&lt;600)</th>
+<th>medium (600–1023)</th>
+<th>expanded (≥1024)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Navegación</td>
+<td>barra inferior: Inicio · Fermentación · Destilación · Granel + <strong>Más</strong> (Maguey · Horneado · Trazabilidad · Configuración*)</td>
+<td>menú lateral 200 con los 8</td>
+<td>menú lateral 240 con empresa arriba y cuenta al pie</td>
+</tr>
+<tr>
+<td>Cabecera</td>
+<td>empresa (→ Cuenta) + título</td>
+<td>empresa + título</td>
+<td><strong>solo título</strong></td>
+</tr>
+<tr>
+<td>Cuenta</td>
+<td>hoja inferior</td>
+<td>drawer</td>
+<td>drawer</td>
+</tr>
+<tr>
+<td>FAB</td>
+<td>56 px, abajo a la derecha; oculto con capas, solo lectura y en Inicio/Configuración</td>
+<td>no existe</td>
+<td>no existe</td>
+</tr>
+</tbody></table>
+<p>* solo <code>role = admin</code>; nunca se muestra deshabilitada. Por URL sin admin →
+<code>state-block denied</code> &quot;Solo el administrador puede ver la configuración&quot;.</p>
+<h2 id="comportamiento">Comportamiento</h2>
+<ul>
+<li>Una sola lista de destinos (<code>app/destinos.ts</code>) con dos presentaciones; la
+ruta se conserva al cambiar de tamaño (misma instancia).</li>
+<li>Tema: <code>data-theme</code> en <code>&lt;html&gt;</code> (claro/oscuro) o sin atributo (sistema);
+se guarda en <code>localStorage pulz:tema</code> y se aplica <strong>antes</strong> de montar.</li>
+<li>Teclado virtual (compact): la barra se oculta mientras un campo tiene foco
+o <code>visualViewport</code> se encoge al 75 %.</li>
+<li>Al elegir un destino desde una capa se espera el <code>popstate</code> del cierre y
+luego se navega (evita volver a la ruta anterior).</li>
+<li>Cambiar de empresa: enlace en Cuenta → <code>/e/&lt;slug&gt;/inicio</code> de la otra
+(las canceladas no aparecen; las vencidas llevan chip &quot;solo lectura&quot;).</li>
+<li>Sin shell en portal, bienvenida, cambio obligatorio y 404 (<code>meta.shell</code>).</li>
+</ul>
+<h2 id="accesibilidad">Accesibilidad</h2>
+<p>Una sola <code>nav[aria-label=&quot;Navegación principal&quot;]</code> por modo; destino actual
+por <code>aria-current=&quot;page&quot;</code> (borde + negrita); targets 44/48/56 px; capas con
+<code>role=dialog</code>, foco atrapado y devuelto; <code>main#contenido</code> enfocable.</p>
+<h2 id="api-real">API real</h2>
+<p><code>meta</code> de ruta: <code>shell: true</code>, <code>destino</code>, <code>titulo</code>, <code>fab?: { etiqueta, icono? }</code>.
+<code>destinosVisibles(esAdmin)</code>, <code>itemsNav(slug, destinos)</code>, <code>destinoDeRuta(nombre)</code>.
+<code>useTema()</code> → <code>{ tema, aplicarTema }</code>; <code>aplicarTemaGuardado()</code>.</p>
+<h2 id="qa-y-ciclo-de-vida">QA y ciclo de vida</h2>
+<p>viewports runtime-verified (4 anchos × 2 temas, 3 roles) · teclado
+runtime-verified (Esc en capas, navegación por enlaces) · touch emulado ·
+zoom 200 % aproximado · contraste heredado de tokens. <strong>Pendiente para
+Stable:</strong> teclado virtual real (iOS/Android), lector de pantalla, cambio de
+empresa con dos membresías reales (la semilla no tiene), harden/audit.</p>
+<h2 id="facetas-de-qa-registry">Facetas de QA (registry)</h2><table><thead><tr><th>Faceta</th><th>Nivel de evidencia</th></tr></thead><tbody><tr><td>visual</td><td>screenshots-reviewed</td></tr><tr><td>viewports</td><td>runtime-verified</td></tr><tr><td>keyboard</td><td>runtime-verified</td></tr><tr><td>touch</td><td>runtime-verified-emulated</td></tr><tr><td>zoom200</td><td>runtime-verified-approx · root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo</td></tr><tr><td>contrast</td><td>passed-with-reviewed-findings</td></tr><tr><td>longText</td><td>static-reviewed</td></tr><tr><td>states</td><td>runtime-verified</td></tr></tbody></table><p>Candidate: <b>sí</b> · Stable: <b>no</b></p></article>
+      <aside class="hub-toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#para-que">Para qué</a></li><li><a href="#anatomia">Anatomía</a></li><li><a href="#modos">Modos</a></li><li><a href="#comportamiento">Comportamiento</a></li><li><a href="#accesibilidad">Accesibilidad</a></li><li><a href="#api-real">API real</a></li><li><a href="#qa-y-ciclo-de-vida">QA y ciclo de vida</a></li><li><a href="#facetas-de-qa-registry">Facetas de QA (registry)</a></li></ol></aside>
+    </main>
+  </div>
+</div>
+<div class="hub-drawer" id="hub-drawer" role="dialog" aria-modal="true" aria-label="Design Hub">
+  <button class="hub-drawer__fondo" type="button" aria-label="Cerrar menú" tabindex="-1"></button>
+  <div class="hub-drawer__panel"><div style="display:flex;justify-content:flex-end"><button class="hub-drawer__cerrar" type="button">Cerrar</button></div><a class="hub-side__marca" href="../index.html">Design Hub · PULZ</a><h2>Foundations</h2><ul><li><a href="../Foundations/Icons.html">Iconos</a></li><li><a href="../Foundations/Tokens.html">Tokens</a></li></ul><h2>Components</h2><ul><li><a href="../Components/bottom-nav.html">Navegación inferior<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/brand-block.html">Bloque de marca<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/button.html">Botón<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/color-field.html">Campo de color<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/fab.html">Botón flotante<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/file-picker.html">Selector de archivo<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/number-field.html">Campo numérico<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/page-header.html">Cabecera de página<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/password-field.html">Campo de contraseña<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/row-menu.html">Menú de fila<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/segmented-choice.html">Segmento de opciones<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/select.html">Select<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/side-nav.html">Menú lateral<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/status-chip.html">Chip de estado<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/switch.html">Interruptor<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Components/text-field.html">Campo de texto<span class="hub-mad hub-mad--candidate">candidate</span></a></li></ul><h2>Patterns</h2><ul><li><a href="../Patterns/app-shell.html" aria-current="page">Shell de la app<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/banner.html">Aviso<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/list-stack.html">Lista apilada<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/state-block.html">Bloque de estado<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Patterns/task-layer.html">Capa de tarea<span class="hub-mad hub-mad--candidate">candidate</span></a></li></ul><h2>Screens</h2><ul><li><a href="../Screens/acceso-bienvenida.html">Bienvenida por enlace<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/acceso-cambio-contrasena.html">Cambio obligatorio de contraseña<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/acceso-portal.html">Portal e inicio de sesión (+ 404)<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/arranque.html">Primer arranque «¿Qué tienes hoy?»<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/configuracion.html">Configuración<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/equipo.html">Equipo<span class="hub-mad hub-mad--candidate">candidate</span></a></li><li><a href="../Screens/inicio.html">Inicio<span class="hub-mad hub-mad--candidate">candidate</span></a></li></ul><h2>QA</h2><ul><li><a href="../qa.html">Evidencia y facetas</a></li></ul></div>
+</div>
+<script src="../assets/hub-navigation.js"></script>
+</body>
+</html>

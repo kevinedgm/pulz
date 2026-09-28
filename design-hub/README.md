@@ -4,24 +4,31 @@ Referencia operativa del sistema de interfaz de PULZ. Documenta **solo lo que
 existe en el código y pasó una compuerta de lima**; el estado de cada pieza
 sale de [`system/registry.json`](system/registry.json), nunca de esta página.
 
-> Hub en Markdown. La estructura HTML (shell, navegación, inicio) está
-> encargada a kiwi en [`lab/hub/encargo-mora.md`](lab/hub/encargo-mora.md);
-> mientras tanto, estas páginas son el contenido verificado que ese shell
-> mostrará.
+> Las fichas se escriben en Markdown (esta carpeta) y el **sitio** se genera
+> con `pnpm build:hub-site` en `site/` (ronda `lab/hub/r01`, pieza
+> `hub-shell`): `python3 -m http.server 4321` en la raíz del repo →
+> `http://localhost:4321/design-hub/site/`. El HTML de `site/` no se edita a
+> mano: cambia la ficha y vuelve a generar.
 
 ## Cómo se usa
 
 - **Ver una pieza funcionando:** `pnpm --filter @pulz/web build:hub` construye
   [`Components/demo/`](Components/demo/index.html) desde el código real
-  (`apps/web/src/shared/ui/`); se sirve con `python3 -m http.server 4321` en
-  la raíz → `http://localhost:4321/design-hub/Components/demo/#<id>`.
+  (`apps/web/src/shared/ui/`); en el sitio cada ficha de componente o patrón
+  la embebe (`?pieza=<id>&solo=1`) y enlaza
+  `http://localhost:4321/design-hub/Components/demo/#<id>`.
 - **Ver las pantallas reales:** dev server (`.claude/launch.json` → `web`) con
-  los usuarios de `supabase/seed.sql`.
-- **Evidencia:** [`qa/evidence/acceso-r01/`](qa/evidence/acceso-r01/) —
-  104 capturas, y [`qa/evidence/shell-r01/`](qa/evidence/shell-r01/) — 56
-  capturas; 1440/1024/768/390 × claro/oscuro, generadas por
-  `qa/evidencia-acceso.mjs` y `qa/evidencia-shell.mjs`; zoom 200 %
-  aproximado por `qa/zoom-acceso.mjs`.
+  los usuarios de `supabase/seed.sql`. En el sitio, cada ficha de pantalla
+  trae la galería de sus capturas.
+- **Evidencia (1440/1024/768/390 × claro/oscuro):**
+  [`qa/evidence/acceso-r01/`](qa/evidence/acceso-r01/) 104 ·
+  [`qa/evidence/shell-r01/`](qa/evidence/shell-r01/) 50 ·
+  [`qa/evidence/configuracion-r01/`](qa/evidence/configuracion-r01/) 67 ·
+  [`qa/evidence/arranque-r01/`](qa/evidence/arranque-r01/) 13 ·
+  [`qa/evidence/hub-r01/`](qa/evidence/hub-r01/) 36 (el sitio mismo) ·
+  [`qa/evidence/fase4-e2e/`](qa/evidence/fase4-e2e/) 9; generadas por
+  `qa/evidencia-*.mjs`; zoom 200 % aproximado por `qa/zoom-acceso.mjs`;
+  enlaces del sitio por `qa/enlaces-hub.mjs`.
 
 ## Madurez (registry, 2026-09-27)
 
@@ -32,8 +39,9 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
 | stable | contrato aprobado explícitamente por el dueño | — (ninguna todavía) |
 
 Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
-[`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/) y
-[`lab/configuracion/r01`](lab/configuracion/r01/) y [`lab/arranque/r01`](lab/arranque/r01/).
+[`lab/acceso/r01`](lab/acceso/r01/), [`lab/shell/r01`](lab/shell/r01/),
+[`lab/configuracion/r01`](lab/configuracion/r01/), [`lab/arranque/r01`](lab/arranque/r01/)
+y [`lab/hub/r01`](lab/hub/r01/) (el shell de este sitio, `hub-shell`).
 
 ## Foundations
 

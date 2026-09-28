@@ -30,10 +30,12 @@ type_law: >
 
 hub_root: design-hub
 hub_layout:
-  - Foundations/{Color,Type,Icons,Tokens}
+  - Foundations/{Tokens,Icons}      # Color y Type viven dentro de Tokens (2026-09-27)
   - Components
   - Patterns
-  - Responsive/{Mobile,Tablet,Desktop}
+  - Screens                         # product-application (mora, 2026-09-27)
+  - QA                              # evidencia por ronda y facetas del registry
+  # Responsive/{Mobile,Tablet,Desktop} se retiró en hub/r01: el rango vive en cada ficha
 
 registry_path: design-hub/system/registry.json
 
@@ -122,11 +124,9 @@ coco:
   component_doc_standard: # orden de secciones de la página de componente, o VACÍO
 
 mora:
-  # Resuelto por mora el 2026-09-27 (ronda acceso/r01). Rutas reales, no ejemplos.
+  # Resuelto por mora el 2026-09-27 (acceso/r01); shell HTML desde hub/r01. Rutas reales, no ejemplos.
   doc_standard:        # VACÍO = el mínimo interno de mora (Header → Overview → … → QA/Lifecycle)
-  doc_shell:           # NO EXISTE todavía: el Hub no tiene shell HTML. Las fichas son Markdown
-                       # (contenido de mora); la estructura HTML la define kiwi con el encargo
-                       # design-hub/lab/hub/encargo-mora.md. No se inventa un shell paralelo.
-  serve_command: "python3 -m http.server 4321"   # desde la raíz del repo (.claude/launch.json → hub)
-  coverage_script:     # VACÍO: no hay censo automático; el registry es el censo
-  hub_preview: "design-hub/Components/demo/index.html#<id> — demo construida desde el código real con `pnpm --filter @pulz/web build:hub`; capturas en design-hub/qa/evidence/<ronda>/"
+  doc_shell: "design-hub/assets/hub-shell.css + design-hub/assets/hub-navigation.js (pieza `hub-shell`, candidate 0.2.0); el sitio design-hub/site/ se GENERA con `pnpm build:hub-site` (design-hub/scripts/build-hub.mjs, marked) desde README.md + fichas Markdown + registry.json — el HTML no se edita a mano"
+  serve_command: "python3 -m http.server 4321"   # desde la raíz del repo (.claude/launch.json → hub) → http://localhost:4321/design-hub/site/
+  coverage_script:     # VACÍO: no hay censo automático; el registry es el censo (qa/enlaces-hub.mjs comprueba que el sitio no tenga enlaces rotos)
+  hub_preview: "en el sitio, cada ficha embebe la demo real (design-hub/Components/demo/index.html?pieza=<id>&solo=1, construida con `pnpm --filter @pulz/web build:hub`) o la galería de design-hub/qa/evidence/<ronda>/ para pantallas"

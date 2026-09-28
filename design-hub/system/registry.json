@@ -2062,5 +2062,84 @@
         ]
       }
     }
+  },
+  "hub-shell": {
+    "kind": "template",
+    "status": "candidate",
+    "owner": "lima",
+    "sourceRound": "lab/hub/r01",
+    "documentation": "../README.md",
+    "demo": "../site/index.html",
+    "source": "../assets/hub-shell.css",
+    "behavior": "../assets/hub-navigation.js",
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "sidebar persistente 260px (≥1024) / barra superior + drawer (<1024) con una sola jerarquía (Foundations · Components · Patterns · Screens · QA) · breadcrumb · contenido generado desde Markdown (marked) con header de metadata del registry · 'En esta página' derivado de los h2 · preview por iframe a la demo real (?pieza=<id>&solo=1) o galería de capturas de evidencia · chip de madurez por texto + forma · 404 propio",
+      "states": [
+        "default",
+        "drawer abierto",
+        "deprecated (banner 'Reemplazada por…', fuera de la navegación)",
+        "sección vacía",
+        "404",
+        "demo no disponible (enlace directo)"
+      ],
+      "rules": "El sitio design-hub/site/ se GENERA (design-hub/scripts/build-hub.mjs) desde README.md, las fichas y registry.json: el HTML no se edita a mano. Hoja propia design-hub/assets/hub-shell.css con tokens.css; nunca CSS copiado de componentes. Enlaces del sidebar 36px (excepción declarada: mínimo WCAG 24); controles principales 44px. Esc cierra el drawer y devuelve el foco. No adopta la navegación del producto. Cada cambio de ficha o de registry se acompaña de `pnpm build:hub-site` y del site/ regenerado en el mismo commit."
+    },
+    "qa": {
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "not-run",
+        "caveat": "tooling interno; queda para Stable"
+      },
+      "contrast": "inherited-from-tokens",
+      "longText": "runtime-verified",
+      "states": "runtime-verified-partial"
+    },
+    "refinement": {
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "static-html",
+      "path": "design-hub/site/"
+    },
+    "version": "0.2.0",
+    "replacedBy": null,
+    "updated": "2026-09-27",
+    "files": [
+      "../assets/hub-shell.css",
+      "../assets/hub-navigation.js",
+      "../scripts/build-hub.mjs",
+      "../qa/evidencia-hub.mjs",
+      "../qa/enlaces-hub.mjs"
+    ],
+    "evidence": "../qa/evidence/hub-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/hub/r01/coco-declaracion.md",
+          "../lab/hub/r01/mora-declaracion.md",
+          "../lab/hub/r01/lima-compuerta.md",
+          "../qa/evidence/hub-r01/"
+        ],
+        "findings": [
+          "deprecated y sección vacía probados solo en el wireframe (sin caso real)",
+          "alto del iframe fijo por rango (LOW, sin acción)"
+        ]
+      }
+    }
   }
 }

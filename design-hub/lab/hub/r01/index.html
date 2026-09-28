@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Design Hub (shell, inicio, fichas) · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.hb-shell{display:grid;grid-template-columns:260px 1fr;min-height:640px}
+.hb-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3);overflow:auto}
+.hb-side h2{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-g6);margin:var(--wf-s4) 0 var(--wf-s1)}
+.hb-side ul{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+.hb-side a{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:36px;padding:0 10px;border-radius:6px;text-decoration:none;font-size:14px;border:2px solid transparent}
+.hb-side a[aria-current="page"]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.hb-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:52px;padding:0 var(--wf-s4);border-bottom:1px solid var(--wf-g3)}
+.hb-top .menu{display:none;min-height:44px}
+.hb-crumb{font-size:13px;color:var(--wf-g6)}
+.hb-body{display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:var(--wf-s6);padding:var(--wf-s5) var(--wf-s6);min-width:0}
+.hb-main{min-width:0}
+.hb-main pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.hb-main table{display:block;overflow-x:auto;max-width:100%}
+.hb-main code{overflow-wrap:anywhere}
+.hb-toc{position:sticky;top:12px;align-self:start;font-size:13px}
+.hb-toc h2{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-g6);margin:0 0 6px}
+.hb-toc ol{margin:0;padding-left:16px;display:grid;gap:2px}
+.hb-toc a,.hb-preview .bar a,.hb-404 a,.hb-main a{display:inline-block;min-height:24px;line-height:24px}
+.hb-meta{display:flex;flex-wrap:wrap;gap:var(--wf-s2) var(--wf-s4);font-size:13px;color:var(--wf-g6);margin:0 0 var(--wf-s4)}
+.hb-meta b{color:var(--wf-g9)}
+.hb-mad{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.hb-mad::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.hb-mad--candidate::before{background:currentColor}
+.hb-mad--draft{border-style:dashed}
+.hb-mad--stable::after{content:"✓";font-size:10px}
+.hb-mad--deprecated{text-decoration:line-through}
+.hb-preview{border:1px solid var(--wf-g3);border-radius:var(--wf-r);overflow:hidden;background:var(--wf-g1)}
+.hb-preview .bar{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;font-size:12px;border-bottom:1px solid var(--wf-g3);background:var(--wf-g0)}
+.hb-preview .frame{height:220px;display:grid;place-items:center;color:var(--wf-g6);font-size:13px;background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px)}
+.hb-gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--wf-s2)}
+.hb-gal .wf-img{aspect-ratio:3/4}
+.hb-mapa{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--wf-s3)}
+.hb-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);display:grid;gap:4px}
+.hb-card ul{list-style:none;margin:0;padding:0}
+.hb-card li{display:flex;justify-content:space-between;align-items:center;min-height:32px;font-size:14px;border-top:1px solid var(--wf-g2)}
+.hb-drawer{position:absolute;top:0;bottom:0;left:0;width:min(300px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.hb-404{text-align:center;padding:var(--wf-s7) var(--wf-s4)}
+@container wf (max-width: 1023px){
+  .hb-shell{grid-template-columns:1fr}
+  .hb-shell>.hb-side{display:none}
+  .hb-top .menu{display:inline-flex}
+  .hb-body{grid-template-columns:1fr;padding:var(--wf-s4)}
+  .hb-toc{position:static;border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s3)}
+  .hb-gal{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hb-mapa{grid-template-columns:1fr}
+}
+@container wf (max-width: 599px){
+  .hb-body{padding:var(--wf-s4)}
+  .hb-meta{flex-direction:column;gap:4px}
+}
+</style>
+</head>
+<body class="wf">
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>HUB · r01 · F2</strong>
+  <fieldset><legend>Página</legend>
+    <button data-s="inicio" aria-pressed="true">1 Inicio</button>
+    <button data-s="componente" aria-pressed="false">2 Ficha de componente</button>
+    <button data-s="pantalla" aria-pressed="false">3 Ficha de pantalla</button>
+    <button data-s="qa" aria-pressed="false">4 QA</button>
+  </fieldset>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Default</option>
+      <option value="drawer">Menú abierto (drawer, &lt;1024)</option>
+      <option value="deprecated">Pieza deprecated</option>
+      <option value="empty">Sección sin piezas (vacío)</option>
+      <option value="notfound">404 del sitio (error)</option>
+      <option value="long">Contenido largo</option>
+      <option value="sindemo">Demo no disponible (servidor apagado)</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="hb-shell">
+      <nav class="hb-side" aria-label="Design Hub" id="wf-side"></nav>
+      <div style="min-width:0;display:flex;flex-direction:column">
+        <header class="hb-top" id="wf-top"></header>
+        <main class="hb-body" id="wf-view" tabindex="-1"></main>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+<script>
+const GRUPOS = [
+  ['Foundations', ['Tokens', 'Iconos']],
+  ['Components', ['Botón', 'Campo de texto', 'Campo de contraseña', 'Segmento de opciones', 'Chip de estado', 'Menú de fila', 'Cabecera de página', 'Menú lateral', 'Navegación inferior', 'Botón flotante', 'Select', 'Campo numérico', 'Interruptor', 'Campo de color', 'Selector de archivo', 'Bloque de marca']],
+  ['Patterns', ['Aviso', 'Bloque de estado', 'Capa de tarea', 'Lista apilada', 'Shell de la app']],
+  ['Screens', ['Portal e inicio de sesión', 'Cambio de contraseña', 'Bienvenida', 'Equipo', 'Inicio', 'Configuración', 'Primer arranque']],
+  ['QA', ['Evidencia por ronda', 'Facetas del registry']],
+];
+const mad = (m) => `<span class="hb-mad hb-mad--${m}">${m}</span>`;
+const side = (actual = 'Botón') => `<strong>Design Hub · PULZ</strong>
+  ${GRUPOS.map(([g, items]) => `<h2>${g}</h2><ul>${items.map(i => `<li><a href="#" ${i === actual ? 'aria-current="page"' : ''}>${i}${g !== 'Foundations' && g !== 'QA' ? mad('candidate') : ''}</a></li>`).join('')}</ul>`).join('')}
+  <span class="wf-note">Una sola jerarquía (perfil hub_layout + Screens + QA; Responsive/* se retira). Estado por texto + forma (contorno discontinuo draft · relleno candidate · relleno con ✓ stable · tachado deprecated). Deprecated sale de aquí.</span>`;
+const cabecera = (crumb) => `<button class="wf-btn menu" aria-haspopup="dialog" aria-expanded="false">Menú</button><nav class="hb-crumb" aria-label="Ruta">${crumb}</nav>`;
+const toc = (secs) => `<aside class="hb-toc" aria-label="En esta página"><h2>En esta página</h2><ol>${secs.map(s => `<li><a href="#">${s}</a></li>`).join('')}</ol></aside>`;
+const meta = (m = 'candidate') => `<p class="hb-meta"><span>Tipo <b>component</b></span><span>Estado ${mad(m)}</span><span>Versión <b>0.2.0</b></span><span>Owner <b>lima</b></span><span>Ronda <b>lab/acceso/r01</b></span><span>Actualizado <b>2026-09-27</b></span></p>`;
+const SECS_C = ['Para qué', 'Uso', 'Preview', 'Anatomía', 'Variantes y estados', 'Comportamiento', 'Responsive', 'Accesibilidad', 'API real', 'Implementación', 'QA y ciclo de vida'];
+const SECS_P = ['Propósito', 'Ruta, entradas y salidas', 'Componentes usados', 'Preview (capturas)', 'Estructura por dispositivo', 'Estados', 'Criterios verificados', 'No verificado'];
+const V = {
+  inicio: () => `<div class="hb-main"><h1>PULZ · Design Hub</h1><p>Referencia operativa del sistema de interfaz. Documenta solo lo que existe en el código y pasó una compuerta de lima; el estado sale del registry.</p>
+    <h2>Cómo se usa</h2><ul><li>Ver una pieza funcionando: demo construida desde el código (Components/demo).</li><li>Ver las pantallas reales: dev server con los usuarios de la semilla.</li><li>Evidencia: capturas por ronda, 4 anchos × claro/oscuro.</li></ul>
+    <h2>Madurez</h2><p>${mad('draft')} en exploración · ${mad('candidate')} pasó la compuerta Candidate · ${mad('stable')} aprobada por el dueño · ${mad('deprecated')} reemplazada</p>
+    <h2>Piezas</h2><div class="hb-mapa">${GRUPOS.slice(0, 4).map(([g, items]) => `<div class="hb-card"><b>${g}</b><ul>${items.slice(0, 4).map(i => `<li><span>${i}</span>${g !== 'Foundations' ? mad('candidate') + ' <span class="wf-small wf-muted">0.2.0</span>' : ''}</li>`).join('')}${items.length > 4 ? `<li class="wf-muted">… ${items.length - 4} más</li>` : ''}</ul></div>`).join('')}</div>
+    <h2>Lo que NO está hecho</h2><ul><li>Bloqueo por 5 intentos (hook fuera del plan).</li><li>Ámbar como texto en claro (DUDAS #12).</li></ul>
+    <span class="wf-note">Inicio del estándar de mora: propósito, cómo se usa, madurez, mapa de piezas con estado y versión (del registry), lo no hecho. Sin KPIs ni miniaturas. El contenido viene de README.md (Markdown) + registry: el sitio se genera.</span></div>${toc(['Cómo se usa', 'Madurez', 'Piezas', 'Lo que NO está hecho'])}`,
+  componente: (o = {}) => `<div class="hb-main"><h1>Botón <code>button</code></h1>${meta(o.mad)}
+    ${o.mad === 'deprecated' ? '<div class="wf-banner" role="status"><b>Reemplazada por</b> <a href="#">button v2</a> · la demo sigue disponible.</div>' : ''}
+    <h2>Para qué</h2><p>La única forma de disparar una acción. Expresa intención (intent) y dónde vive (adapt); nunca estilo.</p>
+    <h2>Uso</h2><ul><li>Una sola primary por vista…</li></ul>
+    <h2>Preview</h2><div class="hb-preview"><div class="bar"><span>Demo real · Components/demo?pieza=button&amp;solo=1</span><a href="#">Abrir aparte ↗</a></div><div class="frame">${o.sindemo ? 'No se pudo cargar la demo. Sirve el Hub con python3 -m http.server 4321 o ábrela aparte.' : 'iframe: la demo del componente (misma página que construye build:hub)'}</div></div>
+    <span class="wf-note">Preview = iframe a la demo REAL (DemoHub con ?pieza=&lt;id&gt;&amp;solo=1). Nunca CSS copiado. Si no carga, se ve el enlace directo.</span>
+    <h2>Anatomía</h2><p>…</p><h2>Variantes y estados</h2><p>…</p><h2>Comportamiento</h2><p>…</p><h2>Responsive</h2><p>…</p><h2>Accesibilidad</h2><p>…</p>
+    <h2>API real</h2><pre class="wf-box" style="padding:12px">props: { intent?, adapt?, type?, loading?, disabled?, motivoDeshabilitado?, href?, to? }</pre>
+    <h2>Implementación</h2><p>Código: <code>${o.long ? 'apps/web/src/modules/configuracion/pages/PortalMarcaPageConUnNombreMuyLargoParaProbarElDesborde.vue' : 'apps/web/src/shared/ui/Boton.vue'}</code> · Pruebas · Evidencia ↗</p>
+    <h2>QA y ciclo de vida</h2><table class="wf-table"><tr><th>Faceta</th><th>Nivel</th></tr><tr><td>viewports</td><td>runtime-verified</td></tr><tr><td>zoom200</td><td>runtime-verified-approx · root font-size</td></tr><tr><td>keyboard</td><td>runtime-verified</td></tr></table>
+    <span class="wf-note">Cuerpo = Markdown de la ficha (marked); header + tabla de facetas = registry. Orden del estándar de mora. Rutas largas envuelven (overflow-wrap).</span></div>${toc(SECS_C)}`,
+  pantalla: () => `<div class="hb-main"><h1>Primer arranque <code>arranque</code></h1>${meta().replace('component', 'product-application').replace('lab/acceso/r01', 'lab/arranque/r01')}
+    <h2>Propósito</h2><p>…</p><h2>Ruta, entradas y salidas</h2><p>…</p><h2>Componentes usados</h2><p>app-shell · state-block · button · …</p>
+    <h2>Preview (capturas)</h2><div class="hb-gal">${['1440 · claro', '1024 · claro', '768 · claro', '390 · claro', '1440 · oscuro', '1024 · oscuro', '768 · oscuro', '390 · oscuro'].map(t => `<figure style="margin:0"><div class="wf-img"></div><figcaption class="wf-small wf-muted">${t}</figcaption></figure>`).join('')}</div>
+    <span class="wf-note">Sin demo aislada: galería de qa/evidence/&lt;ronda&gt;/ por ancho y tema (4 columnas ≥1024, 2 en medium/compact). Cada figura enlaza a la captura completa.</span>
+    <h2>Estructura por dispositivo</h2><p>…</p><h2>Estados</h2><p>…</p><h2>Criterios verificados</h2><p>…</p><h2>No verificado</h2><p>…</p></div>${toc(SECS_P)}`,
+  qa: () => `<div class="hb-main"><h1>QA · evidencia y facetas</h1><h2>Rondas</h2><table class="wf-table"><tr><th>Ronda</th><th>Script</th><th>Capturas</th><th>Resultado</th></tr><tr><td>acceso/r01</td><td>evidencia-acceso.mjs</td><td>104</td><td>8/8</td></tr><tr><td>shell/r01</td><td>evidencia-shell.mjs</td><td>50</td><td>8/8</td></tr><tr><td>configuracion/r01</td><td>evidencia-configuracion.mjs</td><td>67</td><td>8/8</td></tr><tr><td>arranque/r01</td><td>evidencia-arranque.mjs</td><td>13</td><td>8/8</td></tr><tr><td>Fase 4 e2e</td><td>e2e-fase4.mjs</td><td>9</td><td>OK</td></tr></table>
+    <h2>Facetas del registry</h2><table class="wf-table"><tr><th>Pieza</th><th>viewports</th><th>keyboard</th><th>touch</th><th>zoom200</th><th>contrast</th></tr><tr><td>button</td><td>runtime</td><td>runtime</td><td>emulated</td><td>approx</td><td>passed</td></tr><tr><td>…</td><td colspan="5"></td></tr></table>
+    <span class="wf-note">Página generada del registry (qa.*) y de la lista de scripts en qa/. Los niveles se muestran con su caveat, nunca como ✓ plano.</span></div>${toc(['Rondas', 'Facetas del registry'])}`,
+};
+let S = { s: 'inicio', w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  const st = S.state;
+  const actual = S.s === 'componente' ? 'Botón' : S.s === 'pantalla' ? 'Primer arranque' : S.s === 'qa' ? 'Evidencia por ronda' : '';
+  document.getElementById('wf-side').innerHTML = side(actual);
+  const crumb = S.s === 'inicio' ? 'Inicio' : S.s === 'componente' ? 'Inicio / Components / Botón' : S.s === 'pantalla' ? 'Inicio / Screens / Primer arranque' : 'Inicio / QA';
+  document.getElementById('wf-top').innerHTML = cabecera(crumb);
+  let view;
+  if (st === 'notfound') view = `<div class="hb-main hb-404"><h1>No encontramos esta página</h1><p class="wf-muted">El enlace cambió o la pieza ya no está.</p><a class="wf-btn" href="#">Ir al inicio del Hub</a></div>`;
+  else if (st === 'empty') view = `<div class="hb-main"><h1>Patterns estables</h1><div class="wf-state"><h2>Aún no hay patrones estables</h2><p class="wf-muted">Todo está en candidate. Cuando el dueño estabilice, aparecen aquí.</p></div></div>`;
+  else if (S.s === 'componente') view = V.componente({ mad: st === 'deprecated' ? 'deprecated' : 'candidate', long: st === 'long', sindemo: st === 'sindemo' });
+  else view = V[S.s]();
+  document.getElementById('wf-view').innerHTML = view;
+  document.getElementById('wf-overlay').innerHTML = st === 'drawer' && S.w < 1024 ? `<div class="wf-scrim"></div><div class="hb-drawer hb-side" role="dialog" aria-modal="true" aria-label="Design Hub">${side(actual)}<div class="wf-actions" style="margin-top:12px"><button class="wf-btn">Cerrar</button></div></div>` : (st === 'drawer' ? '<span class="wf-note" style="position:absolute;left:280px;top:70px;max-width:360px">En expanded no hay drawer: el sidebar es persistente. Cambia a 768 o 390.</span>' : '');
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+  document.querySelectorAll('[data-s]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.s === S.s)));
+}
+document.addEventListener('click', e => { const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); return; } const s = e.target.closest('[data-s]'); if (s) { S.s = s.dataset.s; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>

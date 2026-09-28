@@ -571,3 +571,30 @@ empieza invocando la skill `kiwi`**, que estructura (F0–F2) y entrega a
 `lima` (gobernanza) → `coco` (construcción + auditoría) → `mora-docs`
 (documentación). Nunca se empieza directo en `lima` o `coco` para algo nuevo.
 Regla completa, con el diagrama del flujo, en `CLAUDE.md`.
+
+## 2026-09-27 · Hub HTML (ronda hub/r01): el sitio se genera, no se escribe
+
+- **El Hub tiene sitio propio** (`design-hub/site/`), generado por
+  `pnpm build:hub-site` (`design-hub/scripts/build-hub.mjs`, `marked`) desde
+  `README.md`, las fichas Markdown y `system/registry.json`. Se decidió así
+  (hallazgo alto de kiwi) para que no haya dos verdades: el HTML nunca se
+  edita a mano; se cambia la ficha y se regenera. El `site/` **se versiona**
+  (como `Components/demo/`) para abrirlo sin construir; cada cambio de ficha
+  o de registry va con su `site/` regenerado en el mismo commit. Revertir:
+  borrar `site/` del repo y generarlo solo en local.
+- **Preview = demo real por iframe** (`Components/demo/index.html?pieza=<id>&solo=1`)
+  y galería de capturas para pantallas: nada de CSS copiado. Alto del iframe
+  fijo por rango (LOW, sin acción; «Abrir aparte» cubre).
+- **`hub-shell` es pieza del registry** (template, `candidate` 0.2.0):
+  `assets/hub-shell.css` (clases `hub-*`, tokens reales) +
+  `assets/hub-navigation.js` (drawer accesible, `aria-current`). Enlaces del
+  sidebar a 36 px como excepción declarada (mínimo WCAG 24; controles
+  principales 44).
+- **`Responsive/{Mobile,Tablet,Desktop}` sale del `hub_layout`** y entran
+  `Screens` y `QA`: el rango vive en cada ficha.
+- **La evidencia acepta el drawer como navegación global** por debajo de
+  1024: el primer `evidencia-hub.mjs` daba 4 falsos negativos buscando la
+  `nav` del sidebar en 768/390. Regla para próximos scripts: comprobar la
+  presentación que corresponde al ancho, no un solo selector.
+- Aprobaciones de kiwi/mora/lima decididas en automático (CLAUDE.md §4):
+  tooling interno, sin reglas de negocio del maestro.
