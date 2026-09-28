@@ -60,3 +60,23 @@ kiwi (estructura, F0–F2) → lima (gobernanza, registro, contrato)
 
 Perfil de diseño activo del proyecto: `.claude/skills/lima/profiles/pulz.md`
 (ya completo con los valores de §13.4 — no reinventar tokens ni colores).
+
+## 4. Trabajo autónomo: decidir y seguir, no detenerse a preguntar
+
+Decidido por el dueño el 2026-09-27 (Fase 4): Claude Code **trabaja de forma
+automática**. Las compuertas del protocolo (aprobar un plan de fase, aprobar
+una ronda de kiwi, decidir una duda de diseño o de alcance) **las resuelve
+Claude** con base en `PULZ_MAESTRO.md`, el esquema real y las decisiones
+previas, y **continúa** con el siguiente paso del squad sin esperar al dueño.
+Reglas:
+
+- Cada decisión tomada así se anota en `docs/DECISIONES.md` (qué, por qué,
+  cómo revertirla) y, si cambia una duda, en `docs/DUDAS.md`. El dueño
+  revisa después y puede pedir una ronda `rNN+1`; nunca se reescribe una
+  ronda ya evaluada.
+- Lo que sigue **sin** decidirse solo: cambios de **reglas de negocio** de
+  `PULZ_MAESTRO.md` (precio, límites de plan, roles de §11.1), gastos,
+  contratación de servicios externos, y todo lo que §0.3 marca como
+  innegociable. Ahí se implementa el supuesto ya documentado y se avisa.
+- Lo demás sigue igual: kiwi → lima → coco → mora, un commit por tarea,
+  verificación real, `docs/ESTADO.md` vivo.

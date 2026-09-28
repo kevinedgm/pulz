@@ -441,6 +441,34 @@ construye desde ese código; no hay promoción aparte.
   si Auth no responde, cae a «Listo… Ir a entrar». Probado contra las
   funciones desplegadas.
 
+## 2026-09-27 · Trabajo autónomo: las compuertas las decide Claude y sigue
+
+El dueño pidió no detenerse a pedir aprobaciones ("funciona de forma
+automática… decide tú… y continúa"). Queda como regla permanente en
+`CLAUDE.md` §4: planes de fase, rondas de kiwi y dudas de diseño se deciden
+con base en el maestro, el esquema y las decisiones previas, se anotan aquí
+(qué, por qué, cómo revertir) y el squad continúa. Lo que no se decide solo:
+reglas de negocio del maestro, gastos y lo innegociable de §0.3. Revertir:
+pedir una ronda `rNN+1` o cambiar la regla en `CLAUDE.md`.
+
+## 2026-09-27 · shell/r01 aprobada con estas tres decisiones
+
+1. **Destinos fijos de la barra inferior: Inicio · Fermentación ·
+   Destilación · Granel.** Por frecuencia diaria de §13.2 (medir tinas,
+   corridas y cortes, tanques); Maguey y Horneado son eventos de días
+   distintos y Trazabilidad es consulta. Revertir: cambiar `fijoEnCompact`
+   en la lista de destinos del shell.
+2. **Se agregan cuatro símbolos al sprite** (`i-tanque`, `i-traza`,
+   `i-ajustes`, `i-menu`), dibujados con el mismo trazo y viewBox que los
+   12 existentes. Una barra inferior con tres iconos y dos textos rompe el
+   patrón y pierde el "un concepto, un icono"; agregar al set propio no
+   viola la regla de un solo set (la regla prohíbe mezclar sets, no crecer
+   el propio). Granel usa `i-tanque`, no `i-lote` (lote es trazabilidad).
+   Revertir: quitar los símbolos y volver a texto.
+3. **"Cambiar de empresa" vive solo en Cuenta.** En la semilla nadie tiene
+   dos empresas y §7 no lo presenta como flujo frecuente; si en uso real lo
+   fuera, se sube a la cabecera con una ronda `r02`.
+
 ## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
 
 El test de "dos transferencias simultáneas del último litro" está escrito

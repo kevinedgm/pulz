@@ -986,5 +986,286 @@
         ]
       }
     }
+  },
+  "app-shell": {
+    "kind": "pattern",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/shell/r01",
+    "documentation": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [
+      "page-header",
+      "side-nav",
+      "bottom-nav",
+      "fab",
+      "banner",
+      "state-block",
+      "task-layer",
+      "segmented-choice",
+      "button",
+      "status-chip"
+    ],
+    "profileDependencies": [
+      "design_system.tokens",
+      "design_system.icons"
+    ],
+    "contract": {
+      "anatomy": "cabecera (page-header) · banner opcional · cuerpo (router-view) · navegación (side-nav ≥600 / bottom-nav <600) · hueco de FAB por destino · capas Más y Cuenta (task-layer)",
+      "modes": {
+        "compact": "<600: bottom-nav 4 fijos + Más; cabecera con empresa→Cuenta (hoja); FAB flotante 56px; cuerpo con padding-bottom ≥ barra + FAB",
+        "medium": "600–1023: side-nav 200 con los 8 destinos; cabecera con empresa→Cuenta (popover); sin FAB ni Más",
+        "expanded": "≥1024: side-nav 240 con empresa arriba y cuenta al pie; cabecera solo título del destino"
+      },
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "denied",
+        "offline",
+        "readonly",
+        "long-name",
+        "multi-empresa",
+        "teclado-virtual",
+        "zoom200"
+      ],
+      "rules": "Una sola lista de destinos (Destino[]) con dos presentaciones; la ruta y el foco del contenido se conservan al cambiar de modo. Configuración solo con role=admin (no se muestra deshabilitada); por URL sin admin → state-block denied. Sin shell en las pantallas de acceso. brand_color solo como línea de acento de 4px en la cabecera. Tema: data-theme (sistema/claro/oscuro) persistido en localStorage; por defecto prefers-color-scheme. Teclado virtual en compact: bottom-nav oculta mientras un campo tiene foco (visualViewport). reduced-motion: capas sin deslizamiento."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "bottom-nav": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/shell/r01",
+    "documentation": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens",
+      "design_system.icons"
+    ],
+    "contract": {
+      "anatomy": "nav[aria-label] con 5 enlaces: 4 destinos fijos + 'Más' (button aria-haspopup=dialog aria-expanded); cada ítem = icono del sprite + etiqueta ≤12 caracteres en dos líneas permitidas",
+      "states": [
+        "default",
+        "current (aria-current=page: borde 2px + negrita, no solo color)",
+        "focus-visible",
+        "hidden-keyboard"
+      ],
+      "rules": "Solo en compact. Ítems ≥48px de alto, ancho 1/5. Área segura inferior (env(safe-area-inset-bottom)). Texto nunca oculto (WCAG 1.4.4). Se oculta con teclado virtual. La lista de fijos viene de Destino.fijoEnCompact."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "side-nav": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/shell/r01",
+    "documentation": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens",
+      "design_system.icons"
+    ],
+    "contract": {
+      "anatomy": "nav[aria-label] con bloque de empresa (iniciales + nombre en 2 líneas con title) · lista de destinos (icono + texto, 44px) · bloque de cuenta al pie (solo expanded: persona + rol, abre Cuenta)",
+      "states": [
+        "default",
+        "current (aria-current=page)",
+        "focus-visible",
+        "long-name"
+      ],
+      "rules": "200px en medium, 240px en expanded. Configuración solo admin. Scroll interno si no cabe (zoom 200%)."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "page-header": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/shell/r01",
+    "documentation": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "header con línea de acento (brand_color, 4px) · botón de empresa (iniciales + nombre 1 línea elipsis + persona · rol; aria-haspopup=dialog) · h1 título del destino",
+      "states": [
+        "default",
+        "long-name",
+        "expanded (sin botón de empresa)"
+      ],
+      "rules": "El nombre completo va en title y en Cuenta. En expanded el botón de empresa no se muestra (vive en side-nav). Altura mínima 56px."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "fab": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/shell/r01",
+    "documentation": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [
+      "button"
+    ],
+    "profileDependencies": [
+      "design_system.tokens",
+      "design_system.icons"
+    ],
+    "contract": {
+      "anatomy": "button flotante 56px (pill) con texto corto (verbo) e icono opcional; abajo a la derecha sobre bottom-nav",
+      "states": [
+        "default",
+        "focus-visible",
+        "hidden (capa abierta, solo lectura, sin conexión donde aplique, destinos sin acción)"
+      ],
+      "rules": "Solo compact. Es LA primaria del destino: la pantalla no muestra otra primaria mientras el FAB esté visible. Lo define cada ronda de etapa (Fase 5); el shell solo da el hueco (slot)."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "inicio": {
+    "kind": "product-application",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/shell/r01",
+    "documentation": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [
+      "app-shell",
+      "state-block",
+      "button"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "screens": [
+        "Hoy (placeholder de Fase 5)",
+        "¿Qué tienes hoy? (sin lotes → arranque/r01)",
+        "carga",
+        "error de membresías"
+      ],
+      "rules": "Destino del shell. Sin datos inventados: tarjetas rotuladas Fase 5. Cuando la empresa no tiene lotes: state-block empty con la primaria 'Empezar' dentro (no baja a barra; la barra es navegación). Sin FAB en Inicio en esta ronda."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
   }
 }
