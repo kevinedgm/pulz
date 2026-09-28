@@ -114,7 +114,7 @@ export async function pedirRecuperacion(correo: string, slug: string): Promise<v
 export async function fijarContrasena(
   contrasena: string,
   token?: string,
-): Promise<{ slug: string | null }> {
+): Promise<{ slug: string | null; loginEmail: string | null }> {
   const { data } = await supabase.auth.getSession()
   const jwt = data.session?.access_token
   let res: Response
@@ -132,6 +132,10 @@ export async function fijarContrasena(
     throw new ErrorAcceso("RED", esErrorDeRed(e) ? MENSAJE_RED : String(e))
   }
   if (!res.ok) throw await errorDeFuncion(res)
-  const body = (await res.json()) as { ok: boolean; slug?: string | null }
-  return { slug: body.slug ?? null }
+  const body = (await res.json()) as {
+    ok: boolean
+    slug?: string | null
+    login_email?: string | null // solo al canjear un token (DUDAS #11)
+  }
+  return { slug: body.slug ?? null, loginEmail: body.login_email ?? null }
 }

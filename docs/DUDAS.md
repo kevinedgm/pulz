@@ -89,8 +89,10 @@
     contraseña y entrar" aunque no entra. Opción barata: que `set-password`
     devuelva también el correo de acceso (`login_email`) para que el
     cliente haga `signInWithPassword` de inmediato con la contraseña recién
-    elegida y llegue a `/inicio` sin tocar nada más. Pendiente de decidir;
-    no bloquea la Fase 3.
+    elegida y llegue a `/inicio` sin tocar nada más. **Resuelto (dueño,
+    2026-09-27, Fase 4): sí, sesión automática.** `set-password` devuelve
+    `login_email` al canjear el token y `BienvenidaPage` entra con él; si el
+    inicio de sesión fallara (red), cae al portal con el usuario listo.
 
 12. **Token `--pend` (ámbar) en modo claro no alcanza 4.5:1 como texto.**
     Al evaluar la compuerta Candidate, lima midió el contraste real de los

@@ -416,6 +416,31 @@ compuerta Stable y solo se corre cuando el dueño pida estabilizar.
 en PULZ coco implementa directo en el stack (CLAUDE.md §3) y el Hub se
 construye desde ese código; no hay promoción aparte.
 
+## 2026-09-27 · Fase 4, servidor: Storage por migración, favicon real y sesión automática
+
+- **El bucket `branding` y sus políticas van en una migración** (`0024`),
+  no en el panel: `insert into storage.buckets … on conflict` y `create
+  policy … on storage.objects` funcionan con `db reset --linked` en el plan
+  actual. La carpeta raíz del objeto es la empresa (`<org_id>/logo.png`) y
+  `branding_org_of(name)` + `has_role(…, admin)` deciden quién escribe; la
+  lectura es pública porque el portal se ve antes de iniciar sesión. SVG
+  queda fuera de `allowed_mime_types` a propósito (puede llevar script y se
+  sirve público); 2 MB de tope.
+- **`favicon.svg` era el de la plantilla de Vite** (rayo morado). Se
+  reemplazó por la marca `pulz-mark` del sprite sobre tinta, y los iconos
+  del manifest (192, 512, maskable, apple-touch) se rasterizan desde ese
+  SVG con el Chromium de Playwright, sin librerías nuevas. Si el dueño tiene
+  un logotipo definitivo, se cambia el SVG y se regeneran.
+- **PWA mínima sin cola offline**: `vite-plugin-pwa` con `autoUpdate` y
+  precache de la app; el portal (`/e/<slug>` exacto) se excluye del
+  fallback de navegación porque lo sirve la Pages Function con la marca en
+  el HTML (§7.7). La cola de capturas es Fase 5.
+- **DUDAS #11 (decisión del dueño): sesión automática tras la bienvenida.**
+  `set-password` devuelve `login_email` al canjear el token (correo real o
+  sintético, tal como quedó en Auth) y `BienvenidaPage` entra de inmediato;
+  si Auth no responde, cae a «Listo… Ir a entrar». Probado contra las
+  funciones desplegadas.
+
 ## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
 
 El test de "dos transferencias simultáneas del último litro" está escrito

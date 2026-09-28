@@ -68,7 +68,6 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, ronda
 
 ## Lo que NO está hecho (no lo busques aquí como hecho)
 
-- Sesión automática tras la bienvenida — `docs/DUDAS.md` #11.
 - Bloqueo por 5 intentos fallidos — hook fuera del plan, `docs/DUDAS.md` #9.
 - Ámbar (`--pend`) como color de texto en claro — `docs/DUDAS.md` #12.
 - Responsive/{Mobile,Tablet,Desktop} como secciones propias: el

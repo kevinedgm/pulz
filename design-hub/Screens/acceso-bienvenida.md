@@ -19,16 +19,15 @@ viaja en el **fragmento** (`#`): nunca llega al servidor del portal; solo
 
 - Entrada: el enlace que el administrador copió desde Equipo.
 - «Crear contraseña y entrar» → `POST set-password` `{contrasena, token}` →
-  éxito: el token sale de la URL (`replaceState`) y se muestra «Listo, ya
-  tienes contraseña» + botón «Ir a entrar» → portal.
+  éxito: el token sale de la URL (`replaceState`); la función devuelve
+  `login_email` y la pantalla **entra de inmediato** (`signInWithPassword`)
+  → `/inicio` (o `/cambiar-contrasena` si aplica). Si Auth no responde,
+  queda la salida manual: «Listo, ya tienes contraseña» + «Ir a entrar».
+  (`docs/DUDAS.md` #11, decidido el 2026-09-27; verificado contra las
+  funciones desplegadas: canje → `login_email` → sesión 200.)
 - Sin token, token inválido, usado o vencido → **un solo mensaje**: «El
   enlace no es válido o ya se usó» + «Pídele a tu encargado que te mande uno
   nuevo.» + «Ir al inicio de sesión». Sin distinguir causa.
-
-> **No hecho:** la pantalla **no deja a la persona dentro**; después de crear
-> la contraseña tiene que entrar en el portal con su usuario. El botón
-> conserva el texto de la ronda («…y entrar»). Decisión pendiente en
-> `docs/DUDAS.md` #11 (que `set-password` devuelva el correo de acceso).
 
 ## Componentes usados
 

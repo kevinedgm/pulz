@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { BloqueEstado, Boton, CampoContrasena } from "../../../shared/ui"
 import { ErrorAcceso, MENSAJE_ENLACE } from "../../../shared/supabase/errores"
-import { fijarContrasena } from "../api"
+import { entrar, fijarContrasena } from "../api"
 import PantallaAcceso from "../components/PantallaAcceso.vue"
 import { useAcceso } from "../store"
 
@@ -45,8 +45,26 @@ async function crear() {
   ocupado.value = true
   errorRed.value = false
   try {
-    await fijarContrasena(nueva.value, token.value)
+    const { loginEmail } = await fijarContrasena(nueva.value, token.value)
     history.replaceState(null, "", location.pathname) // el token ya se usó: fuera de la URL
+    // DUDAS #11 (decisión del dueño): entra de inmediato con la contraseña
+    // recién elegida. Si Auth no responde, queda la salida manual ("Listo").
+    if (loginEmail && acceso.portal) {
+      try {
+        await entrar(acceso.portal.organization_id, loginEmail, nueva.value)
+        await acceso.cargarSesion(true)
+        const m = acceso.membresiaActual
+        if (m && m.status === "activo") {
+          await router.replace({
+            name: m.must_change_password ? "cambiar-contrasena" : "inicio",
+            params: { slug: acceso.slug! },
+          })
+          return
+        }
+      } catch {
+        /* sin sesión automática: la persona entra a mano */
+      }
+    }
     listo.value = true
   } catch (e) {
     if (e instanceof ErrorAcceso && e.codigo === "RED") errorRed.value = true

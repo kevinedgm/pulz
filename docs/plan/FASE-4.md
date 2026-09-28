@@ -9,7 +9,12 @@
 > coco; mora las documentó en el Design Hub; capturas en 390/1024/1440 px,
 > claro y oscuro, sin desbordes."*
 >
-> **Estado: pendiente de aprobación del dueño.** Nada se implementa antes.
+> **Estado (2026-09-27): aprobado por el dueño** — plan y orden (servidor →
+> shell → configuración → arranque); `docs/DUDAS.md` #11 resuelto con
+> **sesión automática tras la bienvenida** (entra en el bloque de servidor);
+> la ronda del Design Hub HTML (tarea 7, encargo de mora a kiwi) **entra en
+> esta fase** y se repite hasta que el resultado pase el estándar documental
+> y mora lo publique. #12 (`--pend` en claro) sigue abierto: no bloquea.
 
 ## Qué entra y qué no
 
@@ -183,3 +188,18 @@ arranque usa las piezas de Configuración).
 2. `docs/DUDAS.md` #11 (bienvenida con sesión automática) y #12 (`--pend` en
    claro): no bloquean, pero si se deciden ahora entran en la ronda del shell.
 3. Si el Design Hub HTML (tarea 7) entra en esta fase o se pospone.
+
+## Resultados reales (2026-09-27) — servidor, tareas 1–4
+
+| Qué | Comando real | Resultado |
+|---|---|---|
+| `0024_marca.sql` (bucket `branding` + 4 políticas en `storage.objects`) | `supabase db reset --linked --yes` | **OK**: se crea por migración; no hizo falta el panel |
+| pgTAP de configuración | `supabase db query --linked -f supabase/tests/configuracion.test.sql` | **33/33**: RLS por rol (admin / productor / operador / otra empresa), `active=false` en vez de borrar (`DELETE` ni siquiera está concedido), slug viejo → historial + `redirect_to`, carga inicial idempotente con saldo 300 L, bucket y políticas |
+| Storage real | `curl` con JWT de Benito y de la dueña de B | **OK**: sube png (200) · lectura pública (200, 9.8 KB) · otra empresa → 403 `row-level security` · SVG → 415 `invalid_mime_type` · sin sesión → 400 · borrar propio → 200 |
+| DUDAS #11 sesión automática | `manage-member` alta enlace → `set-password` con token → `auth/v1/token` con `login_email` | **OK**: `{ok, slug, login_email}` y sesión 200. `BienvenidaPage` entra sola; si falla, «Ir a entrar» |
+| PWA mínima | `pnpm build` | **OK**: `manifest.webmanifest`, `sw.js` (precache de la app, 34 entradas), iconos 192/512/maskable/apple desde la marca PULZ; `favicon.svg` ya no es el de Vite |
+| Advisors | `supabase db advisors --linked` | 0 errores; WARN esperados (RPC `security definer` por diseño §12; contraseñas filtradas #10) |
+| Tipos · lint · Vitest | `vue-tsc -b` · `pnpm lint` · `vitest run` | ✔ · 0/0 · 33/33 |
+
+Nota: el smoke dejó a `prueba.auto` en Cuatro Vientos del proyecto de
+desarrollo; el siguiente `db reset --linked` lo borra.

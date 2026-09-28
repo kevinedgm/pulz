@@ -62,7 +62,14 @@ export default {
         .select("slug")
         .eq("id", inv.data!.organization_id)
         .single()
-      return ok({ ok: true, slug: o.data?.slug ?? null })
+      // login_email (docs/DUDAS.md #11): el correo con el que entra (real
+      // del titular o sintético del colaborador), para que el navegador
+      // inicie sesión de inmediato con la contraseña recién elegida.
+      return ok({
+        ok: true,
+        slug: o.data?.slug ?? null,
+        login_email: upd.data.user?.email ?? null,
+      })
     }
 
     // (a) Con sesión

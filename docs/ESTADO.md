@@ -139,9 +139,12 @@ hacia adelante).
 
 ## Próxima fase
 
-**Fase 4 · Interfaz base y configuración — plan escrito en
-`docs/plan/FASE-4.md` (2026-09-27), pendiente de aprobación del dueño.**
-Orden propuesto: servidor (bucket `branding` + políticas, pgTAP de
-configuración, PWA mínima) → ronda kiwi `shell/r01` → ronda
-`configuracion/r01` → ronda `arranque/r01` → prueba de punta a punta con una
-empresa nueva. Nada se implementa hasta la aprobación (§0.1).
+**Fase 4 · Interfaz base y configuración — plan aprobado (2026-09-27);
+servidor hecho y verificado.** `0024_marca.sql` (bucket `branding` +
+políticas por empresa, por migración), pgTAP `configuracion.test.sql`
+33/33, smoke real de Storage, DUDAS #11 resuelto (sesión automática tras la
+bienvenida, probado contra las funciones desplegadas), PWA mínima (manifest,
+service worker de precache, iconos desde la marca). **Siguiente:** ronda de
+`kiwi` `design-hub/lab/shell/r01` (shell, navegación, tema) → aprobación del
+dueño → lima → coco → mora; luego `configuracion/r01` y `arranque/r01`; la
+ronda del Design Hub HTML (`lab/hub/r01`) entra también en esta fase.
