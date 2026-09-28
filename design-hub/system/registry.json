@@ -2733,5 +2733,62 @@
     "version": "0.1.0",
     "replacedBy": null,
     "updated": "2026-09-27"
+  },
+  "granel": {
+    "kind": "product-application",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/granel/r01",
+    "documentation": null,
+    "demo": null,
+    "source": "../../apps/web/src/modules/granel/pages/GranelPage.vue",
+    "behavior": "../../apps/web/src/modules/granel/pages/GranelPage.vue",
+    "dependencies": [
+      "app-shell",
+      "page-header",
+      "list-stack",
+      "row-menu",
+      "state-block",
+      "banner",
+      "button",
+      "segmented-choice",
+      "select",
+      "number-field",
+      "text-field",
+      "datetime-field",
+      "soft-warning-note",
+      "status-chip"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "screens": [
+        "tanques (saldo, lotes con grado declarado vigente, quién y cuándo, nivel de historia; Entrada / Salida / Transferir por tanque) + colectores con mezcal (Pasar a granel)",
+        "tanque (KPIs, historial movement_log con filtros por lote y persona)",
+        "movimiento (elegir concepto → formulario armado por source_lot / creates_lot / asks_result / asks_counterparty; ledger esperado y diferencia conocidos antes; compra con certificado opcional)",
+        "transferir (origen → destino → litros → % Alc. → conservar / renombrar)"
+      ],
+      "rules": "El sistema no calcula el grado: entradas con asks_result declaran volumen y % Alc.; la diferencia con el ledger se muestra antes y se registra como conciliación (nota). Contraparte obligatoria por concepto. Todo requiere señal (§8.3). Admin y productor; el operador ve. Sin FAB: la acción depende del tanque."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": "vue-ts",
+      "path": "apps/web/src/modules/granel/pages/GranelPage.vue"
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
   }
 }

@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Granel: tanques y movimientos · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+.gr-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.gr-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.gr-side ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.gr-side li{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:6px;border:2px solid transparent}
+.gr-side li[aria-current]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.gr-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:56px;padding:4px var(--wf-s4) 0;border-bottom:1px solid var(--wf-g3)}
+.gr-top h1{font-size:18px;margin:0 0 0 auto}
+.gr-body{padding:var(--wf-s5);min-width:0;max-width:960px}
+.gr-resumen{font-size:13px;color:var(--wf-g6);margin:0 0 var(--wf-s4)}
+.gr-grupo h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-g6);margin:var(--wf-s5) 0 var(--wf-s2)}
+.gr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--wf-s3)}
+.gr-tanque{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);display:grid;gap:var(--wf-s2);min-width:0}
+.gr-tanque h3{margin:0;font-size:17px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.gr-tanque .sub{font-size:13px;color:var(--wf-g6)}
+.gr-saldo{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+.gr-lote{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;padding:6px 0;border-top:1px dashed var(--wf-g3)}
+.gr-lote b{font-variant-numeric:tabular-nums}
+.gr-lote .h{font-size:12px;color:var(--wf-g6)}
+.gr-tanque .wf-actions{margin-top:4px}
+.gr-vacio{color:var(--wf-g6)}
+.gr-lista{list-style:none;margin:0;padding:0}
+.gr-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.5fr) auto auto;gap:var(--wf-s3);align-items:center;min-height:64px;padding:var(--wf-s3) var(--wf-s4);border:1px solid var(--wf-g3);border-top:0}
+.gr-row:first-child{border-top:1px solid var(--wf-g3);border-radius:var(--wf-r) var(--wf-r) 0 0}
+.gr-row:last-child{border-radius:0 0 var(--wf-r) var(--wf-r)}
+.gr-row h3{margin:0;font-size:16px}
+.gr-row .sub,.gr-datos{font-size:13px;color:var(--wf-g6)}
+.gr-kpi{display:flex;flex-wrap:wrap;gap:var(--wf-s2) var(--wf-s5);margin:0 0 var(--wf-s3)}
+.gr-kpi b{font-size:22px;display:block;font-variant-numeric:tabular-nums}
+.gr-kpi span{font-size:12px;color:var(--wf-g6)}
+.gr-det{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--wf-s5)}
+.gr-form{display:grid;gap:var(--wf-s4);max-width:720px}
+.gr-form fieldset{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);display:grid;gap:var(--wf-s3);min-width:0}
+.gr-form legend{font-weight:700;padding:0 4px}
+.gr-fila{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s3)}
+.gr-conceptos{display:grid;gap:var(--wf-s2)}
+.gr-conceptos .wf-btn{min-height:56px;justify-content:flex-start;font-size:15px;text-align:left}
+.gr-conceptos .wf-btn[aria-checked="true"]{background:var(--wf-g2);border-width:3px}
+.gr-conceptos .sub{font-weight:400;font-size:12px;color:var(--wf-g6);margin-left:auto;text-align:right}
+.gr-seg{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s2)}
+.gr-seg .wf-btn[aria-checked="true"]{background:var(--wf-g2);border-width:3px}
+.gr-aviso{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-size:14px}
+.gr-aviso b{display:block}
+.gr-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-weight:600;font-size:14px}
+.gr-warn{border:1px dashed var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s2) var(--wf-s3);font-size:13px}
+.gr-calc{font-size:14px;padding:var(--wf-s2) var(--wf-s3);border:1px dashed var(--wf-g6);border-radius:var(--wf-r)}
+.gr-hecho{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s4);display:grid;gap:var(--wf-s2)}
+.gr-filtros{display:flex;flex-wrap:wrap;gap:var(--wf-s2);margin:0 0 var(--wf-s3)}
+.gr-filtros select{min-height:44px}
+.gr-menu{position:absolute;right:var(--wf-s5);top:200px;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:var(--wf-r);z-index:21;min-width:240px;padding:4px}
+.gr-menu button{display:block;width:100%;text-align:left;min-height:44px;border:0;background:none;padding:0 var(--wf-s3);font:inherit}
+.gr-bottom{display:none}
+@container wf (max-width: 1023px){
+  .gr-shell{grid-template-columns:200px 1fr}
+  .gr-det{grid-template-columns:1fr}.gr-grid{grid-template-columns:1fr}
+  .gr-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"a s" "b b" "c c"}
+  .gr-row>div:first-child{grid-area:a}.gr-row>.gr-datos{grid-area:b}.gr-row>.wf-status{grid-area:s}.gr-row>.wf-actions{grid-area:c;justify-content:flex-start}
+}
+@container wf (max-width: 599px){
+  .gr-shell{grid-template-columns:1fr}.gr-shell>.gr-side{display:none}
+  .gr-body{padding:var(--wf-s4) var(--wf-s4) 140px}
+  .gr-fila{grid-template-columns:1fr}
+  .gr-form [data-wf-persist],.gr-det [data-wf-persist]{display:none}
+  .gr-tanque .wf-actions .wf-btn{flex:1 1 30%}
+  .gr-bottom{display:grid;grid-template-columns:repeat(5,1fr);position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:6px 4px 18px;font-size:11px;text-align:center}
+  .gr-bottom span{min-height:48px;display:grid;place-items:center}
+  .gr-barra{position:absolute;left:0;right:0;bottom:78px;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:flex;gap:var(--wf-s2);z-index:14}
+  .gr-barra .wf-btn--primary{flex:1}
+}
+@container wf (min-width: 600px){.gr-barra{display:none}}
+</style>
+</head>
+<body class="wf">
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>GRANEL · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Tanques · default (2 tanques + colector con mezcal)</option>
+      <option value="loading">Tanques · carga</option>
+      <option value="empty">Tanques · vacío (la empresa no tiene tanques)</option>
+      <option value="vacios">Tanques · tanques sin líquido</option>
+      <option value="offline">Tanques · sin conexión (solo lectura, instantánea)</option>
+      <option value="readonly">Tanques · solo lectura (vencida)</option>
+      <option value="operador">Tanques · operador (ve, no mueve)</option>
+      <option value="long">Tanques · contenido largo (varios lotes)</option>
+      <option value="tanque">Tanque · historial</option>
+      <option value="tanque0">Tanque · sin movimientos</option>
+      <option value="concepto">Movimiento · elegir concepto</option>
+      <option value="agua">Movimiento · Agua para bajar grado (pide resultado; diferencia conocida antes)</option>
+      <option value="venta">Movimiento · Venta a granel (pide contraparte)</option>
+      <option value="compra">Movimiento · Compra de granel (crea lote, certificado opcional)</option>
+      <option value="union">Movimiento · Unión con otro lote (conservar / renombrar)</option>
+      <option value="error">Movimiento · error del servidor (saldo insuficiente)</option>
+      <option value="transferir">Transferir · colector mezcal → tanque con lote (decisión)</option>
+      <option value="transferir-vacio">Transferir · a tanque vacío (folio nuevo)</option>
+      <option value="hecho">Movimiento · registrado (vuelve al tanque)</option>
+      <option value="menu">Tanques · menú de un tanque</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="gr-shell">
+      <nav class="gr-side" aria-label="Navegación principal (shell/r01)"><strong>Mezcal Cuatro Vientos</strong>
+        <ul><li>Inicio</li><li>Maguey</li><li>Horneado</li><li>Fermentación</li><li>Destilación</li><li aria-current="page">Granel</li><li>Trazabilidad</li><li>Configuración</li></ul></nav>
+      <div style="min-width:0;display:flex;flex-direction:column;position:relative">
+        <header class="gr-top" id="wf-top"></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main gr-body" id="wf-view" tabindex="-1"></main>
+        <nav class="gr-bottom" aria-label="Navegación principal (compact)"><span>Inicio</span><span>Fermentación</span><span>Destilación</span><span aria-current="page">Granel</span><span>Más</span></nav>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+<script>
+// Ejemplo: Cuatro Vientos, semilla (§15.1): Tanque 1 G-COMPRA-01 250 L @ 46 (declarada); Tanque 2 G-INI-01 341.8 L @ 44.9 (Benito, 18 sep); Colector mezcal MEZ-002 8 L @ 51 (ejemplo)
+const acciones = (o = {}) => o.operador ? '<span class="wf-small wf-muted">los movimientos los registra el productor</span>' : `<div class="wf-actions"><a class="wf-btn" href="#mov" ${o.dis ? 'aria-disabled="true"' : ''}>Entrada</a><a class="wf-btn" href="#mov" ${o.dis ? 'aria-disabled="true"' : ''}>Salida</a><a class="wf-btn" href="#tr" ${o.dis ? 'aria-disabled="true"' : ''}>Transferir</a></div>`;
+const tanque = (t, o = {}) => `<article class="gr-tanque" aria-label="${t.c}">
+  <h3><span>${t.c}</span><span class="sub">${t.cap} L · ${t.pol}</span></h3>
+  ${t.lotes.length ? `<div class="gr-saldo">${t.lotes.reduce((a, l) => a + l.l, 0).toLocaleString('es-MX', { maximumFractionDigits: 1 })} L</div>${t.lotes.map(l => `<div class="gr-lote"><b>${l.f}</b><span>${l.l.toLocaleString('es-MX', { maximumFractionDigits: 1 })} L</span><span><b>${l.abv} %</b> Alc. declarado</span><span class="h">${l.q} · ${l.d}</span><span class="h">historia ${l.h}</span></div>`).join('')}` : '<div class="gr-saldo gr-vacio">vacío</div><span class="sub">Sin lote. Entra por carga inicial, compra o transferencia.</span>'}
+  <a class="wf-btn wf-btn--quiet" href="#tanque" style="justify-self:start">Ver historial</a>
+  ${acciones(o)}
+</article>`;
+const T1 = { c: 'Tanque 1', cap: '1,000', pol: 'flexible', lotes: [{ f: 'G-COMPRA-01', l: 250, abv: '46.0', q: 'Benito', d: '19 sep', h: 'declarada' }] };
+const T2 = { c: 'Tanque 2', cap: '1,500', pol: 'flexible', lotes: [{ f: 'G-INI-01', l: 341.8, abv: '44.9', q: 'Benito', d: '18 sep', h: 'sin historia' }] };
+const T3 = { c: 'Tanque 3 (ejemplo)', cap: '500', pol: 'estricta', lotes: [] };
+const colectores = (o = {}) => `<section class="gr-grupo"><h2>Colectores con mezcal</h2><ul class="gr-lista"><li class="gr-row"><div><h3>Colector mezcal</h3><span class="sub">MEZ-002 <span class="wf-tag">ejemplo</span> · 60 L de capacidad</span></div><div class="gr-datos"><b>8 L</b> · 51 % Alc. (Tomás, hoy) · historia parcial</div><span class="wf-status wf-status--on">con saldo</span><div class="wf-actions">${o.operador ? '<span class="wf-small wf-muted">a granel lo pasa el productor</span>' : `<a class="wf-btn" href="#tr" ${o.dis ? 'aria-disabled="true"' : ''}>Pasar a granel</a>`}</div></li></ul></section>`;
+const resumen = (n, l) => `<p class="gr-resumen" role="status">${n} tanques · <b>${l} L de granel</b></p>`;
+const topLista = (o = {}) => `<span class="wf-small wf-muted">CV · Mezcal Cuatro Vientos · ${o.operador ? 'Tomás · operador' : 'Aurelia · productora'}</span><h1>Granel</h1>`;
+const topSub = (h1, atras = 'Granel') => `<a class="wf-btn wf-btn--quiet" href="#">‹ ${atras}</a><h1>${h1}</h1>`;
+const listaStd = (o = {}) => `${resumen(3, '591.8')}<div class="gr-grid">${tanque(T1, o)}${tanque(T2, o)}${tanque(T3, o)}</div>${colectores(o)}`;
+const historial = (o = {}) => `<table class="wf-table wf-table--stack"><thead><tr><th>Cuándo</th><th>Qué</th><th>Lote</th><th>Litros</th><th>% Alc.</th><th>Quién</th></tr></thead><tbody>
+  <tr><td data-l="Cuándo">22 sep 13:00</td><td data-l="Qué">Regalo a cliente <span class="wf-small wf-muted">· Cliente ficticio S.A.</span></td><td data-l="Lote">G-INI-01</td><td data-l="Litros">−1</td><td data-l="% Alc.">—</td><td data-l="Quién">Benito</td></tr>
+  <tr><td data-l="Cuándo">22 sep 13:00</td><td data-l="Qué">Venta a granel <span class="wf-small wf-muted">· Cliente ficticio S.A. · Remisión 118</span></td><td data-l="Lote">G-INI-01</td><td data-l="Litros">−300</td><td data-l="% Alc.">—</td><td data-l="Quién">Benito</td></tr>
+  <tr><td data-l="Cuándo">20 sep 13:00</td><td data-l="Qué">Autoconsumo</td><td data-l="Lote">G-INI-01</td><td data-l="Litros">−2</td><td data-l="% Alc.">—</td><td data-l="Quién">Benito</td></tr>
+  <tr><td data-l="Cuándo">19 sep 13:00</td><td data-l="Qué">Muestra de laboratorio <span class="wf-small wf-muted">· Laboratorio ficticio · Análisis 2026-311</span></td><td data-l="Lote">G-INI-01</td><td data-l="Litros">−1</td><td data-l="% Alc.">—</td><td data-l="Quién">Aurelia</td></tr>
+  <tr><td data-l="Cuándo">18 sep 09:30</td><td data-l="Qué">Unión con otro lote <span class="wf-small wf-muted">· desde G-2609-01 (Tanque 1) · se conservó el folio</span></td><td data-l="Lote">G-INI-01</td><td data-l="Litros">+43.8</td><td data-l="% Alc."><b>44.9</b> declarado</td><td data-l="Quién">Benito</td></tr>
+  <tr><td data-l="Cuándo">17 sep 10:00</td><td data-l="Qué">Puntas para subir grado <span class="wf-small wf-muted">· sin lote · puntas de agosto</span></td><td data-l="Lote">G-INI-01</td><td data-l="Litros">+2</td><td data-l="% Alc."><b>44.6</b> declarado</td><td data-l="Quién">Benito</td></tr>
+  <tr><td data-l="Cuándo">1 sep 10:15</td><td data-l="Qué">Carga inicial</td><td data-l="Lote">G-INI-01</td><td data-l="Litros">+600</td><td data-l="% Alc."><b>44.5</b> declarado</td><td data-l="Quién">Benito</td></tr>
+</tbody></table>`;
+const tanqueDet = (o = {}) => `<div class="gr-det"><div>
+  <div class="gr-kpi"><div><b>341.8 L</b><span>en el tanque</span></div><div><b>44.9 %</b><span>Alc. declarado · Benito · 18 sep</span></div><div><b>G-INI-01</b><span>lote · sin historia</span></div></div>
+  <p class="wf-small wf-muted">1,500 L · política flexible · acero inoxidable</p>
+  <h3>Historial</h3>
+  <div class="gr-filtros"><select class="wf-input" style="width:auto"><option>Todos los lotes</option><option>G-INI-01</option></select><select class="wf-input" style="width:auto"><option>Todas las personas</option><option>Benito</option><option>Aurelia</option></select></div>
+  ${o.vacio ? '<div class="wf-state" style="margin:0"><h2>Aún sin movimientos</h2><p class="wf-muted">Cada entrada, salida y transferencia queda aquí con quién y cuándo.</p></div>' : historial()}
+  <span class="wf-note">Bitácora = vista movement_log filtrada por el tanque (§6): cada pata con quién, cuándo pasó, concepto y nota. Las patas de conciliación se leen como «el sistema registró una diferencia de −4.2 L» bajo la entrada que las causó (no como fila suelta).</span>
+</div><aside>
+  <h3>Acciones</h3><div class="wf-actions" style="display:grid"><a class="wf-btn wf-btn--primary" href="#mov" data-wf-persist>Entrada</a><a class="wf-btn" href="#mov">Salida</a><a class="wf-btn" href="#tr">Transferir</a></div>
+  <span class="wf-note">Entrada como primaria del tanque (es la que declara grado); Salida y Transferir secundarias. Admin y productor.</span>
+</aside></div><div class="gr-barra"><a class="wf-btn wf-btn--primary" href="#mov">Entrada</a><a class="wf-btn" href="#mov">Salida</a></div>`;
+const conceptoBtn = (n, sub, sel = false) => `<button type="button" class="wf-btn" role="radio" aria-checked="${sel}">${n}<span class="sub">${sub}</span></button>`;
+const concepto = () => `<form class="gr-form"><fieldset><legend>¿Qué pasó en el Tanque 2?</legend><div class="gr-seg" role="radiogroup" aria-label="Dirección"><button type="button" class="wf-btn" role="radio" aria-checked="true">Entrada</button><button type="button" class="wf-btn" role="radio" aria-checked="false">Salida</button></div>
+  <div class="gr-conceptos" role="radiogroup" aria-label="Concepto">${conceptoBtn('Agua para bajar grado', 'pide volumen y % Alc. resultantes', true)}${conceptoBtn('Puntas para subir grado', 'lote de origen opcional · pide resultado')}${conceptoBtn('Unión con otro lote', 'lote de origen · conservar o renombrar · pide resultado')}${conceptoBtn('Compra de granel', 'crea lote · pide resultado · pide proveedor')}${conceptoBtn('Ajuste de inventario (+)', 'pide resultado')}</div>
+  <span class="wf-note">Los conceptos son los del catálogo de la empresa (Configuración → Catálogos), con su comportamiento visible (§5.2). «Carga inicial» no aparece aquí: vive en el primer arranque y en Recursos.</span></fieldset>
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="button" data-wf-persist>Siguiente</button><a class="wf-btn" href="#">Cancelar</a></div><div class="gr-barra"><button class="wf-btn wf-btn--primary" type="button">Siguiente</button></div></form>`;
+const cuandoNota = (avisoNota = false) => `<fieldset><legend>Cuándo y nota</legend><div class="wf-field"><label for="cu">¿Cuándo pasó?</label><input class="wf-input" id="cu" value="hoy 11:00"></div>${avisoNota ? '' : '<div class="wf-field"><label for="no">Nota (opcional)</label><input class="wf-input" id="no"></div>'}</fieldset>`;
+const agua = () => `<form class="gr-form"><p class="gr-resumen">Entrada · <b>Agua para bajar grado</b> · Tanque 2 · lote G-INI-01 (341.8 L a 44.9 %)</p>
+  <fieldset><legend>Cuánto entra</legend><div class="wf-field" style="max-width:240px"><label for="l1">Litros de agua</label><input class="wf-input" id="l1" inputmode="decimal" value="4"></div></fieldset>
+  <fieldset><legend>Lo que quedó (lo declaras tú; el sistema no calcula el grado)</legend><div class="gr-fila"><div class="wf-field"><label for="r1">Volumen resultante</label><input class="wf-input" id="r1" inputmode="decimal" value="345.6"></div><div class="wf-field"><label for="a1">% Alc. resultante</label><input class="wf-input" id="a1" inputmode="decimal" value="44.4"></div></div>
+  <p class="gr-calc">El ledger quedaría en <b>345.8 L</b> (341.8 + 4). Declaras 345.6: el sistema registrará una diferencia de <b>−0.2 L</b> (contracción).</p>
+  <div class="gr-aviso" role="alert"><b>El volumen declarado no cuadra con lo que había (−0.2 L).</b> Se guarda igual; escribe por qué.</div>
+  <div class="wf-field"><label for="n1">Nota (obligatoria por el aviso)</label><input class="wf-input" id="n1" placeholder="Ej. contracción al mezclar"></div></fieldset>
+  ${cuandoNota(true)}
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Registrar 4 L de agua en Tanque 2</button><a class="wf-btn" href="#">Cancelar</a></div><div class="gr-barra"><button class="wf-btn wf-btn--primary" type="submit">Registrar 4 L de agua</button></div>
+  <span class="wf-note">asks_result: resultado_l obligatorio (NO_PERMITIDO si falta). La diferencia y el aviso diferencia_volumen se conocen antes con el saldo de la instantánea; abv_fuera_rango (35–55) igual. Requiere señal.</span></form>`;
+const venta = () => `<form class="gr-form"><p class="gr-resumen">Salida · <b>Venta a granel</b> · Tanque 2 · lote G-INI-01 (341.8 L a 44.9 %)</p>
+  <fieldset><legend>Cuánto sale</legend><div class="wf-field" style="max-width:240px"><label for="l2">Litros</label><input class="wf-input" id="l2" inputmode="decimal" value="300"></div><p class="gr-calc">Quedan <b>41.8 L</b> en el Tanque 2.</p></fieldset>
+  <fieldset><legend>A quién (este concepto lo pide)</legend><div class="gr-fila"><div class="wf-field"><label for="c2">Contraparte</label><input class="wf-input" id="c2" value="Cliente ficticio S.A."></div><div class="wf-field"><label for="d2">Documento (remisión, factura)</label><input class="wf-input" id="d2" value="Remisión 118"></div></div></fieldset>
+  ${cuandoNota()}
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Sacar 300 L de Tanque 2 (venta)</button><a class="wf-btn" href="#">Cancelar</a></div><div class="gr-barra"><button class="wf-btn wf-btn--primary" type="submit">Sacar 300 L (venta)</button></div>
+  <span class="wf-note">Salida: sin resultado (no cambia el grado). Contraparte obligatoria por el concepto (REQUIERE_NOTA:contraparte si falta): la interfaz bloquea antes. Saldo insuficiente → error del servidor con causa.</span></form>`;
+const compra = () => `<form class="gr-form"><p class="gr-resumen">Entrada · <b>Compra de granel</b> · Tanque 3 (vacío, 500 L estricta)</p>
+  <fieldset><legend>Cuánto entra y qué quedó</legend><div class="gr-fila"><div class="wf-field"><label for="l3">Litros</label><input class="wf-input" id="l3" inputmode="decimal" value="250"></div><div class="wf-field"><label for="a3">% Alc.</label><input class="wf-input" id="a3" inputmode="decimal" value="46"></div></div><div class="gr-fila"><div class="wf-field"><label for="r3">Volumen resultante</label><input class="wf-input" id="r3" inputmode="decimal" value="250"></div><div class="wf-field"><label for="f3">Folio del lote (opcional)</label><input class="wf-input" id="f3" placeholder="G-… automático"></div></div></fieldset>
+  <fieldset><legend>Proveedor (este concepto lo pide)</legend><div class="gr-fila"><div class="wf-field"><label>Proveedor del catálogo</label><select class="wf-input"><option>Destilados Hermanos Luna</option><option>Otro (escribir)</option></select></div><div class="wf-field"><label for="d3">Documento</label><input class="wf-input" id="d3" value="Remisión 0452"></div></div></fieldset>
+  <fieldset><legend>Certificado (opcional, §5.3)</legend><div class="gr-fila"><div class="wf-field"><label for="cf">Folio del certificado</label><input class="wf-input" id="cf"></div><div class="wf-field"><label for="og">Organismo</label><input class="wf-input" id="og"></div></div><div class="gr-fila"><div class="wf-field"><label>Especie declarada</label><select class="wf-input"><option>Espadín</option></select></div><div class="wf-field"><label for="pd">Predio declarado</label><input class="wf-input" id="pd" value="Sola de Vega"></div></div><span class="wf-note">Nada bloquea si falta: el lote nace con historia «declarada» y los datos que haya (lot_external_sources).</span></fieldset>
+  ${cuandoNota()}
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Registrar compra de 250 L en Tanque 3</button><a class="wf-btn" href="#">Cancelar</a></div><div class="gr-barra"><button class="wf-btn wf-btn--primary" type="submit">Registrar compra de 250 L</button></div></form>`;
+const union = () => `<form class="gr-form"><p class="gr-resumen">Entrada · <b>Unión con otro lote</b> · Tanque 2 (G-INI-01, 341.8 L a 44.9 %)</p>
+  <fieldset><legend>De dónde viene</legend><div class="wf-field"><label>Lote de origen (y dónde está)</label><select class="wf-input"><option>G-COMPRA-01 · Tanque 1 · 250 L a 46 %</option><option>MEZ-002 · Colector mezcal · 8 L a 51 %</option></select></div><div class="gr-fila"><div class="wf-field"><label for="l4">Litros</label><input class="wf-input" id="l4" inputmode="decimal" value="250"></div><div class="wf-field"><label for="a4">% Alc. del que entra</label><input class="wf-input" id="a4" inputmode="decimal" value="46"></div></div></fieldset>
+  <fieldset><legend>Folio del lote que queda</legend><div class="gr-seg" role="radiogroup" aria-label="Decisión de folio"><button type="button" class="wf-btn" role="radio" aria-checked="true">Conservar G-INI-01</button><button type="button" class="wf-btn" role="radio" aria-checked="false">Renombrar (folio nuevo)</button></div><span class="wf-note">Sugerido: conservar el folio del lote mayor (G-INI-01, 341.8 L). Con renombrar, los dos se consumen y nace uno nuevo (origen «mezcla») con el aporte de cada uno. Ajuste default_folio_decision = conservar.</span></fieldset>
+  <fieldset><legend>Lo que quedó</legend><div class="gr-fila"><div class="wf-field"><label for="r4">Volumen resultante</label><input class="wf-input" id="r4" inputmode="decimal" value="591.8"></div><div class="wf-field"><label for="ab4">% Alc. resultante</label><input class="wf-input" id="ab4" inputmode="decimal" value="45.4"></div></div><p class="gr-calc">El ledger quedaría en <b>591.8 L</b> (341.8 + 250). Declaras 591.8: cuadra.</p></fieldset>
+  ${cuandoNota()}
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Unir 250 L de G-COMPRA-01 en Tanque 2 (conservar G-INI-01)</button><a class="wf-btn" href="#">Cancelar</a></div><div class="gr-barra"><button class="wf-btn wf-btn--primary" type="submit">Unir 250 L (conservar G-INI-01)</button></div></form>`;
+const errorSrv = () => `<form class="gr-form"><p class="gr-resumen">Salida · <b>Venta a granel</b> · Tanque 2 · G-INI-01</p><fieldset><legend>Cuánto sale</legend><div class="wf-field" style="max-width:240px"><label for="l5">Litros</label><input class="wf-input" id="l5" inputmode="decimal" value="400"></div><div class="gr-alert" role="alert">No alcanza: Tanque 2 tiene 341.8 L y se quieren sacar 400 L.</div></fieldset>${cuandoNota()}<div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Sacar 400 L de Tanque 2 (venta)</button><a class="wf-btn" href="#">Cancelar</a></div><div class="gr-barra"><button class="wf-btn wf-btn--primary" type="submit">Sacar 400 L (venta)</button></div><span class="wf-note">SALDO_INSUFICIENTE traducido («No alcanza: …»); la instantánea puede estar vieja: el servidor manda. Los datos se conservan.</span></form>`;
+const transferir = (o = {}) => `<form class="gr-form"><p class="gr-resumen"><b>Transferir</b></p>
+  <fieldset><legend>De dónde y a dónde</legend><div class="gr-fila"><div class="wf-field"><label>Origen</label><select class="wf-input"><option>Colector mezcal · MEZ-002 · 8 L a 51 %</option><option>Tanque 1 · G-COMPRA-01 · 250 L a 46 %</option></select></div><div class="wf-field"><label>Destino</label><select class="wf-input">${o.vacio ? '<option>Tanque 3 (vacío · 500 L estricta)</option><option>Tanque 1 · G-COMPRA-01 · 250 L</option>' : '<option>Tanque 1 · G-COMPRA-01 · 250 L</option><option>Tanque 2 · G-INI-01 · 341.8 L</option><option>Tanque 3 (vacío)</option>'}</select></div></div><div class="gr-fila"><div class="wf-field"><label for="lt">Litros</label><input class="wf-input" id="lt" inputmode="decimal" value="8"></div><div class="wf-field"><label for="at">% Alc.</label><input class="wf-input" id="at" inputmode="decimal" value="51"></div></div><span class="wf-note">Solo hacia tanque o colector de la misma clase (0019). Por defecto el % Alc. declarado del lote de origen.</span></fieldset>
+  ${o.vacio ? '<fieldset><legend>Folio del lote en el tanque</legend><div class="wf-field"><label for="fn">Folio nuevo (opcional)</label><input class="wf-input" id="fn" placeholder="G-… automático"></div><span class="wf-note">Destino vacío: el destilado se vuelve granel con folio nuevo (o el que escribas).</span></fieldset>' : '<fieldset><legend>El destino ya tiene lote</legend><div class="gr-seg" role="radiogroup" aria-label="Decisión de folio"><button type="button" class="wf-btn" role="radio" aria-checked="true">Conservar G-COMPRA-01</button><button type="button" class="wf-btn" role="radio" aria-checked="false">Renombrar (folio nuevo)</button></div><span class="wf-note">Sugerido: el folio del lote que ya está en el destino (el mayor). Se guarda el aporte de cada uno en el linaje.</span></fieldset>'}
+  ${cuandoNota()}
+  <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit" data-wf-persist>Transferir 8 L de Colector mezcal a ${o.vacio ? 'Tanque 3' : 'Tanque 1'}</button><a class="wf-btn" href="#">Cancelar</a></div><div class="gr-barra"><button class="wf-btn wf-btn--primary" type="submit">Transferir 8 L a ${o.vacio ? 'Tanque 3' : 'Tanque 1'}</button></div>
+  <span class="wf-note">«Pasar a granel» desde Destilación llega aquí con el origen puesto (?origen=colector). Requiere señal; admin y productor.</span></form>`;
+const hecho = () => `<div class="gr-hecho" role="status"><b>Registrado: 4 L de agua en Tanque 2.</b><span class="wf-small">G-INI-01 · 345.6 L a 44.4 % (Aurelia, hoy 11:00). El sistema registró una diferencia de −0.2 L.</span></div>${tanqueDet()}`;
+const V = {
+  default: () => listaStd() + '<span class="wf-note">Sin FAB: la acción depende del tanque (Entrada / Salida / Transferir por tarjeta; ninguna es primaria de la vista). Cada lote muestra su % Alc. declarado vigente con quién y cuándo (lot_declared_abv) y su nivel de historia como texto (§6). Colectores con mezcal → «Pasar a granel» (transferir).</span>',
+  loading: () => `${resumen('…', '…')}<div class="wf-skel" aria-busy="true"><div class="gr-grid">${'<div class="wf-line" style="height:160px;border-radius:6px"></div>'.repeat(2)}</div></div>`,
+  empty: () => `<div class="wf-state"><h2>Tu palenque aún no tiene tanques</h2><p class="wf-muted">Agrégalos en Configuración → Recursos; después registra lo que hay (carga inicial) o una compra.</p><a class="wf-btn" href="#">Ir a Recursos</a></div>`,
+  vacios: () => `${resumen(2, 0)}<div class="gr-grid">${tanque({ ...T1, lotes: [] })}${tanque({ ...T2, lotes: [] })}</div><span class="wf-note">Tanques sin líquido: la tarjeta lo dice y ofrece Entrada (compra / carga inicial) y Transferir desde un colector.</span>`,
+  offline: () => `<p class="gr-warn">Datos de <b>hace 20 min</b>. Los movimientos de granel necesitan señal (dependen de saldos que decide el servidor, §8.3).</p>${listaStd({ dis: true })}`,
+  readonly: () => listaStd({ dis: true }),
+  operador: () => listaStd({ operador: true }) + '<span class="wf-note">Operador: ve tanques, saldos, grado e historial; no mueve granel (rpc_guard 0019). Se dice quién lo hace.</span>',
+  long: () => `${resumen(1, '1,245.3')}<div class="gr-grid">${tanque({ c: 'Tanque de acero inoxidable grande del cuarto de atrás (2019)', cap: '12,500', pol: 'flexible', lotes: [{ f: 'G-2026-09-27-MEZCLA-ESPADIN-TOBALA-0001', l: 845.3, abv: '47.5', q: 'Aurelia Santiago', d: '27 sep', h: 'parcial' }, { f: 'G-COMPRA-02', l: 250, abv: '46.0', q: 'Benito', d: '19 sep', h: 'declarada' }, { f: 'G-INI-02', l: 150, abv: '44.0', q: 'Benito', d: '1 sep', h: 'sin historia' }] })}</div><span class="wf-note">Varios lotes en un tanque (sin unión): cada uno con su saldo y grado; salidas y uniones piden elegir el lote (por defecto el vivo, el más reciente).</span>`,
+  tanque: () => tanqueDet(), tanque0: () => tanqueDet({ vacio: true }),
+  concepto: () => concepto(), agua: () => agua(), venta: () => venta(), compra: () => compra(), union: () => union(), error: () => errorSrv(),
+  transferir: () => transferir(), 'transferir-vacio': () => transferir({ vacio: true }), hecho: () => hecho(),
+  menu: () => listaStd(),
+};
+const OV = { menu: () => `<div class="gr-menu" role="menu"><button role="menuitem">Ver historial</button><button role="menuitem">Entrada…</button><button role="menuitem">Salida…</button><button role="menuitem">Transferir…</button></div>` };
+const TOP = { tanque: () => topSub('Tanque 2'), tanque0: () => topSub('Tanque 3'), concepto: () => topSub('Movimiento', 'Tanque 2'), agua: () => topSub('Entrada', 'Tanque 2'), venta: () => topSub('Salida', 'Tanque 2'), compra: () => topSub('Entrada', 'Tanque 3'), union: () => topSub('Entrada', 'Tanque 2'), error: () => topSub('Salida', 'Tanque 2'), transferir: () => topSub('Transferir'), 'transferir-vacio': () => topSub('Transferir'), hecho: () => topSub('Tanque 2') };
+let S = { w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  const st = S.state;
+  const o = st === 'operador' ? { operador: true } : {};
+  const esLista = ['default','loading','empty','vacios','offline','readonly','operador','long','menu'].includes(st);
+  document.getElementById('wf-top').innerHTML = esLista ? topLista(o) : TOP[st]();
+  document.getElementById('wf-view').innerHTML = V[st]();
+  document.getElementById('wf-overlay').innerHTML = OV[st] ? OV[st]() : '';
+  const banners = { offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puedes consultar; para mover granel necesitas señal.</p>', readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar, no registrar.</p>' };
+  document.getElementById('wf-banner').innerHTML = banners[st] || '';
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>
