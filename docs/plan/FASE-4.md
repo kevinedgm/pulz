@@ -213,3 +213,12 @@ desarrollo; el siguiente `db reset --linked` lo borra.
 | mora documentó en el Design Hub | `design-hub/README.md` + 15 fichas nuevas (6 shell, 7 configuración, 2 pantallas); **sitio HTML** `design-hub/site/` (ronda `lab/hub/r01`: kiwi 84 combinaciones · 0 hallazgos → coco `build-hub.mjs` + `hub-shell.css/js` → mora valida → lima `hub-shell` candidate 0.2.0) | **OK**: `pnpm build:hub-site` 30 fichas + inicio + qa + 404; `qa/enlaces-hub.mjs` 33 páginas / 0 rotos; `qa/evidencia-hub.mjs` 8/8 (36 capturas) |
 | Capturas 390/1024/1440 claro y oscuro sin desbordes | `qa/evidence/{shell,configuracion,arranque}-r01/` = 50 + 67 + 13; `zoom-acceso.mjs` 18/18 | **OK** (más 768 por el perfil) |
 | pgTAP · Vitest · lint · tipos | `configuracion.test.sql` 37/37 · `vitest` 52/52 · eslint 0/0 · `vue-tsc` ✔ | **OK** |
+
+## Cierre (2026-09-27)
+
+`supabase db reset --linked --yes` ejecutado tras el último commit de la
+fase: se aplican las 25 migraciones y la semilla; quedan solo
+`cuatro-vientos` y `prueba-b` (desaparecen `prueba-d-*`, `prueba.auto`,
+Tanque QA, Especie QA y el Tanque B1 de la evidencia del arranque). pgTAP
+`configuracion.test.sql` en verde después del reset. **Fase 4 cerrada.**
+Sigue `docs/plan/FASE-5.md`.

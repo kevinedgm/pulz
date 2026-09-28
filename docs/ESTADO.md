@@ -11,19 +11,19 @@
 
 ## Fase actual
 
-**Fase 4 · Interfaz base y configuración — hecha y verificada de punta a
-punta; falta solo el `db reset --linked` de cierre.** Servidor (`0024`,
-`0025`, pgTAP 37/37, Storage real, PWA mínima, DUDAS #11 resuelto), shell,
-configuración y primer arranque con ciclo completo del squad (kiwi → lima →
-coco → mora, decisiones en automático per `CLAUDE.md` §4), prueba e2e con
-empresa nueva **OK a la primera**, y el **Design Hub con sitio HTML propio**
-(`design-hub/site/`, generado; `hub-shell` candidate). 29 piezas `candidate`
-0.2.0 en el registry; Vitest 52/52; Playwright 8/8 en cinco superficies
-(acceso 104 · shell 50 · configuración 67 · arranque 13 · hub 36 capturas)
-más e2e (9). **Siguiente:** `supabase db reset --linked --yes` (limpia
-Tanque QA, Especie QA, `prueba.auto`, Tanque B1 y `prueba-d-*`), cerrar
-aquí la Fase 4 y abrir `docs/plan/FASE-5.md` (captura por etapa y offline,
-§16).
+**Fase 5 · Captura por etapa y offline — plan escrito
+(`docs/plan/FASE-5.md`, decidido en automático per `CLAUDE.md` §4); empieza
+por el servidor (`0026_vistas_proceso.sql`, `0027_evidencias.sql`, pgTAP
+`proceso.test.sql`) y la cola offline, luego cinco rondas de kiwi
+(fermentación → destilación → granel → maguey-horneado → inicio-hoy).**
+
+**Fase 4 cerrada el 2026-09-27**: servidor, shell, configuración, primer
+arranque, prueba e2e con empresa nueva y Design Hub con sitio HTML propio,
+todo con ciclo completo del squad; 29 piezas `candidate` 0.2.0; Vitest 52/52;
+Playwright 8/8 en cinco superficies (acceso 104 · shell 50 · configuración
+67 · arranque 13 · hub 36 capturas) más e2e (9). `supabase db reset --linked
+--yes` de cierre ejecutado: el proyecto de desarrollo vuelve a la semilla
+(solo `cuatro-vientos` y `prueba-b`); pgTAP de configuración en verde después.
 
 ## Qué pasó
 
@@ -70,7 +70,7 @@ aquí la Fase 4 y abrir `docs/plan/FASE-5.md` (captura por etapa y offline,
 - 2026-09-27: Fase 3 cerrada por lima (14 candidate) y mora (Hub en
   Markdown). Fase 4 completa: ver «Próxima fase» abajo (servidor, shell,
   configuración, arranque, e2e y sitio del Hub) y `docs/plan/FASE-4.md`
-  («Resultados reales»).
+  («Resultados reales»). Cerrada con `db reset --linked` el mismo día.
 
 ## Criterios de aceptación de la Fase 3 (§16) — estado
 
@@ -119,7 +119,7 @@ adaptación probadas con Playwright); falta la compuerta de lima y mora.
 | Node / pnpm | 22.23.3 vía `nvm` · pnpm 9.15.9 vía Corepack |
 | git | `github.com/kevinedgm/pulz`, rama `main` |
 | Supabase CLI | 2.118.0, enlazado a `ypgeiyorgktshgbzhgfh`. Nunca `supabase start` ni `test db` (Docker); pgTAP por `db query --linked -f`; funciones con `deploy --use-api`; **`config diff` antes de cualquier `config push`** |
-| Proyecto Supabase | 22 migraciones + semilla por RPC; 3 Edge Functions desplegadas; hook de intentos no disponible (plan); **cada `db reset --linked` lo reconstruye** |
+| Proyecto Supabase | 25 migraciones + semilla por RPC; 3 Edge Functions desplegadas; hook de intentos no disponible (plan); **cada `db reset --linked` lo reconstruye** |
 | Cloudflare | `apps/web/wrangler.toml` (Pages, `dist/`); la Pages Function se prueba con `pnpm --filter @pulz/web test:portal` (requiere `pnpm build` antes) |
 | Docker / Colima / Podman | desinstalados a propósito, regla permanente |
 | Dev server / Hub | `.claude/launch.json`: `web` (Vite 5173) y `hub` (`python3 -m http.server 4321` → `http://localhost:4321/design-hub/site/`); demos con `pnpm --filter @pulz/web build:hub`, sitio con `pnpm build:hub-site` (versionado; regenerar con cada cambio de ficha o registry) |
@@ -171,4 +171,4 @@ Playwright 8/8 con escrituras reales en Prueba B (Tanque B1, 300 L @ 47).
 arranque → logo → portal, OK a la primera). **Hub HTML hecho (ronda
 `hub/r01`)**: sitio generado en `design-hub/site/` con `pnpm build:hub-site`,
 `hub-shell` candidate 0.2.0, 33 páginas / 0 enlaces rotos, evidencia 8/8.
-**Siguiente:** `db reset --linked` de cierre → `docs/plan/FASE-5.md`.
+**Cerrada** con `db reset --linked` (2026-09-27). Sigue `docs/plan/FASE-5.md`.
