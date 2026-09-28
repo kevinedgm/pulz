@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Configuración (recursos, catálogos, ajustes, portal y marca) · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+/* Solo grises del kit. Reglas locales de esta ronda (estructura, no apariencia). */
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled{opacity:.55;cursor:not-allowed}
+.cf-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:56px;padding:4px var(--wf-s4) 0;border-bottom:1px solid var(--wf-g3)}
+.cf-top h1{font-size:18px;margin:0 0 0 auto}
+.cf-body{padding:var(--wf-s5);min-width:0}
+.cf-ruta{font-size:13px;color:var(--wf-g6);margin:0 0 var(--wf-s3)}
+.cf-cab{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center;margin:0 0 var(--wf-s4)}
+.cf-cab .wf-input,.cf-cab select{max-width:280px}
+.cf-select{min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0);width:100%}
+.cf-form{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--wf-s4);max-width:640px}
+.cf-grupo{min-width:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);display:grid;gap:var(--wf-s3)}
+.cf-grupo h3{margin:0}
+.cf-fila{display:grid;grid-template-columns:1fr 1fr;gap:var(--wf-s3)}
+.cf-switch{display:flex;align-items:center;justify-content:space-between;gap:var(--wf-s3);min-height:44px}
+.cf-switch .sw{width:44px;height:24px;border:2px solid var(--wf-g9);border-radius:999px;position:relative;flex:none}
+.cf-switch .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--wf-g9)}
+.cf-switch .sw[aria-checked="false"]::after{left:auto;right:2px;background:transparent;border:2px solid var(--wf-g9);width:12px;height:12px}
+.cf-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--wf-s2)}
+.cf-seg .wf-btn[aria-pressed="true"]{background:var(--wf-g2);border-width:2px}
+.cf-help{font-size:13px;color:var(--wf-g6);margin:4px 0 0}
+.cf-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:var(--wf-s3) var(--wf-s4);font-weight:600}
+.cf-drawer{position:absolute;top:0;bottom:0;right:0;width:min(440px,92%);background:var(--wf-g0);border-left:1px solid var(--wf-g3);z-index:21;padding:var(--wf-s5);overflow:auto}
+.cf-menu{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s2);display:grid;gap:var(--wf-s1);max-width:260px;margin-top:var(--wf-s2)}
+.cf-menu .wf-btn{justify-content:flex-start}
+.cf-logo{display:flex;gap:var(--wf-s4);align-items:center;flex-wrap:wrap}
+.cf-logo .caja{width:96px;height:96px;border:1px solid var(--wf-g3);border-radius:12px;background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);display:grid;place-items:center;font-size:11px;color:var(--wf-g6)}
+.cf-preview{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);max-width:min(360px,100%);min-width:0}
+.cf-preview .acento{height:4px;background:var(--wf-g4);margin:-16px -16px 12px}
+.cf-slug{display:flex;gap:var(--wf-s2);align-items:center;flex-wrap:wrap}
+.cf-slug code{font-size:14px}
+.cf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.cf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.cf-side ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.cf-side li{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:6px;border:2px solid transparent}
+.cf-side li[aria-current]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.cf-bottom{display:none}
+.wf-table td .wf-status{white-space:nowrap}
+@container wf (max-width: 1023px){
+  .cf-shell{grid-template-columns:200px 1fr}
+  .cf-lista thead{display:none}
+  .cf-lista tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .cf-lista td{display:block;border:0;padding:2px var(--wf-s3)}
+  .cf-lista td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+  .cf-fila{grid-template-columns:1fr}
+}
+@container wf (max-width: 599px){
+  .cf-shell{grid-template-columns:1fr}
+  .cf-shell>.cf-side{display:none}
+  .cf-body{padding:var(--wf-s4) var(--wf-s4) 120px}
+  .cf-drawer{top:auto;left:0;right:0;width:100%;max-height:92%;border-left:0;border-top:1px solid var(--wf-g3);border-radius:12px 12px 0 0}
+  .cf-bottom{display:grid;grid-template-columns:repeat(5,1fr);position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:6px 4px 18px;font-size:11px;text-align:center}
+  .cf-bottom span{min-height:48px;display:grid;place-items:center}
+  .wf-main [data-wf-persist]{display:none}
+  .wf-bottom{display:flex}
+}
+</style>
+</head>
+<body class="wf">
+
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>CONFIGURACIÓN · r01 · F2</strong>
+  <fieldset><legend>Sección</legend>
+    <button data-s="recursos" aria-pressed="true">1 Recursos</button>
+    <button data-s="catalogos" aria-pressed="false">2 Catálogos</button>
+    <button data-s="ajustes" aria-pressed="false">3 Ajustes</button>
+    <button data-s="portal" aria-pressed="false">4 Portal y marca</button>
+  </fieldset>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Default</option>
+      <option value="loading">Carga</option>
+      <option value="empty">Vacío</option>
+      <option value="error">Error (carga / guardado)</option>
+      <option value="denied">Sin permiso (no admin por URL)</option>
+      <option value="offline">Sin conexión</option>
+      <option value="readonly">Solo lectura (vencida)</option>
+      <option value="long">Contenido largo</option>
+      <option value="alta">Agregar / editar (capa)</option>
+      <option value="menu">Acciones de una fila</option>
+      <option value="confirmar">Confirmación (desactivar / ocultar)</option>
+      <option value="slug">Portal · cambiar enlace (capa)</option>
+      <option value="logo">Portal · recorte del logo (capa)</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="cf-shell">
+      <nav class="cf-side" aria-label="Navegación principal (shell/r01)"><strong>Mezcal Cuatro Vientos</strong>
+        <ul><li>Inicio</li><li>Maguey</li><li>Horneado</li><li>Fermentación</li><li>Destilación</li><li>Granel</li><li>Trazabilidad</li><li aria-current="page">Configuración</li></ul>
+        <span class="wf-note">Shell de shell/r01, ya construido. Esta ronda solo decide el cuerpo.</span>
+      </nav>
+      <div style="min-width:0;display:flex;flex-direction:column">
+        <header class="cf-top" id="wf-top"></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main cf-body" id="wf-view" tabindex="-1"></main>
+        <div class="wf-bottom" id="wf-bottom"></div>
+        <nav class="cf-bottom" aria-label="Navegación principal (compact)"><span>Inicio</span><span>Fermentación</span><span>Destilación</span><span>Granel</span><span>Más</span></nav>
+      </div>
+    </div>
+    <div id="wf-overlay"></div>
+  </div>
+</div>
+
+<script>
+// ---------- contenido realista (semilla de Cuatro Vientos; rotulado como ejemplo donde no es de la semilla) ----------
+const RECURSOS = [
+  { c: 'Horno 1', k: 'horno', t: 'Horno cónico de tierra', cap: '10,000 kg', pol: 'libre', cl: '', on: true },
+  { c: 'Tahona', k: 'molino', t: 'Tahona', cap: '—', pol: 'libre', cl: '', on: true },
+  { c: 'Tina 1', k: 'tina', t: 'Tina de sabino', cap: '1,500 L', pol: 'flexible', cl: '', on: true },
+  { c: 'Tina 2', k: 'tina', t: 'Tina de sabino', cap: '1,500 L', pol: 'flexible', cl: '', on: true },
+  { c: 'Tina 3', k: 'tina', t: 'Tina de sabino', cap: '1,500 L', pol: 'flexible', cl: '', on: false },
+  { c: 'Alambique 1', k: 'alambique', t: 'Alambique de cobre', cap: '300 L', pol: 'estricta', cl: '', on: true },
+  { c: 'Colector mezcal', k: 'colector', t: 'Colector de acero', cap: '60 L', pol: 'flexible', cl: 'mezcal', on: true },
+  { c: 'Tanque 1', k: 'tanque', t: 'Tanque de acero inoxidable', cap: '1,000 L', pol: 'flexible', cl: '', on: true },
+  { c: 'Tanque 2', k: 'tanque', t: 'Tanque de plástico grado alimenticio', cap: '1,000 L', pol: 'flexible', cl: '', on: true },
+];
+const KINDS = { horno: 'Hornos', molino: 'Molinos', tina: 'Tinas', alambique: 'Alambiques', colector: 'Colectores', tanque: 'Tanques' };
+const CATALOGOS = {
+  tipo_tina: { n: 'Tipos de tina', filas: [['Tina de sabino', true], ['Tina de pino', true], ['Tina de piel', false], ['Tina de acero inoxidable', true]] },
+  concepto: { n: 'Conceptos de movimiento', filas: [['Venta a granel', true, 'salida', '—', '—', 'cliente'], ['Muestra de laboratorio', true, 'salida', '—', '—', 'laboratorio'], ['Compra de granel', true, 'entrada', 'crea lote', 'pide resultado', 'proveedor'], ['Ajuste de inventario', true, 'entrada', '—', '—', '—']] },
+  especie: { n: 'Especies', filas: [['Espadín', true, 'Agave angustifolia'], ['Tobalá', true, 'Agave potatorum'], ['Madrecuishe', true, 'Agave karwinskii'], ['Tobalá silvestre', true, '— (propia)']] },
+  predio: { n: 'Predios', filas: [['El Llano', true, 'Santiago Matatlán'], ['La Loma', true, 'San Dionisio Ocotepec']] },
+  proveedor: { n: 'Proveedores', filas: [['Don Chucho (maguey)', true, 'Maguey · 951 123 4567'], ['Levaduras del Sur', true, 'Insumos']] },
+  insumo: { n: 'Insumos', filas: [['Levadura seca', true, 'kg'], ['Agua', true, 'L']] },
+};
+const est = (on) => on ? '<span class="wf-status wf-status--on">activo</span>' : '<span class="wf-status wf-status--off">inactivo</span>';
+
+// ---------- piezas comunes ----------
+const cabecera = (titulo, primaria, buscar) => `
+  <p class="cf-ruta">Configuración / <b>${titulo}</b></p>
+  <div class="cf-cab">
+    <button class="wf-btn wf-btn--primary" data-wf-persist>${primaria}</button>
+    ${buscar ? `<input class="wf-input" placeholder="${buscar}" aria-label="Buscar">` : ''}
+  </div>`;
+const menuFila = (acciones) => `<div class="cf-menu" role="menu">${acciones.map(a => `<button class="wf-btn${a.d ? ' wf-btn--danger' : ''}" role="menuitem">${a.t}</button>`).join('')}</div>`;
+
+// ---------- 1. Recursos ----------
+const tablaRecursos = (rs, menuIdx = -1) => `
+  <table class="wf-table cf-lista"><thead><tr><th>Código</th><th>Tipo</th><th>Capacidad · política</th><th>Estado</th><th><span class="wf-sr">Acciones</span></th></tr></thead>
+  <tbody>${rs.map((r, i) => `<tr><td data-l="Código"><b>${r.c}</b>${r.cl ? `<br><span class="wf-small wf-muted">clase: ${r.cl}</span>` : ''}</td><td data-l="Tipo">${r.t}</td><td data-l="Capacidad">${r.cap} · ${r.pol}</td><td data-l="Estado">${est(r.on)}</td><td><button class="wf-btn" aria-haspopup="menu" aria-expanded="${i === menuIdx}">Acciones</button>${i === menuIdx ? menuFila([{ t: 'Editar…' }, { t: r.on ? 'Desactivar…' : 'Reactivar', d: r.on }]) : ''}</td></tr>`).join('')}</tbody></table>`;
+const filtroKind = (k = 'todos') => `<label class="wf-field" style="max-width:280px">Tipo de recurso<select class="cf-select">${['todos', ...Object.keys(KINDS)].map(x => `<option ${x === k ? 'selected' : ''}>${x === 'todos' ? 'Todos' : KINDS[x]}</option>`).join('')}</select></label>`;
+const recursos = {
+  default: () => `${cabecera('Recursos', 'Agregar recurso', 'Buscar por código')}${filtroKind()}${tablaRecursos(RECURSOS)}
+    <span class="wf-note">Un modelo para los seis tipos (§10.3). Filtro por tipo con select (6 opciones > 3: no es segmento). Capacidad con unidad (kg para horno/molino, L para líquidos). Inactivo se ve, no se borra. Colector muestra su clase de líquido.</span>`,
+  loading: () => `${cabecera('Recursos', 'Agregar recurso')}<div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:48px"></div>'.repeat(5)}</div>`,
+  empty: () => `${cabecera('Recursos', 'Agregar recurso').replace('wf-btn wf-btn--primary', 'wf-btn')}<div class="wf-state"><h2>Aún no hay recursos</h2><p class="wf-muted">Empieza por lo que ya tienes: tinas, alambiques y tanques. Los tipos vienen listos.</p><button class="wf-btn wf-btn--primary" data-wf-persist>Agregar recurso</button></div>
+    <span class="wf-note">Empresa nueva: los catálogos vienen sembrados (§10.2) pero los recursos no. La primaria vive en el vacío. El primer arranque (arranque/r01) crea tanques/tinas al vuelo desde aquí.</span>`,
+  error: () => `${cabecera('Recursos', 'Agregar recurso').replace('wf-btn wf-btn--primary', 'wf-btn')}<div class="wf-state" role="alert"><h2>No pudimos cargar los recursos</h2><p class="wf-muted">Revisa tu señal.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div>
+    <h2>Error al guardar (variante, en la capa)</h2><div class="cf-alert" role="alert">Ya hay un recurso con ese código</div><span class="wf-note">unique (organization_id, code): bajo el campo Código; lo escrito se conserva. Tipo de otro kind → el trigger lo rechaza: no debería ocurrir porque el select solo ofrece el catálogo del kind elegido.</span>`,
+  denied: () => `<p class="cf-ruta">Configuración</p><div class="wf-state"><h2>Solo el administrador puede ver la configuración</h2><p class="wf-muted">Pídele a Benito Cruz lo que necesites cambiar.</p><a class="wf-btn" href="#">Volver a Inicio</a></div>`,
+  offline: () => `${cabecera('Recursos', 'Agregar recurso').replace('data-wf-persist>', 'data-wf-persist disabled aria-disabled="true">')}${filtroKind()}${tablaRecursos(RECURSOS)}<span class="wf-note">Todo aquí es escritura: sin señal se ve lo último cargado y la primaria queda deshabilitada con motivo; el menú de fila no aparece.</span>`,
+  readonly: () => recursos.offline().replace('Todo aquí es escritura: sin señal', 'Vencida (read_only): se ve, no se cambia;'),
+  long: () => `${cabecera('Recursos', 'Agregar recurso', 'Buscar por código')}${filtroKind()}${tablaRecursos([{ c: 'Tanque de acero inoxidable grande del cuarto de atrás (2019)', k: 'tanque', t: 'Tanque de acero inoxidable con tapa hermética y válvula inferior', cap: '12,500 L', pol: 'estricta', cl: '', on: true }, ...RECURSOS.slice(0, 3)])}<span class="wf-note">Código de 40 y tipo largo: envuelven, no se recortan; en compact cada celda apilada con su rótulo.</span>`,
+  alta: () => `${cabecera('Recursos', 'Agregar recurso').replace('wf-btn wf-btn--primary', 'wf-btn')}${filtroKind('tanque')}${tablaRecursos(RECURSOS.filter(r => r.k === 'tanque'))}`,
+  menu: () => `${cabecera('Recursos', 'Agregar recurso')}${filtroKind()}${tablaRecursos(RECURSOS, 4)}<span class="wf-note">Tina 3 está inactiva: la acción es Reactivar (no destructiva). Para una activa: Editar… y Desactivar… (destructiva blanda, separada).</span>`,
+  confirmar: () => `${cabecera('Recursos', 'Agregar recurso').replace('wf-btn wf-btn--primary', 'wf-btn')}${filtroKind()}${tablaRecursos(RECURSOS)}`,
+};
+const OV_recursos = {
+  alta: () => `<div class="wf-scrim"></div><aside class="cf-drawer" role="dialog" aria-modal="true" aria-labelledby="ar-t"><h2 id="ar-t" style="margin-top:0">Agregar recurso</h2>
+    <form class="cf-form">
+      <div class="wf-field"><label>Tipo de recurso</label><select class="cf-select"><option>Tanque</option><option>Tina</option><option>Alambique</option><option>Colector</option><option>Horno</option><option>Molino</option></select><p class="cf-help">Define qué catálogo de tipos y qué unidad aplican.</p></div>
+      <div class="wf-field"><label for="rc">Código (como le dicen)</label><input class="wf-input" id="rc" value="Tanque 3"><p class="cf-help">Único en la empresa. Ej.: "Tanque 3", "Alambique chico".</p></div>
+      <div class="wf-field"><label>Tipo (catálogo)</label><select class="cf-select"><option>Tanque de acero inoxidable</option><option>Tanque de plástico grado alimenticio</option><option>Garrafón de vidrio</option></select><p class="cf-help">Solo los tipos de tanque; se editan en Catálogos.</p></div>
+      <div class="cf-fila"><div class="wf-field"><label for="rcap">Capacidad</label><input class="wf-input" id="rcap" inputmode="decimal" value="500"></div><div class="wf-field"><label>Unidad</label><select class="cf-select"><option>L</option><option>kg</option></select></div></div>
+      <div class="wf-field"><label>Política de capacidad</label><div class="cf-seg"><button type="button" class="wf-btn" aria-pressed="false">Estricta</button><button type="button" class="wf-btn" aria-pressed="true">Flexible</button><button type="button" class="wf-btn" aria-pressed="false">Libre</button></div><p class="cf-help">Flexible: avisa si te pasas; estricta: no deja; libre: no mira la capacidad.</p></div>
+      <div class="wf-field"><label for="rl">Ubicación (opcional)</label><input class="wf-input" id="rl" placeholder="Cuarto de atrás"></div>
+      <span class="wf-note">Si el tipo es Colector aparece "Clase de líquido" (mezcal · ordinario · colas · puntas) como select, obligatorio (CHECK del esquema). Para horno/molino la unidad es kg y la política por defecto libre. Editar usa esta misma capa con los valores cargados; el tipo de recurso (kind) no se cambia al editar.</span>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit">Guardar recurso</button><button class="wf-btn" type="button">Cancelar</button></div>
+    </form></aside>`,
+  confirmar: () => `<div class="wf-scrim"></div><aside class="cf-drawer" role="dialog" aria-modal="true" aria-labelledby="cd-t"><h2 id="cd-t" style="margin-top:0">¿Desactivar Tina 2?</h2><p class="wf-muted">Deja de aparecer al registrar. Lo ya registrado no cambia y puedes reactivarla cuando quieras.</p>
+    <span class="wf-note">Incógnita 2: si la tina tiene un ciclo abierto o el tanque tiene saldo, aquí debería decirlo; hoy no hay vista para saberlo. Confirmación genérica corta.</span>
+    <div class="wf-actions" style="margin-top:16px"><button class="wf-btn wf-btn--danger">Desactivar</button><button class="wf-btn">Cancelar</button></div></aside>`,
+};
+
+// ---------- 2. Catálogos ----------
+const selCat = (k = 'tipo_tina') => `<label class="wf-field" style="max-width:320px">Catálogo<select class="cf-select">${Object.entries(CATALOGOS).map(([id, c]) => `<option ${id === k ? 'selected' : ''}>${c.n}</option>`).join('')}<option>Tipos de horno</option><option>Tipos de molino</option><option>Tipos de alambique</option><option>Tipos de colector</option><option>Tipos de tanque</option><option>Tipos de proveedor</option><option>Tipos de adjunto</option><option>Unidades de insumo</option></select></label>`;
+const cols = { tipo_tina: ['Nombre'], concepto: ['Nombre', 'Dirección', 'Crea lote', 'Pide resultado', 'Contraparte'], especie: ['Nombre', 'Nombre científico'], predio: ['Nombre', 'Municipio'], proveedor: ['Nombre', 'Tipo · teléfono'], insumo: ['Nombre', 'Unidad'] };
+const tablaCat = (k, menuIdx = -1) => { const c = CATALOGOS[k]; const cs = cols[k]; return `
+  <table class="wf-table cf-lista"><thead><tr>${cs.map(x => `<th>${x}</th>`).join('')}<th>Estado</th><th><span class="wf-sr">Acciones</span></th></tr></thead>
+  <tbody>${c.filas.map((f, i) => `<tr><td data-l="${cs[0]}"><b>${f[0]}</b></td>${f.slice(2).map((v, j) => `<td data-l="${cs[j + 1]}">${v}</td>`).join('')}<td data-l="Estado">${f[1] ? '<span class="wf-status wf-status--on">visible</span>' : '<span class="wf-status wf-status--off">oculto</span>'}</td><td><button class="wf-btn" aria-haspopup="menu" aria-expanded="${i === menuIdx}">Acciones</button>${i === menuIdx ? menuFila([{ t: 'Editar…' }, { t: f[1] ? 'Ocultar' : 'Mostrar' }]) : ''}</td></tr>`).join('')}</tbody></table>`; };
+const catalogos = {
+  default: () => `${cabecera('Catálogos', 'Agregar tipo de tina', 'Buscar por nombre')}${selCat()}${tablaCat('tipo_tina')}
+    <span class="wf-note">Un solo patrón para 14 catálogos: select del catálogo + lista con las columnas propias de su tabla. Los sembrados de plantilla (§10.2) se OCULTAN (active=false), nunca se borran; los propios igual. La primaria cambia de texto con el catálogo elegido.</span>`,
+  loading: () => `${cabecera('Catálogos', 'Agregar')}${selCat()}<div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:48px"></div>'.repeat(4)}</div>`,
+  empty: () => `${cabecera('Catálogos', 'Agregar insumo').replace('wf-btn wf-btn--primary', 'wf-btn')}${selCat('insumo')}<div class="wf-state"><h2>Aún no hay insumos</h2><p class="wf-muted">Levadura, agua, nutrientes… lo que usas al formular.</p><button class="wf-btn wf-btn--primary" data-wf-persist>Agregar insumo</button></div>`,
+  error: () => `${cabecera('Catálogos', 'Agregar tipo de tina').replace('wf-btn wf-btn--primary', 'wf-btn')}${selCat()}<div class="wf-state" role="alert"><h2>No pudimos cargar el catálogo</h2><p class="wf-muted">Revisa tu señal.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div><h2>Error al guardar (variante)</h2><div class="cf-alert" role="alert">Ya existe "Tina de sabino" en este catálogo</div>`,
+  denied: () => recursos.denied(),
+  offline: () => `${cabecera('Catálogos', 'Agregar tipo de tina').replace('data-wf-persist>', 'data-wf-persist disabled aria-disabled="true">')}${selCat()}${tablaCat('tipo_tina')}`,
+  readonly: () => catalogos.offline(),
+  long: () => `${cabecera('Catálogos', 'Agregar concepto', 'Buscar por nombre')}${selCat('concepto')}${tablaCat('concepto')}<span class="wf-note">Conceptos de movimiento: las columnas de comportamiento (crea lote, pide resultado, pide contraparte) se muestran como texto, no como interruptores en la lista; se editan en la capa. En compact se apilan con rótulo.</span>`,
+  alta: () => `${cabecera('Catálogos', 'Agregar concepto').replace('wf-btn wf-btn--primary', 'wf-btn')}${selCat('concepto')}${tablaCat('concepto')}`,
+  menu: () => `${cabecera('Catálogos', 'Agregar tipo de tina')}${selCat()}${tablaCat('tipo_tina', 2)}`,
+  confirmar: () => catalogos.menu(),
+};
+const OV_catalogos = {
+  alta: () => `<div class="wf-scrim"></div><aside class="cf-drawer" role="dialog" aria-modal="true" aria-labelledby="ac-t"><h2 id="ac-t" style="margin-top:0">Agregar concepto de movimiento</h2>
+    <form class="cf-form">
+      <div class="wf-field"><label for="cn">Nombre</label><input class="wf-input" id="cn" value="Muestra para certificación"></div>
+      <div class="wf-field"><label>Dirección</label><div class="cf-seg" style="grid-template-columns:1fr 1fr"><button type="button" class="wf-btn" aria-pressed="false">Entrada</button><button type="button" class="wf-btn" aria-pressed="true">Salida</button></div></div>
+      <div class="cf-switch"><span>Pide contraparte (cliente, laboratorio, proveedor)</span><span class="sw" role="switch" aria-checked="true"></span></div>
+      <span class="wf-note">Solo para Entrada aparecen: "¿De qué lote viene?" (no aplica · opcional · requerido), "Crea lote" y "Pide volumen y % Alc. resultantes" (CHECK del esquema: salida no los permite). Especie: nombre común + científico. Predio: nombre, municipio, dueño, notas. Proveedor: nombre, tipo (catálogo tipo_proveedor), teléfono, notas. Insumo: nombre + unidad (catálogo unidad_insumo). Tipos de recurso: solo nombre. Misma capa, campos por catálogo.</span>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit">Guardar concepto</button><button class="wf-btn" type="button">Cancelar</button></div>
+    </form></aside>`,
+  confirmar: () => `<div class="wf-scrim"></div><aside class="cf-drawer" role="dialog" aria-modal="true" aria-labelledby="oc-t"><h2 id="oc-t" style="margin-top:0">¿Ocultar "Tina de piel"?</h2><p class="wf-muted">Deja de ofrecerse al crear recursos. Los recursos que ya lo usan no cambian. Puedes mostrarlo de nuevo cuando quieras.</p><div class="wf-actions" style="margin-top:16px"><button class="wf-btn wf-btn--danger">Ocultar</button><button class="wf-btn">Cancelar</button></div></aside>`,
+};
+
+// ---------- 3. Ajustes ----------
+const formAjustes = (dis = false) => `
+  <p class="cf-ruta">Configuración / <b>Ajustes</b></p>
+  <form class="cf-form">
+    <div class="cf-grupo"><h3>Mediciones</h3>
+      <div class="wf-field"><label>Modo de medición</label><div class="cf-seg" style="grid-template-columns:1fr 1fr"><button type="button" class="wf-btn" aria-pressed="true">Mínimo</button><button type="button" class="wf-btn" aria-pressed="false">Completo</button></div><p class="cf-help">Mínimo: actividad y temperatura. Completo: además Brix, dulzor y acidez por zona.</p></div>
+      <div class="cf-fila"><div class="wf-field"><label for="ah">Hora del recordatorio</label><input class="wf-input" id="ah" inputmode="numeric" value="9"><p class="cf-help">0–23. Recordatorio de medir (Fase 5).</p></div><div class="wf-field"><label for="ad">Días esperados de fermentación</label><input class="wf-input" id="ad" inputmode="numeric" value="7"><p class="cf-help">Solo referencia visual.</p></div></div>
+      <div class="cf-fila"><div class="wf-field"><label for="b1">Brix inicial habitual · mínimo</label><input class="wf-input" id="b1" inputmode="decimal" value="12"></div><div class="wf-field"><label for="b2">· máximo</label><input class="wf-input" id="b2" inputmode="decimal" value="14"></div></div>
+    </div>
+    <div class="cf-grupo"><h3>Destilación y granel</h3>
+      <div class="cf-switch"><span>¿Capturan puntas? <span class="cf-help">Casi nadie (&lt;300 mL); si no, no se pregunta.</span></span><span class="sw" role="switch" aria-checked="false"></span></div>
+      <div class="cf-switch"><span>Avisar si una segunda pasada mezcla ordinarios de distintas tinas <span class="cf-help">Avisa y pide nota; nunca bloquea.</span></span><span class="sw" role="switch" aria-checked="true"></span></div>
+      <div class="cf-fila"><div class="wf-field"><label for="a1">% Alc. habitual en granel · mínimo</label><input class="wf-input" id="a1" inputmode="decimal" value="35"></div><div class="wf-field"><label for="a2">· máximo</label><input class="wf-input" id="a2" inputmode="decimal" value="55"></div></div>
+    </div>
+    <div class="cf-grupo"><h3>Folios</h3>
+      <div class="wf-field"><label>Al transferir o mezclar, el folio…</label><div class="cf-seg" style="grid-template-columns:1fr 1fr"><button type="button" class="wf-btn" aria-pressed="true">Se conserva</button><button type="button" class="wf-btn" aria-pressed="false">Se renombra</button></div><p class="cf-help">Decisión por defecto; cada operación puede cambiarla.</p></div>
+    </div>
+    <span class="wf-note">Los 10 campos de organization_settings, agrupados por etapa, en lenguaje del palenque. Validación al salir: mínimo &lt; máximo (CHECK real), hora 0–23. Una primaria: Guardar ajustes (en compact baja a la barra). Sin "Cancelar": los cambios no se aplican hasta guardar; salir descarta con pregunta si hay cambios.</span>
+    <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit" ${dis ? 'disabled aria-disabled="true"' : ''}>Guardar ajustes</button></div>
+  </form>`;
+const ajustes = {
+  default: () => formAjustes(), loading: () => `<p class="cf-ruta">Configuración / <b>Ajustes</b></p><div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:140px;border-radius:6px"></div>'.repeat(3)}</div>`,
+  empty: () => formAjustes(), error: () => `<p class="cf-ruta">Configuración / <b>Ajustes</b></p><div class="cf-alert" role="alert">El mínimo debe ser menor que el máximo</div>${formAjustes()}<span class="wf-note">Error del CHECK bajo el campo; también se valida antes de enviar.</span>`,
+  denied: () => recursos.denied(), offline: () => formAjustes(true), readonly: () => formAjustes(true), long: () => formAjustes(), alta: () => formAjustes(), menu: () => formAjustes(), confirmar: () => formAjustes(),
+};
+
+// ---------- 4. Portal y marca ----------
+const formPortal = (dis = false, largo = false) => `
+  <p class="cf-ruta">Configuración / <b>Portal y marca</b></p>
+  <form class="cf-form">
+    <div class="cf-grupo"><h3>Cómo se ve tu portal</h3>
+      <div class="wf-field"><label for="pn">Nombre de la empresa</label><input class="wf-input" id="pn" value="${largo ? 'Destilería Artesanal de los Cuatro Vientos del Valle de Tlacolula y Anexas, S. de R.L. de C.V.' : 'Mezcal Cuatro Vientos'}"></div>
+      <div class="wf-field"><label for="pe">Estado (dónde está el palenque)</label><input class="wf-input" id="pe" value="Oaxaca"></div>
+      <div class="wf-field"><label for="pm">Mensaje de bienvenida</label><input class="wf-input" id="pm" value="Registro de producción del palenque"><p class="cf-help">36 / 140</p></div>
+      <div class="wf-field"><label for="pc">Color de la empresa</label><div class="cf-slug"><input type="color" id="pc" value="#7a3e1d" style="width:52px;height:44px;border:1px solid var(--wf-g4);border-radius:6px;background:var(--wf-g0)"><code>#7A3E1D</code></div><p class="cf-help">Solo como acento (línea superior y monograma); nunca detrás de texto.</p></div>
+      <div class="wf-field"><label>Logo</label><div class="cf-logo"><div class="caja">logo</div><div><button type="button" class="wf-btn">Subir logo</button> <button type="button" class="wf-btn wf-btn--quiet">Quitar</button><p class="cf-help">PNG, JPG o WebP hasta 2 MB. Se recorta cuadrado y se guarda a 512 px.</p></div></div></div>
+    </div>
+    <div class="cf-grupo"><h3>Enlace del portal</h3>
+      <div class="cf-slug"><code>pulz.mx/e/cuatro-vientos</code><button type="button" class="wf-btn">Cambiar enlace…</button></div>
+      <p class="cf-help">Es el enlace que tu gente tiene guardado. Si lo cambias, el viejo sigue funcionando y nadie más podrá usarlo.</p>
+    </div>
+    <div class="cf-grupo"><h3>Vista previa</h3>
+      <div class="cf-preview"><div class="acento"></div><div class="cf-logo"><div class="caja" style="width:56px;height:56px">logo</div><div style="min-width:0"><b style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${largo ? 'Destilería Artesanal de los Cuatro Vientos del Valle…' : 'Mezcal Cuatro Vientos'}</b><span class="wf-muted wf-small">Registro de producción del palenque</span></div></div></div>
+      <span class="wf-note">La misma marca que ve la gente antes de entrar (MarcaPortal de acceso/r01): se reutiliza el componente, no se dibuja otra.</span>
+    </div>
+    <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist type="submit" ${dis ? 'disabled aria-disabled="true"' : ''}>Guardar cambios</button></div>
+  </form>`;
+const portal = {
+  default: () => formPortal(), loading: () => `<p class="cf-ruta">Configuración / <b>Portal y marca</b></p><div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:120px;border-radius:6px"></div>'.repeat(3)}</div>`,
+  empty: () => formPortal(), error: () => `<p class="cf-ruta">Configuración / <b>Portal y marca</b></p><div class="cf-alert" role="alert">El logo pesa más de 2 MB o no es PNG/JPG/WebP</div>${formPortal()}<span class="wf-note">Errores posibles: logo (tamaño/tipo, del bucket 0024), color no válido (#RRGGBB), mensaje &gt;140, enlace tomado/reservado/mal formado. Siempre bajo su campo.</span>`,
+  denied: () => recursos.denied(), offline: () => formPortal(true), readonly: () => formPortal(true), long: () => formPortal(false, true), alta: () => formPortal(), menu: () => formPortal(), confirmar: () => formPortal(), slug: () => formPortal(), logo: () => formPortal(),
+};
+const OV_portal = {
+  slug: () => `<div class="wf-scrim"></div><aside class="cf-drawer" role="dialog" aria-modal="true" aria-labelledby="sl-t"><h2 id="sl-t" style="margin-top:0">Cambiar el enlace del portal</h2>
+    <form class="cf-form"><div class="wf-field"><label for="sn">Nuevo enlace</label><div class="cf-slug"><span class="wf-muted">pulz.mx/e/</span><input class="wf-input" id="sn" value="cuatro-vientos-mezcal" style="max-width:260px" autocapitalize="none"></div><p class="cf-help">Minúsculas, números y guiones (3 a 40). Se comprueba al salir del campo: "disponible" / "ya está en uso" / "reservado".</p></div>
+      <div class="cf-alert" style="border-style:dashed;font-weight:400">El enlace viejo <code>pulz.mx/e/cuatro-vientos</code> seguirá llevando a tu portal y nadie más podrá usarlo. Los accesos directos instalados siguen funcionando.</div>
+      <span class="wf-note">Trigger organizations_slug_guard: el viejo va al historial; Pages Function 301 + guardia del router. La PWA instalada con el enlace viejo sigue abriendo (301).</span>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" type="submit">Cambiar enlace</button><button class="wf-btn" type="button">Cancelar</button></div></form></aside>`,
+  logo: () => `<div class="wf-scrim"></div><aside class="cf-drawer" role="dialog" aria-modal="true" aria-labelledby="lg-t"><h2 id="lg-t" style="margin-top:0">Recortar el logo</h2>
+    <div class="wf-img" style="aspect-ratio:1;max-width:320px;margin:0 auto;border:2px dashed var(--wf-g6)"></div>
+    <p class="cf-help" style="text-align:center">Arrastra para encuadrar. Se guarda cuadrado a 512 px.</p>
+    <span class="wf-note">Recorte en el navegador con canvas (sin librería si se puede). Si el archivo ya es cuadrado y ≤512, se sube tal cual. Sube a branding/&lt;org_id&gt;/logo.&lt;ext&gt; y guarda logo_path; el portal lo publica al instante.</span>
+    <div class="wf-actions"><button class="wf-btn wf-btn--primary">Usar este logo</button><button class="wf-btn">Cancelar</button></div></aside>`,
+};
+
+// ---------- render ----------
+const SUP = { recursos, catalogos, ajustes, portal };
+const OV = { recursos: OV_recursos, catalogos: OV_catalogos, ajustes: {}, portal: OV_portal };
+const TITULO = { recursos: 'Recursos', catalogos: 'Catálogos', ajustes: 'Ajustes', portal: 'Portal y marca' };
+const PRIMARIA = { recursos: 'Agregar recurso', catalogos: 'Agregar', ajustes: 'Guardar ajustes', portal: 'Guardar cambios' };
+let S = { s: 'recursos', w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  let st = S.state;
+  if (!SUP[S.s][st]) st = 'default';
+  document.getElementById('wf-top').innerHTML = `<span class="wf-small wf-muted">MC · Mezcal Cuatro Vientos · titular · admin</span><h1>${st === 'denied' ? 'Configuración' : TITULO[S.s]}</h1>`;
+  document.getElementById('wf-view').innerHTML = SUP[S.s][st]();
+  const ov = OV[S.s][st] ? OV[S.s][st]() : '';
+  document.getElementById('wf-overlay').innerHTML = ov;
+  const banners = { offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puedes ver lo último cargado; para cambiar algo necesitas señal.</p>', readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar, no cambiar.</p>' };
+  document.getElementById('wf-banner').innerHTML = banners[st] || '';
+  const dis = ['offline', 'readonly'].includes(st);
+  const oculto = st === 'denied' || ['loading', 'error', 'empty'].includes(st) || ov;
+  document.getElementById('wf-bottom').innerHTML = oculto ? '' : `<button class="wf-btn wf-btn--primary" style="flex:1" ${dis ? 'disabled aria-disabled="true"' : ''}>${PRIMARIA[S.s]}</button>`;
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+  document.querySelectorAll('[data-s]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.s === S.s)));
+}
+document.addEventListener('click', e => {
+  const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); return; }
+  const s = e.target.closest('[data-s]'); if (s) { S.s = s.dataset.s; render(); }
+});
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>
