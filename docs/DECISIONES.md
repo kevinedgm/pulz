@@ -469,6 +469,28 @@ pedir una ronda `rNN+1` o cambiar la regla en `CLAUDE.md`.
    dos empresas y §7 no lo presenta como flujo frecuente; si en uso real lo
    fuera, se sube a la cabecera con una ronda `r02`.
 
+## 2026-09-27 · configuracion/r01 aprobada con estas decisiones (CLAUDE.md §4)
+
+1. **Entra `recurso_en_uso(p_org)`** (migración `0025`, función de solo
+   lectura como `equipo_miembros`): por recurso, saldo actual de líquido y
+   ciclos de fermentación abiertos, para que "Desactivar" avise si la tina
+   fermenta o el tanque tiene litros. Es barato y evita apagar recursos con
+   contenido. Revertir: quitar la función y la confirmación específica.
+2. **Una capa por tabla real**, no un formulario dinámico: `tipo_*`
+   comparten campos (solo nombre); conceptos, especies, predios,
+   proveedores e insumos tienen la suya. Menos genérico, más honesto.
+3. **Configuración sigue siendo solo admin**, aunque la RLS deje al
+   productor escribir predios/proveedores/insumos: el productor los captura
+   desde Maguey en Fase 5, en contexto. Revertir: quitar `soloAdmin` del
+   destino y mostrar solo esas tres secciones al productor.
+4. **Piezas nuevas del sistema**: `select`, `number-field`, `switch`,
+   `color-field`, `file-picker`; `MarcaPortal` sube al sistema como
+   `brand-block` porque ya se usa en dos contextos (portal y vista previa).
+5. **Recorte del logo en el navegador con canvas**, sin librería; si una
+   foto de teléfono llega rotada (EXIF), se sube sin recortar (≤2 MB) y se
+   anota. Se prueba con archivos reales en coco.
+6. Reordenar catálogos (`sort_order`) no entra (Could).
+
 ## 2026-09-27 · coco, shell/r01: lo que salió al construir
 
 - **Capas y navegación no se llevan sin cuidado.** `task-layer` deshace su

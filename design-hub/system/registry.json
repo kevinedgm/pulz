@@ -1457,5 +1457,328 @@
         ]
       }
     }
+  },
+  "select": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/configuracion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "label visible · select nativo (44px, borde --muted, flecha del sistema) · ayuda/error con aria-describedby",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "rules": "Para 4+ opciones (≤3 → segmented-choice). Opciones {valor, etiqueta}; vacío con placeholder deshabilitado. Mismo contrato de etiqueta/ayuda/error que text-field."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "number-field": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/configuracion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [
+      "text-field"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "text-field con inputmode decimal|numeric, unidad opcional a la derecha (texto, no botón), min/max/step",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "rules": "Valor numérico o null; valida al salir (blur): rango y 'min < max' lo hace el formulario. Sin spinners. Texto largo no aplica."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "switch": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/configuracion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "fila: texto (label + ayuda) a la izquierda · control role=switch aria-checked 44×24 a la derecha; estado por forma (punto relleno/vacío) + texto 'Sí/No' opcional",
+      "states": [
+        "off",
+        "on",
+        "focus",
+        "disabled"
+      ],
+      "rules": "Para booleanos que se aplican al guardar (no inmediatos). Toda la fila es clicable (≥44px)."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "color-field": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/configuracion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [
+      "text-field"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "label · input type=color (44px, radio --r-md) + hex visible y editable (#RRGGBB) · ayuda",
+      "states": [
+        "default",
+        "focus",
+        "error (hex inválido)"
+      ],
+      "rules": "Solo para el color de acento de la empresa; la interfaz nunca lo pone detrás de texto. Valida ^#[0-9A-Fa-f]{6}$ al salir."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "file-picker": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/configuracion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [
+      "button"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "label · vista previa (96px, imagen o marcador) · botón 'Subir…' (input file oculto, accept por prop) · botón quiet 'Quitar' · ayuda con tipos y tope",
+      "states": [
+        "vacío",
+        "con archivo",
+        "subiendo (aria-busy)",
+        "error (tipo/tamaño)"
+      ],
+      "rules": "Valida tipo y tamaño en el navegador antes de subir con los mismos límites del bucket (2 MB, png/jpeg/webp). El recorte es del consumidor (capa local)."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "brand-block": {
+    "kind": "component",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/configuracion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "anatomy": "logo 56px o monograma (iniciales sobre --clay-100) · nombre (2 líneas, title) · mensaje ≤140 · línea de acento brand_color arriba",
+      "states": [
+        "con logo",
+        "monograma",
+        "cargando (esqueleto)",
+        "nombre largo"
+      ],
+      "rules": "Sube al sistema desde modules/acceso (MarcaPortal): la misma pieza en el portal y en la vista previa de Configuración. Sin acciones."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
+  },
+  "configuracion": {
+    "kind": "product-application",
+    "status": "draft",
+    "owner": "lima",
+    "sourceRound": "lab/configuracion/r01",
+    "documentation": null,
+    "demo": null,
+    "source": null,
+    "behavior": null,
+    "dependencies": [
+      "app-shell",
+      "list-stack",
+      "row-menu",
+      "task-layer",
+      "button",
+      "text-field",
+      "segmented-choice",
+      "status-chip",
+      "state-block",
+      "banner",
+      "select",
+      "number-field",
+      "switch",
+      "color-field",
+      "file-picker",
+      "brand-block"
+    ],
+    "profileDependencies": [
+      "design_system.tokens"
+    ],
+    "contract": {
+      "screens": [
+        "índice",
+        "recursos (lista + filtro por tipo + capa alta/edición + confirmación con recurso_en_uso)",
+        "catálogos (select de catálogo + lista + capa por tabla)",
+        "ajustes (formulario de 10 campos en 3 grupos)",
+        "portal y marca (formulario + logo con recorte + cambiar enlace en capa + vista previa)"
+      ],
+      "rules": "Solo admin (destino soloAdmin; por URL → denied). Nunca borrar: active=false. Errores del esquema bajo el campo. Slug: trigger + historial; tras cambiarlo, router.replace al nuevo. Logo: branding/<org>/logo.<ext> con upsert."
+    },
+    "qa": {
+      "candidate": false,
+      "visual": "pending",
+      "stable": false
+    },
+    "refinement": {
+      "critique": "not-run",
+      "distill": "not-run",
+      "adapt": "not-run",
+      "polish": "not-run",
+      "detector": "not-run"
+    },
+    "production": {
+      "framework": null,
+      "path": null
+    },
+    "version": "0.1.0",
+    "replacedBy": null,
+    "updated": "2026-09-27"
   }
 }
