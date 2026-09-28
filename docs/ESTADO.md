@@ -144,7 +144,13 @@ servidor hecho y verificado.** `0024_marca.sql` (bucket `branding` +
 políticas por empresa, por migración), pgTAP `configuracion.test.sql`
 33/33, smoke real de Storage, DUDAS #11 resuelto (sesión automática tras la
 bienvenida, probado contra las funciones desplegadas), PWA mínima (manifest,
-service worker de precache, iconos desde la marca). **Siguiente:** ronda de
-`kiwi` `design-hub/lab/shell/r01` (shell, navegación, tema) → aprobación del
-dueño → lima → coco → mora; luego `configuracion/r01` y `arranque/r01`; la
-ronda del Design Hub HTML (`lab/hub/r01`) entra también en esta fase.
+service worker de precache, iconos desde la marca). **Shell hecho
+(ronda `shell/r01`, ciclo completo kiwi → lima → coco → mora, decidido en
+automático per `CLAUDE.md` §4):** navegación por proceso (barra 4+Más en
+compact, lateral 200/240), cabecera con empresa → Cuenta (empresas, tema,
+Equipo, salir), banners, hueco de FAB, Inicio con "¿Qué tienes hoy?",
+destinos "próximamente", 4 símbolos nuevos; 20 piezas `candidate` en el
+registry; Vitest 40/40; Playwright shell 8/8 (50 capturas) + acceso 8/8
+(104) + zoom 10/10. **Siguiente:** ronda `configuracion/r01` → luego
+`arranque/r01` → prueba de punta a punta (tarea 5) → ronda del Hub HTML
+(`lab/hub/r01`).

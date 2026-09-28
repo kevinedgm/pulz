@@ -6,7 +6,7 @@
 | Componente | `Icono.vue` — `nombre: IconoNombre`, `size?: number`, `titulo?: string` (sin título es decorativo, `aria-hidden`) |
 | Inyección | `App.vue` inserta el sprite una vez; cada uso es `<use href="#id">` |
 
-## Símbolos que existen (12)
+## Símbolos que existen (16)
 
 | id | Concepto |
 |---|---|
@@ -15,6 +15,7 @@
 | `i-medir` | medición |
 | `i-mas` | agregar (**"+"**; redibujado en la ronda acceso/r01: antes eran tres líneas) |
 | `i-bell` · `i-clock` | aviso · tiempo |
+| `i-tanque` · `i-traza` · `i-ajustes` · `i-menu` | Granel · Trazabilidad · Configuración · «Más» (agregados en `shell/r01`, mismo trazo; decisión 2026-09-27) |
 | `pulz-mark` | marca PULZ (viewBox 96) |
 
 ## Lo que NO existe — y cómo se resolvió

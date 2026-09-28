@@ -18,8 +18,10 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
 - **Ver las pantallas reales:** dev server (`.claude/launch.json` → `web`) con
   los usuarios de `supabase/seed.sql`.
 - **Evidencia:** [`qa/evidence/acceso-r01/`](qa/evidence/acceso-r01/) —
-  104 capturas, 1440/1024/768/390 × claro/oscuro, generadas por
-  `qa/evidencia-acceso.mjs`; zoom 200 % aproximado por `qa/zoom-acceso.mjs`.
+  104 capturas, y [`qa/evidence/shell-r01/`](qa/evidence/shell-r01/) — 56
+  capturas; 1440/1024/768/390 × claro/oscuro, generadas por
+  `qa/evidencia-acceso.mjs` y `qa/evidencia-shell.mjs`; zoom 200 %
+  aproximado por `qa/zoom-acceso.mjs`.
 
 ## Madurez (registry, 2026-09-27)
 
@@ -29,13 +31,13 @@ sale de [`system/registry.json`](system/registry.json), nunca de esta página.
 | **candidate** | pasó la compuerta Candidate de lima; el dueño puede pedir cambios o estabilizar | «Estado: candidate 0.2.0» |
 | stable | contrato aprobado explícitamente por el dueño | — (ninguna todavía) |
 
-Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, ronda
-[`lab/acceso/r01`](lab/acceso/r01/).
+Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, rondas
+[`lab/acceso/r01`](lab/acceso/r01/) y [`lab/shell/r01`](lab/shell/r01/).
 
 ## Foundations
 
 - [Tokens](Foundations/Tokens.md) — variables reales de `tokens.css`, claro y oscuro, con el contraste medido.
-- [Iconos](Foundations/Icons.md) — los 12 símbolos del sprite y qué no existe.
+- [Iconos](Foundations/Icons.md) — los 16 símbolos del sprite y qué no existe.
 
 ## Components (sistema, `apps/web/src/shared/ui/`)
 
@@ -47,6 +49,10 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, ronda
 | [Segmento de opciones](Components/segmented-choice.md) | `segmented-choice` | `SegmentoOpciones.vue` |
 | [Chip de estado](Components/status-chip.md) | `status-chip` | `ChipEstado.vue` |
 | [Menú de fila](Components/row-menu.md) | `row-menu` | `MenuFila.vue` |
+| [Cabecera de página](Components/page-header.md) | `page-header` | `CabeceraPagina.vue` |
+| [Menú lateral](Components/side-nav.md) | `side-nav` | `NavLateral.vue` |
+| [Navegación inferior](Components/bottom-nav.md) | `bottom-nav` | `NavInferior.vue` |
+| [Botón flotante](Components/fab.md) | `fab` | `BotonFlotante.vue` |
 
 ## Patterns (sistema)
 
@@ -56,6 +62,7 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, ronda
 | [Bloque de estado](Patterns/state-block.md) | `state-block` | `BloqueEstado.vue` |
 | [Capa de tarea](Patterns/task-layer.md) | `task-layer` | `CapaTarea.vue` |
 | [Lista apilada](Patterns/list-stack.md) | `list-stack` | `ListaApilada.vue` |
+| [Shell de la app](Patterns/app-shell.md) | `app-shell` | `app/AppShell.vue` |
 
 ## Screens (product-application, `apps/web/src/modules/`)
 
@@ -65,6 +72,7 @@ Ninguna pieza es `stable`. Todo lo de abajo es **candidate 0.2.0**, ronda
 | [Cambio obligatorio de contraseña](Screens/acceso-cambio-contrasena.md) | `acceso-cambio-contrasena` | `/e/:slug/cambiar-contrasena` |
 | [Bienvenida por enlace](Screens/acceso-bienvenida.md) | `acceso-bienvenida` | `/e/:slug/bienvenida#token` |
 | [Equipo](Screens/equipo.md) | `equipo` | `/e/:slug/equipo` |
+| [Inicio](Screens/inicio.md) | `inicio` | `/e/:slug/inicio` |
 
 ## Lo que NO está hecho (no lo busques aquí como hecho)
 

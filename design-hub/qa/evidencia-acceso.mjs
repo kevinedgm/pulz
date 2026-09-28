@@ -34,6 +34,13 @@ async function entrar(page, usuario, contrasena) {
 }
 
 async function salir(page) {
+  // Pantallas de acceso (sin shell): "Cerrar sesión" directo. Dentro del shell
+  // (shell/r01) vive en la Cuenta: botón de empresa (compact/medium) o bloque
+  // de cuenta al pie del menú lateral (expanded).
+  const directo = page.getByRole("button", { name: "Cerrar sesión" })
+  if ((await directo.count()) === 0) {
+    await page.getByRole("button", { name: /cuenta|Cuatro Vientos/ }).first().click()
+  }
   await page.getByRole("button", { name: "Cerrar sesión" }).click()
   await page.waitForURL(`**/e/${SLUG}`)
 }
@@ -127,6 +134,9 @@ for (const tema of TEMAS) {
     await entrar(page, "benito@cuatrovientos.mx", "benito-2026")
     ok(page.url().endsWith("/inicio"), `benito ${ancho}/${tema}: no llegó a inicio`)
     await foto("inicio")
+    // shell/r01: Equipo se llega desde la Cuenta (admin) o desde Configuración
+    await page.getByRole("button", { name: /cuenta|Cuatro Vientos/ }).first().click()
+    await page.getByRole("dialog", { name: "Tu cuenta" }).waitFor()
     await page.getByRole("link", { name: "Equipo" }).click()
     await page.getByRole("heading", { name: "Equipo" }).waitFor()
     await page.getByRole("button", { name: "Acciones para Tomás Hernández" }).waitFor()
@@ -158,10 +168,13 @@ for (const tema of TEMAS) {
 
     // 8. Colaboradora productora: en Inicio no ve "Equipo"; por URL, estado "Sin permiso"
     await entrar(page, "aurelia", "aurelia-2026")
+    await page.getByRole("button", { name: /cuenta|Cuatro Vientos/ }).first().click()
+    await page.getByRole("dialog", { name: "Tu cuenta" }).waitFor()
     ok(
       (await page.getByRole("link", { name: "Equipo" }).count()) === 0,
-      `aurelia ${ancho}/${tema}: ve el enlace Equipo`,
+      `aurelia ${ancho}/${tema}: ve el enlace Equipo en su cuenta`,
     )
+    await page.keyboard.press("Escape")
     await page.goto(`${WEB}/e/${SLUG}/equipo`)
     await page.getByText("Solo el administrador puede ver el equipo").waitFor()
     await foto("equipo-sin-permiso")
@@ -170,7 +183,7 @@ for (const tema of TEMAS) {
 
     // 9. Hub (componentes con tokens reales: incluye solo lectura y estados)
     await page.goto(HUB)
-    await page.getByRole("heading", { level: 2, name: /Botón/ }).waitFor()
+    await page.getByRole("heading", { level: 2, name: "Botón button" }).waitFor()
     await foto("hub")
     await sinScrollH("hub")
 

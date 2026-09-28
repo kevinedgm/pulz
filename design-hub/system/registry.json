@@ -4,7 +4,7 @@
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#button",
+    "documentation": "../Components/button.md",
     "source": "../../apps/web/src/shared/ui/Boton.vue",
     "behavior": "../../apps/web/src/shared/ui/Boton.vue",
     "dependencies": [],
@@ -76,14 +76,15 @@
           "href indefinido pisaba el de RouterLink → solo el atributo de destino que aplica (coco, corregido)"
         ]
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#button"
   },
   "text-field": {
     "kind": "component",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#text-field",
+    "documentation": "../Components/text-field.md",
     "source": "../../apps/web/src/shared/ui/CampoTexto.vue",
     "behavior": "../../apps/web/src/shared/ui/CampoTexto.vue",
     "dependencies": [],
@@ -152,14 +153,15 @@
           "borde --border 1.31:1 como límite del control → --muted 4.9:1 (lima→coco, corregido)"
         ]
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#text-field"
   },
   "password-field": {
     "kind": "component",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#password-field",
+    "documentation": "../Components/password-field.md",
     "source": "../../apps/web/src/shared/ui/CampoContrasena.vue",
     "behavior": "../../apps/web/src/shared/ui/CampoContrasena.vue",
     "dependencies": [
@@ -226,14 +228,15 @@
           "igual que text-field (describedby, intrínseco, borde) (corregido)"
         ]
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#password-field"
   },
   "segmented-choice": {
     "kind": "component",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#segmented-choice",
+    "documentation": "../Components/segmented-choice.md",
     "source": "../../apps/web/src/shared/ui/SegmentoOpciones.vue",
     "behavior": "../../apps/web/src/shared/ui/SegmentoOpciones.vue",
     "dependencies": [],
@@ -297,14 +300,15 @@
           "borde → --muted (corregido)"
         ]
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#segmented-choice"
   },
   "status-chip": {
     "kind": "component",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#status-chip",
+    "documentation": "../Components/status-chip.md",
     "source": "../../apps/web/src/shared/ui/ChipEstado.vue",
     "behavior": null,
     "dependencies": [],
@@ -364,14 +368,15 @@
           "--pend sobre --pend-bg 3.03:1 en claro → texto en --text, ámbar en borde y punto; token a decidir en DUDAS #12 (lima→coco, mitigado)"
         ]
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#status-chip"
   },
   "row-menu": {
     "kind": "component",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#row-menu",
+    "documentation": "../Components/row-menu.md",
     "source": "../../apps/web/src/shared/ui/MenuFila.vue",
     "behavior": "../../apps/web/src/shared/ui/MenuFila.vue",
     "dependencies": [
@@ -381,7 +386,7 @@
       "design_system.tokens"
     ],
     "contract": {
-      "anatomy": "botón '⋯ Acciones' con nombre accesible por fila (aria-haspopup=menu, aria-expanded) + menú de ≤4 elementos; el destructivo va al final, separado, intent danger",
+      "anatomy": "botón 'Acciones' (texto; el sprite no tiene ⋯) con nombre accesible por fila (aria-haspopup=menu, aria-expanded) + menú de ≤4 elementos; el destructivo va al final, separado, intent danger",
       "states": [
         "closed",
         "open",
@@ -431,14 +436,15 @@
         ],
         "findings": []
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#row-menu"
   },
   "banner": {
     "kind": "pattern",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#banner",
+    "documentation": "../Patterns/banner.md",
     "source": "../../apps/web/src/shared/ui/Aviso.vue",
     "behavior": null,
     "dependencies": [],
@@ -494,14 +500,15 @@
         ],
         "findings": []
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#banner"
   },
   "state-block": {
     "kind": "pattern",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#state-block",
+    "documentation": "../Patterns/state-block.md",
     "source": "../../apps/web/src/shared/ui/BloqueEstado.vue",
     "behavior": null,
     "dependencies": [
@@ -560,14 +567,15 @@
         ],
         "findings": []
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#state-block"
   },
   "task-layer": {
     "kind": "pattern",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#task-layer",
+    "documentation": "../Patterns/task-layer.md",
     "source": "../../apps/web/src/shared/ui/CapaTarea.vue",
     "behavior": "../../apps/web/src/shared/ui/CapaTarea.vue",
     "dependencies": [
@@ -624,14 +632,15 @@
           "sin foco al nacer abierta → watch immediate (coco, corregido)"
         ]
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#task-layer"
   },
   "list-stack": {
     "kind": "pattern",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../Components/demo/index.html#list-stack",
+    "documentation": "../Patterns/list-stack.md",
     "source": "../../apps/web/src/shared/ui/ListaApilada.vue",
     "behavior": null,
     "dependencies": [],
@@ -685,14 +694,15 @@
           "celda de acciones repetía su rótulo (coco, corregido)"
         ]
       }
-    }
+    },
+    "demo": "../Components/demo/index.html#list-stack"
   },
   "acceso-portal": {
     "kind": "product-application",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../lab/acceso/r01/index.html",
+    "documentation": "../Screens/acceso-portal.md",
     "source": "../../apps/web/src/modules/acceso/pages/PortalPage.vue",
     "behavior": "../../apps/web/src/modules/acceso/pages/PortalPage.vue",
     "dependencies": [
@@ -765,14 +775,15 @@
           "tarjeta crecía con el input al 200 % → minmax(0,1fr) (lima→coco, corregido)"
         ]
       }
-    }
+    },
+    "demo": "../lab/acceso/r01/index.html"
   },
   "acceso-cambio-contrasena": {
     "kind": "product-application",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../lab/acceso/r01/index.html",
+    "documentation": "../Screens/acceso-cambio-contrasena.md",
     "source": "../../apps/web/src/modules/acceso/pages/CambiarContrasenaPage.vue",
     "behavior": "../../apps/web/src/modules/acceso/pages/CambiarContrasenaPage.vue",
     "dependencies": [
@@ -831,14 +842,15 @@
         ],
         "findings": []
       }
-    }
+    },
+    "demo": "../lab/acceso/r01/index.html"
   },
   "acceso-bienvenida": {
     "kind": "product-application",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../lab/acceso/r01/index.html",
+    "documentation": "../Screens/acceso-bienvenida.md",
     "source": "../../apps/web/src/modules/acceso/pages/BienvenidaPage.vue",
     "behavior": "../../apps/web/src/modules/acceso/pages/BienvenidaPage.vue",
     "dependencies": [
@@ -900,14 +912,15 @@
           "no deja a la persona dentro: set-password no abre sesión (DUDAS #11, decisión del dueño)"
         ]
       }
-    }
+    },
+    "demo": "../lab/acceso/r01/index.html"
   },
   "equipo": {
     "kind": "product-application",
     "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/acceso/r01",
-    "documentation": "../lab/acceso/r01/index.html",
+    "documentation": "../Screens/equipo.md",
     "source": "../../apps/web/src/modules/equipo/pages/EquipoPage.vue",
     "behavior": "../../apps/web/src/modules/equipo/pages/EquipoPage.vue",
     "dependencies": [
@@ -985,16 +998,17 @@
           "EquipoPage ~560 líneas: extraer la capa de alta si crece (REVIEW_REQUIRED, no bloquea)"
         ]
       }
-    }
+    },
+    "demo": "../lab/acceso/r01/index.html"
   },
   "app-shell": {
     "kind": "pattern",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/shell/r01",
-    "documentation": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Patterns/app-shell.md",
+    "source": "../../apps/web/src/app/AppShell.vue",
+    "behavior": "../../apps/web/src/app/AppShell.vue",
     "dependencies": [
       "page-header",
       "side-nav",
@@ -1033,33 +1047,68 @@
       "rules": "Una sola lista de destinos (Destino[]) con dos presentaciones; la ruta y el foco del contenido se conservan al cambiar de modo. Configuración solo con role=admin (no se muestra deshabilitada); por URL sin admin → state-block denied. Sin shell en las pantallas de acceso. brand_color solo como línea de acento de 4px en la cabecera. Tema: data-theme (sistema/claro/oscuro) persistido en localStorage; por defecto prefers-color-scheme. Teclado virtual en compact: bottom-nav oculta mientras un campo tiene foco (visualViewport). reduced-motion: capas sin deslizamiento."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "runtime-verified"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/app/AppShell.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "demo": null,
+    "files": [
+      "../../apps/web/src/app/CapaMas.vue",
+      "../../apps/web/src/app/CapaCuenta.vue",
+      "../../apps/web/src/app/destinos.ts",
+      "../../apps/web/src/app/tema.ts",
+      "../../apps/web/src/App.vue"
+    ],
+    "evidence": "../qa/evidence/shell-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/shell/r01/coco-declaracion.md",
+          "../lab/shell/r01/lima-compuerta.md",
+          "../qa/evidence/shell-r01/"
+        ],
+        "findings": [
+          "carrera popstate de task-layer vs router.push desde una capa → irA espera el popstate (coco, corregido)",
+          "layout por meta.shell, no rutas anidadas (excepción declarada)",
+          "Cuenta como drawer de task-layer, no popover (excepción de lima)"
+        ]
+      }
+    }
   },
   "bottom-nav": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/shell/r01",
-    "documentation": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/bottom-nav.md",
+    "source": "../../apps/web/src/shared/ui/NavInferior.vue",
+    "behavior": "../../apps/web/src/shared/ui/NavInferior.vue",
     "dependencies": [],
     "profileDependencies": [
       "design_system.tokens",
@@ -1076,33 +1125,59 @@
       "rules": "Solo en compact. Ítems ≥48px de alto, ancho 1/5. Área segura inferior (env(safe-area-inset-bottom)). Texto nunca oculto (WCAG 1.4.4). Se oculta con teclado virtual. La lista de fijos viene de Destino.fijoEnCompact."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/NavInferior.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "demo": "../Components/demo/index.html#bottom-nav",
+    "evidence": "../qa/evidence/shell-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/shell/r01/coco-declaracion.md",
+          "../lab/shell/r01/lima-compuerta.md",
+          "../qa/evidence/shell-r01/"
+        ],
+        "findings": [
+          "'Fermentación' se partía a 390 (borde restaba ancho) → sombra interior + sin padding lateral (coco, corregido)"
+        ]
+      }
+    }
   },
   "side-nav": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/shell/r01",
-    "documentation": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/side-nav.md",
+    "source": "../../apps/web/src/shared/ui/NavLateral.vue",
+    "behavior": "../../apps/web/src/shared/ui/NavLateral.vue",
     "dependencies": [],
     "profileDependencies": [
       "design_system.tokens",
@@ -1119,33 +1194,59 @@
       "rules": "200px en medium, 240px en expanded. Configuración solo admin. Scroll interno si no cabe (zoom 200%)."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": "runtime-verified",
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/NavLateral.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "demo": "../Components/demo/index.html#side-nav",
+    "evidence": "../qa/evidence/shell-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/shell/r01/coco-declaracion.md",
+          "../lab/shell/r01/lima-compuerta.md",
+          "../qa/evidence/shell-r01/"
+        ],
+        "findings": [
+          "empresa repetida en medium → empresa opcional, solo expanded (coco, corregido)"
+        ]
+      }
+    }
   },
   "page-header": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/shell/r01",
-    "documentation": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/page-header.md",
+    "source": "../../apps/web/src/shared/ui/CabeceraPagina.vue",
+    "behavior": "../../apps/web/src/shared/ui/CabeceraPagina.vue",
     "dependencies": [],
     "profileDependencies": [
       "design_system.tokens"
@@ -1160,33 +1261,60 @@
       "rules": "El nombre completo va en title y en Cuenta. En expanded el botón de empresa no se muestra (vive en side-nav). Altura mínima 56px."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/CabeceraPagina.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "demo": "../Components/demo/index.html#page-header",
+    "evidence": "../qa/evidence/shell-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/shell/r01/coco-declaracion.md",
+          "../lab/shell/r01/lima-compuerta.md",
+          "../qa/evidence/shell-r01/"
+        ],
+        "findings": []
+      }
+    }
   },
   "fab": {
     "kind": "component",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/shell/r01",
-    "documentation": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Components/fab.md",
+    "source": "../../apps/web/src/shared/ui/BotonFlotante.vue",
+    "behavior": "../../apps/web/src/shared/ui/BotonFlotante.vue",
     "dependencies": [
       "button"
     ],
@@ -1204,33 +1332,62 @@
       "rules": "Solo compact. Es LA primaria del destino: la pantalla no muestra otra primaria mientras el FAB esté visible. Lo define cada ronda de etapa (Fase 5); el shell solo da el hueco (slot)."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "screenshots-reviewed",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "screenshots-reviewed"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/shared/ui/BotonFlotante.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "demo": "../Components/demo/index.html#fab",
+    "evidence": "../qa/evidence/shell-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/shell/r01/coco-declaracion.md",
+          "../lab/shell/r01/lima-compuerta.md",
+          "../qa/evidence/shell-r01/"
+        ],
+        "findings": [
+          "sin uso real hasta Fase 5 (hueco meta.fab)"
+        ]
+      }
+    }
   },
   "inicio": {
     "kind": "product-application",
-    "status": "draft",
+    "status": "candidate",
     "owner": "lima",
     "sourceRound": "lab/shell/r01",
-    "documentation": null,
-    "source": null,
-    "behavior": null,
+    "documentation": "../Screens/inicio.md",
+    "source": "../../apps/web/src/modules/inicio/pages/InicioEmpresaPage.vue",
+    "behavior": "../../apps/web/src/modules/inicio/pages/InicioEmpresaPage.vue",
     "dependencies": [
       "app-shell",
       "state-block",
@@ -1249,23 +1406,56 @@
       "rules": "Destino del shell. Sin datos inventados: tarjetas rotuladas Fase 5. Cuando la empresa no tiene lotes: state-block empty con la primaria 'Empezar' dentro (no baja a barra; la barra es navegación). Sin FAB en Inicio en esta ronda."
     },
     "qa": {
-      "candidate": false,
-      "visual": "pending",
-      "stable": false
+      "candidate": true,
+      "visual": "screenshots-reviewed",
+      "stable": false,
+      "viewports": "runtime-verified",
+      "keyboard": {
+        "status": "runtime-verified-approx",
+        "caveat": "jsdom (Vitest)"
+      },
+      "touch": "runtime-verified-emulated",
+      "zoom200": {
+        "status": "runtime-verified-approx",
+        "caveat": "root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo"
+      },
+      "contrast": "passed-with-reviewed-findings",
+      "longText": "static-reviewed",
+      "states": "runtime-verified"
     },
     "refinement": {
-      "critique": "not-run",
-      "distill": "not-run",
-      "adapt": "not-run",
-      "polish": "not-run",
+      "critique": "degraded",
+      "distill": "manual-playbook",
+      "adapt": "manual-playbook",
+      "polish": "manual-playbook",
       "detector": "not-run"
     },
     "production": {
-      "framework": null,
-      "path": null
+      "framework": "vue-ts",
+      "path": "apps/web/src/modules/inicio/pages/InicioEmpresaPage.vue"
     },
-    "version": "0.1.0",
+    "version": "0.2.0",
     "replacedBy": null,
-    "updated": "2026-09-27"
+    "updated": "2026-09-27",
+    "demo": null,
+    "files": [
+      "../../apps/web/src/modules/inicio/api.ts"
+    ],
+    "evidence": "../qa/evidence/shell-r01/",
+    "gate": {
+      "candidate": {
+        "date": "2026-09-27",
+        "evaluatedBy": "lima",
+        "evidence": [
+          "../lab/shell/r01/coco-declaracion.md",
+          "../lab/shell/r01/lima-compuerta.md",
+          "../qa/evidence/shell-r01/"
+        ],
+        "findings": [
+          "'Empezar' lleva a Granel hasta arranque/r01",
+          "estado sin lotes no verificado con datos reales (Cuatro Vientos tiene lotes)"
+        ]
+      }
+    }
   }
 }

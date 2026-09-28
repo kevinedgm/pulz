@@ -53,10 +53,11 @@ for (const ancho of [1440, 390]) {
   await check("equipo-alta")
   await page.keyboard.press("Escape")
   await page.goto(`${WEB}/e/${SLUG}/inicio`)
+  await page.getByRole("button", { name: /cuenta|Cuatro Vientos/ }).first().click()
   await page.getByRole("button", { name: "Cerrar sesión" }).click()
   await page.waitForURL(`**/e/${SLUG}`)
   await page.goto(HUB)
-  await page.getByRole("heading", { level: 2, name: /Botón/ }).waitFor()
+  await page.getByRole("heading", { level: 2, name: "Botón button" }).waitFor()
   await check("hub")
   await ctx.close()
 }

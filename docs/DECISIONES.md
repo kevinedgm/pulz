@@ -469,6 +469,28 @@ pedir una ronda `rNN+1` o cambiar la regla en `CLAUDE.md`.
    dos empresas y §7 no lo presenta como flujo frecuente; si en uso real lo
    fuera, se sube a la cabecera con una ronda `r02`.
 
+## 2026-09-27 · coco, shell/r01: lo que salió al construir
+
+- **Capas y navegación no se llevan sin cuidado.** `task-layer` deshace su
+  entrada de historial con `history.back()` al cerrarse; si desde la capa
+  (Más, Cuenta) se hace `router.push` de inmediato, el `popstate` llega
+  después y devuelve a la ruta anterior. `AppShell.irA` cierra la capa,
+  espera ese `popstate` (o 400 ms) y luego navega; en la Cuenta, "Equipo" es
+  un enlace que pasa por `irA`, no un `RouterLink` que compite con cerrar.
+  Vale para cualquier capa futura que navegue.
+- **Cuenta como drawer de `task-layer`, no popover** (excepción de lima a la
+  ronda de kiwi): evita una pieza nueva; si molesta en escritorio, `popover`
+  es una ronda aparte.
+- **En medium la empresa no se repite**: la cabecera ya la muestra; el menú
+  lateral la lleva solo en expanded (contrato de `side-nav` ajustado).
+- **Layout por `meta.shell`**, no rutas anidadas: el portal y `/e/:slug/…`
+  comparten prefijo y anidar habría exigido un componente padre para el
+  portal público. `App.vue` elige `AppShell` o `router-view` desnudo.
+- **Inicio "¿Qué tienes hoy?" → "Empezar" lleva a Granel** mientras no exista
+  la ronda `arranque/r01`; esa ronda lo redirige al flujo real.
+- **El Hub necesita un router en memoria**: las navegaciones usan
+  `RouterLink`; sin router, la demo truena. `hub/main.ts` lo instala.
+
 ## 2026-09-27 · Concurrencia: no se pudo probar por la Management API
 
 El test de "dos transferencias simultáneas del último litro" está escrito
