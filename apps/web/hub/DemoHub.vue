@@ -5,6 +5,10 @@ import {
   Aviso,
   BloqueEstado,
   Boton,
+  BotonFlotante,
+  CabeceraPagina,
+  NavInferior,
+  NavLateral,
   CampoContrasena,
   CampoTexto,
   CapaTarea,
@@ -28,6 +32,10 @@ const PIEZAS = [
   { id: "task-layer", nombre: "Capa de tarea" },
   { id: "list-stack", nombre: "Lista apilada" },
   { id: "row-menu", nombre: "Menú de fila" },
+  { id: "page-header", nombre: "Cabecera de página" },
+  { id: "side-nav", nombre: "Menú lateral" },
+  { id: "bottom-nav", nombre: "Navegación inferior" },
+  { id: "fab", nombre: "Botón flotante" },
 ] as const
 type PiezaId = (typeof PIEZAS)[number]["id"]
 
@@ -58,6 +66,27 @@ const rol = ref<"admin" | "productor" | "operador">("operador")
 const entrega = ref<"enlace" | "dictada">("enlace")
 const capa = ref(false)
 const ultimaAccion = ref("")
+// Shell (ronda shell/r01): los destinos de §13.1 como ItemNav de ejemplo
+const destinos = [
+  { id: "inicio", etiqueta: "Inicio", icono: "i-home" as const, to: "#inicio" },
+  { id: "maguey", etiqueta: "Maguey", icono: "i-maguey" as const, to: "#maguey" },
+  { id: "horneado", etiqueta: "Horneado", icono: "i-horno" as const, to: "#horneado" },
+  { id: "fermentacion", etiqueta: "Fermentación", icono: "i-tina" as const, to: "#fermentacion" },
+  { id: "destilacion", etiqueta: "Destilación", icono: "i-destila" as const, to: "#destilacion" },
+  { id: "granel", etiqueta: "Granel", icono: "i-tanque" as const, to: "#granel" },
+  { id: "trazabilidad", etiqueta: "Trazabilidad", icono: "i-traza" as const, to: "#trazabilidad" },
+  {
+    id: "configuracion",
+    etiqueta: "Configuración",
+    icono: "i-ajustes" as const,
+    to: "#configuracion",
+  },
+]
+const fijos = destinos.filter((d) =>
+  ["inicio", "fermentacion", "destilacion", "granel"].includes(d.id),
+)
+const navActual = ref("fermentacion")
+const cuentaAbierta = ref(false)
 const miembros = [
   { n: "Benito Cruz", u: null, rol: "admin", est: "on" as const, txt: "activo" },
   { n: "Aurelia Santiago", u: "aurelia", rol: "productor", est: "on" as const, txt: "activo" },
@@ -350,10 +379,99 @@ const miembros = [
       </ListaApilada>
       <p v-if="ultimaAccion" class="nota" role="status">Acción elegida: {{ ultimaAccion }}</p>
     </section>
+
+    <section v-if="visibles.some((p) => p.id === 'page-header')" id="page-header" class="pieza">
+      <h2>Cabecera de página <code>page-header</code></h2>
+      <CabeceraPagina
+        titulo="Inicio"
+        :empresa="{
+          nombre: 'Mezcal Cuatro Vientos',
+          subtitulo: 'titular · admin',
+          iniciales: 'MC',
+          acento: '#7A3E1D',
+        }"
+        @cuenta="cuentaAbierta = !cuentaAbierta"
+      />
+      <p class="nota">
+        Línea de acento con el color de la empresa (solo acento). En expanded no lleva empresa:
+      </p>
+      <CabeceraPagina titulo="Equipo" />
+      <p v-if="cuentaAbierta" class="nota" role="status">Abriría la Cuenta (task-layer).</p>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'side-nav')" id="side-nav" class="pieza">
+      <h2>Menú lateral <code>side-nav</code></h2>
+      <div class="demo-lateral">
+        <NavLateral
+          :items="destinos"
+          :actual="navActual"
+          :empresa="{
+            nombre: 'Destilería Artesanal de los Cuatro Vientos del Valle',
+            iniciales: 'DA',
+          }"
+          :cuenta="{ nombre: 'titular', subtitulo: 'admin · cuenta', iniciales: 'T' }"
+          ancho="expanded"
+          @cuenta="cuentaAbierta = !cuentaAbierta"
+        />
+        <NavLateral
+          :items="destinos.slice(0, 7)"
+          :actual="navActual"
+          :empresa="{ nombre: 'Mezcal Cuatro Vientos', iniciales: 'MC' }"
+          ancho="medium"
+        />
+      </div>
+      <p class="nota">
+        240 px (expanded, con cuenta al pie) y 200 px (medium, sin Configuración = productora).
+      </p>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'bottom-nav')" id="bottom-nav" class="pieza">
+      <h2>Navegación inferior <code>bottom-nav</code></h2>
+      <div class="demo-inferior">
+        <NavInferior :items="fijos" :actual="navActual" @mas="navActual = 'maguey'" />
+      </div>
+      <p class="nota">
+        Solo en compact (&lt;600): 4 fijos + Más. Aquí se muestra fija dentro del marco; en la app
+        es
+        <code>position: fixed</code>. Ver el marco 390 en «3 espacios».
+      </p>
+    </section>
+
+    <section v-if="visibles.some((p) => p.id === 'fab')" id="fab" class="pieza">
+      <h2>Botón flotante <code>fab</code></h2>
+      <div class="demo-inferior demo-inferior--fab">
+        <BotonFlotante etiqueta="Medir" icono="i-medir" />
+      </div>
+      <p class="nota">
+        Solo compact: la primaria del destino, 56 px, sobre la navegación inferior. En ≥600 no se
+        muestra.
+      </p>
+    </section>
   </main>
 </template>
 
 <style scoped>
+.demo-lateral {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: flex-start;
+  height: 520px;
+}
+.demo-inferior {
+  position: relative;
+  height: 120px;
+  border: 1px dashed var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.demo-inferior :deep(nav),
+.demo-inferior :deep(.fab) {
+  position: absolute;
+}
+.demo-inferior--fab :deep(.fab) {
+  display: inline-flex;
+  bottom: var(--sp-4);
+}
 .sprite {
   position: absolute;
   width: 0;

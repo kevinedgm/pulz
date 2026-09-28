@@ -8,5 +8,6 @@ export const rutasEquipo: RouteRecordRaw[] = [
     path: "/e/:slug/equipo",
     name: "equipo",
     component: () => import("./pages/EquipoPage.vue"),
+    meta: { shell: true, destino: "configuracion", titulo: "Configuración" },
   },
 ]

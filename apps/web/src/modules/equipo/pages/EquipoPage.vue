@@ -302,7 +302,8 @@ const diasParaVencer = (m: MiembroEquipo) =>
 
     <main class="equipo__cuerpo">
       <nav class="equipo__ruta" aria-label="Ruta">
-        <router-link :to="`/e/${acceso.slug}/inicio`">Inicio</router-link> / <strong>Equipo</strong>
+        <router-link :to="`/e/${acceso.slug}/configuracion`">Configuración</router-link> /
+        <strong>Equipo</strong>
       </nav>
 
       <BloqueEstado

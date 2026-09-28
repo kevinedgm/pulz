@@ -10,5 +10,9 @@ export { default as Aviso } from "./Aviso.vue" // banner
 export { default as BloqueEstado } from "./BloqueEstado.vue" // state-block
 export { default as CapaTarea } from "./CapaTarea.vue" // task-layer
 export { default as ListaApilada } from "./ListaApilada.vue" // list-stack
+export { default as CabeceraPagina } from "./CabeceraPagina.vue" // page-header
+export { default as NavLateral } from "./NavLateral.vue" // side-nav
+export { default as NavInferior } from "./NavInferior.vue" // bottom-nav
+export { default as BotonFlotante } from "./BotonFlotante.vue" // fab
 export { default as Icono } from "./Icono.vue" // ayuda local: un solo set (sprite)
 export * from "./tipos"

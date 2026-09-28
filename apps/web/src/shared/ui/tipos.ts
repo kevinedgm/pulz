@@ -21,6 +21,10 @@ export type IconoNombre =
   | "i-mas"
   | "i-bell"
   | "i-clock"
+  | "i-tanque"
+  | "i-traza"
+  | "i-ajustes"
+  | "i-menu"
   | "pulz-mark"
 
 export interface OpcionSegmento<T extends string = string> {
@@ -33,4 +37,13 @@ export interface AccionFila {
   id: string
   etiqueta: string
   intent?: Extract<BotonIntent, "secondary" | "danger">
+}
+
+// Ítem de navegación (registry: bottom-nav, side-nav). Sin dominio: el
+// consumidor (app/destinos.ts) decide qué destinos existen y quién los ve.
+export interface ItemNav {
+  id: string
+  etiqueta: string
+  icono: IconoNombre
+  to: string
 }

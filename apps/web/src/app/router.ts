@@ -2,11 +2,18 @@ import { createRouter, createWebHistory, type RouteLocationRaw } from "vue-route
 import { rutasAcceso } from "../modules/acceso/routes"
 import { useAcceso } from "../modules/acceso/store"
 import { rutasEquipo } from "../modules/equipo/routes"
+import { rutaConfiguracion, rutasProceso } from "../modules/proceso/routes"
+import type { IconoNombre } from "../shared/ui"
 
 declare module "vue-router" {
   interface RouteMeta {
     publica?: boolean
     noEncontrado?: boolean
+    // shell/r01: layout con navegación; destino de §13.1; título; hueco de FAB
+    shell?: boolean
+    destino?: string
+    titulo?: string
+    fab?: { etiqueta: string; icono?: IconoNombre }
   }
 }
 
@@ -23,7 +30,10 @@ const router = createRouter({
       path: "/e/:slug/inicio",
       name: "inicio",
       component: () => import("../modules/inicio/pages/InicioEmpresaPage.vue"),
+      meta: { shell: true, destino: "inicio", titulo: "Inicio" },
     },
+    ...rutasProceso,
+    rutaConfiguracion,
     ...rutasEquipo,
     // Cualquier otra ruta: el mismo 404 genérico (§7.4)
     {

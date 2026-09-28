@@ -1,78 +1,104 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router"
-import { Aviso, Boton, Icono } from "../../../shared/ui"
+import { onMounted, ref, watch } from "vue"
+import { BloqueEstado, Boton } from "../../../shared/ui"
 import { useAcceso } from "../../acceso/store"
+import { tieneLotes } from "../api"
 
-// Inicio mínimo dentro del portal: confirma dónde estás y quién eres tras
-// entrar (endpoint observable del flujo 1 de la ronda acceso/r01). La
-// pantalla "Inicio / hoy" real es de la Fase 4 (§13.2 #3) y pasa por kiwi.
+// Inicio (registry "inicio", ronda shell/r01): destino del shell. "Hoy" con
+// datos reales es Fase 5 (§13.2 #3): aquí no se inventa contenido. Cuando la
+// empresa no tiene lotes, ofrece el primer arranque (ronda arranque/r01).
 const acceso = useAcceso()
-const router = useRouter()
+const estado = ref<"cargando" | "sin-lotes" | "con-lotes" | "error">("cargando")
 
-async function salir() {
-  await acceso.cerrarSesion()
-  await router.replace({ name: "portal", params: { slug: acceso.slug! } })
+async function cargar() {
+  const org = acceso.membresiaActual?.organization_id
+  if (!org) return
+  estado.value = "cargando"
+  try {
+    estado.value = (await tieneLotes(org)) ? "con-lotes" : "sin-lotes"
+  } catch {
+    estado.value = "error"
+  }
 }
+onMounted(cargar)
+watch(() => acceso.membresiaActual?.organization_id, cargar)
 </script>
 
 <template>
-  <div class="inicio">
-    <Aviso v-if="acceso.modoLectura" variante="readonly" titulo="Solo lectura."
-      >La suscripción venció: puedes consultar y exportar, no registrar.</Aviso
+  <div class="hoy">
+    <h2 class="hoy__titulo">Hoy</h2>
+
+    <div v-if="estado === 'cargando'" class="hoy__esqueleto" aria-busy="true">
+      <div v-for="n in 3" :key="n" class="hoy__tarjeta hoy__tarjeta--esqueleto"></div>
+    </div>
+
+    <BloqueEstado
+      v-else-if="estado === 'error'"
+      variante="error"
+      titulo="No pudimos cargar tu empresa"
+      texto="Revisa tu señal."
     >
-    <main class="inicio__cuerpo">
-      <p class="inicio__empresa">
-        <Icono nombre="pulz-mark" :size="20" /> {{ acceso.membresiaActual?.name }}
+      <Boton intent="secondary" @click="cargar">Reintentar</Boton>
+    </BloqueEstado>
+
+    <BloqueEstado
+      v-else-if="estado === 'sin-lotes'"
+      variante="empty"
+      titulo="¿Qué tienes hoy?"
+      texto="Dinos qué hay en tus tanques y tinas para empezar a registrar desde el día uno."
+    >
+      <Boton v-if="!acceso.modoLectura" intent="primary" :to="`/e/${acceso.slug}/granel`"
+        >Empezar</Boton
+      >
+    </BloqueEstado>
+
+    <div v-else class="hoy__lista">
+      <p class="hoy__tarjeta hoy__tarjeta--pronto">
+        <b>Tinas que toca medir hoy</b><span>Fase 5 · aquí verás cuáles y a qué hora.</span>
       </p>
-      <h1 class="inicio__titulo">Hoy</h1>
-      <p class="inicio__texto">
-        Entraste como <strong>{{ acceso.membresiaActual?.username ?? "titular" }}</strong> ({{
-          acceso.membresiaActual?.role
-        }}). Las pantallas de trabajo llegan en la siguiente fase.
+      <p class="hoy__tarjeta hoy__tarjeta--pronto">
+        <b>Corridas abiertas y colectores con contenido</b><span>Fase 5.</span>
       </p>
-      <nav class="inicio__acciones" aria-label="Configuración">
-        <Boton v-if="acceso.esAdmin" intent="secondary" :to="`/e/${acceso.slug}/equipo`"
-          >Equipo</Boton
-        >
-        <Boton intent="quiet" @click="salir">Cerrar sesión</Boton>
-      </nav>
-    </main>
+      <p class="hoy__tarjeta hoy__tarjeta--pronto">
+        <b>Capturas pendientes de enviar</b><span>Fase 5 · cola sin señal.</span>
+      </p>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.inicio {
-  min-height: 100vh;
-  background: var(--canvas);
-  color: var(--text);
-}
-.inicio__cuerpo {
+.hoy {
+  padding: var(--sp-5);
   max-width: 720px;
-  margin: 0 auto;
-  padding: var(--sp-6) var(--sp-4);
+}
+.hoy__titulo {
+  margin: 0 0 var(--sp-4);
+  font: 700 1.5rem/1.2 var(--font);
+}
+.hoy__lista,
+.hoy__esqueleto {
   display: grid;
   gap: var(--sp-3);
 }
-.inicio__empresa {
+.hoy__tarjeta {
+  display: grid;
+  gap: 2px;
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
-  font-weight: 600;
-  color: var(--ink-900);
+  min-height: 72px;
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
 }
-.inicio__titulo {
-  margin: 0;
-  font: 700 1.75rem/1.2 var(--font);
-}
-.inicio__texto {
-  margin: 0;
+.hoy__tarjeta--pronto {
+  border-style: dashed;
   color: var(--muted);
 }
-.inicio__acciones {
-  display: flex;
-  gap: var(--sp-3);
-  flex-wrap: wrap;
-  margin-top: var(--sp-3);
+.hoy__tarjeta--pronto b {
+  color: var(--text);
+}
+.hoy__tarjeta--esqueleto {
+  background: var(--ink-100);
+  border: 0;
 }
 </style>
