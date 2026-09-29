@@ -35,7 +35,7 @@ Brix → Actividad → Revisar. Completo: T. superficie (3 lecturas) → T. fond
 (3) → Brix superficie (3) → Brix fondo (3) → Actividad · Dulzor · Acidez →
 Revisar. Cabecera: tina («otra tina» en el primer paso), día corregible,
 «¿Cuándo pasó?». Revisar: resumen, aviso de Brix con nota obligatoria si
-sale del rango de la empresa, nota opcional, foto opcional (reducida a
+sale del rango de la empresa **solo el día inicial (≤ 1), como el servidor**, nota opcional, foto opcional (reducida a
 1600 px). **Guardar siempre encola** (`registrar_medicion` con
 `idempotency_key`): «Guardada · enviada» o «Guardada · pendiente de
 enviar», y «Medir la siguiente».
@@ -71,7 +71,7 @@ tinas libres · sin permiso.
 ## Criterios verificados
 
 Con Aurelia en Cuatro Vientos (escrituras reales): medición de Tina 2 con
-Brix 19 → aviso → nota → enviada → «Ya medidas hoy» → anulada con motivo;
+Brix 19 con el día corregido a 1 → aviso → nota → enviada → «Ya medidas hoy» → anulada con motivo;
 FAB solo en compact; formulación (estado vacío real); capa sin tinas libres.
 E2E offline (§16): 3 mediciones en modo avión → banner «3 capturas» →
 reconectar → llegan una sola vez y en orden → recargar no duplica. 4 anchos

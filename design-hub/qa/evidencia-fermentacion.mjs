@@ -82,12 +82,19 @@ for (const tema of TEMAS) {
       /toca medir hoy/i.test(await page.locator("section", { has: tina2 }).first().textContent()),
       `lista ${ancho}/${tema}: Tina 2 no está en «toca medir hoy»`,
     )
-    const hrefMedir = await tina2.getByRole("link", { name: "Medir Tina 2" }).getAttribute("href")
+    const hrefMedir = await tina2.getByRole("link", { name: /^(Medir Tina 2|Registrar medición en Tina 2)$/ }).getAttribute("href")
     const ciclo = hrefMedir.split("/fermentacion/")[1].split("/")[0]
 
     // Medir (paso 1) en todas las corridas; guardar solo en la primera
-    await tina2.getByRole("link", { name: "Medir Tina 2" }).click()
+    await tina2.getByRole("link", { name: /^(Medir Tina 2|Registrar medición en Tina 2)$/ }).click()
     await page.getByRole("status").filter({ hasText: "Paso 1 de 4" }).waitFor()
+    if (primera) {
+      // El aviso de Brix es solo del día inicial (DUDAS #17): se corrige el
+      // día del ciclo a 1 para provocarlo (la semilla no tiene unicidad por día)
+      await page.getByRole("button", { name: "cambiar" }).first().click()
+      await page.getByLabel("Día del ciclo").fill("1")
+      await page.getByLabel("Día del ciclo").blur()
+    }
     await foto("medir-1")
     await sinScrollH("medir-1")
     await page.getByLabel("Temperatura").fill("27.5")
@@ -127,7 +134,7 @@ for (const tema of TEMAS) {
         "tras guardar: Tina 2 no pasó a «ya medidas hoy»",
       )
       ok(
-        /hoy \d\d:\d\d.*27\.5 °C.*19 Brix.*actividad 6/.test(await t2.textContent()),
+        /27\.5 °C[\s\S]*19 °Bx[\s\S]*6\/6/.test(await t2.textContent()),
         "tras guardar: la fila no muestra la última medición",
       )
       await foto("lista-medida")
@@ -155,10 +162,13 @@ for (const tema of TEMAS) {
       await capa.getByLabel("Motivo").fill("Evidencia de la ronda; se anula")
       await capa.getByRole("button", { name: "Anular medición" }).click()
       await page.getByText(/anulada\./).waitFor({ timeout: 20000 })
-      ok(
-        (await page.getByRole("row").filter({ hasText: "Evidencia de la ronda" }).count()) >= 1,
-        "anular: la fila anulada no muestra el motivo",
-      )
+      // La tabla se recarga tras anular: esperar la fila con el motivo
+      await page
+        .getByRole("row")
+        .filter({ hasText: "Evidencia de la ronda" })
+        .first()
+        .waitFor({ timeout: 20000 })
+        .catch(() => fallos.push("anular: la fila anulada no muestra el motivo"))
       await foto("detalle-anulada")
       // Cerrar ciclo: solo el diálogo (destructiva; Cancelar es la primaria)
       await page.getByRole("button", { name: "Cerrar ciclo (tina vaciada)" }).click()

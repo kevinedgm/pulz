@@ -978,3 +978,14 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
   (regla de producto de FASE-5: capturar lo de ayer). Revertir: watch de
   `cuando` en `MedirPage`.
 - DUDAS #17: aviso de Brix en la app cualquier día vs. servidor solo día 1.
+
+
+## 2026-09-28 · DUDAS #17: el aviso de Brix en la app solo el día inicial
+
+- El dueño decidió alinear la app al servidor: `avisoBrix` recibe el día
+  del ciclo y no avisa del día 2 en adelante (el Brix baja por diseño;
+  `registrar_medicion` solo marca `brix_fuera_rango` con `p_dia <= 1`).
+  Así la nota obligatoria coincide siempre con un aviso registrado.
+- La evidencia de fermentación (`qa/evidencia-fermentacion.mjs`) corrige el
+  día del ciclo a 1 en la medición de prueba para seguir cubriendo el flujo
+  aviso → nota. Revertir: quitar el parámetro `dia` de `avisoBrix`.

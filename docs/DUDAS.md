@@ -156,6 +156,8 @@
     operación pero no queda como aviso. Decidir: que la app avise solo el
     día 1 (como el servidor) o que el servidor registre el aviso todos los
     días. Hasta entonces se implementa lo que hay.
+    **Resuelto 2026-09-28** (decisión del dueño): la app se alinea al
+    servidor — `avisoBrix(brix, ajustes, dia)` solo avisa con día ≤ 1.
 
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 

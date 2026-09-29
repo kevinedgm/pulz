@@ -98,6 +98,10 @@ describe("promedio / avisoBrix / lecturasParaRpc", () => {
     expect(avisoBrix(11.9, a)).toBe("brix_fuera_rango")
     expect(avisoBrix(null, a)).toBeNull()
     expect(avisoBrix(19, null)).toBeNull()
+    // Solo el Brix inicial (día ≤ 1), como el servidor: después baja por diseño
+    expect(avisoBrix(19, a, 0)).toBe("brix_fuera_rango")
+    expect(avisoBrix(19, a, 2)).toBeNull()
+    expect(avisoBrix(3.5, a, 5)).toBeNull()
   })
   it("arreglos paralelos para registrar_medicion", () => {
     expect(

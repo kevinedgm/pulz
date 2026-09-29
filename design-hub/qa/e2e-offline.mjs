@@ -68,7 +68,7 @@ await page.goto(`${WEB}/e/${SLUG}/fermentacion`)
 await page.getByText("Toca medir hoy").waitFor({ timeout: 20000 })
 // En dev server (Vite) los módulos se piden bajo demanda: se abre una vez la
 // medición con señal para tenerla cargada (en producción la precachea el SW).
-await page.getByRole("link", { name: "Medir Tina 2" }).click()
+await page.getByRole("link", { name: /^(Medir Tina 2|Registrar medición en Tina 2)$/ }).click()
 await page.getByRole("status").filter({ hasText: "Paso 1 de 4" }).waitFor({ timeout: 20000 })
 await page.getByRole("link", { name: "Cancelar" }).click()
 await page.getByText("Toca medir hoy").waitFor({ timeout: 20000 })
@@ -93,7 +93,7 @@ await page.getByRole("link", { name: "Cancelar" }).click()
 await page.getByRole("heading", { name: "Cortes", exact: true }).waitFor({ timeout: 20000 })
 await page.getByRole("link", { name: "Fermentación" }).first().click()
 await page.getByText("Toca medir hoy").waitFor({ timeout: 20000 })
-await page.getByRole("link", { name: "Medir Tina 2" }).click()
+await page.getByRole("link", { name: /^(Medir Tina 2|Registrar medición en Tina 2)$/ }).click()
 await page.getByRole("status").filter({ hasText: "Paso 1 de 4" }).waitFor({ timeout: 20000 })
 await page.getByRole("link", { name: "Cancelar" }).click()
 await page.getByText("Toca medir hoy").waitFor({ timeout: 20000 })
@@ -105,7 +105,7 @@ await page.getByRole("status").filter({ hasText: "Sin conexión" }).waitFor()
 await foto("1-sin-conexion")
 
 async function medir(tina, temp, brix, act, dia = null) {
-  await page.getByRole("link", { name: `Medir ${tina}` }).click()
+  await page.getByRole("link", { name: new RegExp(`^(Medir ${tina}|Registrar medición en ${tina})$`) }).click()
   await page.getByRole("status").filter({ hasText: "Paso 1 de 4" }).waitFor()
   if (dia) {
     await page.getByRole("button", { name: "cambiar" }).first().click()

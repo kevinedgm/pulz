@@ -140,12 +140,15 @@ export function promedio(valores: (number | null)[]): number | null {
   const v = valores.filter((x): x is number => typeof x === "number" && Number.isFinite(x))
   return v.length ? Math.round((v.reduce((a, b) => a + b, 0) / v.length) * 100) / 100 : null
 }
-// Aviso blando conocido antes de enviar (rangos de la empresa, §2.1)
+// Aviso blando conocido antes de enviar (rangos de la empresa, §2.1).
+// Solo el «Brix inicial» (día 0 o 1), igual que registrar_medicion (0017):
+// del día 2 en adelante el Brix baja por diseño y no se avisa (DUDAS #17).
 export function avisoBrix(
   brix: number | null,
   a: Pick<Ajustes, "brix_warn_min" | "brix_warn_max"> | null,
+  dia = 1,
 ): "brix_fuera_rango" | null {
-  if (brix === null || !a) return null
+  if (brix === null || !a || dia > 1) return null
   return brix < a.brix_warn_min || brix > a.brix_warn_max ? "brix_fuera_rango" : null
 }
 // registrar_medicion recibe arreglos paralelos (0017)

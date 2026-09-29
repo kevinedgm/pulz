@@ -94,7 +94,9 @@ const tempProm = computed(() =>
 const brixProm = computed(() =>
   modo.value === "minimo" ? brix.value : promedio([...bSup.value, ...bFondo.value]),
 )
-const aviso = computed(() => avisoBrix(brixProm.value, datos.value?.ajustes ?? null))
+const aviso = computed(() =>
+  avisoBrix(brixProm.value, datos.value?.ajustes ?? null, dia.value ?? 1),
+)
 
 async function cargar() {
   errorCarga.value = null
