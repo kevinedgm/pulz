@@ -1,0 +1,84 @@
+{
+  "fecha": "2026-09-29T00:03:46.327Z",
+  "status": "PASS",
+  "recepcionesAntes": 1,
+  "recepcionesDespues": 2,
+  "checks": [
+    {
+      "ok": true,
+      "m": "A: con datos frescos la primaria está habilitada"
+    },
+    {
+      "ok": true,
+      "m": "A: sin etiqueta de instantánea con señal"
+    },
+    {
+      "ok": true,
+      "m": "B: la intención pendiente muestra los 123 kg"
+    },
+    {
+      "ok": true,
+      "m": "B: ofrece reintentar el original"
+    },
+    {
+      "ok": true,
+      "m": "B: nada llegó al servidor"
+    },
+    {
+      "ok": true,
+      "m": "C: Prueba B no ve la intención de Aurelia"
+    },
+    {
+      "ok": true,
+      "m": "C: no se reenvió nada al cambiar de persona"
+    },
+    {
+      "ok": true,
+      "m": "C: al volver, Aurelia recupera su intención original"
+    },
+    {
+      "ok": true,
+      "m": "C: recargar no reenvía solo"
+    },
+    {
+      "ok": true,
+      "m": "D: etiqueta de antigüedad con fecha y hora"
+    },
+    {
+      "ok": true,
+      "m": "D: sin señal, la primaria está bloqueada"
+    },
+    {
+      "ok": true,
+      "m": "D: sin señal no se puede reintentar"
+    },
+    {
+      "ok": true,
+      "m": "D: con señal y datos frescos la primaria vuelve a habilitarse"
+    },
+    {
+      "ok": true,
+      "m": "D: reconectar no reenvía solo"
+    },
+    {
+      "ok": true,
+      "m": "E: la intención se libera al confirmar"
+    },
+    {
+      "ok": true,
+      "m": "E: exactamente una recepción nueva en el servidor"
+    },
+    {
+      "ok": true,
+      "m": "F: un rechazo confirmado no deja intención pendiente"
+    },
+    {
+      "ok": true,
+      "m": "F: el rechazo no escribió nada"
+    },
+    {
+      "ok": true,
+      "m": "errores JS: "
+    }
+  ]
+}

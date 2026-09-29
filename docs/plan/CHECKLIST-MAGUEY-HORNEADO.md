@@ -7,7 +7,7 @@ sin operaciones de negocio remotas. No modificar FilaUso ni rondas evaluadas.
 
 ## Hito actual: F3 implementada localmente → aceptación parcial
 
-Estado vigente: **r05 draft0.2.1 corregida; aceptación PARTIAL.** r06 (2026-09-28): pruebas alojadas de negocio 37/37 PASS con tenants desechables y limpieza verificada (`r06/evidence/`); bloque 15 cerrado a nivel API salvo 15.12 y 15.13 (interfaz).
+Estado vigente: **r05 draft0.2.1 corregida; aceptación PARTIAL.** r06 (2026-09-28): pruebas alojadas de negocio 37/37 PASS con tenants desechables y limpieza verificada (`r06/evidence/`); bloque 15 cerrado: API (15.05–15.11, 15.14) y UI con Playwright (15.12, 15.13).
 183/183 locales,34 módulo incluidos,5/5 acceso alojado; builds/lint PASS.
 Matriz y límites: `design-hub/lab/maguey-horneado/r05/acceptance-matrix.md`.
 
@@ -153,10 +153,10 @@ no sustituye esa autorización específica ni permite tocar demos existentes.
   simular pérdida de respuesta después del commit; reintentar y comprobar una
   sola operación. Mantener cantidad, fecha y clave, incluso tras navegar y
   recargar. No confundir dos llamadas con dos registros.
-- [ ] **15.12 · Probar recuperación de señal.** Abrir desde instantánea, comprobar
+- [x] **15.12 · Probar recuperación de señal.** Abrir desde instantánea, comprobar
   captura bloqueada y etiqueta de antigüedad; reconectar, refrescar y validar
   que sólo los datos frescos habiliten escritura. No debe reenviar solo.
-- [ ] **15.13 · Revisar partición de intenciones.** Cambiar de empresa/persona
+- [x] **15.13 · Revisar partición de intenciones.** Cambiar de empresa/persona
   sin mostrar ni reenviar la intención ajena; recuperar la original al volver.
   Verificar rechazo confirmado frente a resultado incierto.
 - [x] **15.14 · Cerrar fixtures y evidencias.** Aplicar únicamente la limpieza
@@ -271,7 +271,7 @@ Usar una fila por ítem que se trabaje; añadir la evidencia al marcarlo.
 | 15.04 | DONE | 2026-09-28 | r05/evidence/hosted-access.json |5/5 PASS tras autorización explícita |
 | 15.05–15.14 | BLOCKED | 2026-09-28 | r05/acceptance-matrix.md | Sin operaciones de negocio remotas; mocks no sustituyen servidor |
 | 15.05–15.11, 15.14 | DONE (API) | 2026-09-28 | r06/evidence/hosted-api.json | `node scripts/test-mh-hosted-r06.mjs` contra `ypgeiyorgktshgbzhgfh` (CLAUDE.md §1): 37/37 PASS en dos tenants desechables `qa-mh-r06-*`: permisos admin/productor/operador/otro tenant/solo lectura, recepción mínima y con opcionales, exceso atómico, apertura con dos lotes, cierre con linaje, cocido sin horneada, formulación real, lote ajeno rechazado sin consumo, respuesta perdida post-commit con reintento; limpieza exacta `cleanup.json` = 0 restantes; huella de datos existentes idéntica antes/después. Nivel API autenticada, no navegador |
-| 15.12, 15.13 | ABIERTO | 2026-09-28 | — | Recuperación de señal desde instantánea y partición de intenciones por empresa/persona son de interfaz: no las cubre r06 (API); requieren Playwright con el shell autenticado |
+| 15.12, 15.13 | DONE (UI) | 2026-09-28 | r06/evidence/ui-15-12-15-13.json + 6 capturas | `node design-hub/qa/e2e-mh-r06.mjs` (Playwright, shell autenticado, proyecto alojado): 19/19. 15.12: sin señal la página de Maguey se monta desde la instantánea con «Mostrando datos guardados el <fecha>», primaria y reintento bloqueados; al volver la señal solo los datos frescos habilitan la escritura y no se reenvía nada. 15.13: una petición abortada deja la intención (123 kg) sin confirmar; la dueña de Prueba B no la ve ni la reenvía; al volver Aurelia la recupera; recargar no reenvía; el reintento del original escribe exactamente una recepción; un rechazo P0001 confirmado libera la intención sin escribir. Defecto encontrado y corregido: sin señal la página pedía «vuelve a entrar» en vez de mostrar la instantánea (ProcesoSolidoPage) |
 | 15.15 | DONE dictamen | 2026-09-28 | r05/acceptance-matrix.md | Resultado remoto PARTIAL, no bloque15 cerrado |
 | 16.01 | DONE | 2026-09-28 | r05/acceptance-matrix.md | Capacidades y ausencias identificadas |
 | 16.02 | PARTIAL | 2026-09-28 | r05/evidence/keyboard.json | Cuatro capturas demo, Más/detalle/revisión/foco; falta barrido completo |

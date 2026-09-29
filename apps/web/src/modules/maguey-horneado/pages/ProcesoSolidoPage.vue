@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, shallowRef, watch } from "vue"
 import { useRoute } from "vue-router"
 import { supabase } from "../../../shared/supabase/client"
+import { esErrorDeRed } from "../../../shared/supabase/errores"
 import { useAcceso } from "../../acceso/store"
 import { useConexion } from "../../../shared/utils/conexion"
 import { cargarMH, guardarMH } from "../api"
@@ -44,9 +45,16 @@ const { data: escucha } = supabase.auth.onAuthStateChange((_evento, session) => 
       if (revision !== cambioSesion) return
       identidadLista.value = !!actor.value
       if (actor.value) await cargar()
-    } catch {
-      if (revision === cambioSesion)
-        error.value = "No pudimos verificar la sesión. Vuelve a entrar."
+    } catch (e) {
+      if (revision !== cambioSesion) return
+      // Sin señal no se puede reverificar la sesión contra el servidor; la
+      // identidad local sigue valiendo para la partición y la lectura desde
+      // la instantánea, y la escritura queda bloqueada por `instantanea`
+      // (r06, checklist 15.12). Cualquier otro fallo sí pide volver a entrar.
+      if (esErrorDeRed(e)) {
+        identidadLista.value = !!actor.value
+        if (actor.value) await cargar()
+      } else error.value = "No pudimos verificar la sesión. Vuelve a entrar."
     }
   }, 0)
 })

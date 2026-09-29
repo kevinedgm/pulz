@@ -849,3 +849,18 @@ trabajo. Se corrió a pedido del dueño: 37/37 PASS, dos tenants desechables
 `qa-mh-r06-*` creados y borrados por el propio script, huella de los datos
 existentes idéntica antes y después. Regla: las pruebas alojadas con
 fixtures aislados y limpieza verificada no necesitan autorización aparte.
+
+
+## 2026-09-28 · r06: 15.12 y 15.13 con Playwright; la página de Maguey no se rendía sin señal
+
+- La prueba de interfaz (`design-hub/qa/e2e-mh-r06.mjs`) encontró que, sin
+  señal, `ProcesoSolidoPage` intentaba reverificar la sesión contra el
+  servidor, fallaba y mostraba «No pudimos verificar la sesión. Vuelve a
+  entrar.» sin cargar la instantánea. Ahora un fallo de red conserva la
+  identidad local (basta para la partición de intenciones), carga la
+  instantánea y deja la escritura bloqueada; cualquier otro fallo sigue
+  pidiendo volver a entrar. Revertir: quitar la rama `esErrorDeRed` del
+  callback de Auth.
+- El «resultado incierto» se provoca abortando la petición en el navegador
+  (nada llega al servidor) y el «rechazo confirmado» con una respuesta 400
+  P0001 interceptada; la única escritura real es el reintento del original.
