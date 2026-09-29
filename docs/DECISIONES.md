@@ -1028,3 +1028,17 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
   rebase para conservar el historial lineal; rama borrada.
 - Regla para lo que sigue: mirar el estado de Actions al subir; un push
   con CI en rojo no se deja pasar.
+
+
+## 2026-09-28 · MH 16.03/16.04/16.07: el simulador no sustituye al teléfono; guion para el dueño
+
+- Se intentó cerrar las tres pruebas físicas con el simulador de iOS 26
+  (Safari, iPhone 17 Pro) desde el panel del app. Se descarta como
+  evidencia: los toques inyectados llegan a Safari como pulsación/hover
+  (un campo necesita dos toques para enfocar y a veces abre «Pegar») y,
+  con el teclado en pantalla activo, la escritura inyectada no llega. Y
+  aunque funcionara, el checklist pide medio real: «no disponible» no es
+  PASS. No se fabrica evidencia.
+- Queda `design-hub/lab/maguey-horneado/r06/pruebas-fisicas.md`: guion de
+  15 minutos con teléfono real y VoiceOver/TalkBack para las tres, con
+  criterio PASS/FAIL por paso. El frente sigue PARTIAL hasta tenerlas.

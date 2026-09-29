@@ -27,7 +27,7 @@ reescribe. Un solo frente; FilaUso y Foundations sin cambios.
 | Negocio alojado (API) | 37/37 PASS, limpieza 0 restantes, huella previa idéntica |
 | Interfaz alojada 15.12/15.13 | 19/19 PASS |
 | Accesibilidad 14.03 + 16.02/05/06/08/09 | 132/132 PASS |
-| 16.03 touch físico · 16.04 teclado virtual · 16.07 lector de pantalla | **BLOCKED**: sin medio real; «no disponible» no es PASS |
+| 16.03 touch físico · 16.04 teclado virtual · 16.07 lector de pantalla | **BLOCKED**: sin medio real; «no disponible» no es PASS. Simulador de iOS descartado (ver `pruebas-fisicas.md`); guion para el dueño listo |
 
 ## Seis dimensiones
 
