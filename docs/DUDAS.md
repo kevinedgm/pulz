@@ -143,6 +143,10 @@
     (semilla anterior). Decidir: reincorporar la escala oscura a Foundations
     (ronda propia, la base está «approved») o retirar el conmutador del shell
     mientras tanto. Hasta entonces «oscuro» = «claro» en toda la app.
+    **Resuelto 2026-09-28** (pedido del dueño): `tokens.css` recupera el tema
+    como overrides de roles semánticos y alias (`color.dark` en
+    `.fruti/tokens.json`); los roles base aprobados no cambian. Verificado con
+    `design-hub/qa/tema-oscuro.mjs` (20/20).
 
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 

@@ -887,3 +887,26 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
 - 15.02/15.03 se dan por resueltos con lo que r06 ya hizo: proyecto único
   autorizado por CLAUDE.md §1, tenants desechables con limpieza por IDs para
   la API, y semilla + `db reset` para la UI (sin usuarios reales, §2).
+
+
+## 2026-09-28 · Tema oscuro restaurado en tokens.css (DUDAS #16)
+
+- El dueño pidió arreglarlo. En vez de rescatar la paleta azul de la semilla
+  vieja (`docs/referencia/pulz-tokens.css`, anterior a Foundations 1.0.0), el
+  tema oscuro se deriva de las escalas aprobadas: superficie `#1C1B23` sobre
+  fondo `#121118`, texto `#F2F1F5`, tinta y estados en el tono 300 y texto de
+  estado en el tono 200 sobre fondos tintados. Solo cambian roles semánticos
+  y alias; los siete roles base y las escalas siguen intactos, así que no se
+  reabre la aprobación de Foundations. `color.dark` queda en
+  `.fruti/tokens.json` como fuente canónica y el Hub (Foundations/Color) lo
+  documenta.
+- Selectores como en shell/r01: `prefers-color-scheme: dark` salvo
+  `data-theme="light"`, y `data-theme="dark"` manual (Cuenta). Verificado en
+  el shell autenticado: sistema oscuro, manual claro sobre sistema oscuro,
+  manual oscuro sobre sistema claro y sistema claro; contraste en oscuro:
+  texto 16.7:1, secundario 8.0, error 10.4, primario 6.5, foco 7.2, bordes
+  7.2 (`design-hub/qa/evidence/tema-oscuro/`). Los chips `on`/`partial` no
+  estaban en pantalla tras el `db reset`; sus pares se calcularon desde los
+  tokens (7.5:1 y 8.0:1).
+- Pendiente menor detectado: `index.html` y el manifest PWA siguen con
+  `theme-color #173F87` (kit anterior); no se toca aquí.

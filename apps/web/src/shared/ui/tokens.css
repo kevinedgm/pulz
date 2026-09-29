@@ -1,6 +1,7 @@
 /* GENERATED BINDING · canonical source: /.fruti/tokens.json
  * PULZ Foundations 1.0.0 · approved 2026-09-28.
  * Do not change base roles here; update the approved foundation source first.
+ * El tema oscuro (color.dark en tokens.json) solo redefine roles semánticos y alias.
  */
 :root {
   color-scheme: light;
@@ -175,6 +176,87 @@
   --brand-clay: var(--color-secondary);
   --brand-ink-hover: var(--color-primary-600);
   --brand-clay-hover: var(--color-secondary-600);
+}
+
+/* Tema oscuro (shell/r01): sigue al sistema salvo elección manual, que
+ * app/tema.ts escribe en <html data-theme>. Los roles base no cambian; solo
+ * los semánticos y los alias. Contrastes medidos en r06 de Maguey/Horneado
+ * (texto 15.2:1, secundario 7.2, tinta 6.5, estados ≥5.4 sobre su fondo).
+ * El bloque va dos veces porque la preferencia del sistema y la manual no
+ * pueden compartir selector. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  color-scheme: dark;
+
+  /* Roles semánticos: mismos nombres, valores de las escalas aprobadas. */
+  --color-background: #121118;
+  --color-surface: #1c1b23;
+  --color-text: #f2f1f5;
+  --color-text-muted: #aaa7b5;
+  --color-border: #4f4d5c;
+  --color-focus: var(--color-primary-300);
+  --color-action: var(--color-primary-300);
+  --color-action-text: var(--color-ink);
+  --color-accent: var(--color-secondary-300);
+  --color-accent-text: var(--color-ink);
+  --color-danger-text: var(--color-danger-200);
+  --color-success-text: var(--color-success-200);
+  --color-warning-text: var(--color-warning-200);
+
+  /* Alias heredados: tinta y estados suben al tono 300 sobre superficie oscura. */
+  --ink-900: var(--color-primary-300);
+  --ink-700: var(--color-primary-200);
+  --ink-100: #2a2450;
+  --clay-300: var(--color-secondary-300);
+  --clay-100: #3d2a26;
+  --ok: var(--color-success-300);
+  --ok-bg: #16302a;
+  --pend: var(--color-warning-300);
+  --pend-bg: #302716;
+  --late: var(--color-danger-300);
+  --late-bg: #33191d;
+  --info: var(--color-primary-300);
+  --info-bg: #262046;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 40%);
+  --brand-ink-hover: var(--color-primary-200);
+  --brand-clay-hover: var(--color-secondary-200);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Roles semánticos: mismos nombres, valores de las escalas aprobadas. */
+  --color-background: #121118;
+  --color-surface: #1c1b23;
+  --color-text: #f2f1f5;
+  --color-text-muted: #aaa7b5;
+  --color-border: #4f4d5c;
+  --color-focus: var(--color-primary-300);
+  --color-action: var(--color-primary-300);
+  --color-action-text: var(--color-ink);
+  --color-accent: var(--color-secondary-300);
+  --color-accent-text: var(--color-ink);
+  --color-danger-text: var(--color-danger-200);
+  --color-success-text: var(--color-success-200);
+  --color-warning-text: var(--color-warning-200);
+
+  /* Alias heredados: tinta y estados suben al tono 300 sobre superficie oscura. */
+  --ink-900: var(--color-primary-300);
+  --ink-700: var(--color-primary-200);
+  --ink-100: #2a2450;
+  --clay-300: var(--color-secondary-300);
+  --clay-100: #3d2a26;
+  --ok: var(--color-success-300);
+  --ok-bg: #16302a;
+  --pend: var(--color-warning-300);
+  --pend-bg: #302716;
+  --late: var(--color-danger-300);
+  --late-bg: #33191d;
+  --info: var(--color-primary-300);
+  --info-bg: #262046;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 40%);
+  --brand-ink-hover: var(--color-primary-200);
+  --brand-clay-hover: var(--color-secondary-200);
 }
 
 @media (prefers-reduced-motion: reduce) {

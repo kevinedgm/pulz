@@ -20,6 +20,10 @@ Los valores `500` de las escalas son aliases exactos de estos roles. Los tonos `
 
 Primary gobierna acción/selección; secondary expresa sin asumir significado semántico. Danger, success y warning nunca se intercambian. El significado se comunica con texto y forma además de color. Para texto normal se usan aliases semánticos con contraste suficiente; el rojo base no se fuerza como texto cuando no alcanza 4.5:1.
 
+## Tema oscuro
+
+`color.dark` en el archivo canónico redefine solo los roles semánticos y los alias de la app; los roles base y las escalas no cambian. Superficie `#1C1B23` sobre fondo `#121118`, texto `#F2F1F5`, tinta y estados en el tono `300` de su escala (contraste ≥6.5:1 sobre superficie) y texto de estado en el tono `200` sobre su fondo tintado (≥7.5:1). Se aplica con `prefers-color-scheme: dark` salvo `data-theme="light"`, o manualmente con `data-theme="dark"` (conmutador en Cuenta). Medición: `design-hub/qa/tema-oscuro.mjs` (r06 Maguey/Horneado).
+
 ## Tokens semánticos
 
 `background`, `text`, `textMuted`, `border`, `focus`, `action`, `actionText`, `accent`, `accentText`, `dangerText`, `successText` y `warningText` están definidos en el archivo canónico.

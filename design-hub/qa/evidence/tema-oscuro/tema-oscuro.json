@@ -1,0 +1,303 @@
+{
+  "fecha": "2026-09-29T00:46:50.639Z",
+  "status": "PASS",
+  "checks": 20,
+  "fallos": [],
+  "erroresDePagina": [],
+  "evidencia": {
+    "sistemaOscuro": {
+      "scheme": "dark",
+      "fondo": "rgb(18, 17, 24)",
+      "superficie": "#1c1b23",
+      "theme": null
+    },
+    "contrasteMaguey": [
+      {
+        "nombre": "texto principal",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 16,
+        "minimo": 4.5,
+        "ratio": 16.69
+      },
+      {
+        "nombre": "texto secundario",
+        "fg": [
+          170,
+          167,
+          181
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 14,
+        "minimo": 4.5,
+        "ratio": 7.96
+      },
+      {
+        "nombre": "estado (status)",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 16,
+        "minimo": 4.5,
+        "ratio": 16.69
+      },
+      {
+        "nombre": "leyenda",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 16,
+        "minimo": 4.5,
+        "ratio": 16.69
+      },
+      {
+        "nombre": "etiqueta",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 15,
+        "minimo": 4.5,
+        "ratio": 16.69
+      },
+      {
+        "nombre": "error",
+        "fg": [
+          229,
+          180,
+          187
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 16,
+        "minimo": 4.5,
+        "ratio": 10.35
+      },
+      {
+        "nombre": "botón primario",
+        "fg": [
+          28,
+          27,
+          35
+        ],
+        "bg": [
+          165,
+          144,
+          253
+        ],
+        "fontSize": 16,
+        "minimo": 4.5,
+        "ratio": 6.51
+      },
+      {
+        "nombre": "botón secundario",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          28,
+          27,
+          35
+        ],
+        "fontSize": 16,
+        "minimo": 4.5,
+        "ratio": 15.18
+      },
+      {
+        "nombre": "chip on",
+        "sel": ".chip--on",
+        "ausente": true
+      },
+      {
+        "nombre": "chip off",
+        "fg": [
+          170,
+          167,
+          181
+        ],
+        "bg": [
+          28,
+          27,
+          35
+        ],
+        "fontSize": 13,
+        "minimo": 4.5,
+        "ratio": 7.24
+      },
+      {
+        "nombre": "navegación",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 14,
+        "minimo": 4.5,
+        "ratio": 16.69
+      },
+      {
+        "nombre": "navegación activa",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          28,
+          27,
+          35
+        ],
+        "fontSize": 14,
+        "minimo": 4.5,
+        "ratio": 15.18
+      },
+      {
+        "nombre": "empresa (cabecera nav)",
+        "fg": [
+          242,
+          241,
+          245
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 15,
+        "minimo": 4.5,
+        "ratio": 16.69
+      },
+      {
+        "nombre": "borde de campo",
+        "fg": [
+          170,
+          167,
+          181
+        ],
+        "bg": [
+          28,
+          27,
+          35
+        ],
+        "fontSize": 16,
+        "minimo": 3,
+        "ratio": 7.24
+      },
+      {
+        "nombre": "borde de botón",
+        "fg": [
+          170,
+          167,
+          181
+        ],
+        "bg": [
+          28,
+          27,
+          35
+        ],
+        "fontSize": 16,
+        "minimo": 3,
+        "ratio": 7.24
+      },
+      {
+        "nombre": "anillo de foco",
+        "fg": [
+          165,
+          144,
+          253
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 16,
+        "minimo": 3,
+        "ratio": 7.16
+      }
+    ],
+    "contrasteHorneado": [
+      {
+        "nombre": "chip partial",
+        "sel": ".chip--partial",
+        "ausente": true
+      },
+      {
+        "nombre": "botón quiet",
+        "fg": [
+          165,
+          144,
+          253
+        ],
+        "bg": [
+          18,
+          17,
+          24
+        ],
+        "fontSize": 16,
+        "minimo": 4.5,
+        "ratio": 7.16
+      }
+    ],
+    "sistemaOscuroManualClaro": {
+      "scheme": "light",
+      "fondo": "rgb(248, 248, 250)",
+      "superficie": "#f8f8fa",
+      "theme": "light"
+    },
+    "sistemaClaroManualOscuro": {
+      "scheme": "dark",
+      "fondo": "rgb(18, 17, 24)",
+      "superficie": "#1c1b23",
+      "theme": "dark"
+    },
+    "sistemaClaro": {
+      "scheme": "light",
+      "fondo": "rgb(248, 248, 250)",
+      "superficie": "#f8f8fa",
+      "theme": null
+    }
+  }
+}
