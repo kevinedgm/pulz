@@ -88,7 +88,7 @@ tratarse como un gate ya validado.
 
 | Plan | Estado actual y pendiente |
 | --- | --- |
-| Fase 0 | Tooling/build/tests verificados; CI en PR real e instalación limpia pendientes. |
+| Fase 0 | Tooling/build/tests verificados; CI en PR real **hecho** (kevinedgm/pulz#1 verde); instalación limpia pendiente. |
 | Fase 1 | Aislamiento y saldos 18/18 con fixture propio; reconstrucción desde cero no repetida. |
 | Fase 2 | RPC 26/26; **concurrencia real pendiente**, no aceptación completa. |
 | Fase 3 | Portal 11/11, equipo 12/12; altas/canjes reales no repetidos. Hook de cinco intentos sigue limitado por plan. |

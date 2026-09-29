@@ -112,7 +112,7 @@ de esto y puede completarse mientras se decide.
 |---|---|
 | `pnpm install && pnpm build && pnpm test` en verde | correrlos en la raíz del monorepo, código de salida 0 |
 | ~~`supabase start` responde~~ | **retirado**: el dueño descartó Docker/Colima permanentemente; el CLI se usa solo para migraciones contra el proyecto alojado (ver `docs/DECISIONES.md`) |
-| CI corre en un PR | abrir un PR de prueba (o revisar un run de Actions) y confirmar que `ci.yml` se dispara y termina en verde |
+| CI corre en un PR | **Hecho 2026-09-28**: [kevinedgm/pulz#1](https://github.com/kevinedgm/pulz/pull/1) disparó `ci.yml` por `pull_request` y terminó en verde (install, lint, format, build, test, runner). Antes el job llevaba 23 corridas en rojo por dos pruebas que cargaban el cliente real de Supabase sin `.env.local`; corregido en ese PR. Fusionado con rebase |
 | Existe el perfil PULZ de lima con los valores de §13.4 y el Design Hub inicial | revisar el archivo de perfil que genera Fruti Squad (dentro de `.claude/` o `design-hub/`, según lo que instale) y comparar campo por campo contra la tabla de §13.4 |
 
 Si algún criterio no se puede comprobar con un comando real (p. ej. `supabase

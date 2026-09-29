@@ -1010,3 +1010,21 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
   como en r06; sin demo, reset ni DDL (CLAUDE.md §1/§4).
 - `scripts/test-db-concurrency.mjs` se conserva como registro del intento
   por Management API; el gate es `pnpm test:rpc:concurrency`.
+
+
+## 2026-09-28 · CI comprobado en un PR real; el job llevaba 23 corridas en rojo
+
+- `ci.yml` corría en cada push a `main` pero fallaba desde el 27 de
+  septiembre: `acceso/__tests__/api.test.ts` y `arranque/__tests__/
+  arranque.test.ts` importan módulos que arrastran
+  `shared/supabase/client.ts`, que lanza al cargar si faltan `VITE_*`; en
+  Actions no hay `.env.local`. No era un defecto del producto. Se mockea el
+  cliente en esas dos pruebas (como en el resto) y se verificó localmente
+  sin `.env.local`: 193/193, runner 10/10.
+- La corrección entró por el primer PR del repo (kevinedgm/pulz#1) para
+  cerrar el criterio de Fase 0 «CI corre en un PR»: `pull_request` disparó
+  el job y terminó en verde (una corrida previa falló solo por el salto de
+  línea final de `CLAUDE.md`, corregido en el mismo PR). Fusionado con
+  rebase para conservar el historial lineal; rama borrada.
+- Regla para lo que sigue: mirar el estado de Actions al subir; un push
+  con CI en rojo no se deja pasar.

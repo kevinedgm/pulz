@@ -11,7 +11,7 @@
 
 ## Fase actual
 
-**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado por completo: API y Playwright); bloque 16 de accesibilidad cerrado con Playwright en el shell autenticado (132/132) salvo 16.03/16.04/16.07 que exigen hardware/AT. Dictamen r06: PARTIAL, draft 0.2.1. Tema oscuro restaurado en tokens.css (DUDAS #16 resuelta). **Inicio/Hoy con datos reales construido (ronda inicio-hoy/r01, `inicio` candidate 0.3.0, evidencia PASS)**; E2E del proceso completo (tarea 8) PASS: la simulación de la semilla rehecha desde la interfaz en Prueba B da §15.1 exacto. Fase 5 completa. **Concurrencia real (Fase 2) certificada: `pnpm test:rpc:concurrency` 15/15 con dos sesiones por PostgREST.** Queda CI en un PR real.**
+**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado por completo: API y Playwright); bloque 16 de accesibilidad cerrado con Playwright en el shell autenticado (132/132) salvo 16.03/16.04/16.07 que exigen hardware/AT. Dictamen r06: PARTIAL, draft 0.2.1. Tema oscuro restaurado en tokens.css (DUDAS #16 resuelta). **Inicio/Hoy con datos reales construido (ronda inicio-hoy/r01, `inicio` candidate 0.3.0, evidencia PASS)**; E2E del proceso completo (tarea 8) PASS: la simulación de la semilla rehecha desde la interfaz en Prueba B da §15.1 exacto. Fase 5 completa. **Concurrencia real (Fase 2) certificada: `pnpm test:rpc:concurrency` 15/15 con dos sesiones por PostgREST.** **CI comprobado en un PR real (kevinedgm/pulz#1, verde por `pull_request`)**; el job llevaba 23 corridas en rojo por dos pruebas que cargaban el cliente real sin `.env.local`, corregido. Sin pendientes de las Fases 0–5 salvo accesibilidad con hardware/AT (MH 16.03/16.04/16.07).**
 R05 cierra el corte de navegación y corrige identidad concurrente, intención
 corrupta, origen de cocido y timestamp offline.183/183 locales (34 módulo),
 5/5 acceso alojado autorizado; tipos/build/demo/lint PASS. Siete anchos revisados.
@@ -144,7 +144,7 @@ y sus limitaciones están en la verificación del 2026-09-28.
    y correcciones locales terminadas; no reutilizar gates de rondas anteriores.
 3. ~~Implementar Inicio/hoy real · E2E completo del proceso (tarea 8)~~ (hechos 2026-09-28; offline ya aceptado con e2e-offline).
 4. Revalidar composición, accesibilidad y consumo real de Foundations.
-5. Comprobar CI en PR real; siguen las limitaciones del hook de intentos y
+5. ~~Comprobar CI en PR real~~ (hecho 2026-09-28, kevinedgm/pulz#1 verde); siguen las limitaciones del hook de intentos y
    demás decisiones abiertas en `DUDAS.md`.
 
 ### Lista histórica al cerrar Fase 3 (no pendientes actuales)
@@ -174,7 +174,7 @@ y sus limitaciones están en la verificación del 2026-09-28.
    y #10 (protección de contraseñas filtradas). No bloquean.
 4. Sigue abierto de fases anteriores: concurrencia a mano (#5), escala 1–6
    (#4), folios/entrada de tina/corregir_operacion (#6–#8). No bloquean.
-5. Abrir un PR real y confirmar `ci.yml` (no bloquea).
+5. ~~Abrir un PR real y confirmar `ci.yml`~~ (hecho 2026-09-28).
 
 ## Entorno (actualizado 2026-09-27)
 
