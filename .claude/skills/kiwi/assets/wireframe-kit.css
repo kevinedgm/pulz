@@ -10,8 +10,9 @@
 *{box-sizing:border-box}
 body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
 .wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
-.wf button{font:inherit;color:inherit;cursor:pointer}
-.wf a{color:inherit}
+/* :where() keeps these resets at zero specificity so .wf-btn--primary etc. can set their own color */
+.wf :where(button){font:inherit;color:inherit;cursor:pointer}
+.wf :where(a){color:inherit}
 .wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Barra de control (fuera del diseño) */

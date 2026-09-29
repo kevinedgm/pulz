@@ -80,3 +80,22 @@ Reglas:
   innegociable. Ahí se implementa el supuesto ya documentado y se avisa.
 - Lo demás sigue igual: kiwi → lima → coco → mora, un commit por tarea,
   verificación real, `docs/ESTADO.md` vivo.
+
+<!-- fruti-squad:start -->
+## 🍓 Fruti Squad (kiwi → lima → coco → mora)
+
+Este proyecto incluye el Fruti Squad en `./.claude/skills`. Cada carpeta tiene su `SKILL.md`/`AGENT.md`; léelos cuando la tarea lo pida:
+
+- **kiwi** — estructura: brief, user flow y wireframes F0–F2 adaptativos con traspaso a lima → `./.claude/skills/kiwi/`
+- **lima** — gobierna: clasifica, reutiliza, registra y decide el estado de cada pieza → `./.claude/skills/lima/`
+- **coco** — construye: alta fidelidad con el sistema real, implementación y auditoría → `./.claude/skills/coco/`
+- **mora-docs** — documenta lo implementado y sincroniza el Design Hub (último paso del flujo) → `./.claude/skills/mora-docs/`
+
+Flujo: **kiwi estructura → lima gobierna → coco construye → mora documenta.** Cada uno se dedica a una actividad y todos usan el perfil de proyecto de lima (`./.claude/skills/lima/profiles/<proyecto>.md`).
+
+Política de ejecución (rutea primero, lee después; fuentes aprobadas; handoffs compactos):
+
+@.fruti/policy.md
+
+Rutas reales de skills/agentes: `.fruti/paths.yaml`. Los contratos `.fruti/runtime/*.yaml` citan rutas relativas al paquete (`skills/...`, `agentes/...`); resuélvelas con ese mapa o con `fruti path <ruta>` (imprime la ruta real). Invoca cada miembro con la herramienta Skill (`kiwi`, `lima`, `coco`, `mora-docs`) y haz las preguntas de producto con AskUserQuestion.
+<!-- fruti-squad:end -->

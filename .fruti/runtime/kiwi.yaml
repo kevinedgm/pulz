@@ -68,7 +68,7 @@ operations:
     references: [agentes/kiwi/references/validacion.md]
   test_f2:
     purpose: prove structural reasoning before visual construction
-    inputs: [.fruti/tests/current/request.md]
+    inputs: [.fruti/tests/<round>/request.md]
     references:
       - agentes/kiwi/references/brief-funcional.md
       - agentes/kiwi/references/fidelidad.md
@@ -76,8 +76,8 @@ operations:
       - agentes/kiwi/references/geometry-contract.md
       - agentes/kiwi/references/validacion.md
     outputs:
-      - .fruti/tests/current/kiwi-f2.html
-      - .fruti/tests/current/kiwi-decisions.yaml
+      - .fruti/tests/<round>/kiwi-f2.html
+      - .fruti/tests/<round>/kiwi-decisions.yaml
       - .fruti/handoffs/current.json
     requirements:
       - neutral_grayscale_f2
@@ -87,11 +87,15 @@ operations:
       - loading_empty_error_offline_permissions_long_content_large_list_keyboard
       - decision_source_rule_product_context_or_inference
       - no_generic_card_without_grouping_reason
+      - piece_contract_per_piece_with_promote_demote_per_size
+      - adaptation_is_recomposition_not_restacking
       - configured_interface_standards_are_normative_when_present
       - missing_normative_standard_is_reported_not_invented
 
 output:
   handoff: .fruti/handoffs/current.json
+  state: .fruti/state/current.json
+  round_copy: .fruti/tests/<round>/handoff-kiwi.json
   next_owner: lima
   include: [artifact, round, frozen_structure, pieces, adaptive_matrix, required_states, data_proposal, design_direction_ref, redesign_scope_ref, open_questions, evidence, delta]
 rules:

@@ -57,10 +57,10 @@ operations:
       - references/inspiration never become component specifications
   test_governance:
     inputs:
-      - .fruti/tests/current/request.md
-      - .fruti/tests/current/kiwi-decisions.yaml
+      - .fruti/tests/<round>/request.md
+      - .fruti/tests/<round>/kiwi-decisions.yaml
       - .fruti/handoffs/current.json
-    output: .fruti/tests/current/lima-contract.yaml
+    output: .fruti/tests/<round>/lima-contract.yaml
     rules:
       - classify_reuse_extend_new_local
       - validate_geometry_and_adaptive_contract
@@ -75,6 +75,7 @@ operations:
 output:
   handoff: .fruti/handoffs/current.json
   state: .fruti/state/current.json
+  round_copy: .fruti/tests/<round>/handoff-lima.json   # gate after Coco: handoff-lima-gate.json
   next_owner: coco
   include: [artifact, round, classification, disposition, contract, implementation_target, implementation_language, styling_strategy, registry_status, tokens_to_reuse, redesign_scope_status, design_direction_ref, local_vs_system, open_questions, evidence, delta]
 rules:

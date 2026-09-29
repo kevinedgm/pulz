@@ -20,4 +20,6 @@ Visual hierarchy, legibility, density, contrast, spacing, typography, affordance
 
 ## Reference breakpoints
 
+> Verification viewports (profile `breakpoints`) are not layout thresholds: layout modes are compact `<600`, medium `600–1023`, expanded `>=1024` (see the policy → Breakpoint semantics: `AGENTS.md` in the package, `.fruti/policy.md` in an installed project). The viewport set must cover all three modes.
+
 Design and verify at 1440 / 1024 / 768 / 390. These are checked at the Stable Gate (quality-gates.md). The `adapt` pass runs in the pre-candidate phase (critique → distill → adapt → polish), so responsive composition is resolved before the piece becomes a candidate; the later `harden` pass then hardens those already-resolved compositions rather than fabricating new unhardened states.

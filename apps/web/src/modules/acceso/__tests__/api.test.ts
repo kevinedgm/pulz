@@ -1,6 +1,10 @@
 // correoDeAcceso: mismo cálculo que member_login_email() en Postgres (0012).
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import { correoDeAcceso } from "../api"
+
+// api.ts importa el cliente de Supabase, que exige VITE_* al cargar: en CI
+// no hay .env.local y estas pruebas son puras.
+vi.mock("../../../shared/supabase/client", () => ({ supabase: {} }))
 
 const ORG = "b66cf468-47f7-51ee-a8f2-994d907440b9"
 

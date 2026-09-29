@@ -1,9 +1,13 @@
 // Contrato de la tarjeta de recipiente (ronda arranque/r01) y de la api local.
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import { mount } from "@vue/test-utils"
 import TarjetaRecipiente from "../components/TarjetaRecipiente.vue"
 import { guardarEstado, leerEstado, materialDe, mensajeDeCarga } from "../api"
 import type { Recurso } from "../../configuracion/api"
+
+// La tarjeta y la api importan el cliente de Supabase, que exige VITE_* al
+// cargar: en CI no hay .env.local y aquí no se toca la red.
+vi.mock("../../../shared/supabase/client", () => ({ supabase: {} }))
 
 const tanque: Recurso = {
   id: "r1",
