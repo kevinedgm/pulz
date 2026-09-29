@@ -205,3 +205,14 @@ Si hay herramientas reales para invocar a lima, uso su nombre instalado; si no, 
 | [references/validacion.md](references/validacion.md) | Fase 5 siempre |
 | [assets/](assets/) | Kit, base HTML y plantillas |
 | [scripts/check_artifact.py](scripts/check_artifact.py) | Fase 5 |
+
+## F2 geometry contract
+
+En F2 no basta con dibujar cajas. Antes del handoff a lima, cada región importante debe tener geometría y jerarquía explícitas: tamaño de referencia cuando afecte usabilidad, grid/span, relaciones de spacing, densidad, target interactivo, wrapping/overflow y prioridad informativa.
+
+Usa `references/geometry-contract.md` junto con `references/wireframing.md`. La matriz adaptativa debe declarar qué se conserva, cambia y oculta en compact/medium/expanded. No introduzcas una card solo como contenedor visual genérico.
+
+Las decisiones estructurales importantes deben registrar procedencia `rule | product-context | inference`. Una inferencia nunca se presenta como regla de un estándar.
+
+En pruebas `fruti test`, produce además `.fruti/tests/<round>/kiwi-f2.html` y `.fruti/tests/<round>/kiwi-decisions.yaml` antes de entregar a lima.
+

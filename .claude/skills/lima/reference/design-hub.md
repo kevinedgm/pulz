@@ -6,6 +6,8 @@ Everything below `stable` is built and shown here; production is never touched d
 
 Place the piece in the Hub folder matching its `artifact_type` (router). Reuse the profile's Hub stylesheet for tokens; never fork styling.
 
+> **Authority note.** For the canonical documentation page (shell, section set and order) `.fruti/contracts/documentation.yaml` wins. "Reuse the profile's Hub stylesheet" below applies to the **isolated demo/preview** of the real artifact, never to the documentation shell, which stays neutral (`separation_rule`).
+
 ## What a Hub entry must contain
 
 1. **Interactive demo** — every variant, size, and state rendered and interactive (not a static image).

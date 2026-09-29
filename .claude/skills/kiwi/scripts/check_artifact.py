@@ -202,9 +202,18 @@ def main():
     else:
         warns.append("sin notas wf-note: anota decisiones y supuestos")
 
-    prim = len(re.findall(r"wf-btn--primary|class=\"[^\"]*\bprimary\b", html))
-    if prim:
-        oks.append(f"{prim} marcas de acción primaria (revisa: una por vista)")
+    # A static check cannot render JS: markup outside <script> is counted on its own, and
+    # marks inside script templates (one per state view) are reported separately.
+    prim_re = r"wf-btn--primary|class=\"[^\"]*\bprimary\b"
+    scripts = re.findall(r"<script\b[^>]*>.*?</script>", html, flags=re.S | re.I)
+    static_html = re.sub(r"<script\b[^>]*>.*?</script>", "", html, flags=re.S | re.I)
+    prim_static = len(re.findall(prim_re, static_html))
+    prim_tpl = sum(len(re.findall(prim_re, sc)) for sc in scripts)
+    if prim_static or prim_tpl:
+        oks.append(f"acción primaria: {prim_static} en marcado estático, {prim_tpl} en plantillas JS (una por estado)")
+        oks.append("(no se verifica el render: comprueba en el navegador que cada espacio muestra una sola primaria visible)")
+    if prim_static > 1:
+        warns.append(f"{prim_static} primarias en marcado estático: revisa que no coincidan visibles en un mismo espacio")
 
     print(f"kiwi · check_artifact · {path.name} · {args.fidelidad}")
     for o in oks:

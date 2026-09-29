@@ -9,7 +9,7 @@ design_system_name: "PULZ"
 color_law: |
   surface #FFFFFF     # page background
   ink     #14161A     # default text
-  action  #2F6BFF     # ONLY the primary action / active state
+  action  #2A62F0     # ONLY the primary action / active state
   accent  #7C5CFF     # focus, selection, secondary emphasis
   danger  #C0392B     # ONLY errors / destructive
   success #12805C     # positive state
@@ -19,7 +19,7 @@ color_law: |
 type_law: |
   body:    "Inter"
   display: "Inter Tight"
-  scale:   1.20 modular scale from 14px base
+  # roles/sizes come from .fruti/contracts/typography.yaml; to override set typography.scale_mode: custom in the profile
 
 tokens_source:
   - src/styles/tokens.css

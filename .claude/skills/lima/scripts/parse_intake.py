@@ -137,6 +137,21 @@ def emit(data):
     scalar("INTAKE_QA_RUNNER", "qa_runner")
     scalar("INTAKE_SERVE", "serve_command")
     scalar("INTAKE_A11Y", "a11y_target")
+    # implementation target: normalise to the contract vocabulary; AUTO/empty -> unresolved (empty)
+    fw = str(data.get("framework", "") or "").strip()
+    lang = ""
+    if fw.upper() == "AUTO":
+        fw = ""
+    m = re.match(r"^(.*?)-(ts|js)$", fw)
+    if m:
+        fw = m.group(1)
+        lang = "typescript" if m.group(2) == "ts" else "javascript"
+    st = str(data.get("styling", "") or "").strip()
+    if st.upper() == "AUTO":
+        st = ""
+    out.append(f"INTAKE_FRAMEWORK={sh_single(fw)}")
+    out.append(f"INTAKE_LANGUAGE={sh_single(lang)}")
+    out.append(f"INTAKE_STYLING={sh_single(st)}")
     scalar("INTAKE_TOUCH", "touch_min_px")
     scalar("INTAKE_VIEWPORTS", "breakpoints")
 

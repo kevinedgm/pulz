@@ -1,5 +1,22 @@
 # Component documentation — the Design Hub documentation standard
 
+> **Authority note.** `.fruti/contracts/documentation.yaml` (owner: mora) is the single normative source for the canonical page's **shell, section set and section order**. This file keeps only guidance that does not conflict with it: the golden rule, sources of truth, the lifecycle-gated API rule, reusable primitives and the consistency rule. The "Page shell" and "Mandatory section order" below are **superseded** — they are kept as a mapping so older references resolve.
+
+| Legacy section here | Canonical section in `documentation.yaml` |
+|---|---|
+| Header, Overview, Usage (when / when not) | `overview` (`what_it_is`, `purpose`, `when_to_use`, `when_not_to_use`) |
+| Live examples, Playground | `preview` (real component or verified evidence; a Playground is optional and never replaces it) |
+| Anatomy | `anatomy` |
+| Variants/Intents, Sizes/Shapes | `variants` |
+| States | `states` |
+| Behaviors | `behavior` |
+| Responsive | `adaptive` |
+| Accessibility | `accessibility` |
+| API Reference | `api` (only when a real API exists) |
+| Implementation | `implementation` |
+| QA/Lifecycle | `lifecycle_qa` |
+| Do/Don't, Related | not canonical sections; add them only by extending `documentation.yaml` through Lima/Mora, never per page |
+
 Authoritative owner of **how every Design System artifact is documented**. Not a gallery, not a static mockup: each artifact has one **canonical, living, Vuetify-style reference page**. `design-hub.md` owns building demos in the lab; this file owns the documentation standard every page must follow, so no page invents its own visual religion.
 
 > **Golden rule.** Documentation describes **what actually exists** and states clearly **what does not yet exist**. It never documents aspired-to props, variants, or APIs as if they worked. A beautiful page claiming `loading`, `density`, `rounded`, `variant`, `elevation` all work while the real component laughs from another folder is a failure.
@@ -18,7 +35,7 @@ project profile     → design-system context
 
 Status/version live only in the registry; do not restate them in multiple files. Prefer reflecting the real source over re-typing a table that will drift.
 
-## Page shell (three-zone, Vuetify-style)
+## Page shell (SUPERSEDED — see the authority note; the contract's neutral monochrome shell applies)
 
 Every component page uses the shared docs shell:
 
@@ -30,7 +47,7 @@ Every component page uses the shared docs shell:
 
 On ≤1000px the left nav becomes a togglable drawer (burger + scrim + Escape). Anchors must work. This shell is provided by `docs.css` + `docs.js` in the Hub; reuse it, never re-layout per page.
 
-## Mandatory section order
+## Mandatory section order (SUPERSEDED — use the section set in `documentation.yaml`)
 
 Include a section only when it applies; omit (do not empty-stub) what doesn't:
 

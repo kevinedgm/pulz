@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "project": null,
+  "active_artifact": null,
+  "round": null,
+  "phase": null,
+  "owner": null,
+  "next_owner": null,
+  "profile_path": null,
+  "registry_path": null,
+  "canonical_evidence": [],
+  "frozen_decisions": [],
+  "open_questions": [],
+  "last_handoff": ".fruti/handoffs/current.json",
+  "note": "Operational cache only. Canonical profile, registry, code/types and QA evidence always win on conflict."
+}
