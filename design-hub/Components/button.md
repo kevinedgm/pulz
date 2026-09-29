@@ -73,7 +73,7 @@ slots: default
 ## Implementación
 
 Tokens: `--ink-900/700/100`, `--surface`, `--text`, `--late/--late-bg`,
-`--border`, `--tap`, `--sp-*`, `--r-lg`, `--r-pill`, `--font`.
+`--muted` (borde de `secondary`, 6.3:1; `--border` daba 1.34:1 — r06 Maguey/Horneado), `--tap`, `--sp-*`, `--r-lg`, `--r-pill`, `--font`.
 Dependencias del registry: ninguna.
 
 ## QA y ciclo de vida

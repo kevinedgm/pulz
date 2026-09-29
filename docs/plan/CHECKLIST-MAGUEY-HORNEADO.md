@@ -7,7 +7,7 @@ sin operaciones de negocio remotas. No modificar FilaUso ni rondas evaluadas.
 
 ## Hito actual: F3 implementada localmente → aceptación parcial
 
-Estado vigente: **r05 draft0.2.1 corregida; aceptación PARTIAL.** r06 (2026-09-28): pruebas alojadas de negocio 37/37 PASS con tenants desechables y limpieza verificada (`r06/evidence/`); bloque 15 cerrado: API (15.05–15.11, 15.14) y UI con Playwright (15.12, 15.13).
+Estado vigente: **r05 draft0.2.1 corregida; aceptación PARTIAL.** r06 (2026-09-28): pruebas alojadas de negocio 37/37 PASS con tenants desechables y limpieza verificada (`r06/evidence/`); bloque 15 cerrado: API (15.05–15.11, 15.14) y UI con Playwright (15.12, 15.13). Bloque 16 (2026-09-28, `r06/evidence/a11y-14-03-16.json`, 132/132): teclado completo, 200 %, forced-colors, contraste/movimiento y contenido extremo cerrados en el shell autenticado; quedan **16.03, 16.04 y 16.07** (touch físico, teclado virtual, lector de pantalla: sin hardware/AT). Dictamen: `r06/result.md`.
 183/183 locales,34 módulo incluidos,5/5 acceso alojado; builds/lint PASS.
 Matriz y límites: `design-hub/lab/maguey-horneado/r05/acceptance-matrix.md`.
 
@@ -89,7 +89,7 @@ Dependencia: ninguna escritura remota. Prioridad inmediata.
 - [x] **14.02 · Congelar lo que debe conservarse.** Registrar rail 160/240 px,
   insets 16/24 px, cinco destinos compactos, etiquetas completas, targets y
   Foundations vigentes; conservar hashes de r04.
-- [ ] **14.03 · Reproducir MH-F3-VIS-01.** Capturar «Fermentación» a 768 px y
+- [x] **14.03 · Reproducir MH-F3-VIS-01.** Capturar «Fermentación» a 768 px y
   comprobar los bordes de medium (600 y 1023 px) tanto en demo como en el
   componente de navegación usado por la app.
 - [x] **14.04 · Resolver el corte de palabra.** Mantener nombre completo y tamaño
@@ -121,10 +121,10 @@ no sustituye esa autorización específica ni permite tocar demos existentes.
 - [x] **15.01 · Diagnosticar conectividad sin mutar datos.** Distinguir falta
   de red/permisos de ejecución, endpoint no disponible y rechazo funcional;
   registrar causa sin exponer credenciales ni eludir controles de seguridad.
-- [ ] **15.02 · Identificar el entorno de prueba.** Documentar proyecto,
+- [x] **15.02 · Identificar el entorno de prueba.** Documentar proyecto,
   empresa/tenant, usuarios por rol y datos que pueden usarse. No asumir que
   una demo existente es desechable.
-- [ ] **15.03 · Resolver autorización de escrituras y limpieza.** Precisar
+- [x] **15.03 · Resolver autorización de escrituras y limpieza.** Precisar
   operaciones, fixtures aislados y cómo retirarlos o conservarlos. Solicitar
   autoridad específica si falta; no hacer reset ni borrar datos ajenos.
 - [x] **15.04 · Repetir los cinco tests de acceso alojado.** Empresa inexistente,
@@ -179,7 +179,7 @@ se debe declarar ese alcance y repetir lo que cambie en el shell autenticado.
 - [x] **16.01 · Preparar matriz de dispositivos.** Registrar navegador, sistema,
   tamaño CSS, dispositivo táctil y tecnología de asistencia disponibles;
   identificar explícitamente recursos faltantes.
-- [ ] **16.02 · Completar todos los recorridos por teclado.** Recepción, revisión
+- [x] **16.02 · Completar todos los recorridos por teclado.** Recepción, revisión
   y vuelta, apertura, cierre, cocido existente, Más y detalle; verificar orden,
   foco visible, ausencia de trampas, Escape y retorno al disparador o resultado.
 - [ ] **16.03 · Probar touch físico.** Medir targets mínimos de 44 px y comprobar
@@ -188,19 +188,19 @@ se debe declarar ese alcance y repetir lo que cambie en el shell autenticado.
 - [ ] **16.04 · Probar teclado virtual.** Capturar kilos y fechas en móvil real;
   comprobar que campos, error y confirmación no queden tapados por teclado,
   navegación inferior ni áreas seguras.
-- [ ] **16.05 · Probar texto al 200% de forma nativa.** Usar ampliación real del
+- [x] **16.05 · Probar texto al 200% de forma nativa.** Usar ampliación real del
   navegador/sistema, no el selector aproximado del arnés; comprobar todos los
   formularios, listas, navegación y capas sin pérdida de contenido o funciones.
-- [ ] **16.06 · Probar forced-colors.** Usar un entorno que lo soporte; verificar
+- [x] **16.06 · Probar forced-colors.** Usar un entorno que lo soporte; verificar
   foco, bordes, estado activo, errores y botones. CSS presente no equivale a
   prueba ejecutada.
 - [ ] **16.07 · Probar lector de pantalla.** Comprobar nombres, headings, regiones,
   unidad kg, estado deshabilitado, descripción de errores, diálogo y anuncio
   de éxito, sin lectura del fondo inactivo ni avisos duplicados/confusos.
-- [ ] **16.08 · Medir contraste y movimiento.** Texto normal/secundario/error,
+- [x] **16.08 · Medir contraste y movimiento.** Texto normal/secundario/error,
   controles y foco con colores computados; verificar reduced-motion en las
   transiciones aplicables y justificar N/A si no hay movimiento.
-- [ ] **16.09 · Probar contenido extremo.** Folios/contextos largos, listas
+- [x] **16.09 · Probar contenido extremo.** Folios/contextos largos, listas
   paginadas, cantidades decimales/grandes y mensajes de error largos con texto
   ampliado; comprobar comprensión y agrupación, no sólo desborde.
 - [x] **16.10 · Corregir y volver a comprobar hallazgos.** Cada defecto tiene
@@ -283,6 +283,15 @@ Usar una fila por ítem que se trabaje; añadir la evidencia al marcarlo.
 | 17.07 | DONE | 2026-09-28 | r05/evidence/documentation-check.json | Hub48 fichas;121 referencias,0 ausentes/IDs duplicados |
 | 17.08 | DONE | 2026-09-28 | r05/evidence/artifact-hashes.json | Ronda sellada,36 archivos protegidos sin cambios |
 | 17.09 | DEVUELTO PARTIAL | 2026-09-28 | r05/result.md |22/43 ítems cerrados/evaluados;21 abiertos; no aceptación completa |
+| 14.03 | DONE | 2026-09-28 | r06/evidence/a11y-14-03-16.json + 14-03-fermentacion-{600,768,1023}.png | Shell autenticado: «Fermentación» completa (guion discrecional) en rail 160 px a 600/768/1023 (2 líneas, sin recorte) y 240 px a 1024/1440 (1 línea); sin desplazamiento horizontal. Demo ya verificada en r05 |
+| 15.02, 15.03 | DONE | 2026-09-28 | r06/evidence/{setup,cleanup,manifest}.json | Entorno: proyecto `ypgeiyorgktshgbzhgfh` (único autorizado, CLAUDE.md §1); tenants desechables `qa-mh-r06-*` con usuarios por rol creados y retirados por IDs exactos (cleanup = 0 restantes; huella de datos existentes idéntica). Para UI: cuatro-vientos (aurelia) y prueba-b con semilla; los residuos se retiran con `supabase db reset --linked` (CLAUDE.md §2, sin usuarios reales) |
+| 16.02 | DONE | 2026-09-28 | r06/evidence/a11y-14-03-16.json (`16.02`) + 16-02-*.png | `node design-hub/qa/a11y-mh-r06.mjs`, todo por teclado en el shell autenticado con escrituras reales: recepción 1 kg (título → Kilos en ≤2 Tab → resultado enfocado), apertura con revisión y vuelta (h2 enfocado; «Volver a cantidades» regresa al selector de horno; typeahead del select), cierre en capa (foco entra a Kilos cocidos, 14 Tab y Shift+Tab contenidos, Escape devuelve a «Cerrar horneada», envío enfoca resultado y cierra la capa), cocido previo, detalle (Escape → «Ver detalle»), Más en compact (Escape → «Más»; Enter en «Maguey» navega y cierra). Foco visible en todas las paradas |
+| 16.05 | DONE (emulación equivalente) | 2026-09-28 | r06/evidence/a11y-14-03-16.json (`16.05`) + 16-05-*-{720,512,384,320}x2.png | 200 % como lo aplica el navegador: viewport CSS a la mitad + DPR 2 (1440→720 lateral medium; 1024→512, 768→384 y 640→320 con navegación inferior). Sin desplazamiento horizontal en lista/recepción/horneado; los 11 controles del formulario (opcionales abiertos) caben y miden ≥44 px; capas de detalle y cocido caben y su envío es alcanzable |
+| 16.06 | DONE (emulación Chromium) | 2026-09-28 | r06/evidence/a11y-14-03-16.json (`16.06`) + 16-06-forced-colors-error.png | `forcedColors: active`: anillo de foco en botón y campo, bordes de campo (1px) y botón (1px), destino activo por borde + peso 700, error como `role=alert` con texto visible |
+| 16.08 | DONE | 2026-09-28 | r06/evidence/a11y-14-03-16.json (`16.08`) + 16-08-contraste-*.png | Colores computados y fondo efectivo: texto principal/estado/leyenda/etiqueta 16.8:1, secundario 6.3, error 6.5, primario 4.9, quiet 4.9, chips on 6.5 / partial 5.2 / off 6.3, navegación 16.8, borde de campo 6.3, borde de botón 6.3, anillo de foco 4.9. **Dos defectos corregidos**: chip `on` 4.35:1 y `partial` 4.25:1 (texto pasa a tono 700/600) y borde del botón secundario 1.34:1 (pasa a `--muted`). Movimiento: 31 elementos revisados, ninguna transición/animación en la capa ni controles; con `prefers-reduced-motion` igual (N/A justificado). «Oscuro» midió idéntico: `tokens.css` (Foundations 1.0.0) no define tema oscuro — ver DUDAS #16 |
+| 16.09 | DONE (lecturas interceptadas) | 2026-09-28 | r06/evidence/a11y-14-03-16.json (`16.09`) + 16-09-*.png | Con las lecturas REST de lots/saldos/recepciones interceptadas (solo render, sin escrituras): folio de 84 caracteres y nota de 300 completos sin desbordar, 122 lotes → 50 filas + «Mostrar siguientes 50» → 100, cada fila conserva identidad › datos › estado › acciones, 98,765,432.5 kg y 123,456.789 kg formateados; error de 596 caracteres como alert que envuelve; a 1024 y a 384×2 (200 %) |
+| 16.03, 16.04, 16.07 | BLOCKED | 2026-09-28 | — | Sin hardware táctil, móvil físico ni lector de pantalla en este entorno; no se certifican por emulación |
+| 17.09 | DEVUELTO PARTIAL (r06) | 2026-09-28 | r06/result.md | Resuelto: bloques 14, 15 y 17; 16 salvo 16.03/16.04/16.07. Aceptación completa NO: quedan pruebas exigibles con hardware/AT. Draft 0.2.1; Candidate/Stable siguen no elegibles |
 
 ### Referencias de partida
 

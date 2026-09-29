@@ -33,7 +33,8 @@ withDefaults(defineProps<{ variante?: ChipVariante }>(), { variante: "on" })
   flex: none;
 }
 .chip--on {
-  color: var(--ok);
+  /* Texto en el tono 700: --ok (500) sobre --ok-bg da 4.35:1 a 13px (r06 a11y) */
+  color: var(--color-success-text);
   background: var(--ok-bg);
 }
 .chip--on::before {
@@ -56,7 +57,8 @@ withDefaults(defineProps<{ variante?: ChipVariante }>(), { variante: "on" })
   text-decoration: line-through;
 }
 .chip--partial {
-  color: var(--info);
+  /* --info (500) sobre --info-bg da 4.25:1; --ink-700 (600) da 5.2:1 (r06 a11y) */
+  color: var(--ink-700);
   background: var(--info-bg);
 }
 .chip--partial::before {

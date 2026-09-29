@@ -94,7 +94,9 @@ function onClick(e: MouseEvent) {
   background: var(--ink-700);
 }
 .boton--secondary {
-  border-color: var(--border);
+  /* --border sobre --surface da 1.34:1: el contorno no cumple 1.4.11 bajo el
+     sol; --muted (6.3:1) es el mismo borde que llevan los campos (r06 a11y) */
+  border-color: var(--muted);
 }
 .boton--secondary:hover {
   background: var(--ink-100);

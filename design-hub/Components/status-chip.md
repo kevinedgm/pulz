@@ -30,10 +30,10 @@ pasado: no se tacha).
 
 | variante | punto | texto | color de refuerzo |
 |---|---|---|---|
-| `on` | relleno | `--ok` | `--ok` sobre `--ok-bg` (4.5 / 6.6) |
+| `on` | relleno | `--color-success-text` (700) | punto y borde `--ok` sobre `--ok-bg`; texto 6.5:1 (r06: con `--ok` daba 4.35) |
 | `draft` | contorno **discontinuo** | `--text` | borde y punto `--pend` sobre `--pend-bg` |
 | `off` | contorno, texto **tachado** | `--muted` | `--surface` |
-| `partial` | medio relleno | `--info` | `--info` sobre `--info-bg` (4.5 / 6.1) |
+| `partial` | medio relleno | `--ink-700` (600) | punto `--info` sobre `--info-bg`; texto 5.2:1 (r06: con `--info` daba 4.25) |
 | `pending` | contorno **discontinuo** | `--text` | borde y punto `--pend` sobre `--pend-bg` |
 | `failed` | relleno, borde **doble** 3 px | `--late` | `--late` sobre `--surface` |
 

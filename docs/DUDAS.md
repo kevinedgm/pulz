@@ -135,6 +135,15 @@
     ¿Quiere el dueño un campo «vinazas» al cerrar, o anular cortes con
     motivo como las mediciones? (cambio de esquema: 0009/0018).
 
+16. **Tema oscuro perdido en Foundations 1.0.0** (detectado 2026-09-28 en r06
+    de Maguey/Horneado): `apps/web/src/shared/ui/tokens.css` se regeneró
+    desde `.fruti/tokens.json` y ya no trae `prefers-color-scheme: dark` ni
+    `[data-theme="dark"]`; `app/tema.ts` sigue escribiendo `data-theme` sin
+    efecto. El tema oscuro existe solo en `docs/referencia/pulz-tokens.css`
+    (semilla anterior). Decidir: reincorporar la escala oscura a Foundations
+    (ronda propia, la base está «approved») o retirar el conmutador del shell
+    mientras tanto. Hasta entonces «oscuro» = «claro» en toda la app.
+
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
 Las 9 preguntas de §18 (escala de actividad/dulzor/acidez, precio del plan,

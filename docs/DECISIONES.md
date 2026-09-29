@@ -864,3 +864,26 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
 - El «resultado incierto» se provoca abortando la petición en el navegador
   (nada llega al servidor) y el «rechazo confirmado» con una respuesta 400
   P0001 interceptada; la única escritura real es el reintento del original.
+
+
+## 2026-09-28 · r06 Maguey/Horneado: bloque 16 con Playwright; contraste de chip y botón corregido
+
+- `design-hub/qa/a11y-mh-r06.mjs` cierra 14.03, 16.02, 16.05, 16.06, 16.08 y
+  16.09 en el shell autenticado (132/132). Lo que es emulación se declara
+  como tal: 200 % = viewport CSS/2 + DPR 2 (idéntico a lo que hace el
+  navegador), forced-colors y reduced-motion con la emulación de Chromium,
+  contenido extremo con lecturas REST interceptadas (solo render). 16.03,
+  16.04 y 16.07 se dejan abiertos: no se certifican tacto físico, teclado
+  virtual ni lector de pantalla sin el medio real.
+- Dos piezas del sistema cambian por medición, no por gusto: `ChipEstado`
+  `on` pasa el texto a `--color-success-text` (6.5:1; `--ok` daba 4.35 a
+  13 px) y `partial` a `--ink-700` (5.2:1; `--info` daba 4.25); `Boton`
+  `secondary` toma el borde `--muted` (6.3:1) en lugar de `--border`
+  (1.34:1), el mismo borde que ya llevan los campos. El punto y el borde del
+  chip conservan el color semántico. Revertir: restaurar `--ok`/`--info`/
+  `--border` en esos dos archivos; las fichas del Hub anotan el motivo.
+- `tokens.css` ya no define tema oscuro (Foundations 1.0.0): no se toca aquí
+  porque la base está aprobada; queda DUDAS #16.
+- 15.02/15.03 se dan por resueltos con lo que r06 ya hizo: proyecto único
+  autorizado por CLAUDE.md §1, tenants desechables con limpieza por IDs para
+  la API, y semilla + `db reset` para la UI (sin usuarios reales, §2).

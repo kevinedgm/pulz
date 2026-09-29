@@ -1,0 +1,2050 @@
+{
+  "fecha": "2026-09-29T00:38:31.165Z",
+  "web": "http://localhost:5173",
+  "proyecto": "ypgeiyorgktshgbzhgfh",
+  "empresa": "cuatro-vientos",
+  "status": "PASS",
+  "checks": 132,
+  "fallos": [],
+  "erroresDePagina": [],
+  "escriturasReales": [
+    "recepción 1 kg",
+    "horneada abierta 1 kg (Horno 1)",
+    "horneada cerrada 0.5 kg",
+    "cocido previo 0.25 kg"
+  ],
+  "noReal": [
+    "16.09: lecturas REST interceptadas (folios/notas largos, 120 lotes, cantidades enormes)",
+    "16.06/16.08/16.09: error 400 P0001 interceptado",
+    "16.05: zoom 200 % = viewport/2 + DPR 2",
+    "16.06 forced-colors y 16.08 reduced-motion: emulación de Chromium"
+  ],
+  "abiertos": [
+    "16.03 touch físico",
+    "16.04 teclado virtual",
+    "16.07 lector de pantalla"
+  ],
+  "checksDetalle": [
+    {
+      "ok": true,
+      "m": "14.03 @600: la etiqueta conserva el nombre completo"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @600: el texto no queda recortado en el rail"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @600: sin desplazamiento horizontal del documento"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @768: la etiqueta conserva el nombre completo"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @768: el texto no queda recortado en el rail"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @768: sin desplazamiento horizontal del documento"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1023: la etiqueta conserva el nombre completo"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1023: el texto no queda recortado en el rail"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1023: sin desplazamiento horizontal del documento"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1024: la etiqueta conserva el nombre completo"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1024: el texto no queda recortado en el rail"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1024: sin desplazamiento horizontal del documento"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1440: la etiqueta conserva el nombre completo"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1440: el texto no queda recortado en el rail"
+    },
+    {
+      "ok": true,
+      "m": "14.03 @1440: sin desplazamiento horizontal del documento"
+    },
+    {
+      "ok": true,
+      "m": "16.02 recepción: al entrar el foco va al título"
+    },
+    {
+      "ok": true,
+      "m": "16.02 recepción: desde el título, Kilos llega en ≤2 Tab (antes solo «Volver sin borrar» de la cabecera)"
+    },
+    {
+      "ok": true,
+      "m": "16.02 recepción: todas las paradas tienen foco visible"
+    },
+    {
+      "ok": true,
+      "m": "16.02 recepción: el foco aterriza en el resultado"
+    },
+    {
+      "ok": true,
+      "m": "16.02 apertura: el foco va al título"
+    },
+    {
+      "ok": true,
+      "m": "16.02 apertura: foco visible en todas las paradas"
+    },
+    {
+      "ok": true,
+      "m": "16.02 apertura: la revisión enfoca su título"
+    },
+    {
+      "ok": true,
+      "m": "16.02 apertura: al volver, el foco regresa al formulario (horno)"
+    },
+    {
+      "ok": true,
+      "m": "16.02 apertura: resultado enfocado"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: el foco entra al primer campo de la capa"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: 14 Tab seguidos nunca salen de la capa (sin fuga)"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: el ciclo vuelve al primer campo (envuelve)"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: Shift+Tab también queda contenido"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: Escape devuelve el foco al disparador"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: foco visible en la capa"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: resultado enfocado tras cerrar la capa"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cierre: la capa se cerró sola al confirmar"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cocido: foco inicial en Kilos cocidos"
+    },
+    {
+      "ok": true,
+      "m": "16.02 cocido: resultado enfocado"
+    },
+    {
+      "ok": true,
+      "m": "16.02 detalle: el foco entra a la capa"
+    },
+    {
+      "ok": true,
+      "m": "16.02 detalle: Escape regresa a «Ver detalle»"
+    },
+    {
+      "ok": true,
+      "m": "16.02 Más: el foco entra a la capa"
+    },
+    {
+      "ok": true,
+      "m": "16.02 Más: Escape devuelve el foco a «Más»"
+    },
+    {
+      "ok": true,
+      "m": "16.02 Más: Enter en «Maguey» navega y cierra la capa"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · texto principal: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · texto secundario: 6.33:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · estado (status): 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · leyenda de formulario: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · etiqueta de campo: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · error: 6.54:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · botón primario: 4.86:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · botón secundario: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · botón quiet: 4.86:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · chip de estado: 6.49:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · ítem de navegación: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · ítem activo de navegación: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · borde de campo: 6.33:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · borde de botón: 6.33:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · anillo de foco: 4.86:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · chip parcial (horneada abierta): 5.21:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · chip apagado (cerrada): 6.33:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 claro · borde de botón en fila: 6.33:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · texto principal: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · texto secundario: 6.33:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · estado (status): 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · leyenda de formulario: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · etiqueta de campo: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · error: 6.54:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · botón primario: 4.86:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · botón secundario: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · botón quiet: 4.86:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · chip de estado: 6.49:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · ítem de navegación: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · ítem activo de navegación: 16.76:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · borde de campo: 6.33:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · borde de botón: 6.33:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · anillo de foco: 4.86:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · chip parcial (horneada abierta): 5.21:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · chip apagado (cerrada): 6.33:1 ≥ 4.5:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 oscuro · borde de botón en fila: 6.33:1 ≥ 3:1"
+    },
+    {
+      "ok": true,
+      "m": "16.08 movimiento: la emulación reduced-motion está activa"
+    },
+    {
+      "ok": true,
+      "m": "16.08 movimiento: con reduced-motion ninguna transición/animación queda activa (normal tenía 0)"
+    },
+    {
+      "ok": true,
+      "m": "16.06: forced-colors reportado activo por el navegador"
+    },
+    {
+      "ok": true,
+      "m": "16.06: el foco del botón primario tiene contorno bajo forced-colors"
+    },
+    {
+      "ok": true,
+      "m": "16.06: el foco del campo tiene contorno bajo forced-colors"
+    },
+    {
+      "ok": true,
+      "m": "16.06: el campo conserva borde"
+    },
+    {
+      "ok": true,
+      "m": "16.06: el botón secundario conserva borde"
+    },
+    {
+      "ok": true,
+      "m": "16.06: el destino activo se distingue sin color (borde o peso)"
+    },
+    {
+      "ok": true,
+      "m": "16.06: el error es un alert con texto visible"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @720css×2: todos los controles del formulario caben en el ancho"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @720css×2: controles ≥44 px de alto"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @720css×2: la capa de detalle cabe en el viewport"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @720css×2: la capa de cocido cabe y su envío es alcanzable"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @720css×2: sin desplazamiento horizontal (720/720)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @720css×2: sin desplazamiento horizontal (720/720)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @720css×2: sin desplazamiento horizontal (720/720)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @512css×2: todos los controles del formulario caben en el ancho"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @512css×2: controles ≥44 px de alto"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @512css×2: la capa de detalle cabe en el viewport"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @512css×2: la capa de cocido cabe y su envío es alcanzable"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @512css×2: sin desplazamiento horizontal (512/512)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @512css×2: sin desplazamiento horizontal (512/512)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @512css×2: sin desplazamiento horizontal (512/512)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @384css×2: todos los controles del formulario caben en el ancho"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @384css×2: controles ≥44 px de alto"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @384css×2: la capa de detalle cabe en el viewport"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @384css×2: la capa de cocido cabe y su envío es alcanzable"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @384css×2: sin desplazamiento horizontal (384/384)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @384css×2: sin desplazamiento horizontal (384/384)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @384css×2: sin desplazamiento horizontal (384/384)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @320css×2: todos los controles del formulario caben en el ancho"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @320css×2: controles ≥44 px de alto"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @320css×2: la capa de detalle cabe en el viewport"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @320css×2: la capa de cocido cabe y su envío es alcanzable"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @320css×2: sin desplazamiento horizontal (320/320)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @320css×2: sin desplazamiento horizontal (320/320)"
+    },
+    {
+      "ok": true,
+      "m": "16.05 @320css×2: sin desplazamiento horizontal (320/320)"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: la lista muestra 50 lotes y pagina el resto"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: ninguna fila desborda ni pierde su bloque de identidad"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: cada fila conserva identidad › datos › estado › acciones"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: el folio de 84 caracteres se muestra completo"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: 98,765,432.5 kg se formatea con separadores y decimal"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: sin desplazamiento horizontal con 50 filas"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: «Mostrar siguientes 50» pasa a 100 filas"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: el botón refleja 123,456.789 kg"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: el error de 596 caracteres se lee completo y envuelve"
+    },
+    {
+      "ok": true,
+      "m": "16.09 1024: sin desplazamiento horizontal con el error largo"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: la lista muestra 50 lotes y pagina el resto"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: ninguna fila desborda ni pierde su bloque de identidad"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: cada fila conserva identidad › datos › estado › acciones"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: el folio de 84 caracteres se muestra completo"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: 98,765,432.5 kg se formatea con separadores y decimal"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: sin desplazamiento horizontal con 50 filas"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: «Mostrar siguientes 50» pasa a 100 filas"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: el botón refleja 123,456.789 kg"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: el error de 596 caracteres se lee completo y envuelve"
+    },
+    {
+      "ok": true,
+      "m": "16.09 384x2: sin desplazamiento horizontal con el error largo"
+    }
+  ],
+  "evidencia": {
+    "14.03": [
+      {
+        "ancho": 600,
+        "nav": "lat lat--medium shell__lateral mh-navigation",
+        "rail": 160,
+        "texto": "Fermenta­ción",
+        "lineas": 2,
+        "recortado": false,
+        "overflow": "visible",
+        "inset": "12px",
+        "pagina": {
+          "scroll": 600,
+          "cliente": 600,
+          "ok": true
+        }
+      },
+      {
+        "ancho": 768,
+        "nav": "lat lat--medium shell__lateral mh-navigation",
+        "rail": 160,
+        "texto": "Fermenta­ción",
+        "lineas": 2,
+        "recortado": false,
+        "overflow": "visible",
+        "inset": "12px",
+        "pagina": {
+          "scroll": 768,
+          "cliente": 768,
+          "ok": true
+        }
+      },
+      {
+        "ancho": 1023,
+        "nav": "lat lat--medium shell__lateral mh-navigation",
+        "rail": 160,
+        "texto": "Fermenta­ción",
+        "lineas": 2,
+        "recortado": false,
+        "overflow": "visible",
+        "inset": "12px",
+        "pagina": {
+          "scroll": 1023,
+          "cliente": 1023,
+          "ok": true
+        }
+      },
+      {
+        "ancho": 1024,
+        "nav": "lat lat--expanded shell__lateral mh-navigation",
+        "rail": 240,
+        "texto": "Fermenta­ción",
+        "lineas": 1,
+        "recortado": false,
+        "overflow": "visible",
+        "inset": "12px",
+        "pagina": {
+          "scroll": 1024,
+          "cliente": 1024,
+          "ok": true
+        }
+      },
+      {
+        "ancho": 1440,
+        "nav": "lat lat--expanded shell__lateral mh-navigation",
+        "rail": 240,
+        "texto": "Fermenta­ción",
+        "lineas": 1,
+        "recortado": false,
+        "overflow": "visible",
+        "inset": "12px",
+        "pagina": {
+          "scroll": 1440,
+          "cliente": 1440,
+          "ok": true
+        }
+      }
+    ],
+    "16.02": {
+      "recepcion": {
+        "hastaPrimaria": [
+          "Inicio",
+          "Maguey",
+          "Horneado",
+          "Fermentación",
+          "Destilación",
+          "Granel",
+          "Trazabilidad",
+          "Aaureliaproductor · cuenta",
+          "Registrar recepción"
+        ],
+        "alEntrar": {
+          "tag": "h1",
+          "nombre": "Registrar recepción",
+          "visible": true,
+          "enDialogo": false
+        },
+        "desdeTitulo": [
+          "Volver sin borrar",
+          "Kilos (obligatorio)"
+        ],
+        "orden": [
+          "summary: Detalles opcionales",
+          "button[button]: cambiar",
+          "input[text]: Folio (opcional)",
+          "button[submit]: 1 kg · Registrar recepción"
+        ],
+        "focoVisible": true,
+        "resultado": {
+          "tag": "p",
+          "tipo": "status",
+          "nombre": "Recepción registrada · 1 kg",
+          "visible": true,
+          "enDialogo": false
+        }
+      },
+      "apertura": {
+        "alEntrar": {
+          "tag": "h1",
+          "nombre": "Abrir horneada",
+          "visible": true,
+          "enDialogo": false
+        },
+        "hornoPorTeclado": true,
+        "hornoMetodo": "typeahead del select",
+        "orden": [
+          "input[text]: Kilos de MAG-003",
+          "input[text]: Kilos de MAG-002",
+          "button[button]: cambiar",
+          "input[text]: Folio (opcional)",
+          "button[submit]: Revisar Horno 1 con 1 kg"
+        ],
+        "focoVisible": true,
+        "revision": {
+          "tag": "h2",
+          "nombre": "Revisar carga de Horno 1",
+          "visible": true,
+          "enDialogo": false
+        },
+        "vuelta": {
+          "tag": "select",
+          "nombre": "Horno",
+          "visible": true,
+          "enDialogo": false
+        },
+        "resultado": {
+          "tag": "p",
+          "tipo": "status",
+          "nombre": "Horneada abierta · 1 kg",
+          "visible": true,
+          "enDialogo": false
+        }
+      },
+      "cierre": {
+        "alAbrir": {
+          "tag": "input",
+          "tipo": "text",
+          "nombre": "Kilos cocidos",
+          "visible": true,
+          "enDialogo": true
+        },
+        "cicloTab": [
+          "input: Combustible (opcional)",
+          "button: cambiar",
+          "input: Folio del cocido (opcional)",
+          "input: Nota (opcional)",
+          "button: Cancelar",
+          "button: Cerrar",
+          "input: Kilos cocidos",
+          "input: Combustible (opcional)",
+          "button: cambiar",
+          "input: Folio del cocido (opcional)",
+          "input: Nota (opcional)",
+          "button: Cancelar",
+          "button: Cerrar",
+          "input: Kilos cocidos"
+        ],
+        "trasEscape": {
+          "tag": "button",
+          "tipo": "button",
+          "nombre": "Cerrar horneada",
+          "visible": true,
+          "enDialogo": false
+        },
+        "orden": [
+          "input[text]: Combustible (opcional)",
+          "button[button]: cambiar",
+          "input[text]: Folio del cocido (opcional)",
+          "input[text]: Nota (opcional)",
+          "button[submit]: Cerrar con 0.5 kg de cocido"
+        ],
+        "resultado": {
+          "tag": "p",
+          "tipo": "status",
+          "nombre": "Horneada cerrada · 0.5 kg Llenar tinas",
+          "visible": true,
+          "enDialogo": false
+        }
+      },
+      "cocido": {
+        "orden": [
+          "button: cambiar",
+          "input: Folio del cocido (opcional)",
+          "input: Nota (opcional)",
+          "button: Registrar 0.25 kg de cocido"
+        ],
+        "resultado": {
+          "tag": "p",
+          "tipo": "status",
+          "nombre": "Cocido registrado · 0.25 kg Llenar tinas",
+          "visible": true,
+          "enDialogo": false
+        }
+      },
+      "detalle": {
+        "alAbrir": {
+          "tag": "button",
+          "tipo": "button",
+          "nombre": "Cerrar",
+          "visible": true,
+          "enDialogo": true
+        },
+        "titulo": "MAG-003",
+        "trasEscape": {
+          "tag": "button",
+          "tipo": "button",
+          "nombre": "Ver detalle",
+          "visible": true,
+          "enDialogo": false
+        }
+      },
+      "mas": {
+        "alAbrir": {
+          "tag": "button",
+          "tipo": "button",
+          "nombre": "Cerrar",
+          "visible": true,
+          "enDialogo": true
+        },
+        "hastaMas": [
+          "MCMezcal Cuatro Vientosaurelia · productor",
+          "Abrir horneada",
+          "Cerrar horneada",
+          "Ver detalle",
+          "Llenar tinas",
+          "Llenar tinas",
+          "Llenar tinas",
+          "Llenar tinas",
+          "Llenar tinas",
+          "Llenar tinas",
+          "Ver detalle",
+          "Ver detalle",
+          "Ver detalle",
+          "Ver detalle",
+          "Cocido que ya tenía",
+          "Inicio",
+          "Fermentación",
+          "Destilación",
+          "Granel",
+          "Más"
+        ],
+        "trasEscape": {
+          "tag": "button",
+          "tipo": "button",
+          "nombre": "Más",
+          "visible": true,
+          "enDialogo": false
+        },
+        "navego": "http://localhost:5173/e/cuatro-vientos/maguey"
+      }
+    },
+    "16.08": {
+      "claro": [
+        {
+          "nombre": "texto principal",
+          "sel": ".mh-identity h3",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 700,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "texto secundario",
+          "sel": ".mh-identity p",
+          "tipo": "texto",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "minimo": 4.5,
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "estado (status)",
+          "sel": ".mh-surface [role=status]",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "leyenda de formulario",
+          "sel": ".mh-form legend",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 700,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "etiqueta de campo",
+          "sel": ".mh-form label",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 15,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "error",
+          "sel": ".mh-error",
+          "tipo": "texto",
+          "fg": [
+            148,
+            61,
+            74
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "minimo": 4.5,
+          "ratio": 6.54,
+          "pasa": true
+        },
+        {
+          "nombre": "botón primario",
+          "sel": ".boton--primary",
+          "tipo": "texto",
+          "fg": [
+            248,
+            248,
+            250
+          ],
+          "bg": [
+            109,
+            74,
+            255
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 4.86,
+          "pasa": true
+        },
+        {
+          "nombre": "botón secundario",
+          "sel": ".mh-heading .boton:not(.boton--primary)",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "botón quiet",
+          "sel": ".boton--quiet",
+          "tipo": "texto",
+          "fg": [
+            109,
+            74,
+            255
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 500,
+          "minimo": 4.5,
+          "ratio": 4.86,
+          "pasa": true
+        },
+        {
+          "nombre": "chip de estado",
+          "sel": ".mh-state",
+          "tipo": "texto",
+          "fg": [
+            24,
+            92,
+            73
+          ],
+          "bg": [
+            226,
+            235,
+            234
+          ],
+          "fontSize": 13,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 6.49,
+          "pasa": true
+        },
+        {
+          "nombre": "ítem de navegación",
+          "sel": "nav[aria-label=\"Navegación principal\"] a:not([aria-current])",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 14,
+          "fontWeight": 500,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "ítem activo de navegación",
+          "sel": "nav[aria-label=\"Navegación principal\"] a[aria-current]",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 14,
+          "fontWeight": 700,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "borde de campo",
+          "sel": ".mh-form input",
+          "tipo": "borde",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "minimo": 3,
+          "extra": "1px solid",
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "borde de botón",
+          "sel": ".mh-heading .boton:not(.boton--primary)",
+          "tipo": "borde",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 3,
+          "extra": "1px solid",
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "anillo de foco",
+          "sel": ".boton--primary:focus-visible",
+          "tipo": "foco",
+          "fg": [
+            109,
+            74,
+            255
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 3,
+          "extra": "3px solid",
+          "ratio": 4.86,
+          "pasa": true
+        },
+        {
+          "nombre": "chip parcial (horneada abierta)",
+          "sel": ".chip--partial",
+          "tipo": "texto",
+          "fg": [
+            96,
+            66,
+            221
+          ],
+          "bg": [
+            234,
+            231,
+            250
+          ],
+          "fontSize": 13,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 5.21,
+          "pasa": true
+        },
+        {
+          "nombre": "chip apagado (cerrada)",
+          "sel": ".chip--off",
+          "tipo": "texto",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 13,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "borde de botón en fila",
+          "sel": ".mh-row .boton--secondary",
+          "tipo": "borde",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 3,
+          "extra": "1px solid",
+          "ratio": 6.33,
+          "pasa": true
+        }
+      ],
+      "oscuro": [
+        {
+          "nombre": "texto principal",
+          "sel": ".mh-identity h3",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 700,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "texto secundario",
+          "sel": ".mh-identity p",
+          "tipo": "texto",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 14,
+          "fontWeight": 400,
+          "minimo": 4.5,
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "estado (status)",
+          "sel": ".mh-surface [role=status]",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "leyenda de formulario",
+          "sel": ".mh-form legend",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 700,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "etiqueta de campo",
+          "sel": ".mh-form label",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 15,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "error",
+          "sel": ".mh-error",
+          "tipo": "texto",
+          "fg": [
+            148,
+            61,
+            74
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "minimo": 4.5,
+          "ratio": 6.54,
+          "pasa": true
+        },
+        {
+          "nombre": "botón primario",
+          "sel": ".boton--primary",
+          "tipo": "texto",
+          "fg": [
+            248,
+            248,
+            250
+          ],
+          "bg": [
+            109,
+            74,
+            255
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 4.86,
+          "pasa": true
+        },
+        {
+          "nombre": "botón secundario",
+          "sel": ".mh-heading .boton:not(.boton--primary)",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "botón quiet",
+          "sel": ".boton--quiet",
+          "tipo": "texto",
+          "fg": [
+            109,
+            74,
+            255
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 500,
+          "minimo": 4.5,
+          "ratio": 4.86,
+          "pasa": true
+        },
+        {
+          "nombre": "chip de estado",
+          "sel": ".mh-state",
+          "tipo": "texto",
+          "fg": [
+            24,
+            92,
+            73
+          ],
+          "bg": [
+            226,
+            235,
+            234
+          ],
+          "fontSize": 13,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 6.49,
+          "pasa": true
+        },
+        {
+          "nombre": "ítem de navegación",
+          "sel": "nav[aria-label=\"Navegación principal\"] a:not([aria-current])",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 14,
+          "fontWeight": 500,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "ítem activo de navegación",
+          "sel": "nav[aria-label=\"Navegación principal\"] a[aria-current]",
+          "tipo": "texto",
+          "fg": [
+            24,
+            23,
+            31
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 14,
+          "fontWeight": 700,
+          "minimo": 4.5,
+          "ratio": 16.76,
+          "pasa": true
+        },
+        {
+          "nombre": "borde de campo",
+          "sel": ".mh-form input",
+          "tipo": "borde",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 400,
+          "minimo": 3,
+          "extra": "1px solid",
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "borde de botón",
+          "sel": ".mh-heading .boton:not(.boton--primary)",
+          "tipo": "borde",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 3,
+          "extra": "1px solid",
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "anillo de foco",
+          "sel": ".boton--primary:focus-visible",
+          "tipo": "foco",
+          "fg": [
+            109,
+            74,
+            255
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 3,
+          "extra": "3px solid",
+          "ratio": 4.86,
+          "pasa": true
+        },
+        {
+          "nombre": "chip parcial (horneada abierta)",
+          "sel": ".chip--partial",
+          "tipo": "texto",
+          "fg": [
+            96,
+            66,
+            221
+          ],
+          "bg": [
+            234,
+            231,
+            250
+          ],
+          "fontSize": 13,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 5.21,
+          "pasa": true
+        },
+        {
+          "nombre": "chip apagado (cerrada)",
+          "sel": ".chip--off",
+          "tipo": "texto",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 13,
+          "fontWeight": 600,
+          "minimo": 4.5,
+          "ratio": 6.33,
+          "pasa": true
+        },
+        {
+          "nombre": "borde de botón en fila",
+          "sel": ".mh-row .boton--secondary",
+          "tipo": "borde",
+          "fg": [
+            93,
+            90,
+            104
+          ],
+          "bg": [
+            248,
+            248,
+            250
+          ],
+          "fontSize": 16,
+          "fontWeight": 600,
+          "minimo": 3,
+          "extra": "1px solid",
+          "ratio": 6.33,
+          "pasa": true
+        }
+      ],
+      "movimiento": {
+        "normal": {
+          "revisados": 34,
+          "conMovimiento": [],
+          "reduceMotion": false
+        },
+        "reducido": {
+          "revisados": 34,
+          "conMovimiento": [],
+          "reduceMotion": true
+        }
+      }
+    },
+    "16.06": {
+      "foco": {
+        "tag": "button",
+        "tipo": "button",
+        "nombre": "Registrar recepción",
+        "visible": true,
+        "enDialogo": false
+      },
+      "navegacion": {
+        "activo": {
+          "fontWeight": "700",
+          "borde": "2px solid rgb(0, 0, 159)",
+          "bordeAbajo": "2px solid",
+          "color": "rgb(0, 0, 159)",
+          "fondo": "rgb(255, 255, 255)",
+          "forced": "auto"
+        },
+        "otro": {
+          "fontWeight": "500",
+          "borde": "2px solid rgb(0, 0, 159)",
+          "bordeAbajo": "2px solid",
+          "color": "rgb(0, 0, 159)",
+          "fondo": "rgba(255, 255, 255, 0)",
+          "forced": "auto"
+        },
+        "forcedColors": true
+      },
+      "campo": {
+        "campo": {
+          "borde": "1px solid rgba(5, 0, 73, 0.8)",
+          "color": "rgb(0, 0, 0)",
+          "fondo": "rgb(255, 255, 255)"
+        },
+        "boton": {
+          "borde": "1px solid rgb(0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "fondo": "rgb(255, 255, 255)"
+        }
+      },
+      "error": {
+        "texto": "prueba forced-colors Lo capturado se conserva; puedes reinte",
+        "color": "rgb(0, 0, 0)",
+        "fondo": "rgba(255, 255, 255, 0)",
+        "role": "alert"
+      },
+      "focoCampo": {
+        "tag": "input",
+        "tipo": "text",
+        "nombre": "Kilos (obligatorio)",
+        "visible": true,
+        "enDialogo": false
+      }
+    },
+    "16.05": [
+      {
+        "ventana": 1440,
+        "css": 720,
+        "dpr": 2,
+        "vistas": {
+          "lista": {
+            "scroll": 720,
+            "cliente": 720,
+            "ok": true
+          },
+          "recepcion": {
+            "scroll": 720,
+            "cliente": 720,
+            "ok": true
+          },
+          "horneado": {
+            "scroll": 720,
+            "cliente": 720,
+            "ok": true
+          }
+        },
+        "nav": "lat lat--medium shell__lateral mh-navigation",
+        "campos": [
+          {
+            "nombre": "Kilos (obligatorio)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Detalles opcionales",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Piñas (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Especie (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Predio (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Proveedor (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Nota de calidad (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "cambiar",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Folio (opcional)",
+            "dentro": true,
+            "alto": 46
+          },
+          {
+            "nombre": "Registrar recepción",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Volver sin borrar",
+            "dentro": true,
+            "alto": 48
+          }
+        ],
+        "capa": {
+          "ancho": 440,
+          "alto": 504,
+          "cabe": true,
+          "desplazable": "no hace falta"
+        },
+        "capaCocido": {
+          "cabe": true,
+          "envioVisible": true
+        }
+      },
+      {
+        "ventana": 1024,
+        "css": 512,
+        "dpr": 2,
+        "vistas": {
+          "lista": {
+            "scroll": 512,
+            "cliente": 512,
+            "ok": true
+          },
+          "recepcion": {
+            "scroll": 512,
+            "cliente": 512,
+            "ok": true
+          },
+          "horneado": {
+            "scroll": 512,
+            "cliente": 512,
+            "ok": true
+          }
+        },
+        "nav": "inf",
+        "campos": [
+          {
+            "nombre": "Kilos (obligatorio)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Detalles opcionales",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Piñas (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Especie (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Predio (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Proveedor (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Nota de calidad (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "cambiar",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Folio (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Registrar recepción",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Volver sin borrar",
+            "dentro": true,
+            "alto": 48
+          }
+        ],
+        "capa": {
+          "ancho": 440,
+          "alto": 321,
+          "cabe": true,
+          "desplazable": "no hace falta"
+        },
+        "capaCocido": {
+          "cabe": true,
+          "envioVisible": true
+        }
+      },
+      {
+        "ventana": 768,
+        "css": 384,
+        "dpr": 2,
+        "vistas": {
+          "lista": {
+            "scroll": 384,
+            "cliente": 384,
+            "ok": true
+          },
+          "recepcion": {
+            "scroll": 384,
+            "cliente": 384,
+            "ok": true
+          },
+          "horneado": {
+            "scroll": 384,
+            "cliente": 384,
+            "ok": true
+          }
+        },
+        "nav": "inf",
+        "campos": [
+          {
+            "nombre": "Kilos (obligatorio)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Detalles opcionales",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Piñas (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Especie (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Predio (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Proveedor (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Nota de calidad (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "cambiar",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Folio (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Registrar recepción",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Volver sin borrar",
+            "dentro": true,
+            "alto": 48
+          }
+        ],
+        "capa": {
+          "ancho": 384,
+          "alto": 242,
+          "cabe": true,
+          "desplazable": "no hace falta"
+        },
+        "capaCocido": {
+          "cabe": true,
+          "envioVisible": true
+        }
+      },
+      {
+        "ventana": 640,
+        "css": 320,
+        "dpr": 2,
+        "vistas": {
+          "lista": {
+            "scroll": 320,
+            "cliente": 320,
+            "ok": true
+          },
+          "recepcion": {
+            "scroll": 320,
+            "cliente": 320,
+            "ok": true
+          },
+          "horneado": {
+            "scroll": 320,
+            "cliente": 320,
+            "ok": true
+          }
+        },
+        "nav": "inf",
+        "campos": [
+          {
+            "nombre": "Kilos (obligatorio)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Detalles opcionales",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Piñas (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Especie (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Predio (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Proveedor (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Nota de calidad (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "cambiar",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Folio (opcional)",
+            "dentro": true,
+            "alto": 44
+          },
+          {
+            "nombre": "Registrar recepción",
+            "dentro": true,
+            "alto": 48
+          },
+          {
+            "nombre": "Volver sin borrar",
+            "dentro": true,
+            "alto": 48
+          }
+        ],
+        "capa": {
+          "ancho": 320,
+          "alto": 202,
+          "cabe": true,
+          "desplazable": "no hace falta"
+        },
+        "capaCocido": {
+          "cabe": true,
+          "envioVisible": true
+        }
+      }
+    ],
+    "16.09": [
+      {
+        "etiqueta": "1024",
+        "status": "122 lotes con saldo · 11,851,852,024 kg de maguey",
+        "visibles": 50,
+        "largo": {
+          "folio": "MAG-2026-09-28-TOBALÁ-SILVESTRE-LOMA-DEL-TORO-SAN-BALTAZAR-GUELAVILA-0001-REPOSICIÓN",
+          "desborda": false,
+          "identidadCabe": true,
+          "orden": "mh-identity>mh-data>mh-state>mh-actions"
+        },
+        "grande": "98,765,432.5 kg",
+        "pagina": {
+          "scroll": 1024,
+          "cliente": 1024,
+          "ok": true
+        },
+        "trasPaginar": 100,
+        "botonGrande": "123,456.789 kg · Registrar recepción",
+        "error": {
+          "caracteres": 596,
+          "desborda": false,
+          "role": "alert"
+        },
+        "paginaError": {
+          "scroll": 1024,
+          "cliente": 1024,
+          "ok": true
+        }
+      },
+      {
+        "etiqueta": "384x2",
+        "status": "122 lotes con saldo · 11,851,852,024 kg de maguey",
+        "visibles": 50,
+        "largo": {
+          "folio": "MAG-2026-09-28-TOBALÁ-SILVESTRE-LOMA-DEL-TORO-SAN-BALTAZAR-GUELAVILA-0001-REPOSICIÓN",
+          "desborda": false,
+          "identidadCabe": true,
+          "orden": "mh-identity>mh-data>mh-state>mh-actions"
+        },
+        "grande": "98,765,432.5 kg",
+        "pagina": {
+          "scroll": 384,
+          "cliente": 384,
+          "ok": true
+        },
+        "trasPaginar": 100,
+        "botonGrande": "123,456.789 kg · Registrar recepción",
+        "error": {
+          "caracteres": 596,
+          "desborda": false,
+          "role": "alert"
+        },
+        "paginaError": {
+          "scroll": 384,
+          "cliente": 384,
+          "ok": true
+        }
+      }
+    ]
+  }
+}
