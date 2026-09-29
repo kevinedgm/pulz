@@ -11,7 +11,7 @@
 
 ## Fase actual
 
-**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado por completo: API y Playwright); bloque 16 de accesibilidad cerrado con Playwright en el shell autenticado (132/132) salvo 16.03/16.04/16.07 que exigen hardware/AT. Dictamen r06: PARTIAL, draft 0.2.1. Tema oscuro restaurado en tokens.css (DUDAS #16 resuelta). **Inicio/Hoy con datos reales construido (ronda inicio-hoy/r01, `inicio` candidate 0.3.0, evidencia PASS)**; falta el E2E del proceso completo (tarea 8) y la concurrencia real.**
+**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado por completo: API y Playwright); bloque 16 de accesibilidad cerrado con Playwright en el shell autenticado (132/132) salvo 16.03/16.04/16.07 que exigen hardware/AT. Dictamen r06: PARTIAL, draft 0.2.1. Tema oscuro restaurado en tokens.css (DUDAS #16 resuelta). **Inicio/Hoy con datos reales construido (ronda inicio-hoy/r01, `inicio` candidate 0.3.0, evidencia PASS)**; E2E del proceso completo (tarea 8) PASS: la simulación de la semilla rehecha desde la interfaz en Prueba B da §15.1 exacto. Fase 5 completa salvo la concurrencia real (Fase 2) y CI en PR real.**
 R05 cierra el corte de navegación y corrige identidad concurrente, intención
 corrupta, origen de cocido y timestamp offline.183/183 locales (34 módulo),
 5/5 acceso alojado autorizado; tipos/build/demo/lint PASS. Siete anchos revisados.
@@ -142,7 +142,7 @@ y sus limitaciones están en la verificación del 2026-09-28.
 2. Cerrar aceptación de Maguey/Horneado r05: fixtures persistentes aislados
    autorizados para E2E de negocio y accesibilidad física/nativa. Implementación
    y correcciones locales terminadas; no reutilizar gates de rondas anteriores.
-3. ~~Implementar Inicio/hoy real~~ (hecho 2026-09-28) · E2E completo del proceso (tarea 8); repetir aceptación offline.
+3. ~~Implementar Inicio/hoy real · E2E completo del proceso (tarea 8)~~ (hechos 2026-09-28; offline ya aceptado con e2e-offline).
 4. Revalidar composición, accesibilidad y consumo real de Foundations.
 5. Comprobar CI en PR real; siguen las limitaciones del hook de intentos y
    demás decisiones abiertas en `DUDAS.md`.

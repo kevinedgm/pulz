@@ -125,8 +125,11 @@ async function cargar() {
   }
 }
 onMounted(cargar)
-watch(cycleId, () => {
-  if (uso.value) dia.value = diaDelCiclo(uso.value.started_at, hoy)
+// El día del ciclo sigue a «¿Cuándo pasó?»: capturar lo de ayer (o rehacer
+// una semana, §16) debe llevar el día de esa fecha, no el de hoy.
+watch([cycleId, cuando], () => {
+  if (uso.value)
+    dia.value = diaDelCiclo(uso.value.started_at, cuando.value ? new Date(cuando.value) : hoy)
 })
 
 const rango = (v: number | null, min: number, max: number) =>

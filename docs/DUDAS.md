@@ -148,6 +148,15 @@
     `.fruti/tokens.json`); los roles base aprobados no cambian. Verificado con
     `design-hub/qa/tema-oscuro.mjs` (20/20).
 
+17. **Aviso de Brix: la app avisa cualquier día, el servidor solo lo
+    registra el día ≤ 1** (detectado 2026-09-28 en el E2E de Fase 5).
+    `registrar_medicion` (0017) marca `brix_fuera_rango` solo cuando
+    `p_dia <= 1` («Brix inicial», §2.1); `MedirPage` (`avisoBrix`) pide la
+    nota en cualquier día, así que del día 2 en adelante la nota viaja en la
+    operación pero no queda como aviso. Decidir: que la app avise solo el
+    día 1 (como el servidor) o que el servidor registre el aviso todos los
+    días. Hasta entonces se implementa lo que hay.
+
 ## De negocio (§18 de `PULZ_MAESTRO.md`)
 
 Las 9 preguntas de §18 (escala de actividad/dulzor/acidez, precio del plan,

@@ -347,8 +347,16 @@ no aprobación vigente).
 | Evidencia | `db reset` → `node design-hub/qa/evidencia-inicio-hoy.mjs` | **PASS**: 4 anchos × 2 temas + operador (41 capturas); Hoy con la semilla; medición real desde Hoy y vuelta con la tina fuera de «Toca medir»; sin señal con instantánea y Medir activo; Tomás sin Abrir corrida ni Pasar a granel |
 | Tipos · lint · format | `vue-tsc -b` · `pnpm lint` · `pnpm format` | ✔ · 0/0 · ✔ |
 
-Queda de la fase: **tarea 8** (E2E proceso completo en Prueba B) y la
-concurrencia real (Fase 2); `db reset --linked` al cerrar cada corrida.
+## Resultados reales (2026-09-28) — E2E proceso completo (tarea 8)
+
+| Qué | Comando real | Resultado |
+|---|---|---|
+| Simulación de `seed.sql` rehecha **desde la interfaz** en Prueba B (vacía) con sus fechas: 12 recursos y 2 proveedores por Configuración, carga inicial por el arranque, tina que ya fermentaba, recepción, horneada abierta y cerrada, formulación a dos tinas, 8 mediciones, tina lista, DES-001/002 (6 cortes, 2 cierres), DES-003 de 2ª con ordinario + colas (aviso `mezcla_clases_2a` → nota), transferencia con folio nuevo, agua (`diferencia_volumen` → nota), puntas, unión conservando folio, compra con proveedor/certificado, muestra, autoconsumo, venta y regalo | `db reset --linked` → `node design-hub/qa/e2e-fase5.mjs` | **PASS**: 38 operaciones; `resource_lot_balances` = §15.1 exacto (Colector colas 16 · Tanque 1 250 · Tanque 2 341.8 · Tina 1 870 · Tina 2 1,400 · Tina 3 1,300), un solo lote por recurso, ningún otro recurso con saldo; folios FER-T1-001, FER-T2-001, G-COMPRA-01 y COL-002 iguales a la semilla; 9 capturas + `evidence/fase5-e2e/e2e-fase5.json` |
+| Lo que la interfaz no permite (declarado en el JSON) | — | folios de cortes, formulación (F-001), tina que ya fermentaba (FER-T3-INI → FER-001) y carga inicial (G-INI-01 → G-001) son automáticos; la carga inicial del arranque va con la fecha de hoy; con «pide resultado» no se captura el % Alc. de lo que entra (puntas 68 %, compra 46 %); «Regalo a cliente» → «Muestra comercial»; Brix < 12 y % Alc. < 35 piden nota en la app |
+| Defecto corregido por el E2E | `MedirPage` | el día del ciclo se calculaba con la fecha de hoy aunque se cambiara «¿Cuándo pasó?»: ahora sigue a la fecha capturada (8 sep = día 2 contando desde la formulación del 7) |
+
+Queda de la fase: la concurrencia real (Fase 2) y CI en un PR real;
+`db reset --linked` al cerrar cada corrida.
 
 ### Actualización 2026-09-28 · frente único r05
 

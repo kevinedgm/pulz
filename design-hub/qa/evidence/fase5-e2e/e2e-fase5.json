@@ -1,0 +1,101 @@
+{
+  "fecha": "2026-09-29T01:39:28.026Z",
+  "empresa": "prueba-b",
+  "status": "PASS",
+  "operaciones": 38,
+  "saldos": [
+    {
+      "code": "Colector colas",
+      "folio": "COL-002",
+      "volumen": 16
+    },
+    {
+      "code": "Tanque 1",
+      "folio": "G-COMPRA-01",
+      "volumen": 250
+    },
+    {
+      "code": "Tanque 2",
+      "folio": "G-001",
+      "volumen": 341.8
+    },
+    {
+      "code": "Tina 1",
+      "folio": "FER-T1-001",
+      "volumen": 870
+    },
+    {
+      "code": "Tina 2",
+      "folio": "FER-T2-001",
+      "volumen": 1400
+    },
+    {
+      "code": "Tina 3",
+      "folio": "FER-001",
+      "volumen": 1300
+    }
+  ],
+  "tabla": [
+    {
+      "recurso": "Colector colas",
+      "esperado": 16,
+      "real": 16,
+      "folioEsperado": "auto (semilla COL-002)",
+      "folioReal": "COL-002"
+    },
+    {
+      "recurso": "Tanque 1",
+      "esperado": 250,
+      "real": 250,
+      "folioEsperado": "G-COMPRA-01",
+      "folioReal": "G-COMPRA-01"
+    },
+    {
+      "recurso": "Tanque 2",
+      "esperado": 341.8,
+      "real": 341.8,
+      "folioEsperado": "auto (semilla G-INI-01)",
+      "folioReal": "G-001"
+    },
+    {
+      "recurso": "Tina 1",
+      "esperado": 870,
+      "real": 870,
+      "folioEsperado": "FER-T1-001",
+      "folioReal": "FER-T1-001"
+    },
+    {
+      "recurso": "Tina 2",
+      "esperado": 1400,
+      "real": 1400,
+      "folioEsperado": "FER-T2-001",
+      "folioReal": "FER-T2-001"
+    },
+    {
+      "recurso": "Tina 3",
+      "esperado": 1300,
+      "real": 1300,
+      "folioEsperado": "auto (semilla FER-T3-INI)",
+      "folioReal": "FER-001"
+    }
+  ],
+  "avisos": [
+    {
+      "code": "mezcla_clases_2a",
+      "note": "Había olla libre y poca cola; se juntó con el ordinario"
+    },
+    {
+      "code": "diferencia_volumen",
+      "note": "Contracción al mezclar"
+    }
+  ],
+  "fallos": [],
+  "declarado": [
+    "folios automáticos donde la interfaz no los pide: cortes, formulación (F-001), tina que ya fermentaba (FER-T3-INI), carga inicial (G-INI-01)",
+    "la carga inicial del arranque se registra con la fecha de hoy",
+    "el día del ciclo lo cuenta la app desde la formulación (8 sep = día 2)",
+    "«Regalo a cliente» → «Muestra comercial» (concepto con contraparte de Prueba B)",
+    "con «pide resultado» la app no captura el % Alc. de lo que entra (puntas 68 %, compra 46 %): solo el resultado declarado",
+    "Brix < 12 y % Alc. < 35 piden nota en la app (la semilla no la traía): se escribe «Simulación §15.1»"
+  ]
+}

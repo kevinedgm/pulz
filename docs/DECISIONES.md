@@ -958,3 +958,23 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
   Inicio; se extrae al sistema si un tercer consumidor la necesita.
 - Tomás trae `must_change_password` en la semilla: la evidencia le cambia la
   contraseña para verlo como operador y `db reset` lo deshace.
+
+
+## 2026-09-28 · E2E del proceso completo (Fase 5, tarea 8) PASS
+
+- `design-hub/qa/e2e-fase5.mjs` rehace la simulación de `seed.sql` desde la
+  interfaz en Prueba B (vacía tras `db reset`) y compara
+  `resource_lot_balances` con §15.1: exacto, 38 operaciones. Prueba B se
+  deja con la simulación hasta el siguiente `db reset`.
+- Lo que la interfaz no ofrece se declara, no se simula por SQL: folios
+  automáticos donde no hay campo (cortes, formulación, tina que ya
+  fermentaba, carga inicial), carga inicial del arranque con fecha de hoy,
+  sin % Alc. de lo que entra cuando el concepto pide resultado, «Regalo a
+  cliente» como «Muestra comercial» (Prueba B no trae ese concepto). Si el
+  dueño quiere folio en cortes/formulación/carga inicial o fecha en el
+  arranque, es una ronda pequeña de kiwi por pantalla.
+- Defecto corregido: `MedirPage` calculaba el día del ciclo con la fecha de
+  hoy aunque se cambiara «¿Cuándo pasó?»; ahora sigue a la fecha capturada
+  (regla de producto de FASE-5: capturar lo de ayer). Revertir: watch de
+  `cuando` en `MedirPage`.
+- DUDAS #17: aviso de Brix en la app cualquier día vs. servidor solo día 1.
