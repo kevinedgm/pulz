@@ -9,6 +9,40 @@
 > mientras no haya lanzamiento, y que toda interfaz empieza por la skill
 > `kiwi`.
 
+## Resumen final · Fases 0–5 (2026-09-28)
+
+Las cinco fases del plan (`docs/plan/FASE-0.md` … `FASE-5.md`) están
+construidas, verificadas contra el proyecto alojado y en `main` con CI en
+verde. Lo único abierto son tres pruebas de Maguey/Horneado que exigen un
+teléfono y un lector de pantalla reales.
+
+| Fase | Qué quedó | Verificación vigente |
+|---|---|---|
+| 0 · Tooling | Monorepo pnpm/Node 22, Vite + Vue 3 + TS, ESLint/Prettier, Fruti Squad, Design Hub, CI | `ci.yml` en verde en `main` y en un PR real (kevinedgm/pulz#1); 23 corridas rojas previas explicadas y corregidas |
+| 1 · Esquema | 27 migraciones «desde cero», RLS por empresa, semilla de Cuatro Vientos y Prueba B | pgTAP aislamiento 18/18, configuración 37/37, proceso 57/57; `db reset --linked` limpio |
+| 2 · Comandos | 17 RPC de negocio con idempotencia, locks y avisos blandos | pgTAP RPC 26/26; simulación por RPC = §15.1; **concurrencia real 15/15** (dos sesiones por PostgREST) |
+| 3 · Acceso | Portal por empresa, login usuario/correo, cambio obligatorio, equipo, Edge Functions | 5/5 acceso alojado; 14 piezas candidate 0.2.0 en el registry; Hub documentado |
+| 4 · Shell y configuración | App-shell (nav por proceso, FAB, tema claro/oscuro), Configuración (recursos, catálogos, ajustes, portal/marca), arranque | E2E Fase 4 (empresa nueva → carga inicial → logo); tema oscuro restaurado (DUDAS #16); PWA con manifest e iconos de Foundations |
+| 5 · Proceso | Cola offline, Fermentación, Destilación, Granel, Maguey/Horneado, **Inicio/Hoy real** | e2e-offline (3 mediciones + 2 cortes una sola vez y en orden); **E2E proceso completo desde la interfaz en Prueba B = §15.1 exacto** (38 operaciones); MH r06: API 37/37, UI 19/19, a11y 132/132 |
+
+Estado del código: Vitest **193/193**, tipos, lint y Prettier en verde;
+Hub 51 páginas sin enlaces rotos. Proyecto alojado en estado de semilla
+(último `db reset` tras el E2E de Fase 5).
+
+**Abierto (no se puede cerrar desde este entorno):** Maguey/Horneado 16.03
+tacto físico, 16.04 teclado virtual, 16.07 lector de pantalla — guion de
+15 minutos en `design-hub/lab/maguey-horneado/r06/pruebas-fisicas.md`.
+Mientras tanto `maguey-horneado` sigue draft 0.2.1 con aceptación PARTIAL;
+el resto de pantallas de proceso están en candidate 0.2.0/0.3.0.
+
+**Para el dueño (DUDAS):** #5, #16 y #17 resueltas hoy; siguen abiertas
+las de negocio de §18 y las decisiones que este documento y `DECISIONES.md`
+marcan como reversibles.
+
+**Fuera de alcance de las Fases 0–5:** Trazabilidad (Fase 6), despliegue a
+producción, notificaciones push, régimen de migraciones aditivas (cambia el
+día que haya usuarios reales, CLAUDE.md §2).
+
 ## Fase actual
 
 **Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado por completo: API y Playwright); bloque 16 de accesibilidad cerrado con Playwright en el shell autenticado (132/132) salvo 16.03/16.04/16.07 que exigen hardware/AT. Dictamen r06: PARTIAL, draft 0.2.1. Tema oscuro restaurado en tokens.css (DUDAS #16 resuelta). **Inicio/Hoy con datos reales construido (ronda inicio-hoy/r01, `inicio` candidate 0.3.0, evidencia PASS)**; E2E del proceso completo (tarea 8) PASS: la simulación de la semilla rehecha desde la interfaz en Prueba B da §15.1 exacto. Fase 5 completa. **Concurrencia real (Fase 2) certificada: `pnpm test:rpc:concurrency` 15/15 con dos sesiones por PostgREST.** **CI comprobado en un PR real (kevinedgm/pulz#1, verde por `pull_request`)**; el job llevaba 23 corridas en rojo por dos pruebas que cargaban el cliente real sin `.env.local`, corregido. Sin pendientes de las Fases 0–5 salvo accesibilidad con hardware/AT (MH 16.03/16.04/16.07).**
@@ -137,15 +171,13 @@ y sus limitaciones están en la verificación del 2026-09-28.
 
 ## Qué falta
 
-1. ~~Resolver y verificar concurrencia real con dos sesiones~~ (hecho 2026-09-28:
-   `pnpm test:rpc:concurrency` PASS 15/15 por PostgREST, tenant desechable).
-2. Cerrar aceptación de Maguey/Horneado r05: fixtures persistentes aislados
-   autorizados para E2E de negocio y accesibilidad física/nativa. Implementación
-   y correcciones locales terminadas; no reutilizar gates de rondas anteriores.
-3. ~~Implementar Inicio/hoy real · E2E completo del proceso (tarea 8)~~ (hechos 2026-09-28; offline ya aceptado con e2e-offline).
-4. Revalidar composición, accesibilidad y consumo real de Foundations.
-5. ~~Comprobar CI en PR real~~ (hecho 2026-09-28, kevinedgm/pulz#1 verde); siguen las limitaciones del hook de intentos y
-   demás decisiones abiertas en `DUDAS.md`.
+1. Maguey/Horneado 16.03, 16.04 y 16.07 con teléfono y lector de pantalla
+   reales (`design-hub/lab/maguey-horneado/r06/pruebas-fisicas.md`); con los
+   tres PASS, lima reevalúa Candidate para `maguey-horneado`.
+2. Decisiones del dueño en `DUDAS.md` (negocio §18 y reversibles).
+3. Todo lo demás de las Fases 0–5 está hecho (ver el resumen final arriba);
+   las listas históricas de abajo se conservan como registro, no como
+   pendientes.
 
 ### Lista histórica al cerrar Fase 3 (no pendientes actuales)
 
