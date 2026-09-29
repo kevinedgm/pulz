@@ -90,6 +90,9 @@ describe("CampoColor (color-field)", () => {
     expect(w.emitted("update:modelValue")?.[1]).toEqual(["#287A55"])
     await w.setProps({ error: "Debe ser #RRGGBB." })
     expect(w.findAll("input")[1].attributes("aria-invalid")).toBe("true")
+    // Con hex inválido el selector nativo cae al primary de Foundations
+    await w.setProps({ modelValue: "#zz" })
+    expect((w.findAll("input")[0].element as HTMLInputElement).value).toBe("#6d4aff")
   })
 })
 

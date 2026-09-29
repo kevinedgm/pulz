@@ -41,7 +41,7 @@ function desdeTexto(e: Event) {
         :id="id"
         class="campo__muestra"
         type="color"
-        :value="valido ? modelValue : '#173F87'"
+        :value="valido ? modelValue : '#6D4AFF'"
         :disabled="disabled"
         :aria-label="`Elegir ${etiqueta.toLowerCase()}`"
         @input="emit('update:modelValue', ($event.target as HTMLInputElement).value.toUpperCase())"

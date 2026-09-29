@@ -924,5 +924,8 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
   regeneran con `apps/web/scripts/iconos.mjs` (Chromium de Playwright, como
   en Fase 4; ahora queda como script en el repo). El maskable lleva fondo a
   sangre y el glifo al 72 % dentro de la zona segura.
-- No se toca el `#173F87` de `CampoColor` (valor por defecto del acento de
-  cada empresa en Configuración): es un dato de negocio, no de marca PULZ.
+- `CampoColor`: el dueño pidió que el color de respaldo del selector nativo
+  (cuando el hex escrito aún no es válido) también sea `#6D4AFF`. El acento
+  de cada empresa sigue siendo suyo (`organizations.accent`); solo cambia el
+  valor que muestra el picker mientras no hay uno válido. Test en
+  `configuracion.test.ts`.
