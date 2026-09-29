@@ -141,6 +141,22 @@ describe("tema", () => {
     expect(localStorage.getItem("pulz:tema")).toBeNull()
   })
 
+  it("sincroniza <meta theme-color> con la elección manual y la restaura en sistema", () => {
+    document.head.innerHTML =
+      '<meta name="theme-color" media="(prefers-color-scheme: light)" content="#6D4AFF">' +
+      '<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#A590FD">'
+    const metas = () =>
+      [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')].map(
+        (m) => m.content,
+      )
+    aplicarTema("oscuro")
+    expect(metas()).toEqual(["#A590FD", "#A590FD"])
+    aplicarTema("claro")
+    expect(metas()).toEqual(["#6D4AFF", "#6D4AFF"])
+    aplicarTema("sistema")
+    expect(metas()).toEqual(["#6D4AFF", "#A590FD"])
+  })
+
   it("al arrancar aplica lo guardado", () => {
     localStorage.setItem("pulz:tema", "oscuro")
     aplicarTemaGuardado()

@@ -20,8 +20,9 @@ export default defineConfig({
         display: "standalone",
         start_url: "/",
         scope: "/",
-        theme_color: "#173F87",
-        background_color: "#F8F6F2",
+        // --ink-900 y --canvas del tema claro (Foundations 1.0.0)
+        theme_color: "#6D4AFF",
+        background_color: "#F8F8FA",
         icons: [
           { src: "icons/pwa-192x192.png", sizes: "192x192", type: "image/png" },
           { src: "icons/pwa-512x512.png", sizes: "512x512", type: "image/png" },

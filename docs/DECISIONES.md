@@ -908,5 +908,21 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
   7.2 (`design-hub/qa/evidence/tema-oscuro/`). Los chips `on`/`partial` no
   estaban en pantalla tras el `db reset`; sus pares se calcularon desde los
   tokens (7.5:1 y 8.0:1).
-- Pendiente menor detectado: `index.html` y el manifest PWA siguen con
-  `theme-color #173F87` (kit anterior); no se toca aquí.
+- Pendiente menor detectado: `index.html` y el manifest PWA seguían con
+  `theme-color #173F87` (kit anterior); resuelto en la entrada siguiente.
+
+
+## 2026-09-28 · theme-color, manifest e iconos PWA sobre Foundations 1.0.0
+
+- Pedido del dueño. Se mantiene la regla de Fase 4 (`theme_color` =
+  `--ink-900`, `background_color` = `--canvas`) con los valores vigentes:
+  `index.html` lleva dos `<meta name="theme-color" media=…>` (`#6D4AFF`
+  claro, `#A590FD` oscuro) y `app/tema.ts` las fuerza al color del tema
+  elegido a mano y las restaura en «sistema» (test en `shell.test.ts`). El
+  manifest queda en `#6D4AFF` / `#F8F8FA`.
+- `favicon.svg` pasa a `#6D4AFF` y los cuatro PNG del manifest se
+  regeneran con `apps/web/scripts/iconos.mjs` (Chromium de Playwright, como
+  en Fase 4; ahora queda como script en el repo). El maskable lleva fondo a
+  sangre y el glifo al 72 % dentro de la zona segura.
+- No se toca el `#173F87` de `CampoColor` (valor por defecto del acento de
+  cada empresa en Configuración): es un dato de negocio, no de marca PULZ.
