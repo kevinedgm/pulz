@@ -82,6 +82,7 @@ Reglas:
   verificación real, `docs/ESTADO.md` vivo.
 
 <!-- fruti-squad:start -->
+
 ## 🍓 Fruti Squad (kiwi → lima → coco → mora)
 
 Este proyecto incluye el Fruti Squad en `./.claude/skills`. Cada carpeta tiene su `SKILL.md`/`AGENT.md`; léelos cuando la tarea lo pida:
