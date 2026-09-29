@@ -338,6 +338,18 @@ después y pgTAP `proceso.test.sql` en verde.
 Siguiente en aquel cierre: ronda `maguey-horneado/r01` → coco (antecedente,
 no aprobación vigente).
 
+## Resultados reales (2026-09-28) — ronda inicio-hoy/r01 (tarea 7)
+
+| Qué | Comando real | Resultado |
+|---|---|---|
+| Ronda inicio-hoy/r01 (kiwi → lima → coco → mora) | `lab/inicio-hoy/r01/` completo; `inicio` 0.2.0 → **candidate 0.3.0**; ficha reescrita + sitio regenerado | **OK** |
+| Vitest | `hoy.test.ts` (10: puras, cola con fallo/pendiente, permisos, instantánea, sin lotes) | **193/193** |
+| Evidencia | `db reset` → `node design-hub/qa/evidencia-inicio-hoy.mjs` | **PASS**: 4 anchos × 2 temas + operador (41 capturas); Hoy con la semilla; medición real desde Hoy y vuelta con la tina fuera de «Toca medir»; sin señal con instantánea y Medir activo; Tomás sin Abrir corrida ni Pasar a granel |
+| Tipos · lint · format | `vue-tsc -b` · `pnpm lint` · `pnpm format` | ✔ · 0/0 · ✔ |
+
+Queda de la fase: **tarea 8** (E2E proceso completo en Prueba B) y la
+concurrencia real (Fase 2); `db reset --linked` al cerrar cada corrida.
+
 ### Actualización 2026-09-28 · frente único r05
 
 R05: navegación medium corregida; recuperación/identidad/origen de cocido y

@@ -1555,13 +1555,17 @@
     "kind": "product-application",
     "status": "candidate",
     "owner": "lima",
-    "sourceRound": "lab/shell/r01",
+    "sourceRound": "lab/inicio-hoy/r01",
     "documentation": "../Screens/inicio.md",
     "source": "../../apps/web/src/modules/inicio/pages/InicioEmpresaPage.vue",
     "behavior": "../../apps/web/src/modules/inicio/pages/InicioEmpresaPage.vue",
     "dependencies": [
       "app-shell",
+      "page-header",
+      "banner",
       "state-block",
+      "status-chip",
+      "list-stack",
       "button"
     ],
     "profileDependencies": [
@@ -1569,12 +1573,12 @@
     ],
     "contract": {
       "screens": [
-        "Hoy (placeholder de Fase 5)",
+        "Hoy: resumen + Toca medir (agrupar.porMedir, día N de M, rótulo por measurement_reminder_hour, Medir) + Destilación (corridas abiertas con Cortar/Ver, colectores con saldo con Pasar a granel/Ver) + Por enviar (cola por elemento: motivo, Reintentar, Corregir/Descartar)",
+        "Todo medido · Sin tinas · Sin corridas ni colectores · Hoy no hay nada pendiente",
         "¿Qué tienes hoy? (sin lotes → arranque/r01)",
-        "carga",
-        "error de membresías"
+        "carga · error · sin señal (instantánea de fermentación + destilación)"
       ],
-      "rules": "Destino del shell. Sin datos inventados: tarjetas rotuladas Fase 5. Cuando la empresa no tiene lotes: state-block empty con la primaria 'Empezar' dentro (no baja a barra; la barra es navegación). Sin FAB en Inicio en esta ronda."
+      "rules": "Inicio es lectura + atajos: no captura. Una primaria: Medir de la tina más atrasada (FAB en compact vía meta.fab/useFab; nula sin tinas por medir). Medir y Cortar no dependen de la señal (cola); Abrir corrida / Llenar tinas / Pasar a granel piden admin|productor y señal. La hora del recordatorio solo rotula (DUDAS #13). Por enviar se oculta con la cola vacía; el banner del shell da el total. Maguey/Horneado no entran en Hoy."
     },
     "qa": {
       "candidate": true,
@@ -1587,10 +1591,10 @@
       },
       "touch": "runtime-verified-emulated",
       "zoom200": {
-        "status": "runtime-verified-approx",
-        "caveat": "root font-size 200 % (qa/zoom-acceso.mjs), no zoom nativo"
+        "status": "not-run",
+        "caveat": "pendiente para Stable"
       },
-      "contrast": "passed-with-reviewed-findings",
+      "contrast": "static-reviewed",
       "longText": "static-reviewed",
       "states": "runtime-verified"
     },
@@ -1605,28 +1609,17 @@
       "framework": "vue-ts",
       "path": "apps/web/src/modules/inicio/pages/InicioEmpresaPage.vue"
     },
-    "version": "0.2.0",
+    "version": "0.3.0",
     "replacedBy": null,
-    "updated": "2026-09-27",
+    "updated": "2026-09-28",
     "demo": null,
     "files": [
       "../../apps/web/src/modules/inicio/api.ts"
     ],
     "evidence": "../qa/evidence/shell-r01/",
     "gate": {
-      "candidate": {
-        "date": "2026-09-27",
-        "evaluatedBy": "lima",
-        "evidence": [
-          "../lab/shell/r01/coco-declaracion.md",
-          "../lab/shell/r01/lima-compuerta.md",
-          "../qa/evidence/shell-r01/"
-        ],
-        "findings": [
-          "'Empezar' lleva a Granel hasta arranque/r01",
-          "estado sin lotes no verificado con datos reales (Cuatro Vientos tiene lotes)"
-        ]
-      }
+      "candidate": "passed",
+      "stable": "not-eligible"
     }
   },
   "select": {

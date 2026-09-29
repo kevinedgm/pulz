@@ -942,3 +942,19 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
 - Supuestos que el dueño puede cambiar en r02: la hora del recordatorio solo
   rotula («toca desde las 9:00»), no oculta; «Por enviar» desaparece con la
   cola vacía; Maguey/Horneado no entran en Hoy; 8 filas y «y N más».
+
+
+## 2026-09-28 · inicio-hoy/r01 construida; `inicio` candidate 0.3.0
+
+- coco implementó Hoy sobre lo ya existente: `cargarHoy` compone
+  `cargarUsos` y `cargarDestilacion` (cada una con su instantánea; se
+  muestra la más antigua) en vez de una vista nueva; sin `data_contract`
+  nuevo. Revertir: volver a 0.2.0 (placeholder) desde git.
+- `MedirPage` acepta `?volver=inicio` para regresar a Hoy con «Medición
+  guardada.»; sin el parámetro sigue volviendo a la lista de tinas.
+- Sin red, `tieneLotes` (que no tiene instantánea) ya no tumba Hoy: se pasa
+  directo a las instantáneas; sin ellas, error como antes.
+- lima: `queue-item` (fila de la cola con motivo y acciones) queda local en
+  Inicio; se extrae al sistema si un tercer consumidor la necesita.
+- Tomás trae `must_change_password` en la semilla: la evidencia le cambia la
+  contraseña para verlo como operador y `db reset` lo deshace.

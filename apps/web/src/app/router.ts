@@ -36,7 +36,13 @@ const router = createRouter({
       path: "/e/:slug/inicio",
       name: "inicio",
       component: () => import("../modules/inicio/pages/InicioEmpresaPage.vue"),
-      meta: { shell: true, destino: "inicio", titulo: "Inicio" },
+      // FAB «Medir» (inicio-hoy/r01): la página lo apunta a la tina más atrasada
+      meta: {
+        shell: true,
+        destino: "inicio",
+        titulo: "Inicio",
+        fab: { etiqueta: "Medir", icono: "i-medir" },
+      },
     },
     ...rutasFermentacion,
     ...rutasDestilacion,

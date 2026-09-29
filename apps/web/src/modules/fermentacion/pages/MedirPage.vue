@@ -44,7 +44,9 @@ const route = useRoute()
 const cola = useCola()
 const org = computed(() => acceso.membresiaActual?.organization_id ?? "")
 const slug = computed(() => String(route.params.slug))
-const volver = computed(() => `/e/${slug.value}/fermentacion`)
+// Desde Inicio/Hoy (?volver=inicio) se regresa a Hoy; si no, a la lista de tinas
+const desdeInicio = route.query.volver === "inicio"
+const volver = computed(() => `/e/${slug.value}/${desdeInicio ? "inicio" : "fermentacion"}`)
 
 const datos = ref<DatosFermentacion | null>(null)
 const errorCarga = ref<string | null>(null)
@@ -337,7 +339,7 @@ const opcionesTina = computed(() =>
           :intent="siguienteTina ? 'secondary' : 'primary'"
           :adapt="siguienteTina ? 'default' : 'page-primary'"
           :to="`${volver}?aviso=medida`"
-          >Volver a Fermentación</Boton
+          >Volver a {{ desdeInicio ? "Inicio" : "Fermentación" }}</Boton
         >
       </div>
     </div>
