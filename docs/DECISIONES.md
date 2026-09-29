@@ -929,3 +929,16 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
   de cada empresa sigue siendo suyo (`organizations.accent`); solo cambia el
   valor que muestra el picker mientras no hay uno válido. Test en
   `configuracion.test.ts`.
+
+## 2026-09-28 · inicio-hoy/r01 (kiwi) aprobada en automático
+
+- Estructura de Inicio con datos reales (§13.2 #3): línea resumen + tres
+  bloques en orden de urgencia (Toca medir › Destilación › Por enviar), una
+  sola primaria («Medir» de la tina más atrasada; en compact baja a la
+  barra), instantánea con Medir/Cortar activos porque van por la cola.
+  Aprobada por cumplir §13.2 #3 y reutilizar las reglas ya implementadas
+  (`agrupar`, `tocaMedirHoy`, `useCola`); 45 combinaciones sin desborde ni
+  doble primaria. Revertir: abrir r02 con la estructura que se prefiera.
+- Supuestos que el dueño puede cambiar en r02: la hora del recordatorio solo
+  rotula («toca desde las 9:00»), no oculta; «Por enviar» desaparece con la
+  cola vacía; Maguey/Horneado no entran en Hoy; 8 filas y «y N más».

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Inicio / Hoy con datos reales · r01</title>
+<!-- kit neutral de kiwi, inline para que el artefacto se abra suelto (copia idéntica en vendor/) -->
+<style>
+/* kiwi · wireframe-kit.css — kit neutral F1/F2
+   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+:root{
+  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
+  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
+  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+.wf button{font:inherit;color:inherit;cursor:pointer}
+.wf a{color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Barra de control (fuera del diseño) */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
+.wf-ctl label{display:flex;gap:6px;align-items:center}
+
+/* Marco de espacio: el contenido responde con container queries */
+.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
+.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota · ";font-weight:700}
+body.wf-no-notes .wf-note{display:none}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+</style>
+<style>
+.wf .wf-btn--primary{color:var(--wf-g0)}
+.wf .wf-btn:disabled,.wf .wf-btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.hy-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.hy-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.hy-side ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.hy-side li{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:6px;border:2px solid transparent}
+.hy-side li[aria-current]{border-color:var(--wf-g9);font-weight:700;background:var(--wf-g0)}
+.hy-top{display:flex;align-items:center;gap:var(--wf-s3);min-height:56px;padding:4px var(--wf-s4) 0;border-bottom:1px solid var(--wf-g3)}
+.hy-top h1{font-size:18px;margin:0 0 0 auto}
+.hy-body{padding:var(--wf-s5);min-width:0;max-width:1100px}
+.hy-fecha{margin:0;font-size:13px;color:var(--wf-g6)}
+.hy-resumen{font-size:15px;margin:4px 0 var(--wf-s4)}
+.hy-cols{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:var(--wf-s5);align-items:start}
+.hy-bloque h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--wf-g6);margin:0 0 var(--wf-s2);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.hy-bloque h2 a{font-size:13px;text-transform:none;letter-spacing:0;font-weight:500}
+.hy-bloque{margin-bottom:var(--wf-s5)}
+.hy-lista{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r);background:var(--wf-g0)}
+.hy-fila{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px var(--wf-s3);padding:var(--wf-s3) var(--wf-s4);min-height:64px;align-items:center}
+.hy-fila+.hy-fila{border-top:1px solid var(--wf-g3)}
+.hy-fila h3{margin:0;font-size:17px;overflow-wrap:anywhere}
+.hy-fila .sub{font-size:13px;color:var(--wf-g6);overflow-wrap:anywhere}
+.hy-fila .dato{display:block;font-size:15px;font-variant-numeric:tabular-nums}
+.hy-fila .wf-actions{justify-self:end}
+.hy-fila--tarde h3::after{content:" · toca medir";font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+.hy-fila--pronto h3::after{content:" · toca desde las 9:00";font-size:12px;font-weight:500;border:1px dashed var(--wf-g6);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+.hy-mas{padding:var(--wf-s2) var(--wf-s4);font-size:13px;border-top:1px solid var(--wf-g3)}
+.hy-ctx{font-size:13px;color:var(--wf-g6);margin:var(--wf-s2) 0 0}
+.hy-vacio{border:1px dashed var(--wf-g4);border-radius:var(--wf-r);padding:var(--wf-s4);font-size:14px;color:var(--wf-g6)}
+.hy-vacio b{color:var(--wf-g9);display:block;margin-bottom:4px}
+.hy-warn{border:1px solid var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s2) var(--wf-s3);font-size:14px;margin:0 0 var(--wf-s3)}
+.hy-fallo{font-size:13px;border:1px dashed var(--wf-g6);border-radius:4px;padding:2px 8px;margin-top:2px;display:inline-block}
+.hy-barra{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none;gap:var(--wf-s2)}
+.hy-barra .wf-btn{flex:1 1 auto}
+.hy-bottomnav{display:none;border-top:1px solid var(--wf-g3);padding:6px 4px;background:var(--wf-g1)}
+.hy-bottomnav span{flex:1;text-align:center;font-size:11px;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:2px solid transparent}
+.hy-bottomnav span[aria-current]{border-color:var(--wf-g9);font-weight:700}
+@container wf (max-width: 1023px){
+  .hy-shell{grid-template-columns:160px 1fr}
+  .hy-cols{grid-template-columns:1fr}
+}
+@container wf (max-width: 599px){
+  .hy-shell{grid-template-columns:1fr}
+  .hy-shell>.hy-side{display:none}
+  .hy-body{padding:var(--wf-s4)}
+  .hy-fila{grid-template-columns:1fr}
+  .hy-fila .wf-actions{justify-self:stretch}
+  .hy-fila .wf-actions .wf-btn{flex:1 1 auto}
+  .hy-body [data-wf-persist]{display:none}
+  .hy-barra{display:flex}
+  .hy-bottomnav{display:flex}
+}
+</style>
+</head>
+<body class="wf">
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>INICIO / HOY · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="768" aria-pressed="false">medium 768</button>
+    <button data-w="390" aria-pressed="false">compact 390</button>
+  </fieldset>
+  <label>Estado
+    <select id="wf-state" data-wf-states>
+      <option value="default">Hoy · default (3 por medir, 1 corrida, 1 colector, 2 por enviar)</option>
+      <option value="loading">Hoy · carga</option>
+      <option value="sinlotes">Hoy · sin lotes (¿Qué tienes hoy? → arranque)</option>
+      <option value="temprano">Hoy · antes de la hora del recordatorio (8:20)</option>
+      <option value="medido">Hoy · todo medido; corrida abierta</option>
+      <option value="sintinas">Hoy · sin tinas fermentando</option>
+      <option value="sindestilacion">Hoy · sin corridas ni colectores</option>
+      <option value="nada">Hoy · nada pendiente</option>
+      <option value="muchas">Hoy · 14 tinas por medir</option>
+      <option value="largo">Hoy · nombres y folios largos</option>
+      <option value="offline">Hoy · sin señal (instantánea; Medir/Cortar activos)</option>
+      <option value="readonly">Hoy · solo lectura (vencida)</option>
+      <option value="operador">Hoy · operador</option>
+      <option value="fallo">Hoy · cola con fallo y corrección pendiente</option>
+      <option value="error">Hoy · error de carga</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="wf hy-shell">
+      <aside class="hy-side" aria-label="Navegación principal (shell)">
+        <span class="wf-small wf-muted">MC · Mezcal Cuatro Vientos</span>
+        <ul><li aria-current="page">Inicio</li><li>Maguey</li><li>Horneado</li><li>Fermentación</li><li>Destilación</li><li>Granel</li><li>Trazabilidad</li></ul>
+      </aside>
+      <div style="min-width:0;display:flex;flex-direction:column;min-height:640px">
+        <div class="hy-top" id="wf-top"></div>
+        <div id="wf-banner"></div>
+        <main class="hy-body wf" id="wf-view" style="flex:1"></main>
+        <div class="hy-barra" id="wf-barra"></div>
+        <nav class="hy-bottomnav" aria-label="Navegación principal (compact)"><span aria-current="page">Inicio</span><span>Fermentación</span><span>Destilación</span><span>Granel</span><span>Más</span></nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Ejemplo: Cuatro Vientos (§15.1) el lunes 28 sep, 9:40. Tina 1 (870 L, día 22, en vaciado) y Tina 2 (1,400 L, día 22) vienen de la semilla; Tina 3 fermentaba desde antes. Corrida DES-004 y colector con mezcal: ejemplo.
+const dis = (o) => o.dis ? 'aria-disabled="true"' : '';
+const tina = (t, o = {}) => `<li class="hy-fila ${o.temprano ? 'hy-fila--pronto' : 'hy-fila--tarde'}"><div><h3>${t.n}</h3><span class="sub">día ${t.d} de ${t.m} · ${t.u} · ${t.l} L</span></div>${o.lectura ? '<span class="sub">solo consulta</span>' : `<div class="wf-actions"><a class="wf-btn ${o.primaria ? 'wf-btn--primary' : ''}" href="#medir" ${o.primaria ? 'data-wf-persist' : ''}>Medir</a></div>`}</li>`;
+const T = [
+  { n: 'Tina 3', d: 9, m: 7, u: 'sin mediciones', l: '1,300' },
+  { n: 'Tina 2', d: 22, m: 7, u: 'ayer 9:10 · Tomás', l: '1,400' },
+  { n: 'Tina 4 (ejemplo)', d: 2, m: 7, u: 'ayer 18:30 · Aurelia', l: '900' },
+];
+const bloqueMedir = (lista, o = {}) => `<section class="hy-bloque" aria-labelledby="h-medir"><h2 id="h-medir"><span>Toca medir · ${lista.length}</span><a href="#ferm">Fermentación</a></h2>
+  ${lista.length ? `<ul class="hy-lista">${lista.map((t, i) => tina(t, { ...o, primaria: i === 0 && !o.lectura })).join('')}${o.mas ? `<div class="hy-mas">y ${o.mas} más por medir → <a href="#ferm">Fermentación</a></div>` : ''}</ul>` : `<div class="hy-vacio"><b>Todo medido por hoy.</b> ${o.ctxVacio || '3 tinas medidas · 1 lista para destilar.'} <a href="#ferm">Ver en Fermentación</a></div>`}
+  ${o.ctx ? `<p class="hy-ctx">${o.ctx}</p>` : ''}
+  <span class="wf-note">Orden y regla = agrupar(tinas_en_uso).porMedir (fermentando sin medición con fecha local de hoy; más días sin medir primero). Día N de M = diaDelCiclo / fermentation_expected_days. Antes de measurement_reminder_hour el rótulo es «toca desde las 9:00»; la tina no sale de la lista (DUDAS #13: sin push). Medir = /fermentacion/:ciclo/medir (va por la cola: funciona sin señal). Una sola primaria: Medir de la primera; en compact baja a la barra.</span>
+</section>`;
+const corrida = (o = {}) => `<li class="hy-fila"><div><h3>DES-004 <span class="wf-tag">ejemplo</span></h3><span class="sub">Alambique 1 · 1ª pasada · empezó hoy 6:30 · Tomás</span><span class="dato"><b>290 L</b> cargados · <b>60 L</b> cortados</span></div>${o.lectura ? '<a class="wf-btn wf-btn--quiet" href="#corrida">Ver corrida</a>' : `<div class="wf-actions"><a class="wf-btn" href="#corte">Cortar</a><a class="wf-btn wf-btn--quiet" href="#corrida">Ver corrida</a></div>`}</li>`;
+const colector = (o = {}) => `<li class="hy-fila"><div><h3>Colector mezcal</h3><span class="sub">MEZ-002 <span class="wf-tag">ejemplo</span> · mezcal</span><span class="dato"><b>8 L</b> · 51 % Alc.</span></div><div class="wf-actions">${o.operador || o.lectura ? '<a class="wf-btn wf-btn--quiet" href="#dest">Ver</a>' : `<a class="wf-btn" href="#granel" ${dis(o)}>Pasar a granel</a>`}</div></li>`;
+const bloqueDest = (o = {}) => `<section class="hy-bloque" aria-labelledby="h-dest"><h2 id="h-dest"><span>Destilación</span><a href="#dest">Ver todo</a></h2>
+  ${o.vacio ? `<div class="hy-vacio"><b>Sin corridas abiertas ni colectores con líquido.</b> ${o.operador || o.lectura ? 'Las corridas las abre el productor.' : `<a class="wf-btn" href="#abrir" ${dis(o)}>Abrir corrida</a>`}</div>` : `<ul class="hy-lista">${o.sinCorrida ? '' : corrida(o)}${colector(o)}</ul>`}
+  <span class="wf-note">corridas (status abierta: alambique, pasada, L cargados / cortados) + colectores_con_saldo (clase, litros, % Alc.). Cortar va por la cola (activo sin señal); «Pasar a granel» y «Abrir corrida» necesitan señal y rol admin/productor. Ninguna es primaria de Hoy.</span>
+</section>`;
+const elem = (e) => `<li class="hy-fila"><div><h3>${e.r}</h3><span class="sub">${e.c}</span>${e.f ? `<span class="hy-fallo" role="status">Falló: ${e.f}</span>` : ''}</div><div class="wf-actions">${e.estado === 'fallo' ? `<a class="wf-btn" href="#reintentar">Reintentar</a>${e.corregir ? '<a class="wf-btn wf-btn--quiet" href="#medir">Corregir</a>' : '<a class="wf-btn wf-btn--quiet" href="#descartar">Descartar</a>'}` : '<span class="wf-status wf-status--draft">pendiente · espera señal</span>'}</div></li>`;
+const bloqueCola = (lista, o = {}) => lista.length ? `<section class="hy-bloque" aria-labelledby="h-cola"><h2 id="h-cola"><span>Por enviar · ${lista.length}</span></h2><ul class="hy-lista">${lista.map(elem).join('')}</ul>
+  <span class="wf-note">ElementoCola.resumen + estado. Pendiente = espera señal (se envía solo con useCola); fallo = motivo (error) + Reintentar (misma clave, idempotente) y Corregir si requiereNota (abre la pantalla de origen) o Descartar. El bloque no aparece con la cola vacía: el banner del shell ya da el total.</span>
+</section>` : '';
+const COLA = [{ r: 'Medición · Tina 1 · día 22', c: 'hoy 9:12 · Tomás', estado: 'pendiente' }, { r: 'Corte · DES-004 · mezcal 20 L', c: 'hoy 9:30 · Tomás', estado: 'pendiente' }];
+const COLA_FALLO = [{ r: 'Medición · Tina 2 · día 22', c: 'hoy 9:12 · Tomás', estado: 'fallo', f: 'Brix fuera de rango: escribe una nota', corregir: true }, { r: 'Corte · DES-004 · mezcal 20 L', c: 'hoy 9:30 · Tomás', estado: 'fallo', f: 'La corrida ya está cerrada' }, { r: 'Medición · Tina 3 · día 9', c: 'hoy 9:40 · Tomás', estado: 'pendiente' }];
+const resumen = (m, c, e, o = {}) => `<p class="hy-fecha">lunes 28 de septiembre · ${o.hora || '9:40'}${o.instantanea ? ` · <b>Mostrando datos guardados el 28 sep, 8:55</b>` : ''}</p><p class="hy-resumen" role="status"><b>${m} tina${m === 1 ? '' : 's'} por medir</b> · ${c} · ${e}</p>`;
+const cols = (a, b) => `<div class="hy-cols"><div>${a}</div><div>${b}</div></div>`;
+const std = (o = {}) => resumen(3, '1 corrida abierta', o.cola ? `${o.cola.length} capturas por enviar` : 'nada por enviar', o) + cols(bloqueMedir(T, { ...o, ctx: '1 tina ya medida hoy (Tina 1, en vaciado).' }), bloqueDest(o) + bloqueCola(o.cola || [], o));
+const cabecera = (o = {}) => `<span class="wf-small wf-muted">MC · Mezcal Cuatro Vientos · ${o.operador ? 'Tomás · operador' : 'Aurelia · productora'}</span><h1>Inicio</h1>`;
+const V = {
+  default: () => std({ cola: COLA }),
+  loading: () => resumen('…', '…', '…') + `<div class="wf-skel" aria-busy="true">${'<div class="wf-line" style="height:72px;border-radius:6px;margin-bottom:12px"></div>'.repeat(3)}</div>`,
+  sinlotes: () => `<div class="wf-state"><h2>¿Qué tienes hoy?</h2><p class="wf-muted">Dinos qué hay en tus tanques y tinas para empezar a registrar desde el día uno.</p><a class="wf-btn wf-btn--primary" href="#arranque" data-wf-persist>Empezar</a></div><span class="wf-note">Se conserva tal cual (shell/r01, arranque/r01): tieneLotes = false. Modo lectura no ve «Empezar».</span>`,
+  temprano: () => resumen(3, '1 corrida abierta', 'nada por enviar', { hora: '8:20' }) + cols(bloqueMedir(T, { temprano: true }), bloqueDest()),
+  medido: () => resumen(0, '1 corrida abierta', 'nada por enviar') + cols(bloqueMedir([], {}), bloqueDest()),
+  sintinas: () => resumen(0, '1 corrida abierta', 'nada por enviar') + cols(`<section class="hy-bloque" aria-labelledby="h-medir"><h2 id="h-medir"><span>Toca medir · 0</span><a href="#ferm">Fermentación</a></h2><div class="hy-vacio"><b>Sin tinas fermentando.</b> Cuando llenes tinas, aquí verás cuáles medir cada día. <a class="wf-btn" href="#formular">Llenar tinas</a></div></section>`, bloqueDest()),
+  sindestilacion: () => resumen(3, 'sin corridas', 'nada por enviar') + cols(bloqueMedir(T, { ctx: '1 tina ya medida hoy.' }), bloqueDest({ vacio: true })),
+  nada: () => resumen(0, 'sin corridas', 'nada por enviar') + `<div class="wf-state"><h2>Hoy no hay nada pendiente</h2><p class="wf-muted">Tinas medidas, sin corridas abiertas y todo enviado.</p><div class="wf-actions" style="justify-content:center"><a class="wf-btn" href="#ferm">Fermentación</a><a class="wf-btn" href="#dest">Destilación</a><a class="wf-btn" href="#granel">Granel</a></div></div>`,
+  muchas: () => resumen(14, '1 corrida abierta', 'nada por enviar') + cols(bloqueMedir([...T, ...Array.from({ length: 5 }, (_, i) => ({ n: `Tina ${i + 5} (ejemplo)`, d: 3 + i, m: 7, u: 'ayer · Tomás', l: '1,200' }))], { mas: 6, ctx: '2 tinas ya medidas hoy · 1 lista para destilar.' }), bloqueDest()),
+  largo: () => resumen(1, '1 corrida abierta', 'nada por enviar') + cols(bloqueMedir([{ n: 'Tina de concreto grande del cuarto de atrás (la que tapamos con lona, 2019)', d: 22, m: 14, u: 'anteayer 17:45 · Aurelia Santiago Hernández', l: '2,350' }], { ctx: 'Folio FER-2026-09-07-ESPADIN-LOMA-DEL-TORO-0002.' }), bloqueDest()),
+  offline: () => `<p class="hy-warn"><b>Sin señal.</b> Puedes medir y cortar: se guardan en el teléfono y se envían al volver la señal. Lo demás necesita señal.</p>` + std({ dis: true, instantanea: true, cola: COLA }),
+  readonly: () => std({ lectura: true }) + '<span class="wf-note">Solo lectura (suscripción vencida): se ve todo; ningún atajo de captura. La cola sigue mostrándose porque puede tener capturas previas.</span>',
+  operador: () => std({ operador: true, cola: COLA }) + '<span class="wf-note">Operador: Medir y Cortar sí; sin «Abrir corrida», «Llenar tinas» ni «Pasar a granel». Reintentar/Corregir solo de sus capturas (la cola es por teléfono).</span>',
+  fallo: () => std({ cola: COLA_FALLO }),
+  error: () => resumen('…', '…', '…') + `<div class="wf-state"><h2>No pudimos cargar tu día</h2><p class="wf-muted">Revisa tu señal.</p><a class="wf-btn" href="#">Reintentar carga</a></div><span class="wf-note">Sin instantánea previa (primera vez sin señal): state-block error, como en las otras rondas.</span>`,
+};
+const BARRA = { default: 1, temprano: 1, sindestilacion: 1, muchas: 1, largo: 1, offline: 1, operador: 1, fallo: 1 };
+let S = { w: innerWidth < 700 ? 390 : innerWidth < 1200 ? 768 : 1440, state: 'default' };
+function render(){
+  const f = document.getElementById('wf-frame'); f.style.setProperty('--wf-w', S.w + 'px');
+  const lbl = document.getElementById('wf-label'); lbl.style.setProperty('--wf-w', S.w + 'px');
+  lbl.textContent = `Marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} · breakpoints del perfil PULZ (1440 / 768 / 390)`;
+  const st = S.state;
+  document.getElementById('wf-top').innerHTML = cabecera({ operador: st === 'operador' });
+  document.getElementById('wf-view').innerHTML = V[st]();
+  const barra = BARRA[st] ? `<a class="wf-btn wf-btn--primary" href="#medir">Medir ${st === 'largo' ? 'Tina de concreto…' : 'Tina 3'}</a>` : st === 'sinlotes' ? '<a class="wf-btn wf-btn--primary" href="#arranque">Empezar</a>' : '';
+  document.getElementById('wf-barra').innerHTML = barra;
+  const banners = { offline: '<p class="wf-banner" role="status"><b>Sin conexión.</b> 2 capturas pendientes de enviar. Se envían al volver la señal; puedes seguir midiendo.</p>', readonly: '<p class="wf-banner" role="status"><b>Solo lectura.</b> La suscripción venció: puedes consultar, no registrar.</p>', fallo: '<p class="wf-banner" role="status"><b>3 capturas pendientes de enviar · 2 fallaron.</b> Revisa las que fallaron abajo.</p>' };
+  document.getElementById('wf-banner').innerHTML = banners[st] || '';
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const w = e.target.closest('[data-w]'); if (w) { S.w = +w.dataset.w; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+
+</body>
+</html>
