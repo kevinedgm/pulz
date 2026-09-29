@@ -14,8 +14,9 @@
 >
 > **Estado (2026-09-27): aprobado e implementado.** 17 RPC + helpers en
 > `0014`–`0021`, semilla por RPC, pgTAP 26/26 + aislamiento 18/18 + saldos
-> §15.1 exactos. Único punto no comprobado: la concurrencia con dos sesiones
-> reales (SKIP; `docs/DUDAS.md` #5). Detalle de resultados al final.
+> §15.1 exactos. **Concurrencia real certificada el 2026-09-28** por PostgREST
+> con dos sesiones (`pnpm test:rpc:concurrency`, 15/15; DUDAS #5 cerrada).
+> Detalle de resultados al final.
 
 ## Qué ya existe y qué no
 
@@ -135,7 +136,7 @@ pgTAP, por RPC (tarea 11) + concurrencia (tarea 12). Nada de Vitest.
 | Criterio | Cómo | Resultado real (2026-09-27) |
 |---|---|---|
 | pgTAP por RPC: feliz, idempotencia, duras, blandas | `supabase db query --linked -f supabase/tests/rpc.test.sql` | **26/26 ok** |
-| Concurrencia: dos transferencias del último litro → una pasa, otra `SALDO_INSUFICIENTE` | test con `dblink` (tarea 12) | **SKIP**: en Supabase alojado `dblink_connect` exige contraseña; no se declara en verde. Cómo probarlo a mano: `docs/DUDAS.md` #5 |
+| Concurrencia: dos transferencias del último litro → una pasa, otra `SALDO_INSUFICIENTE` | `pnpm test:rpc:concurrency` (2026-09-28): dos sesiones reales por Auth + PostgREST sobre un tenant desechable `qa-race-*`, limpieza por UUID | **PASS 15/15**: 3 rondas del último litro con las dos peticiones en vuelo a la vez → una OK y una `SALDO_INSUFICIENTE`, origen en 0; 10 transferencias simultáneas de 1 L sobre 3 L → exactamente 3 OK y 7 `SALDO_INSUFICIENTE`; misma clave de idempotencia a la vez → una sola operación (las dos llamadas reciben el mismo id) y el saldo se mueve una vez; dos escrituras independientes a la vez → ambas pasan. Residuos 0. Evidencia `docs/plan/evidence/2026-09-29T04-14-01.230Z-concurrency-postgrest/` |
 | La simulación por RPC da §15.1 | tras `db reset --linked` con la semilla nueva, la misma consulta de saldos de la Fase 1 | **Exactos** (y 38 operaciones, 13 lotes, 16 aristas, mismos niveles de historia y avisos que la referencia) |
 | Aislamiento sigue en verde | `…/aislamiento.test.sql` | **18/18 ok** |
 

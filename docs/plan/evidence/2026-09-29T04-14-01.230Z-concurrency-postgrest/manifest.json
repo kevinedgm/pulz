@@ -1,0 +1,23 @@
+{
+  "project": "ypgeiyorgktshgbzhgfh",
+  "tag": "qa-race-ad785404",
+  "org": "cb39a2f1-d607-4b79-b18d-7e9a288ce059",
+  "users": [
+    {
+      "id": "20fc34e1-3ca9-41d3-8b8f-b06f1f3186af",
+      "email": "qa-race-ad785404-a@example.invalid"
+    },
+    {
+      "id": "a882047a-7a29-46b1-b87b-076e41c8f6a7",
+      "email": "qa-race-ad785404-b@example.invalid"
+    }
+  ],
+  "resources": {
+    "origen": "8439f34b-63a1-43d4-aa88-07815c5665e5",
+    "dest1": "437891a7-095d-4671-8f6f-e5bd86ad386e",
+    "dest2": "1f38f9c3-6c61-4e48-94db-f4dd5d7701ea",
+    "dest3": "5e27f205-71e2-41b9-a92c-a641d0a69f7a"
+  },
+  "cleanupSha256": "4f3f9a209e452b7d3cb6bf32d14cc5760cffb878e485c649ed36ed17543aebee",
+  "note": "Tenant desechable por PostgREST; limpieza por UUID exactos. Sin demo, reset ni DDL."
+}

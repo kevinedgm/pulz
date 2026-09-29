@@ -11,7 +11,7 @@
 
 ## Fase actual
 
-**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado por completo: API y Playwright); bloque 16 de accesibilidad cerrado con Playwright en el shell autenticado (132/132) salvo 16.03/16.04/16.07 que exigen hardware/AT. Dictamen r06: PARTIAL, draft 0.2.1. Tema oscuro restaurado en tokens.css (DUDAS #16 resuelta). **Inicio/Hoy con datos reales construido (ronda inicio-hoy/r01, `inicio` candidate 0.3.0, evidencia PASS)**; E2E del proceso completo (tarea 8) PASS: la simulación de la semilla rehecha desde la interfaz en Prueba B da §15.1 exacto. Fase 5 completa salvo la concurrencia real (Fase 2) y CI en PR real.**
+**Frente único vigente · 2026-09-28: Maguey/Horneado r05 corregida, aceptación parcial; r06 pruebas alojadas de negocio 37/37 PASS (bloque 15 cerrado por completo: API y Playwright); bloque 16 de accesibilidad cerrado con Playwright en el shell autenticado (132/132) salvo 16.03/16.04/16.07 que exigen hardware/AT. Dictamen r06: PARTIAL, draft 0.2.1. Tema oscuro restaurado en tokens.css (DUDAS #16 resuelta). **Inicio/Hoy con datos reales construido (ronda inicio-hoy/r01, `inicio` candidate 0.3.0, evidencia PASS)**; E2E del proceso completo (tarea 8) PASS: la simulación de la semilla rehecha desde la interfaz en Prueba B da §15.1 exacto. Fase 5 completa. **Concurrencia real (Fase 2) certificada: `pnpm test:rpc:concurrency` 15/15 con dos sesiones por PostgREST.** Queda CI en un PR real.**
 R05 cierra el corte de navegación y corrige identidad concurrente, intención
 corrupta, origen de cocido y timestamp offline.183/183 locales (34 módulo),
 5/5 acceso alojado autorizado; tipos/build/demo/lint PASS. Siete anchos revisados.
@@ -36,7 +36,7 @@ Ver [continuación y evidencia vigente](plan/CONTINUACION-2026-09-28.md) y
 Corregidos capacidad flexible, instantáneas/errores offline, aislamiento de
 fixtures y selección del grado declarado vigente. Aplicación **145/145**;
 runner **10/10**; seis suites DB aisladas **163 aserciones hoja PASS**.
-Concurrencia real **NO certificada**: tres intentos fallidos, limpieza de sus
+Concurrencia real **certificada después** (ver «Fase actual»); antes: tres intentos fallidos por la Management API, limpieza de sus
 fixtures confirmada. No se reseteó la base. Manrope, Instrument Serif y Lucide
 se entregan localmente en app/demo. Maguey/Horneado **r02 rechazada** tras
 revisión nueva: antecedente de r03, cuyo estado vigente se indica arriba. Siguen
@@ -137,8 +137,8 @@ y sus limitaciones están en la verificación del 2026-09-28.
 
 ## Qué falta
 
-1. Resolver y verificar concurrencia real con dos sesiones; suites normales
-   ya aisladas y en verde. No reejecutar SQL histórico sobre datos de demo.
+1. ~~Resolver y verificar concurrencia real con dos sesiones~~ (hecho 2026-09-28:
+   `pnpm test:rpc:concurrency` PASS 15/15 por PostgREST, tenant desechable).
 2. Cerrar aceptación de Maguey/Horneado r05: fixtures persistentes aislados
    autorizados para E2E de negocio y accesibilidad física/nativa. Implementación
    y correcciones locales terminadas; no reutilizar gates de rondas anteriores.

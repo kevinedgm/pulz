@@ -989,3 +989,24 @@ fixtures aislados y limpieza verificada no necesitan autorización aparte.
 - La evidencia de fermentación (`qa/evidencia-fermentacion.mjs`) corrige el
   día del ciclo a 1 en la medición de prueba para seguir cubriendo el flujo
   aviso → nota. Revertir: quitar el parámetro `dia` de `avisoBrix`.
+
+
+## 2026-09-28 · Concurrencia real (Fase 2, tarea 12) certificada por PostgREST
+
+- Los tres intentos anteriores fallaban por el mecanismo, no por la base:
+  `supabase db query` (Management API) no mantiene una sesión entre
+  llamadas, así que nunca se podía «ver» a la primera sesión reteniendo el
+  lock. La prueba nueva (`scripts/test-rpc-concurrency.mjs`) usa el camino
+  de producción: dos usuarios con sesión propia llaman a las RPC por
+  PostgREST a la vez (`Promise.all`), y se comprueba el resultado en la
+  base. Es la concurrencia que vivirán los usuarios, no una simulación.
+- Resultado 15/15: último litro (3 rondas, peticiones solapadas en el
+  reloj del cliente) → una OK y una `SALDO_INSUFICIENTE`; 10 simultáneas
+  sobre 3 L → exactamente 3 OK; misma clave de idempotencia a la vez → una
+  sola operación y las dos llamadas reciben el mismo id (el lock de
+  recursos serializa y `rpc_existing` resuelve al segundo); escrituras
+  independientes a la vez → sin deadlock. Tenant desechable `qa-race-*`
+  creado por SQL y borrado por UUID exactos (limpieza verificada en 0),
+  como en r06; sin demo, reset ni DDL (CLAUDE.md §1/§4).
+- `scripts/test-db-concurrency.mjs` se conserva como registro del intento
+  por Management API; el gate es `pnpm test:rpc:concurrency`.

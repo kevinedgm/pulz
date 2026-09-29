@@ -1,0 +1,284 @@
+{
+  "fecha": "2026-09-29T04:14:01.330Z",
+  "tag": "qa-race-ad785404",
+  "estado": "PASS",
+  "carreras": [
+    {
+      "carrera": "ultimo-litro",
+      "ronda": 1,
+      "A": {
+        "inicio": "2026-09-29T04:14:09.248Z",
+        "fin": "2026-09-29T04:14:09.459Z",
+        "ok": true,
+        "data": "5463be1a-a33f-408f-8f1f-2b6a425942e6",
+        "error": null
+      },
+      "B": {
+        "inicio": "2026-09-29T04:14:09.248Z",
+        "fin": "2026-09-29T04:14:09.548Z",
+        "ok": false,
+        "data": null,
+        "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-001 y se piden 1 L"
+      },
+      "solapan": true,
+      "origenRestante": 0
+    },
+    {
+      "carrera": "ultimo-litro",
+      "ronda": 2,
+      "A": {
+        "inicio": "2026-09-29T04:14:09.976Z",
+        "fin": "2026-09-29T04:14:10.171Z",
+        "ok": false,
+        "data": null,
+        "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-002 y se piden 1 L"
+      },
+      "B": {
+        "inicio": "2026-09-29T04:14:09.976Z",
+        "fin": "2026-09-29T04:14:10.096Z",
+        "ok": true,
+        "data": "aa278a34-781e-46bb-af4f-572710bf794c",
+        "error": null
+      },
+      "solapan": true,
+      "origenRestante": 0
+    },
+    {
+      "carrera": "ultimo-litro",
+      "ronda": 3,
+      "A": {
+        "inicio": "2026-09-29T04:14:10.489Z",
+        "fin": "2026-09-29T04:14:10.623Z",
+        "ok": false,
+        "data": null,
+        "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-003 y se piden 1 L"
+      },
+      "B": {
+        "inicio": "2026-09-29T04:14:10.489Z",
+        "fin": "2026-09-29T04:14:10.622Z",
+        "ok": true,
+        "data": "aa278a34-781e-46bb-af4f-572710bf794c",
+        "error": null
+      },
+      "solapan": true,
+      "origenRestante": 0
+    },
+    {
+      "carrera": "sobre-demanda",
+      "pedidas": 10,
+      "litros": 3,
+      "ok": 3,
+      "saldoInsuficiente": 7,
+      "otros": [],
+      "origenRestante": 0,
+      "resultados": [
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.085Z",
+          "ok": true,
+          "data": "5463be1a-a33f-408f-8f1f-2b6a425942e6",
+          "error": null
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.153Z",
+          "ok": true,
+          "data": "aa278a34-781e-46bb-af4f-572710bf794c",
+          "error": null
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.366Z",
+          "ok": false,
+          "data": null,
+          "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-004 y se piden 1 L"
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.317Z",
+          "ok": false,
+          "data": null,
+          "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-004 y se piden 1 L"
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.327Z",
+          "ok": false,
+          "data": null,
+          "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-004 y se piden 1 L"
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.297Z",
+          "ok": true,
+          "data": "d37693c9-4fa2-4251-95c6-c717650f037b",
+          "error": null
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.344Z",
+          "ok": false,
+          "data": null,
+          "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-004 y se piden 1 L"
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.305Z",
+          "ok": false,
+          "data": null,
+          "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-004 y se piden 1 L"
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.366Z",
+          "ok": false,
+          "data": null,
+          "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-004 y se piden 1 L"
+        },
+        {
+          "inicio": "2026-09-29T04:14:10.965Z",
+          "fin": "2026-09-29T04:14:11.344Z",
+          "ok": false,
+          "data": null,
+          "error": "SALDO_INSUFICIENTE: QA Origen tiene 0.000 L del lote G-004 y se piden 1 L"
+        }
+      ]
+    },
+    {
+      "carrera": "idempotencia-simultanea",
+      "idem": "d83a1b71-3553-4bca-a8f7-8a737cdd82d3",
+      "A": {
+        "inicio": "2026-09-29T04:14:11.699Z",
+        "fin": "2026-09-29T04:14:11.824Z",
+        "ok": true,
+        "data": "5463be1a-a33f-408f-8f1f-2b6a425942e6",
+        "error": null
+      },
+      "B": {
+        "inicio": "2026-09-29T04:14:11.699Z",
+        "fin": "2026-09-29T04:14:11.817Z",
+        "ok": true,
+        "data": "5463be1a-a33f-408f-8f1f-2b6a425942e6",
+        "error": null
+      },
+      "operaciones": 1,
+      "origenRestante": 4
+    },
+    {
+      "carrera": "independientes",
+      "A": {
+        "inicio": "2026-09-29T04:14:12.043Z",
+        "fin": "2026-09-29T04:14:12.140Z",
+        "ok": true,
+        "data": "97867f21-044b-4c11-97cd-7acc7dcadec1",
+        "error": null
+      },
+      "B": {
+        "inicio": "2026-09-29T04:14:12.043Z",
+        "fin": "2026-09-29T04:14:12.156Z",
+        "ok": true,
+        "data": "debc9aad-c65d-4cd7-b13b-844f985be12d",
+        "error": null
+      },
+      "solapan": true
+    }
+  ],
+  "limpieza": true,
+  "sesiones": "dos usuarios admin con sesión propia (Auth password grant) sobre PostgREST",
+  "idempotenciaSegundaLlamada": [],
+  "saldosFinales": [
+    {
+      "resource_id": "1f38f9c3-6c61-4e48-94db-f4dd5d7701ea",
+      "lot_id": "97867f21-044b-4c11-97cd-7acc7dcadec1",
+      "volume_l": 2
+    },
+    {
+      "resource_id": "1f38f9c3-6c61-4e48-94db-f4dd5d7701ea",
+      "lot_id": "aa278a34-781e-46bb-af4f-572710bf794c",
+      "volume_l": 3
+    },
+    {
+      "resource_id": "437891a7-095d-4671-8f6f-e5bd86ad386e",
+      "lot_id": "5463be1a-a33f-408f-8f1f-2b6a425942e6",
+      "volume_l": 3
+    },
+    {
+      "resource_id": "5e27f205-71e2-41b9-a92c-a641d0a69f7a",
+      "lot_id": "d37693c9-4fa2-4251-95c6-c717650f037b",
+      "volume_l": 1
+    },
+    {
+      "resource_id": "5e27f205-71e2-41b9-a92c-a641d0a69f7a",
+      "lot_id": "debc9aad-c65d-4cd7-b13b-844f985be12d",
+      "volume_l": 2
+    },
+    {
+      "resource_id": "8439f34b-63a1-43d4-aa88-07815c5665e5",
+      "lot_id": "47508169-a1a5-4bbc-99c7-37f4859784bc",
+      "volume_l": 4
+    }
+  ],
+  "checks": [
+    {
+      "ok": true,
+      "m": "último litro ronda 1: exactamente una pasa y la otra SALDO_INSUFICIENTE (1/1)"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 1: el origen queda en 0 L (0)"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 1: las dos peticiones estuvieron en vuelo a la vez"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 2: exactamente una pasa y la otra SALDO_INSUFICIENTE (1/1)"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 2: el origen queda en 0 L (0)"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 2: las dos peticiones estuvieron en vuelo a la vez"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 3: exactamente una pasa y la otra SALDO_INSUFICIENTE (1/1)"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 3: el origen queda en 0 L (0)"
+    },
+    {
+      "ok": true,
+      "m": "último litro ronda 3: las dos peticiones estuvieron en vuelo a la vez"
+    },
+    {
+      "ok": true,
+      "m": "sobre-demanda: 3 OK y 7 SALDO_INSUFICIENTE de 10 (3/7, otros: )"
+    },
+    {
+      "ok": true,
+      "m": "sobre-demanda: el origen queda en 0 L (0)"
+    },
+    {
+      "ok": true,
+      "m": "idempotencia simultánea: una sola operación con la clave (1)"
+    },
+    {
+      "ok": true,
+      "m": "idempotencia simultánea: el saldo se movió una sola vez (quedan 4 L de 5)"
+    },
+    {
+      "ok": true,
+      "m": "idempotencia simultánea: al menos una llamada devolvió la operación"
+    },
+    {
+      "ok": true,
+      "m": "independientes: las dos entradas pasan (ok / ok)"
+    }
+  ],
+  "fallos": []
+}

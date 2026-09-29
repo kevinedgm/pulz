@@ -100,7 +100,7 @@ No se tocó el proyecto heredado.
 - [x] Corregir capacidades flexibles y probar el flujo con nota.
 - [x] Runner que falle ante TAP fallido/incompleto.
 - [ ] Aislar fixtures de aislamiento/RPC/proceso de la empresa usada por demos.
-- [ ] Ejecutar concurrencia con dos sesiones y limpieza segura.
+- [x] Ejecutar concurrencia con dos sesiones y limpieza segura (2026-09-28, `pnpm test:rpc:concurrency` PASS 15/15 por PostgREST; residuos 0).
 - [ ] Reevaluar contrato Maguey/Horneado contra Foundations vigentes;
       conservar decisiones válidas de Kiwi y abrir ronda nueva si cambia
       estructura. No reutilizar aprobación histórica como nueva.

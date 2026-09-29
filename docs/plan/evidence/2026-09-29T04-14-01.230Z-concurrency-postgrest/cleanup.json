@@ -1,0 +1,38 @@
+[
+  {
+    "entity": "organizations",
+    "remaining": 0
+  },
+  {
+    "entity": "users",
+    "remaining": 0
+  },
+  {
+    "entity": "profiles",
+    "remaining": 0
+  },
+  {
+    "entity": "resources",
+    "remaining": 0
+  },
+  {
+    "entity": "liquid_movements",
+    "remaining": 0
+  },
+  {
+    "entity": "lot_lineage",
+    "remaining": 0
+  },
+  {
+    "entity": "operation_warnings",
+    "remaining": 0
+  },
+  {
+    "entity": "lots",
+    "remaining": 0
+  },
+  {
+    "entity": "operations",
+    "remaining": 0
+  }
+]

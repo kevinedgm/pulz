@@ -51,6 +51,13 @@
    de seguridad; no se reintentó ni se eludió. Antes de nuevas escrituras,
    revisar mecanismo y obtener aprobación del alcance concreto de prueba.
    Evidencia y siguiente paso: [continuación](plan/CONTINUACION-2026-09-28.md).
+   **Resuelto 2026-09-28.** La Management API no da dos sesiones (cada
+   `db query` es una llamada aislada), así que la prueba se hizo por el
+   camino real: dos usuarios con sesión propia (Auth) llamando a
+   `transferir` por PostgREST a la vez, sobre un tenant desechable
+   `qa-race-*` borrado por UUID. `pnpm test:rpc:concurrency` → 15/15: último
+   litro (3 rondas), 10 simultáneas sobre 3 L → 3 OK, misma clave a la vez →
+   una operación, escrituras independientes sin deadlock. Residuos 0.
 
 9. **Hook de intentos de contraseña (§7.5, §18 #9) — RESPONDIDO: no está en
    el plan del proyecto.** `supabase config push` devolvió `402 "The

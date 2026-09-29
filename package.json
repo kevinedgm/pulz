@@ -11,6 +11,7 @@
     "test": "pnpm -r --if-present run test",
     "test:db": "node scripts/test-db.mjs",
     "test:db:concurrency": "node scripts/test-db-concurrency.mjs",
+    "test:rpc:concurrency": "node scripts/test-rpc-concurrency.mjs",
     "test:db:runner": "node --test scripts/tap-result.test.mjs scripts/db-fixture.test.mjs",
     "lint": "eslint .",
     "format": "prettier --check .",
